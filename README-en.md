@@ -138,6 +138,8 @@
 ## Basic Usage
 - **Warning**: Due to the lack of a signature, you must run `xattr -cr YSbrowser.app` on macOS to use it.
 - **Warning**: The following are basic parameters. --user-data-dir is required to maintain environment isolation.
+- **Warning:** If you need to print the object to the console, please include `openConsole`, for example, `console.log("openConsole",{})`.
+- **WARNING:** If DrissionPage crashes, please change the port: set_address("http://127.0.0.1:8910").
 ```bash
 chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data 
 ```
