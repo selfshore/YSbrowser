@@ -151,7 +151,7 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 ### Eliminated Automation Signatures
 - ✅ CDP detection
 - ✅ Selenium signatures
-- ✅ Playwright signatures
+- ✅ Playwright signatures(Some parts have been removed, but it's still recommended to use patchright.)
 - ✅ DrissionPage signatures
 
 ### Recommended Tool

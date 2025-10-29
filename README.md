@@ -155,7 +155,7 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 ### 已消除的自动化特征
 - ✅ CDP 检测
 - ✅ Selenium 特征
-- ✅ Playwright 特征
+- ✅ Playwright 特征(仅去掉部分，仍建议使用patchright)
 - ✅ DrissionPage 特征
 
 ### 推荐工具
