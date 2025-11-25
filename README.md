@@ -28,7 +28,6 @@
 | `--timezone`                         | `Asia/Tokyo`          | 设置浏览器时区      |
 | `--fpseed`                           | `12lfisffwfaTYa`      | 指纹生成种子       |
 | `--chrome-version`                   | `130.0.7151.70`       | Chrome 浏览器版本 |
-| `--noimage`                          | -                     | 禁用图片加载       |
 | `--nocrash`                          | -                     | 修复自动化工具崩溃问题  |
 | `--lang`                             | `zh-CN`               | 设置浏览器语言      |
 | `--accept-lang`                      | `zh-CN`               | 设置 HTTP 请求语言 |
@@ -38,7 +37,7 @@
 | `--platformversion`                  | `15.4.1`              | 系统版本         |
 | `--custom-screen`                    | `1792x1120,1792x1039` | 屏幕宽高         |
 | `--force-device-scale-factor`        | `1`                   | 物理像素和css像素比值 |
-| `--custom-geolocation`               | `110,220`             | 设置纬度和经度      |
+| `--custom-geolocation`               | `110,220,70`          | 设置纬度和经度，精确距离 |
 | `--use-fake-device-for-media-stream` | -                     | 设置虚拟媒体设备     |
 | `--custom-brand`                     | `"Microsoft Edge"`    | 浏览器品牌        |
 | `--close-portscan`                   | -                     | 屏蔽端口扫描       |
@@ -120,7 +119,7 @@
 ### **`custom-geolocation`** 
 - **功能**：设置经纬度（navigator.geolocation.getCurrentPosition）
 - **示例**：
-  - `110,220`(纬度,经度)
+  - `110,220,70`(纬度,经度,精度)
 
 ### **`use-fake-device-for-media-stream`**
 - **功能**：伪造媒体设备（navigator.mediaDevices.enumerateDevices）
@@ -182,9 +181,7 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 ## 🚧 开发路线图
 | 功能                     | 状态   | 说明                                                                 |
 |--------------------------|--------|----------------------------------------------------------------------|
-| Linux 支持               | ❌ 待实现 | 正在适配 Linux 平台                                                  |
 | GPU 指纹伪造             | ⚙️ 开发中 | 增强图形指纹的伪装能力                                               |
-| 多版本 TLS 指纹支持      | ⚙️ 开发中 | 增加更多 Chrome 版本的 TLS 指纹库                                    |
 > **提示**：项目持续更新中，欢迎提交 Issue！如果想帮助我收集更多指纹，请点击[网址](https://www.hanyiting.com)
 
 ## 求职：有合适的爬虫和反爬岗位欢迎内推

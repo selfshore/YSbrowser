@@ -23,26 +23,25 @@
 ---
 
 ## ⚙️ Core Parameters
-| Parameter                            | Value                 | Description                                    |
-|--------------------------------------|-----------------------|------------------------------------------------|
-| `--timezone`                         | `Asia/Tokyo`          | Set browser timezone                           |
-| `--fpseed`                           | `12lfisffwfaTYa`      | Fingerprint generation seed                    |
-| `--chrome-version`                   | `130.0.7151.70`       | Chrome browser version                         |
-| `--noimage`                          | -                     | Disable image loading                          |
-| `--nocrash`                          | -                     | Fix automation tool crashes                    |
-| `--lang`                             | `zh-CN`               | Set browser language                           |
-| `--accept-lang`                      | `zh-CN`               | Set HTTP request language                      |
-| `--proxy-server`                     | `socks5://ip:port`    | Set proxy server                               |
-| `--proxy-auth`                       | `username:password`   | Set proxy auth                                 |
-| `--cpucores`                         | `6`                   | Number of CPU cores                            |
-| `--platformversion`                  | `15.4.1`              | Operating system version                       |
-| `--custom-screen`                    | `1792x1120,1792x1039` | Set screen width and height                    |
+| Parameter                            | Value                 | Description                               |
+|--------------------------------------|-----------------------|-------------------------------------------|
+| `--timezone`                         | `Asia/Tokyo`          | Set browser timezone                      |
+| `--fpseed`                           | `12lfisffwfaTYa`      | Fingerprint generation seed               |
+| `--chrome-version`                   | `130.0.7151.70`       | Chrome browser version                    |
+| `--nocrash`                          | -                     | Fix automation tool crashes               |
+| `--lang`                             | `zh-CN`               | Set browser language                      |
+| `--accept-lang`                      | `zh-CN`               | Set HTTP request language                 |
+| `--proxy-server`                     | `socks5://ip:port`    | Set proxy server                          |
+| `--proxy-auth`                       | `username:password`   | Set proxy auth                            |
+| `--cpucores`                         | `6`                   | Number of CPU cores                       |
+| `--platformversion`                  | `15.4.1`              | Operating system version                  |
+| `--custom-screen`                    | `1792x1120,1792x1039` | Set screen width and height               |
 | `--force-device-scale-factor`        | `1`                   | Set the ratio of physical pixels to CSS pixels |
-| `--custom-geolocation`               | `110,220`             | Set latitude and longitude                     |
-| `--use-fake-device-for-media-stream` | -                     | Use fake media devices                         |
-| `--custom-brand`                     | `"Microsoft Edge"`    | Browser brand                                  |
-| `--close-portscan`                   | -                     | Block port scan                                |
-| `--iconumber`                        | 1                     | browser number                                 |
+| `--custom-geolocation`               | `110,220,70`           | Set latitude and longitude,accuracy       |
+| `--use-fake-device-for-media-stream` | -                     | Use fake media devices                    |
+| `--custom-brand`                     | `"Microsoft Edge"`    | Browser brand                             |
+| `--close-portscan`                   | -                     | Block port scan                           |
+| `--iconumber`                        | 1                     | browser number                            |
 
 ---
 
@@ -179,8 +178,6 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 ## 🚧 Development Roadmap
 | Feature                  | Status     | Description                                                      |
 |--------------------------|------------|------------------------------------------------------------------|
-| Linux Support            | ❌ Pending  | Adapting for Linux platform                                      |
 | GPU Fingerprint Spoofing | ⚙️ In Progress | Enhancing graphics fingerprint camouflage                        |
-| Multi-version TLS Support| ⚙️ In Progress | Expanding TLS fingerprint library for more Chrome versions       |
 
 > **Tip**: Project continuously updated - welcome to submit Issues! If you'd like to help me collect more fingerprints, please click [here](https://www.hanyiting.com)
