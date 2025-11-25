@@ -8,17 +8,17 @@
 [English](README-en.md) | [中文](README.md)
 
 ## 🔍 检测通过列表
-| 检测平台                                                             | 状态            | 备注     |
-|--------------------------------------------------------------------|---------------|--------|
-| [browserscan](https://browserscan.net)                             | ✅ 完美通过        | -      |
-| [creepjs](https://abrahamjuliot.github.io/creepjs/)                | ✅ 62.5%+      | 持续优化中  |
-| [iphey](https://iphey.com)                                         | ✅ 完美通过        | -      |
-| [pixelscan](https://pixelscan.net)                                 | ✅ 完美通过        | -      |
-| [cloudflare](https://www.cloudflare.com/zh-cn/)                    | ✅ 完美通过        | 需启用图片加载 |
-| [datadome](https://datadome.co/products/bot-protection/)           | ✅ 完美通过        | -      |
-| [brotector](https://kaliiiiiiiiii.github.io/brotector/)            | ✅ 完美通过        | -      |
-| [sannysoft](https://bot.sannysoft.com/)                            | ✅ 完美通过        | -      |
-| [fingerprint](https://fingerprint.com/products/bot-detection/)     | ✅ 完美通过        | -      |
+| 检测平台                                                             | 状态            | 备注    |
+|--------------------------------------------------------------------|---------------|-------|
+| [browserscan](https://browserscan.net)                             | ✅ 完美通过        | -     |
+| [creepjs](https://abrahamjuliot.github.io/creepjs/)                | ✅ 62.5%+      | 持续优化中 |
+| [iphey](https://iphey.com)                                         | ✅ 完美通过        | -     |
+| [pixelscan](https://pixelscan.net)                                 | ✅ 完美通过        | -     |
+| [cloudflare](https://www.cloudflare.com/zh-cn/)                    | ✅ 完美通过        | -     |
+| [datadome](https://datadome.co/products/bot-protection/)           | ✅ 完美通过        | -     |
+| [brotector](https://kaliiiiiiiiii.github.io/brotector/)            | ✅ 完美通过        | -     |
+| [sannysoft](https://bot.sannysoft.com/)                            | ✅ 完美通过        | -     |
+| [fingerprint](https://fingerprint.com/products/bot-detection/)     | ✅ 完美通过        | -     |
 
 ---
 
@@ -63,11 +63,6 @@
   - 自动适配 TLS 指纹（支持版本有限）
   - 仅建议在目标网站有严格版本控制时使用
 - **推荐**：使用官方发布的 Chrome 版本号
-
-### **`noimage`**  
-- **功能**：禁用所有图片加载
-- **使用场景**：提高页面加载速度
-- **警告**：可能触发 Cloudflare 等安全检测（不推荐常规使用）
 
 ### **`nocrash`**  
 - **功能**：修复 Playwright/Puppeteer 中 iframe 相关的崩溃问题

@@ -8,17 +8,17 @@
 [English](README-en.md) | [中文](README.md)
 
 ## 🔍 Tested & Passed
-| Detection Platform                                                  | Status       | Notes                |
-|---------------------------------------------------------------------|--------------|----------------------|
-| [browserscan](https://browserscan.net)                              | ✅ Perfect    | -                    |
+| Detection Platform                                                  | Status       | Notes                  |
+|---------------------------------------------------------------------|--------------|------------------------|
+| [browserscan](https://browserscan.net)                              | ✅ Perfect    | -                      |
 | [creepjs](https://abrahamjuliot.github.io/creepjs/)                 | ✅ 62.5%+     | Continuous improvement |
-| [iphey](https://iphey.com)                                          | ✅ Perfect    | -                    |
-| [pixelscan](https://pixelscan.net)                                  | ✅ Perfect    | -                    |
-| [cloudflare](https://www.cloudflare.com/zh-cn/)                     | ✅ Perfect    | Requires image loading |
-| [datadome](https://datadome.co/products/bot-protection/)            | ✅ Perfect    | -                    |
-| [brotector](https://kaliiiiiiiiii.github.io/brotector/)             | ✅ Perfect    | -                    |
-| [sannysoft](https://bot.sannysoft.com/)                             | ✅ Perfect    | -                    |
-| [fingerprint](https://fingerprint.com/products/bot-detection/)      | ✅ Perfect      | -                    |
+| [iphey](https://iphey.com)                                          | ✅ Perfect    | -                      |
+| [pixelscan](https://pixelscan.net)                                  | ✅ Perfect    | -                      |
+| [cloudflare](https://www.cloudflare.com/zh-cn/)                     | ✅ Perfect    | -                      |
+| [datadome](https://datadome.co/products/bot-protection/)            | ✅ Perfect    | -                      |
+| [brotector](https://kaliiiiiiiiii.github.io/brotector/)             | ✅ Perfect    | -                      |
+| [sannysoft](https://bot.sannysoft.com/)                             | ✅ Perfect    | -                      |
+| [fingerprint](https://fingerprint.com/products/bot-detection/)      | ✅ Perfect      | -                      |
 
 ---
 
@@ -63,11 +63,6 @@
   - Automatically adapts TLS fingerprints (limited version support)
   - Recommended only for sites with strict version controls
 - **Best Practice**: Use officially released Chrome versions
-
-### **`noimage`**  
-- **Function**: Disable all image loading
-- **Use Case**: Improve page loading speed
-- **Warning**: May trigger security systems like Cloudflare (not recommended for regular use)
 
 ### **`nocrash`**  
 - **Function**: Fixes iframe-related crashes in Playwright/Puppeteer
