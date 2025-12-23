@@ -153,13 +153,6 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 - ✅ Playwright 特征(仅去掉部分，仍建议使用patchright)
 - ✅ DrissionPage 特征
 
-### 推荐工具
-**[DrissionPage](https://github.com/g1879/DrissionPage)** - 低特征、高性能的自动化解决方案  
-**优势**：
-- 极简的浏览器指纹特征
-- 完美的鼠标事件模拟
-- 无崩溃风险的内容交互
-
 ### 关键技术改进
 1. **鼠标事件修复**：彻底解决 CDP 的 `Input.dispatchMouseEvent` 缺陷
 2. **Shadow DOM 访问**：通过 `opshadowRoot` 访问封闭式 shadow DOM
