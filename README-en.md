@@ -150,13 +150,6 @@ chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=12
 - ✅ Playwright signatures(Some parts have been removed, but it's still recommended to use patchright.)
 - ✅ DrissionPage signatures
 
-### Recommended Tool
-**[DrissionPage](https://github.com/g1879/DrissionPage)** - Low-profile, high-performance automation solution  
-**Advantages**:
-- Minimal browser fingerprint footprint
-- Perfect mouse event simulation
-- Crash-free content interaction
-
 ### Key Technical Improvements
 1. **Mouse Event Fix**: Permanently resolves CDP's `Input.dispatchMouseEvent` defect
 2. **Shadow DOM Access**: Access closed shadow DOM via `opshadowRoot`
