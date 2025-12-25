@@ -15,7 +15,6 @@
 | [iphey](https://iphey.com)                                          | ✅ Perfect    | -                      |
 | [pixelscan](https://pixelscan.net)                                  | ✅ Perfect    | -                      |
 | [cloudflare](https://www.cloudflare.com/zh-cn/)                     | ✅ Perfect    | -                      |
-| [datadome](https://datadome.co/products/bot-protection/)            | ✅ Perfect    | -                      |
 | [brotector](https://kaliiiiiiiiii.github.io/brotector/)             | ✅ Perfect    | -                      |
 | [sannysoft](https://bot.sannysoft.com/)                             | ✅ Perfect    | -                      |
 | [fingerprint](https://fingerprint.com/products/bot-detection/)      | ✅ Perfect      | -                      |
