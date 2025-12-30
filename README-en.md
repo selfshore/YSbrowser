@@ -97,6 +97,17 @@
 - **Recommendation**：
   - `macOS`:  Use versions like 15.4.1, 15.5, etc.
   - `Windows`: Use versions like 10.0.0, etc.
+    | Windows Version | Internal Build Number | Platform-Version String | Status |
+    | :--- | :--- | :--- | :--- |
+    | **Windows 11 (24H2)** | 26100+ | `"19.0.0"` | Latest / Preview |
+    | **Windows 11 (23H2)** | 22631 | `"17.0.0"` | Recommended / Mainstream |
+    | **Windows 11 (22H2)** | 22621 | `"15.0.0"` | Stable |
+    | **Windows 11 (21H2)** | 22000 | `"13.0.0"` | Initial Release |
+    | **Windows 10 (22H2)** | 19045 | `"10.0.0"` | Most Common (Win10) |
+    | **Windows 10 (21H2)** | 19044 | `"10.0.0"` | Stable |
+    | **Windows 8.1** | 9600 | `"6.3.0"` | Obsolete |
+    | **Windows 8** | 9200 | `"6.2.0"` | Obsolete |
+    | **Windows 7** | 7601 | `"6.1.0"` | Obsolete |
 
 ### **`custom-screen`** 
 - **Function**: Sets screen width, height, and available width, height, corresponding to `screen.width`, `screen.height`, `screen.availWidth`, and `screen.availHeight` in JavaScript.
