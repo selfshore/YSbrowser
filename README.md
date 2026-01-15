@@ -147,7 +147,6 @@
 - **警告**：由于没签名，mac上要执行xattr -cr YSbrowser.app才能使用。
 - **警告**：下面是基本参数，保持环境隔离必须携带--user-data-dir。
 - **警告**：如果需要console打印对象请携带openConsole，例如console.log("openConsole",{})。
-- **警告**：如果使用DrissionPage闪退，请更换端口set_address("http://127.0.0.1:8910")。
 ```bash
 chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data 
 ```
