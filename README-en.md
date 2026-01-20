@@ -7,175 +7,217 @@
 
 [English](README-en.md) | [中文](README.md)
 
-## 🔍 Tested & Passed
-| Detection Platform                                                  | Status       | Notes                  |
-|---------------------------------------------------------------------|--------------|------------------------|
-| [browserscan](https://browserscan.net)                              | ✅ Perfect    | -                      |
-| [creepjs](https://abrahamjuliot.github.io/creepjs/)                 | ✅ 62.5%+     | Continuous improvement |
-| [iphey](https://iphey.com)                                          | ✅ Perfect    | -                      |
-| [pixelscan](https://pixelscan.net)                                  | ✅ Perfect    | -                      |
-| [cloudflare](https://www.cloudflare.com/zh-cn/)                     | ✅ Perfect    | -                      |
-| [datadome](https://datadome.co/products/bot-protection/)            | ✅ Perfect    | -                      |
-| [brotector](https://kaliiiiiiiiii.github.io/brotector/)             | ✅ Perfect    | -                      |
-| [sannysoft](https://bot.sannysoft.com/)                             | ✅ Perfect    | -                      |
-| [fingerprint](https://fingerprint.com/products/bot-detection/)      | ✅ Perfect      | -                      |
+## 🔍 Fingerprint Detection Pass List
+| Detection Platform                                                  | Status          | Notes         |
+|--------------------------------------------------------------------|-----------------|---------------|
+| [browserscan](https://browserscan.net)                             | ✅ Perfect Pass  | -             |
+| [creepjs](https://abrahamjuliot.github.io/creepjs/)                | ✅ 62.5%+        | Continuously optimizing |
+| [iphey](https://iphey.com)                                         | ✅ Perfect Pass  | -             |
+| [pixelscan](https://pixelscan.net)                                 | ✅ Perfect Pass  | -             |
+| [cloudflare](https://www.cloudflare.com/zh-cn/)                    | ✅ Perfect Pass  | -             |
+| [datadome](https://datadome.co/products/bot-protection/)           | ✅ Perfect Pass  | -             |
+| [brotector](https://kaliiiiiiiiii.github.io/brotector/)            | ✅ Perfect Pass  | -             |
+| [sannysoft](https://bot.sannysoft.com/)                            | ✅ Perfect Pass  | -             |
+| [fingerprint](https://fingerprint.com/products/bot-detection/)     | ✅ Perfect Pass  | -             |
 
 ---
 
-## ⚙️ Core Parameters
-| Parameter                            | Value                 | Description                               |
-|--------------------------------------|-----------------------|-------------------------------------------|
-| `--timezone`                         | `Asia/Tokyo`          | Set browser timezone                      |
-| `--fpseed`                           | `12lfisffwfaTYa`      | Fingerprint generation seed               |
-| `--chrome-version`                   | `130.0.7151.70`       | Chrome browser version                    |
-| `--nocrash`                          | -                     | Fix automation tool crashes               |
-| `--lang`                             | `zh-CN`               | Set browser language                      |
-| `--accept-lang`                      | `zh-CN`               | Set HTTP request language                 |
-| `--proxy-server`                     | `socks5://ip:port`    | Set proxy server                          |
-| `--proxy-auth`                       | `username:password`   | Set proxy auth                            |
-| `--cpucores`                         | `6`                   | Number of CPU cores                       |
-| `--platformversion`                  | `15.4.1`              | Operating system version                  |
-| `--custom-screen`                    | `1792x1120,1792x1039` | Set screen width and height               |
-| `--force-device-scale-factor`        | `1`                   | Set the ratio of physical pixels to CSS pixels |
-| `--custom-geolocation`               | `110,220,70`           | Set latitude and longitude,accuracy       |
-| `--use-fake-device-for-media-stream` | -                     | Use fake media devices                    |
-| `--custom-brand`                     | `"Microsoft Edge"`    | Browser brand                             |
-| `--close-portscan`                   | -                     | Block port scan                           |
-| `--iconumber`                        | 1                     | browser number                            |
+## ⚙️ Core Parameter Configuration
+| Parameter                            | Value                 | Description            |
+|--------------------------------------|-----------------------|------------------------|
+| `--timezone`                         | `Asia/Tokyo`          | Set browser timezone   |
+| `--fpseed`                           | `12lfisffwfaTYa`      | Fingerprint generation seed |
+| `--chrome-version`                   | `130.0.7151.70`       | Chrome browser version |
+| `--nocrash`                          | -                     | Fix automation tool crash issues |
+| `--lang`                             | `zh-CN`               | Set browser language   |
+| `--accept-lang`                      | `zh-CN`               | Set HTTP request language |
+| `--proxy-server`                     | `socks5://ip:port`    | Set proxy server       |
+| `--proxy-auth`                       | `username:password`   | Set proxy authentication |
+| `--cpucores`                         | `6`                   | CPU core count         |
+| `--platformversion`                  | `15.4.1`              | System version         |
+| `--custom-screen`                    | `1792x1120,1792x1039` | Screen dimensions      |
+| `--force-device-scale-factor`        | `1`                   | Physical to CSS pixel ratio |
+| `--custom-geolocation`               | `110,220,70`          | Set latitude, longitude, accuracy |
+| `--block-geolocation`                | -                     | Block location (available in v5.2+) |
+| `--use-fake-device-for-media-stream` | -                     | Set virtual media device |
+| `--custom-brand`                     | `"Microsoft Edge"`    | Browser brand          |
+| `--close-portscan`                   | -                     | Block port scanning    |
+| `--iconumber`                        | 1                     | Browser instance number |
+| `--webrtc-ip-policy`                 | `disabled`            | Disable WebRTC IP leak (available in v5.2+) |
+| `--gpu-fingerprint`                  | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)` | Renderer (available in v5.2+) |
+
 
 ---
 
 ## 📝 Parameter Details
 ### **`timezone`**  
-- **Function**: Sets browser timezone
-- **Recommendation**: Match your proxy IP location's timezone
+- **Function**: Set browser timezone
+- **Recommendation**: Keep consistent with proxy IP location timezone
 - **Example**: `--timezone=America/New_York`
 
 ### **`fpseed`**  
 - **Function**: Fingerprint generation seed
-- **Impact**: Canvas, WebGL, audio, speech, DOMRect, fonts, and other fingerprints
-- **Importance**: Consistent seed ensures reproducible browser fingerprints
+- **Scope**: canvas, webgl, audio, speech, DOMRect, fonts and other fingerprints
+- **Importance**: Keeping the same seed ensures consistent browser fingerprint generation
 
 ### **`chrome-version`**  
 - **Function**: Specify Chrome browser version
-- **Important Notes**:
-  - Version tightly coupled with browser APIs - arbitrary changes may increase detection risk
-  - Automatically adapts TLS fingerprints (limited version support)
-  - Recommended only for sites with strict version controls
-- **Best Practice**: Use officially released Chrome versions
+- **Notes**:
+  - Version number is closely tied to browser APIs; arbitrary changes may cause detection risks
+  - Auto-adapts TLS fingerprint (limited version support)
+  - Only recommended when target website has strict version control
+- **Recommendation**: Use officially released Chrome version numbers
 
 ### **`nocrash`**  
-- **Function**: Fixes iframe-related crashes in Playwright/Puppeteer
-- **Solves**: Crashes caused by `contentWindow.open`
+- **Function**: Fix iframe-related crash issues in Playwright/Puppeteer
+- **Fixes**: Crashes caused by `contentWindow.open`
 
-### **`lang` & `accept-lang`**
-- **Function**: Control browser language and HTTP headers
-- **Impact**: Speech recognition and localization-related fingerprints
-- **Recommendation**: Keep both values consistent
+### **`lang` and `accept-lang`**
+- **Function**: Control browser language and HTTP request headers
+- **Affects**: Speech recognition, localization-related fingerprints
+- **Recommendation**: Keep both consistent
 
 ### **`proxy-server`**  
-- **Function**: Configure network proxy server
+- **Function**: Set network proxy server
 - **Format**: `--proxy-server=[protocol]://[address]:[port]`
-- **Supported Protocols**:
+- **Protocol Support**:
   - `http`: HTTP/HTTPS proxy
   - `socks4`: SOCKS4 proxy
   - `socks5`: SOCKS5 proxy
-- **Examples**:
+- **Example**:
   - `--proxy-server=http://127.0.0.1:8080`
 
 ### **`proxy-auth`**  
-- **Function**：Set proxy authentication credentials
-- **Examples**：
+- **Function**: Set network proxy authentication
+- **Example**:
   - `--proxy-auth=username:password`
 
 ### **`cpucores`**  
-- **Function**：Number of CPU cores (e.g., an i7 typically has 6 cores, corresponding to navigator.hardwareConcurrency).
-- **Recommendation**：Use common CPU core counts (6, 8, 10, 12).
+- **Function**: CPU core count (e.g., i7 has 6 cores, corresponds to navigator.hardwareConcurrency)
+- **Recommendation**: Use common CPU core counts (6, 8, 10, 12)
 
 ### **`platformversion`**  
-- **Function**：Operating system version.
-- **Recommendation**：
-  - `macOS`:  Use versions like 15.4.1, 15.5, etc.
-  - `Windows`: Use versions like 10.0.0, etc.
-    | Windows Version | Internal Build Number | Platform-Version String | Status |
+- **Function**: System version
+- **Recommendations**:
+  - `macOS`: System version, like 15.4.1, 15.5, etc.
+  - `Windows`:
+    | Windows Version | Build Number | Platform-Version | Status |
     | :--- | :--- | :--- | :--- |
-    | **Windows 11 (24H2)** | 26100+ | `"19.0.0"` | Latest / Preview |
-    | **Windows 11 (23H2)** | 22631 | `"17.0.0"` | Recommended / Mainstream |
+    | **Windows 11 (24H2)** | 26100+ | `"19.0.0"` | Latest/Preview |
+    | **Windows 11 (23H2)** | 22631 | `"17.0.0"` | Mainstream Recommended |
     | **Windows 11 (22H2)** | 22621 | `"15.0.0"` | Stable |
-    | **Windows 11 (21H2)** | 22000 | `"13.0.0"` | Initial Release |
-    | **Windows 10 (22H2)** | 19045 | `"10.0.0"` | Most Common (Win10) |
+    | **Windows 11 (21H2)** | 22000 | `"13.0.0"` | Initial |
+    | **Windows 10 (22H2)** | 19045 | `"10.0.0"` | Win10 Most Common |
     | **Windows 10 (21H2)** | 19044 | `"10.0.0"` | Stable |
-    | **Windows 8.1** | 9600 | `"6.3.0"` | Obsolete |
-    | **Windows 8** | 9200 | `"6.2.0"` | Obsolete |
-    | **Windows 7** | 7601 | `"6.1.0"` | Obsolete |
+    | **Windows 8.1** | 9600 | `"6.3.0"` | Outdated |
+    | **Windows 8** | 9200 | `"6.2.0"` | Outdated |
+    | **Windows 7** | 7601 | `"6.1.0"` | Outdated |
 
-### **`custom-screen`** 
-- **Function**: Sets screen width, height, and available width, height, corresponding to `screen.width`, `screen.height`, `screen.availWidth`, and `screen.availHeight` in JavaScript.
-- **Recommendation**: If you set this, `width` and `height` are required. `availWidth` and `availHeight` can be omitted, as the browser will adjust them automatically. It's recommended to use real-world resolutions.
-- **Example**:
+### **`custom-screen`**  
+- **Function**: Screen width/height and available width/height, corresponds to width, height, availWidth, availHeight in JavaScript's screen object.
+- **Recommendation**: If setting this, width and height are required. availWidth and availHeight can be omitted if unknown; the browser will auto-adjust. Try to use real resolutions.
+- **Examples**:
   - `1792x1120,1792x1039`
   - `1792x1120`
 
-### **`force-device-scale-factor`** 
-- **Function**: Sets the ratio of physical pixels to CSS pixels, corresponding to `devicePixelRatio`.
-- **Example**:
+### **`force-device-scale-factor`**  
+- **Function**: Physical to CSS pixel ratio, i.e., devicePixelRatio
+- **Examples**:
   - `1`
   - `2`
 
-### **`custom-geolocation`** 
-- **Function**: Sets the latitude and longitude (`navigator.geolocation.getCurrentPosition`).
+### **`custom-geolocation` and `block-geolocation`** 
+- **Function**: custom-geolocation sets latitude/longitude (navigator.geolocation.getCurrentPosition), block-geolocation blocks location functionality
 - **Example**:
-  - `110,220` (latitude, longitude)
+  - `--custom-geolocation=110,220,70` (latitude, longitude, accuracy)
 
 ### **`use-fake-device-for-media-stream`**
-- **Function**: Uses fake media devices (`navigator.mediaDevices.enumerateDevices`).
+- **Function**: Fake media devices (navigator.mediaDevices.enumerateDevices)
 
 ### **`custom-brand`**
-- **Function**: Disguises the browser brand.
-- **Recommendation**: If you are impersonating a real browser brand, you should include the `user-agent` parameter. If you are creating a fictional brand, you don't need to include `user-agent`.
+- **Function**: Spoof browser brand
+- **Recommendation**: If spoofing as a real browser brand, include the user-agent parameter. If using a fictional non-existent brand, user-agent is not needed.
 - **Examples**:
-  - `--custom-brand="Microsoft Edge" --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"`
+  - `--custom-brand="Microsoft Edge"
+--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"`
   - `--custom-brand="fake brand"`
 
 ### **`close-portscan`**
-- **Function**: Blocks port scanning.
+- **Function**: Block port scanning
+
+### **`webrtc-ip-policy`**
+- **Function**: Prevent WebRTC from leaking real IP
+- **Example**:
+  - `--webrtc-ip-policy=disabled`
+
+### **`gpu-fingerprint`**
+- **Function**: Modify renderer
+- **Examples**:
+    | # | Full ANGLE Renderer String |
+    | :--- | :--- |
+    | **0** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 960 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **1** | `ANGLE (AMD, AMD Radeon R9 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **2** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 770 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **3** | `ANGLE (Intel, Intel(R) HD Graphics 4600 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **4** | `ANGLE (AMD, AMD Radeon HD 8800 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **5** | `ANGLE (NVIDIA, NVIDIA GeForce GT 730 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **6** | `ANGLE (Intel, Intel(R) HD Graphics 4400 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **7** | `ANGLE (AMD, AMD Radeon R7 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **8** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **9** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 980 Ti Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **10** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 970M Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+    | **11** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 1080 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+---
 
 ## Basic Usage
-- **Warning**: Due to the lack of a signature, you must run `xattr -cr YSbrowser.app` on macOS to use it.
-- **Warning**: The following are basic parameters. --user-data-dir is required to maintain environment isolation.
-- **Warning:** If you need to print the object to the console, please include `openConsole`, for example, `console.log("openConsole",{})`.
+- **Warning**: Since it's unsigned, run `xattr -cr YSbrowser.app` on macOS before use.
+- **Warning**: Below are basic parameters. To maintain environment isolation, `--user-data-dir` is required.
+- **Warning**: To print objects in console, include openConsole, e.g., `console.log("openConsole",{})`.
 ```bash
 chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data 
 ```
 
 ## Simulate Brave
 ```bash
-chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx --user-data-dir=./my_user_data --chrome-version=137.0.0.0 --custom-brand=Brave --enable-features=BraveAPI --disable-features=keyboardAPI,NetworkAPI
+chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data --chrome-version=137.0.0.0 --custom-brand=Brave --enable-features=BraveAPI --disable-features=keyboardAPI,NetworkAPI
 ```
 
 ## 🤖 Automation Tool Support
 ### Eliminated Automation Signatures
-- ✅ CDP detection
-- ✅ Selenium signatures
-- ✅ Playwright signatures(Some parts have been removed, but it's still recommended to use patchright.)
-- ✅ DrissionPage signatures
+- ✅ CDP Detection
+- ✅ Selenium Signatures
+- ✅ Playwright Signatures (only partial removal, patchright still recommended)
+- ✅ DrissionPage Signatures
 
 ### Key Technical Improvements
-1. **Mouse Event Fix**: Permanently resolves CDP's `Input.dispatchMouseEvent` defect
+1. **Mouse Event Fix**: Thoroughly resolved CDP's `Input.dispatchMouseEvent` defects
 2. **Shadow DOM Access**: Access closed shadow DOM via `opshadowRoot`
-3. **Automation Detection Bypass**: Eliminates common automation tool markers
+3. **Automation Detection Bypass**: Eliminated common automation tool signature markers
 
 ---
 
 ## 🐞 Debugging Support
-- **Renamed Debugger**: `debugger` → `debuging` (bypasses detection)
-- **Console Checks**: Bypasses common console property checks
+- **Renamed Debugger**: `debugger` → `debuging` (bypass detection)
+- **Console Inspection**: Bypasses common console property checks
 
 ---
 
 ## 🚧 Development Roadmap
-| Feature                  | Status     | Description                                                      |
-|--------------------------|------------|------------------------------------------------------------------|
-| GPU Fingerprint Spoofing | ⚙️ In Progress | Enhancing graphics fingerprint camouflage                        |
+> **Tip**: Project is continuously updated. Welcome to submit Issues! If you'd like to help collect more fingerprints, please visit [website](https://www.hanyiting.com)
 
-> **Tip**: Project continuously updated - welcome to submit Issues! If you'd like to help me collect more fingerprints, please click [here](https://www.hanyiting.com)
+## ⚖️ Disclaimer
+> **Note:** This project is strictly prohibited for illegal use.
+<details>
+<summary>Click to expand detailed legal compliance statement</summary>
+
+1. **Legal Compliance**: Users should use this tool in compliance with local laws. It is strictly prohibited to use this tool for any illegal or non-compliant activities.
+2. **Risk Assumption**: All consequences arising from improper use or illegal purposes (including legal liability and economic losses) are the sole responsibility of the user and are unrelated to the developer.
+3. **No Warranty**: This tool is provided "as is." The developer is not responsible for any losses resulting from the use of this tool.
+4. **Commercial Use Prohibited**: This tool is for learning and communication purposes only. It is strictly prohibited for any illegal profit-making activities.
+
+</details>
+
+## Job Seeking: Welcome referrals for crawler and anti-crawler positions
+
+### Discussion Group
+<img src="QQ20250723-104659.png" alt="QQ Group 1043047569" width="400" height="400">
