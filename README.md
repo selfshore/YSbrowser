@@ -38,10 +38,14 @@
 | `--custom-screen`                    | `1792x1120,1792x1039` | 屏幕宽高         |
 | `--force-device-scale-factor`        | `1`                   | 物理像素和css像素比值 |
 | `--custom-geolocation`               | `110,220,70`          | 设置纬度和经度，精确距离 |
+| `--block-geolocation`               | -          | 屏蔽位置 |
 | `--use-fake-device-for-media-stream` | -                     | 设置虚拟媒体设备     |
 | `--custom-brand`                     | `"Microsoft Edge"`    | 浏览器品牌        |
 | `--close-portscan`                   | -                     | 屏蔽端口扫描       |
 | `--iconumber`                        | 1                     | 浏览器编号        |
+| `--webrtc-ip-policy`                | `disabled`            | 关闭webtrc的ip泄露（5.2版本以上可用）        |
+| `--gpu-fingerprint`                  |    `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)`                | 渲染器        |
+
 
 ---
 
@@ -122,10 +126,10 @@
   - `1`
   - `2`
 
-### **`custom-geolocation`** 
-- **功能**：设置经纬度（navigator.geolocation.getCurrentPosition）
+### **`custom-geolocation`和`block-geolocation`** 
+- **功能**：custom-geolocation设置经纬度（navigator.geolocation.getCurrentPosition）,block-geolocation屏蔽位置功能
 - **示例**：
-  - `110,220,70`(纬度,经度,精度)
+  - `--custom-geolocation=110,220,70`(纬度,经度,精度)
 
 ### **`use-fake-device-for-media-stream`**
 - **功能**：伪造媒体设备（navigator.mediaDevices.enumerateDevices）
@@ -141,6 +145,26 @@
 ### **`close-portscan`**
 - **功能**：屏蔽端口扫描
 
+### **`webrtc-ip-policy`**
+- **功能**：防止webrtc泄露真实IP
+- **示例**：
+  - `--webrtc-ip-policy=disabled`
+
+### **`gpu-fingerprint`**
+- **功能**：修改渲染器
+- **示例**：
+  0: "ANGLE (NVIDIA, NVIDIA GeForce GTX 960 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  1: "ANGLE (AMD, AMD Radeon R9 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  2: "ANGLE (NVIDIA, NVIDIA GeForce GTX 770 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  3: "ANGLE (Intel, Intel(R) HD Graphics 4600 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  4: "ANGLE (AMD, AMD Radeon HD 8800 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  5: "ANGLE (NVIDIA, NVIDIA GeForce GT 730 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  6: "ANGLE (Intel, Intel(R) HD Graphics 4400 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  7: "ANGLE (AMD, AMD Radeon R7 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  8: "ANGLE (NVIDIA, NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  9: "ANGLE (NVIDIA, NVIDIA GeForce GTX 980 Ti Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  10: "ANGLE (NVIDIA, NVIDIA GeForce GTX 970M Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  11: "ANGLE (NVIDIA, NVIDIA GeForce GTX 1080 Direct3D11 vs_5_0 ps_5_0, D3D11)"
 ---
 
 ## 基本用法
