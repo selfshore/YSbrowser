@@ -7,7 +7,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-## 🔍 检测通过列表
+## 🔍 指纹检测通过列表
 | 检测平台                                                             | 状态            | 备注    |
 |--------------------------------------------------------------------|---------------|-------|
 | [browserscan](https://browserscan.net)                             | ✅ 完美通过        | -     |
@@ -38,13 +38,13 @@
 | `--custom-screen`                    | `1792x1120,1792x1039` | 屏幕宽高         |
 | `--force-device-scale-factor`        | `1`                   | 物理像素和css像素比值 |
 | `--custom-geolocation`               | `110,220,70`          | 设置纬度和经度，精确距离 |
-| `--block-geolocation`               | -          | 屏蔽位置 |
+| `--block-geolocation`               | -          | 屏蔽位置 （5.2版本以上可用）|
 | `--use-fake-device-for-media-stream` | -                     | 设置虚拟媒体设备     |
 | `--custom-brand`                     | `"Microsoft Edge"`    | 浏览器品牌        |
 | `--close-portscan`                   | -                     | 屏蔽端口扫描       |
 | `--iconumber`                        | 1                     | 浏览器编号        |
 | `--webrtc-ip-policy`                | `disabled`            | 关闭webtrc的ip泄露（5.2版本以上可用）        |
-| `--gpu-fingerprint`                  |    `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)`                | 渲染器        |
+| `--gpu-fingerprint`                  |    `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)`                | 渲染器（5.2版本以上可用）        |
 
 
 ---
