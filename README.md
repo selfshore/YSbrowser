@@ -153,18 +153,20 @@
 ### **`gpu-fingerprint`**
 - **功能**：修改渲染器
 - **示例**：
-  0: "ANGLE (NVIDIA, NVIDIA GeForce GTX 960 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  1: "ANGLE (AMD, AMD Radeon R9 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  2: "ANGLE (NVIDIA, NVIDIA GeForce GTX 770 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  3: "ANGLE (Intel, Intel(R) HD Graphics 4600 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  4: "ANGLE (AMD, AMD Radeon HD 8800 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  5: "ANGLE (NVIDIA, NVIDIA GeForce GT 730 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  6: "ANGLE (Intel, Intel(R) HD Graphics 4400 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  7: "ANGLE (AMD, AMD Radeon R7 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  8: "ANGLE (NVIDIA, NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  9: "ANGLE (NVIDIA, NVIDIA GeForce GTX 980 Ti Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  10: "ANGLE (NVIDIA, NVIDIA GeForce GTX 970M Direct3D11 vs_5_0 ps_5_0, D3D11)"
-  11: "ANGLE (NVIDIA, NVIDIA GeForce GTX 1080 Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  | 序号 | 完整 ANGLE 渲染器字符串 |
+| :--- | :--- |
+| **0** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 960 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **1** | `ANGLE (AMD, AMD Radeon R9 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **2** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 770 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **3** | `ANGLE (Intel, Intel(R) HD Graphics 4600 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **4** | `ANGLE (AMD, AMD Radeon HD 8800 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **5** | `ANGLE (NVIDIA, NVIDIA GeForce GT 730 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **6** | `ANGLE (Intel, Intel(R) HD Graphics 4400 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **7** | `ANGLE (AMD, AMD Radeon R7 200 Series Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **8** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **9** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 980 Ti Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **10** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 970M Direct3D11 vs_5_0 ps_5_0, D3D11)` |
+| **11** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 1080 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
 ---
 
 ## 基本用法
