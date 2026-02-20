@@ -23,28 +23,39 @@
 ---
 
 ## ⚙️ Core Parameter Configuration
-| Parameter                            | Value                 | Description            |
-|--------------------------------------|-----------------------|------------------------|
-| `--timezone`                         | `Asia/Tokyo`          | Set browser timezone   |
-| `--fpseed`                           | `12lfisffwfaTYa`      | Fingerprint generation seed |
-| `--chrome-version`                   | `130.0.7151.70`       | Chrome browser version |
-| `--nocrash`                          | -                     | Fix automation tool crash issues |
-| `--lang`                             | `zh-CN`               | Set browser language   |
-| `--accept-lang`                      | `zh-CN`               | Set HTTP request language |
-| `--proxy-server`                     | `socks5://ip:port`    | Set proxy server       |
-| `--proxy-auth`                       | `username:password`   | Set proxy authentication |
-| `--cpucores`                         | `6`                   | CPU core count         |
-| `--platformversion`                  | `15.4.1`              | System version         |
-| `--custom-screen`                    | `1792x1120,1792x1039` | Screen dimensions      |
-| `--force-device-scale-factor`        | `1`                   | Physical to CSS pixel ratio |
-| `--custom-geolocation`               | `110,220,70`          | Set latitude, longitude, accuracy |
-| `--block-geolocation`                | -                     | Block location (available in v5.2+) |
-| `--use-fake-device-for-media-stream` | -                     | Set virtual media device |
-| `--custom-brand`                     | `"Microsoft Edge"`    | Browser brand          |
-| `--close-portscan`                   | -                     | Block port scanning    |
-| `--iconumber`                        | 1                     | Browser instance number |
-| `--webrtc-ip-policy`                 | `disabled`            | Disable WebRTC IP leak (available in v5.2+) |
-| `--gpu-fingerprint`                  | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)` | Renderer (available in v5.2+) |
+
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| `--timezone` | `Asia/Tokyo` | Set browser timezone |
+| `--fpseed` | `12lfisffwfaTYa` | General fingerprint generation seed |
+| `--webgl-seed` | `12lfisffwfaTYa` | WebGL drawing fingerprint seed |
+| `--canvas-seed` | `12lfisffwfaTYa` | Canvas drawing fingerprint seed |
+| `--quota-seed` | `12lfisffwfaTYa` | Storage quota fingerprint seed |
+| `--css-seed` | `12lfisffwfaTYa` | CSS fingerprint seed |
+| `--font-seed` | `12lfisffwfaTYa` | Font list fingerprint seed |
+| `--audio-seed` | `12lfisffwfaTYa` | Audio context fingerprint seed |
+| `--svg-seed` | `12lfisffwfaTYa` | SVG fingerprint seed |
+| `--speech-seed` | `12lfisffwfaTYa` | SpeechVoices fingerprint seed |
+| `--rect-seed` | `12lfisffwfaTYa` | DOMRect fingerprint seed |
+| `--webrtc-ip-policy` | `disabled` or `proxy` | Disable WebRTC or use custom IP (v5.2+) |
+| `--webrtc-proxy-ip` | `127.0.0.1` | Exposed WebRTC IP address |
+| `--chrome-version` | `130.0.7151.70` | Chrome browser version |
+| `--nocrash` | - | Fix automation tool crash issues |
+| `--lang` | `zh-CN` | Set browser UI language |
+| `--accept-lang` | `zh-CN` | Set HTTP Request-Language header |
+| `--proxy-server` | `socks5://ip:port` | Set proxy server address |
+| `--proxy-auth` | `username:password` | Set proxy authentication credentials |
+| `--cpucores` | `6` | Reported CPU core count |
+| `--platformversion` | `15.4.1` | Operating system version |
+| `--custom-screen` | `1792x1120,1792x1039` | Screen resolution and usable area |
+| `--force-device-scale-factor` | `1` | Ratio of physical pixels to CSS pixels |
+| `--custom-geolocation` | `110,220,70` | Set Lat, Long, and Accuracy |
+| `--block-geolocation` | - | Block location access (v5.2+) |
+| `--use-fake-device-for-media-stream` | - | Use virtual media devices (camera/mic) |
+| `--custom-brand` | `"Microsoft Edge"` | Browser brand identity |
+| `--close-portscan` | - | Block local port scanning attempts |
+| `--iconumber` | `1` | Browser instance index number |
+| `--gpu-fingerprint` | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)` | Specific GPU renderer string (v5.2+) |
 
 
 ---
