@@ -36,8 +36,9 @@
 | `--svg-seed`                       | `12lfisffwfaTYa`      | svg指纹生成种子       |
 | `--speech-seed`                       | `12lfisffwfaTYa`      | speechvoices指纹生成种子       |
 | `--rect-seed`                       | `12lfisffwfaTYa`      | domrect指纹生成种子       |
-| `--webrtc-ip-policy`                  | `disabled or proxy`      | 禁用webrtc或者使用自定义IP       |
+| `--webrtc-ip-policy`                  | `disabled` or `proxy`      | 禁用webrtc或者使用自定义IP       |
 | `--webrtc-proxy-ip`                  | `127.0.0.1`      | webrtc的暴露IP       |
+| `--enable-features`                  | `TurnstileClicker`,`PXAutoHold`      | 启用通过cloudflare和px验证码      |
 | `--chrome-version`                   | `130.0.7151.70`       | Chrome 浏览器版本 |
 | `--nocrash`                          | -                     | 修复自动化工具崩溃问题  |
 | `--lang`                             | `zh-CN`               | 设置浏览器语言      |
