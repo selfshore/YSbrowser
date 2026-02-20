@@ -27,6 +27,17 @@
 |--------------------------------------|-----------------------|--------------|
 | `--timezone`                         | `Asia/Tokyo`          | 设置浏览器时区      |
 | `--fpseed`                           | `12lfisffwfaTYa`      | 指纹生成种子       |
+| `--webgl-seed`                       | `12lfisffwfaTYa`      | WEBGL绘画指纹生成种子       |
+| `--canvas-seed`                       | `12lfisffwfaTYa`      | CANVAS绘画指纹生成种子       |
+| `--quota-seed`                       | `12lfisffwfaTYa`      | STORAGE指纹生成种子       |
+| `--css-seed`                       | `12lfisffwfaTYa`      | css指纹生成种子       |
+| `--font-seed`                       | `12lfisffwfaTYa`      | 字体指纹生成种子       |
+| `--audio-seed`                       | `12lfisffwfaTYa`      | 音频指纹生成种子       |
+| `--svg-seed`                       | `12lfisffwfaTYa`      | svg指纹生成种子       |
+| `--speech-seed`                       | `12lfisffwfaTYa`      | speechvoices指纹生成种子       |
+| `--rect-seed`                       | `12lfisffwfaTYa`      | domrect指纹生成种子       |
+| `--webrtc-ip-policy`                  | `disabled or proxy`      | 禁用webrtc或者使用自定义IP       |
+| `--webrtc-proxy-ip`                  | `127.0.0.1`      | webrtc的暴露IP       |
 | `--chrome-version`                   | `130.0.7151.70`       | Chrome 浏览器版本 |
 | `--nocrash`                          | -                     | 修复自动化工具崩溃问题  |
 | `--lang`                             | `zh-CN`               | 设置浏览器语言      |
