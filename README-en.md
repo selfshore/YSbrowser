@@ -40,7 +40,7 @@
 | `--webrtc-ip-policy` | `disabled` or `proxy` | Disable WebRTC or use custom IP (v5.2+) |
 | `--webrtc-proxy-ip` | `127.0.0.1` | Exposed WebRTC IP address |
 | `--enable-features` | `TurnstileClicker`,`PXAutoHold` | Enable Cloudflare Turnstile and PX captcha bypass |
-| `--chrome-version` | `130.0.7151.70` | Chrome browser version |
+| `--chrome-version` | `140.0.7339.185` | Chrome browser version |
 | `--nocrash` | - | Fix automation tool crash issues |
 | `--lang` | `zh-CN` | Set browser UI language |
 | `--accept-lang` | `zh-CN` | Set HTTP Request-Language header |
