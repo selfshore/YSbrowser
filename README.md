@@ -55,7 +55,6 @@
 | `--custom-brand`                     | `"Microsoft Edge"`    | 浏览器品牌        |
 | `--close-portscan`                   | -                     | 屏蔽端口扫描       |
 | `--iconumber`                        | 1                     | 浏览器编号        |
-| `--webrtc-ip-policy`                | `disabled`            | 关闭webtrc的ip泄露（5.2版本以上可用）        |
 | `--gpu-fingerprint`                  |    `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)`                | 渲染器（5.2版本以上可用）        |
 
 
