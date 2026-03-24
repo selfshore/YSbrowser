@@ -56,7 +56,7 @@
 | `--custom-brand` | `"Microsoft Edge"` | Browser brand identity |
 | `--close-portscan` | - | Block local port scanning attempts |
 | `--iconumber` | `1` | Browser instance index number |
-| `--gpu-fingerprint` | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)` | Specific GPU renderer string (v5.2+) |
+| `--gpu-seed` | `12lfisffwfaTYa` | Specific GPU renderer string (v5.2+) |
 
 
 ---
