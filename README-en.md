@@ -162,24 +162,6 @@
 - **Example**:
   - `--webrtc-ip-policy=disabled`
 
-### **`gpu-fingerprint`**
-- **Function**: Modify renderer
-- **Examples**:
-    | # | Full ANGLE Renderer String |
-    | :--- | :--- |
-    | **0** | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **1** | `ANGLE (AMD, AMD Radeon RX 6750 GRE 12GB Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **2** | `ANGLE (NVIDIA, NVIDIA GeForce RTX 2060 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **3** | `ANGLE (Intel, Intel(R) Iris(R) Xe Graphics Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **4** | `ANGLE (AMD, AMD Radeon(TM) Graphics Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **5** | `ANGLE (NVIDIA, NVIDIA GeForce GT 710 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **6** | `ANGLE (Intel, Intel(R) UHD Graphics Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **7** | `ANGLE (AMD, AMD Radeon RX 6700 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **8** | `ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **9** | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4090 Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **10** | `ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU Direct3D11 vs_5_0 ps_5_0, D3D11)` |
-    | **11** | `ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 Ti Direct3D11 vs_5_0 ps_5_0, D3D11)` |
----
 
 ## Basic Usage
 - **Warning**: Since it's unsigned, run `xattr -cr YSbrowser.app` on macOS before use.
