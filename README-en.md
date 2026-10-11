@@ -1,217 +1,332 @@
 <div align="center">
 
-# ✨ 𝕐𝕊𝕓𝕣𝕠𝕨𝕤𝕖𝕣 ✨  
-**Next-Generation Privacy Browser Solution**
+<h1>YSbrowser</h1>
 
-</div>
+<p><strong>A deeply customized Chromium-based browser for Windows</strong></p>
+<p>A stable, reproducible browser environment with independent configuration for each instance</p>
+
+[![Release](https://img.shields.io/github/v/release/selfshore/YSbrowser?display_name=tag&style=for-the-badge&color=0969da)](https://github.com/selfshore/YSbrowser/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/selfshore/YSbrowser/total?style=for-the-badge&color=2da44e)](https://github.com/selfshore/YSbrowser/releases)
+[![Stars](https://img.shields.io/github/stars/selfshore/YSbrowser?style=for-the-badge&color=bf8700)](https://github.com/selfshore/YSbrowser/stargazers)
+[![Platform](https://img.shields.io/badge/Windows-x64-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/selfshore/YSbrowser/releases)
+
+[Download](https://github.com/selfshore/YSbrowser/releases/latest) · [Quick Start](#quick-start) · [Command-Line Options](#command-line-options) · [Report an Issue](https://github.com/selfshore/YSbrowser/issues)
 
 [English](README-en.md) | [中文](README.md)
 
-## 🔍 Fingerprint Detection Pass List
-| Detection Platform                                                  | Status          | Notes         |
-|--------------------------------------------------------------------|-----------------|---------------|
-| [browserscan](https://browserscan.net)                             | ✅ Perfect Pass  | -             |
-| [creepjs](https://abrahamjuliot.github.io/creepjs/)                | ✅ 62.5%+        | Continuously optimizing |
-| [iphey](https://iphey.com)                                         | ✅ Perfect Pass  | -             |
-| [pixelscan](https://pixelscan.net)                                 | ✅ Perfect Pass  | -             |
-| [cloudflare](https://www.cloudflare.com/zh-cn/)                    | ✅ Perfect Pass  | -             |
-| [datadome](https://datadome.co/products/bot-protection/)           | ✅ Perfect Pass  | -             |
-| [brotector](https://kaliiiiiiiiii.github.io/brotector/)            | ✅ Perfect Pass  | -             |
-| [sannysoft](https://bot.sannysoft.com/)                            | ✅ Perfect Pass  | -             |
-| [fingerprint](https://fingerprint.com/products/bot-detection/)     | ✅ Perfect Pass  | -             |
+</div>
 
 ---
 
-## ⚙️ Core Parameter Configuration
+> **Documentation version**: This page describes the new version. For older browser releases, see the [legacy English documentation](docs/legacy/README-en.md) or [旧版中文说明](docs/legacy/README.md). Options may differ between versions; use the instructions for your release.
 
-| Parameter | Value | Description |
-| :--- | :--- | :--- |
-| `--timezone` | `Asia/Tokyo` | Set browser timezone |
-| `--fpseed` | `12lfisffwfaTYa` | General fingerprint generation seed |
-| `--webgl-seed` | `12lfisffwfaTYa` | WebGL drawing fingerprint seed |
-| `--canvas-seed` | `12lfisffwfaTYa` | Canvas drawing fingerprint seed |
-| `--quota-seed` | `12lfisffwfaTYa` | Storage quota fingerprint seed |
-| `--css-seed` | `12lfisffwfaTYa` | CSS fingerprint seed |
-| `--font-seed` | `12lfisffwfaTYa` | Font list fingerprint seed |
-| `--audio-seed` | `12lfisffwfaTYa` | Audio context fingerprint seed |
-| `--svg-seed` | `12lfisffwfaTYa` | SVG fingerprint seed |
-| `--speech-seed` | `12lfisffwfaTYa` | SpeechVoices fingerprint seed |
-| `--rect-seed` | `12lfisffwfaTYa` | DOMRect fingerprint seed |
-| `--webrtc-ip-policy` | `disabled` or `proxy` | Disable WebRTC or use custom IP (v5.2+) |
-| `--webrtc-proxy-ip` | `127.0.0.1` | Exposed WebRTC IP address |
-| `--enable-features` | `TurnstileClicker`,`PXAutoHold` | Enable Cloudflare Turnstile and PX captcha bypass |
-| `--chrome-version` | `140.0.7339.185` | Chrome browser version |
-| `--nocrash` | - | Fix automation tool crash issues |
-| `--lang` | `zh-CN` | Set browser UI language |
-| `--accept-lang` | `zh-CN` | Set HTTP Request-Language header |
-| `--proxy-server` | `socks5://ip:port` | Set proxy server address |
-| `--proxy-auth` | `username:password` | Set proxy authentication credentials |
-| `--cpucores` | `6` | Reported CPU core count |
-| `--platformversion` | `15.4.1` | Operating system version |
-| `--custom-screen` | `1792x1120,1792x1039` | Screen resolution and usable area |
-| `--force-device-scale-factor` | `1` | Ratio of physical pixels to CSS pixels |
-| `--custom-geolocation` | `110,220,70` | Set Lat, Long, and Accuracy |
-| `--block-geolocation` | - | Block location access (v5.2+) |
-| `--use-fake-device-for-media-stream` | - | Use virtual media devices (camera/mic) |
-| `--custom-brand` | `"Microsoft Edge"` | Browser brand identity |
-| `--close-portscan` | - | Block local port scanning attempts |
-| `--iconumber` | `1` | Browser instance index number |
-| `--gpu-seed` | `12lfisffwfaTYa` | Specific GPU renderer string (v5.2+) |
+## Introduction
 
+YSbrowser is a customized Chromium-based desktop browser for Windows. The new version configures the browser environment at the browser engine level, with support for separate user data directories, authenticated proxies, WebRTC address policies, and reproducible configurations for Canvas, WebGL, Audio, fonts, screens, and text geometry.
 
----
+The same launch options and seeds consistently select the same environment. When each instance uses a different `--user-data-dir`, its cookies, cache, LocalStorage, IndexedDB, and site permissions are isolated from those of other instances.
 
-## 📝 Parameter Details
-### **`timezone`**  
-- **Function**: Set browser timezone
-- **Recommendation**: Keep consistent with proxy IP location timezone
-- **Example**: `--timezone=America/New_York`
+> The current graphics implementation targets Windows x64 and Chromium's default ANGLE D3D11 rendering path. If you force Vulkan, OpenGL, or SwiftShader, WebGL rendering results are not guaranteed to match those produced by D3D11.
 
-### **`fpseed`**  
-- **Function**: Fingerprint generation seed
-- **Scope**: canvas, webgl, audio, speech, DOMRect, fonts and other fingerprints
-- **Importance**: Keeping the same seed ensures consistent browser fingerprint generation
+## What's New
 
-### **`chrome-version`**  
-- **Function**: Specify Chrome browser version
-- **Notes**:
-  - Version number is closely tied to browser APIs; arbitrary changes may cause detection risks
-  - Auto-adapts TLS fingerprint (limited version support)
-  - Only recommended when target website has strict version control
-- **Recommendation**: Use officially released Chrome version numbers
+<table>
+<tr>
+<td width="50%" valign="top">
 
-### **`nocrash`**  
-- **Function**: Fix iframe-related crash issues in Playwright/Puppeteer
-- **Fixes**: Crashes caused by `contentWindow.open`
+### 🧩 Environment Configuration
 
-### **`lang` and `accept-lang`**
-- **Function**: Control browser language and HTTP request headers
-- **Affects**: Speech recognition, localization-related fingerprints
-- **Recommendation**: Keep both consistent
+- Timezone, language, CPU, memory, and operating system version
+- Screen and device scaling settings
+- Fonts and SpeechSynthesis voice combinations
+- Independent DOMRect and SVGRect configuration
+- WebRTC candidate address policies
 
-### **`proxy-server`**  
-- **Function**: Set network proxy server
-- **Format**: `--proxy-server=[protocol]://[address]:[port]`
-- **Protocol Support**:
-  - `http`: HTTP/HTTPS proxy
-  - `socks4`: SOCKS4 proxy
-  - `socks5`: SOCKS5 proxy
-- **Example**:
-  - `--proxy-server=http://127.0.0.1:8080`
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
 
-### **`proxy-auth`**  
-- **Function**: Set network proxy authentication
-- **Example**:
-  - `--proxy-auth=username:password`
+### 🌐 Networking
 
-### **`cpucores`**  
-- **Function**: CPU core count (e.g., i7 has 6 cores, corresponds to navigator.hardwareConcurrency)
-- **Recommendation**: Use common CPU core counts (6, 8, 10, 12)
+- HTTP, HTTPS, and SOCKS5 proxies
+- Username and password authentication
+- Proxy switching for individual instances while the browser is running
+- Switching the proxy for instance A does not change instance B
+- Independent control over the address exposed through WebRTC
 
-### **`platformversion`**  
-- **Function**: System version
-- **Recommendations**:
-  - `macOS`: System version, like 15.4.1, 15.5, etc.
-  - `Windows`:
-    | Windows Version | Build Number | Platform-Version | Status |
-    | :--- | :--- | :--- | :--- |
-    | **Windows 11 (24H2)** | 26100+ | `"19.0.0"` | Latest/Preview |
-    | **Windows 11 (23H2)** | 22631 | `"17.0.0"` | Mainstream Recommended |
-    | **Windows 11 (22H2)** | 22621 | `"15.0.0"` | Stable |
-    | **Windows 11 (21H2)** | 22000 | `"13.0.0"` | Initial |
-    | **Windows 10 (22H2)** | 19045 | `"10.0.0"` | Win10 Most Common |
-    | **Windows 10 (21H2)** | 19044 | `"10.0.0"` | Stable |
-    | **Windows 8.1** | 9600 | `"6.3.0"` | Outdated |
-    | **Windows 8** | 9200 | `"6.2.0"` | Outdated |
-    | **Windows 7** | 7601 | `"6.1.0"` | Outdated |
+</td>
+<td width="50%" valign="top">
 
-### **`custom-screen`**  
-- **Function**: Screen width/height and available width/height, corresponds to width, height, availWidth, availHeight in JavaScript's screen object.
-- **Recommendation**: If setting this, width and height are required. availWidth and availHeight can be omitted if unknown; the browser will auto-adjust. Try to use real resolutions.
-- **Examples**:
-  - `1792x1120,1792x1039`
-  - `1792x1120`
+### 🛠️ Usability
 
-### **`force-device-scale-factor`**  
-- **Function**: Physical to CSS pixel ratio, i.e., devicePixelRatio
-- **Examples**:
-  - `1`
-  - `2`
+- Support for CDP, Playwright, Patchright, and Puppeteer
+- Instance numbers on window and taskbar icons
+- Extension developer mode enabled by default
+- Direct pasting into the DevTools console
+- JavaScript source maps disabled by default
 
-### **`custom-geolocation` and `block-geolocation`** 
-- **Function**: custom-geolocation sets latitude/longitude (navigator.geolocation.getCurrentPosition), block-geolocation blocks location functionality
-- **Example**:
-  - `--custom-geolocation=110,220,70` (latitude, longitude, accuracy)
+</td>
+</tr>
+</table>
 
-### **`use-fake-device-for-media-stream`**
-- **Function**: Fake media devices (navigator.mediaDevices.enumerateDevices)
+## Quick Start
 
-### **`custom-brand`**
-- **Function**: Spoof browser brand
-- **Recommendation**: If spoofing as a real browser brand, include the user-agent parameter. If using a fictional non-existent brand, user-agent is not needed.
-- **Examples**:
-  - `--custom-brand="Microsoft Edge"
---user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"`
-  - `--custom-brand="fake brand"`
+Download the Windows archive from [Releases](https://github.com/selfshore/YSbrowser/releases), extract it, and run `YSbrowser.exe`.
 
-### **`close-portscan`**
-- **Function**: Block port scanning
+Recommended minimal configuration:
 
-### **`webrtc-ip-policy`**
-- **Function**: Prevent WebRTC from leaking real IP
-- **Example**:
-  - `--webrtc-ip-policy=disabled`
-
-
-## Basic Usage
-- **Warning**: Since it's unsigned, run `xattr -cr YSbrowser.app` on macOS before use.
-- **Warning**: Below are basic parameters. To maintain environment isolation, `--user-data-dir` is required.
-- **Warning**: To print objects in console, include openConsole, e.g., `console.log("openConsole",{})`.
-```bash
-chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data 
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\profile-01" `
+  --fpseed="profile-01" `
+  --timezone="Asia/Shanghai" `
+  --lang="zh-CN" `
+  --accept-lang="zh-CN,zh,en"
 ```
 
-## Simulate Brave
-```bash
-chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data --chrome-version=140.0.0.0 --custom-brand=Brave --enable-features=BraveAPI --disable-features=keyboardAPI,NetworkAPI
+Each concurrently running instance must use a different user data directory. Do not let two processes open the same directory at the same time, as Chromium's directory locking and data writes may conflict.
+
+## How Seeds Work
+
+The new version uses a general seed together with module-specific seeds:
+
+```mermaid
+flowchart LR
+    A[Module-specific seed] -->|If present| D[Select the module configuration]
+    B[fpseed] -->|If no module-specific seed is set| D
+    C[Default Chromium environment] -->|If neither seed is set| D
 ```
 
-## 🤖 Automation Tool Support
-### Eliminated Automation Signatures
-- ✅ CDP Detection
-- ✅ Selenium Signatures
-- ✅ Playwright Signatures (only partial removal, patchright still recommended)
-- ✅ DrissionPage Signatures
+Precedence:
 
-### Key Technical Improvements
-1. **Mouse Event Fix**: Thoroughly resolved CDP's `Input.dispatchMouseEvent` defects
-2. **Shadow DOM Access**: Access closed shadow DOM via `opshadowRoot`
-3. **Automation Detection Bypass**: Eliminated common automation tool signature markers
+```text
+Module-specific seed  >  fpseed  >  Default Chromium behavior
+```
 
----
+For example:
 
-## 🐞 Debugging Support
-- **Renamed Debugger**: `debugger` → `debuging` (bypass detection)
-- **Console Inspection**: Bypasses common console property checks
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\profile-02" `
+  --fpseed="account-02" `
+  --canvas-seed="canvas-02" `
+  --webgl-seed="webgl-02"
+```
 
----
+Canvas uses `canvas-02`, and WebGL uses `webgl-02`. Other modules that support the general seed derive their configurations from `account-02`.
 
-## 🚧 Development Roadmap
-> **Tip**: Project is continuously updated. Welcome to submit Issues! If you'd like to help collect more fingerprints, please visit [website](https://www.hanyiting.com)
+The same string always maps to the same configuration. Changing a seed does not guarantee that every hash displayed by every detection website will change, because websites use different drawing content and data collection APIs.
 
-## ⚖️ Disclaimer
-> **Note:** This project is strictly prohibited for illegal use.
+## Command-Line Options
+
+### General and Module-Specific Seeds
+
+| Option | Example | Description |
+| --- | --- | --- |
+| `--fpseed` | `profile-01` | General configuration seed, used as a fallback by individual modules |
+| `--canvas-seed` | `canvas-01` | Canvas fingerprint |
+| `--webgl-seed` | `webgl-01` | WebGL fingerprint |
+| `--audio-seed` | `audio-01` | OfflineAudioContext output configuration |
+| `--font-seed` | `font-01` | Font fingerprint |
+| `--speech-seed` | `speech-01` | Select a SpeechSynthesis voice combination |
+| `--screen-seed` | `screen-01` | Select an internally consistent desktop screen configuration |
+| `--rect-seed` | `rect-01` | Shared fallback seed for DOMRect and SVGRect |
+| `--domrect-seed` | `dom-01` | Control DOMRect only; takes precedence over `--rect-seed` |
+| `--svgrect-seed` | `svg-01` | Control SVGRect only; takes precedence over `--rect-seed` |
+
+The precedence for DOMRect and SVGRect is:
+
+```text
+domrect-seed > rect-seed > fpseed > Default behavior
+svgrect-seed > rect-seed > fpseed > Default behavior
+```
+
+### System and Region
+
+| Option | Example | Description |
+| --- | --- | --- |
+| `--timezone` | `Asia/Kuala_Lumpur` | Set the IANA timezone used by web pages |
+| `--lang` | `en-US` | Set the browser interface language |
+| `--accept-lang` | `en-US,en` | Set the language list exposed to web pages and the HTTP `Accept-Language` header |
+| `--cpucores` | `8` | Set `navigator.hardwareConcurrency` |
+| `--memory` | `8` | Set `navigator.deviceMemory` |
+| `--platformversion` | `19.0.0` | Set `platformVersion` in Client Hints |
+| `--chrome-version` | `154.0.0.0` | Set the reported version information and related JavaScript API values |
+| `--geolocation` | `3.1390,101.6869,100` | Set latitude, longitude, and accuracy in meters |
+| `--iconumber` | `12` | Display an instance number on the window icon and Windows taskbar icon |
+
+For language settings, set both `--lang` and `--accept-lang`. The timezone, language, and proxy location should form a plausible regional environment. For example:
+
+```powershell
+--timezone="Asia/Kuala_Lumpur" --lang="en-US" --accept-lang="en-US,en"
+```
+
+The geolocation option uses the format `--geolocation=latitude,longitude,accuracy`. Accuracy is optional and defaults to `100` meters when omitted:
+
+```powershell
+--geolocation="3.1390,101.6869,100"
+--geolocation="3.1390,101.6869"
+```
+
+Latitude must be between `-90` and `90`, longitude between `-180` and `180`, and accuracy must be nonnegative. This option changes the location returned by `navigator.geolocation`, but does not automatically grant websites access to it. The page must still run in a secure context and obtain geolocation permission.
+
+### Network Proxies
+
+| Option | Example | Description |
+| --- | --- | --- |
+| `--proxy-server` | `http://127.0.0.1:8080` | Set an HTTP, HTTPS, or SOCKS5 proxy |
+| `--proxy-auth` | `username:password` | Set the proxy username and password |
+| `--webrtc-ip-policy` | `disabled` | Prevent WebRTC from exposing address candidates |
+| `--webrtc-ip-policy` | `proxy` | Enable a custom WebRTC address policy |
+| `--webrtc-proxy-ip` | `203.0.113.10` | Set the address exposed through WebRTC |
+
+Authenticated proxy example:
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\proxy-01" `
+  --proxy-server="http://127.0.0.1:8080" `
+  --proxy-auth="username:password" `
+  --webrtc-ip-policy="proxy" `
+  --webrtc-proxy-ip="203.0.113.10"
+```
+
+`--webrtc-proxy-ip` only controls the candidate address exposed through WebRTC; it does not replace a network proxy. Outbound HTTP traffic still uses `--proxy-server` or the system's network configuration.
+
+Command-line options may be visible to local process management tools. Do not expose real proxy passwords in screenshots, logs, or public issues.
+
+### Automation and Instance Management
+
+| Option | Example | Description |
+| --- | --- | --- |
+| `--user-data-dir` | `D:\YSbrowser\profiles\01` | Set a separate user data directory |
+| `--remote-debugging-port` | `9222` | Open a CDP debugging port |
+| `--iconumber` | `1` | Label the browser window and taskbar icon |
+
+CDP launch example:
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\automation-01" `
+  --remote-debugging-port=9222 `
+  --iconumber=1 `
+  --fpseed="automation-01"
+```
+
+A second instance should use a different directory and port. CDP debugging ports should only be accessible on trusted networks.
+
+## Recommended Configuration Example
+
+The following example uses a stable general seed with separate seeds for Canvas, WebGL, and fonts:
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\my-001" `
+  --fpseed="my-profile-001" `
+  --canvas-seed="my-canvas-001" `
+  --webgl-seed="my-webgl-001" `
+  --font-seed="my-font-001" `
+  --timezone="Asia/Kuala_Lumpur" `
+  --lang="en-US" `
+  --accept-lang="en-US,en" `
+  --cpucores=8 `
+  --memory=8 `
+  --platformversion="19.0.0" `
+  --geolocation="3.1390,101.6869,100" `
+  --proxy-server="socks5://127.0.0.1:1080" `
+  --webrtc-ip-policy="proxy" `
+  --webrtc-proxy-ip="203.0.113.10" `
+  --iconumber=1
+```
+
+To reuse the same environment over time, keep the user data directory, seeds, and complete launch options. Seeds do not store cookies, IndexedDB data, login sessions, or Visitor IDs assigned by a website's server.
+
+### Sample Results from Online Tests
+
+Online spot checks were performed with three representative configurations:
+
+| Test Page | Observed Result |
+| --- | --- |
+| [Fingerprint Playground](https://demo.fingerprint.com/playground) | `tampering=false`, `anti_detect_browser=false` |
+| [TZP Canvas Noise](https://arkenfox.github.io/TZP/tests/canvasnoise.html) | The write hash matched both read hashes |
+| [BrowserScan](https://www.browserscan.net/zh) | No graphics consistency warnings; the WebGL hash changed with the seed |
+| [CreepJS](https://abrahamjuliot.github.io/creepjs/) | Canvas and WebGL hashes changed with the seed |
+| [PixelScan](https://pixelscan.net/fingerprint-check) | Reported a consistent browser fingerprint |
+
+Detection websites and their rules change over time. The table reflects results for a particular build, driver, and test date, and does not provide a permanent guarantee for future versions or all websites.
+
+## Consistency Recommendations
+
+- Keep the proxy country, timezone, language, and geolocation consistent.
+- Keep the Chrome version consistent with its supported APIs, Client Hints, and TLS capabilities.
+- Use a GPU name, WebGL extensions, parameters, shader precision, and rendering results from the same configuration.
+- Choose a CPU core count and memory combination that is typical of desktop devices.
+- Keep screen dimensions, available screen area, scaling, and viewport size plausible.
+- Keep the same environment consistent across the main page, iframes, Workers, and OffscreenCanvas.
+- Avoid frequently changing seeds while an environment is in use.
+
+## Frequently Asked Questions
+
 <details>
-<summary>Click to expand detailed legal compliance statement</summary>
+<summary><strong>Why did the Visitor ID stay the same after I changed all the seeds?</strong></summary>
 
-1. **Legal Compliance**: Users should use this tool in compliance with local laws. It is strictly prohibited to use this tool for any illegal or non-compliant activities.
-2. **Risk Assumption**: All consequences arising from improper use or illegal purposes (including legal liability and economic losses) are the sole responsibility of the user and are unrelated to the developer.
-3. **No Warranty**: This tool is provided "as is." The developer is not responsible for any losses resulting from the use of this tool.
-4. **Commercial Use Prohibited**: This tool is for learning and communication purposes only. It is strictly prohibited for any illegal profit-making activities.
+A Visitor ID usually depends on more than rendering fingerprints. Cookies, LocalStorage, IndexedDB, the user data directory, IP address, account, and server-side history may all contribute to identification. When testing a fresh environment, use a new `--user-data-dir` and make sure the previous browser processes have fully exited.
 
 </details>
 
-## Job Seeking: Welcome referrals for crawler and anti-crawler positions
+<details>
+<summary><strong>Why did a website's Canvas or WebGL hash stay the same?</strong></summary>
 
-### Discussion Group
-<img src="QQ20250723-104659.png" alt="QQ Group 1043047569" width="400" height="400">
+Different websites use different drawing content and APIs. A configuration may affect text rasterization, complex shaders, or color quantization, but the result may remain the same if the test page does not exercise those paths. Use multiple websites and local pixel tests to determine whether a configuration has taken effect.
+
+</details>
+
+<details>
+<summary><strong>Why do Chrome, CreepJS, and BrowserScan show different results?</strong></summary>
+
+These pages use different signals, rendering samples, hash algorithms, and presentation methods. Different results do not automatically mean that the configuration has failed. First check whether the same website produces reproducible results with the same options.
+
+</details>
+
+<details>
+<summary><strong>Can multiple instances share one user-data-dir?</strong></summary>
+
+This is not recommended. Chromium locks a user data directory while it is in use. Concurrent writes may cause startup failures, data corruption, or configuration interference between instances. Each concurrent instance should use its own directory.
+
+</details>
+
+## Reporting Issues
+
+Submit problems through [GitHub Issues](https://github.com/selfshore/YSbrowser/issues). Please include as much of the following as possible:
+
+- YSbrowser version and Chromium major version
+- Windows version and graphics driver version
+- Complete launch options that are safe to share, with real IP addresses and passwords replaced by placeholders
+- Whether the issue can be reproduced with a fresh user data directory
+- Test URLs, screenshots, and clear steps to reproduce the issue
+- `chrome://gpu` information for graphics-related issues
+
+## Community
+
+<div align="center">
+
+**QQ Group: 1043047569**
+
+<img src="./qrcode_1791730257577.jpg" alt="YSbrowser QQ Group" width="360">
+
+</div>
+
+## Disclaimer
+
+YSbrowser is intended solely for browser compatibility research, privacy protection, automated testing, and personal learning. Users must comply with applicable local laws, the terms of service of target websites, and data authorization requirements. This project must not be used for unauthorized access, fraud, attacks, or other unlawful activities.
+
+This project is provided as is. Browsers, graphics drivers, detection scripts, and website rules continually change. The maintainers do not guarantee continued compatibility with any particular website and accept no liability for data loss, account restrictions, or other losses arising from use of this project.
+
+---
+
+<div align="center">
+
+If you find this project useful, consider giving it a ⭐
+
+</div>

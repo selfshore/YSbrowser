@@ -1,216 +1,335 @@
 <div align="center">
 
-# ✨ 𝕐𝕊𝕓𝕣𝕠𝕨𝕤𝕖𝕣 ✨  
-**下一代隐私浏览器解决方案**
+<h1>YSbrowser</h1>
 
-</div>
+<p><strong>基于 Chromium 深度定制的 Windows 浏览器</strong></p>
+<p>稳定、可复现、可独立配置的浏览器运行环境</p>
+
+[![Release](https://img.shields.io/github/v/release/selfshore/YSbrowser?display_name=tag&style=for-the-badge&color=0969da)](https://github.com/selfshore/YSbrowser/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/selfshore/YSbrowser/total?style=for-the-badge&color=2da44e)](https://github.com/selfshore/YSbrowser/releases)
+[![Stars](https://img.shields.io/github/stars/selfshore/YSbrowser?style=for-the-badge&color=bf8700)](https://github.com/selfshore/YSbrowser/stargazers)
+[![Platform](https://img.shields.io/badge/Windows-x64-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](https://github.com/selfshore/YSbrowser/releases)
+
+[下载](https://github.com/selfshore/YSbrowser/releases/latest) · [使用说明](#快速开始) · [参数列表](#命令行参数) · [问题反馈](https://github.com/selfshore/YSbrowser/issues)
 
 [English](README-en.md) | [中文](README.md)
 
-## 🔍 指纹检测通过列表
-| 检测平台                                                             | 状态            | 备注    |
-|--------------------------------------------------------------------|---------------|-------|
-| [browserscan](https://browserscan.net)                             | ✅ 完美通过        | -     |
-| [creepjs](https://abrahamjuliot.github.io/creepjs/)                | ✅ 62.5%+      | 持续优化中 |
-| [iphey](https://iphey.com)                                         | ✅ 完美通过        | -     |
-| [pixelscan](https://pixelscan.net)                                 | ✅ 完美通过        | -     |
-| [cloudflare](https://www.cloudflare.com/zh-cn/)                    | ✅ 完美通过        | -     |
-| [datadome](https://datadome.co/products/bot-protection/)           | ✅ 完美通过        | -     |
-| [brotector](https://kaliiiiiiiiii.github.io/brotector/)            | ✅ 完美通过        | -     |
-| [sannysoft](https://bot.sannysoft.com/)                            | ✅ 完美通过        | -     |
-| [fingerprint](https://fingerprint.com/products/bot-detection/)     | ✅ 完美通过        | -     |
+</div>
 
 ---
 
-## ⚙️ 核心参数配置
-| 参数名                                  | 值                     | 功能描述         |
-|--------------------------------------|-----------------------|--------------|
-| `--timezone`                         | `Asia/Tokyo`          | 设置浏览器时区      |
-| `--fpseed`                           | `12lfisffwfaTYa`      | 指纹生成种子       |
-| `--webgl-seed`                       | `12lfisffwfaTYa`      | WEBGL绘画指纹生成种子       |
-| `--canvas-seed`                       | `12lfisffwfaTYa`      | CANVAS绘画指纹生成种子       |
-| `--quota-seed`                       | `12lfisffwfaTYa`      | STORAGE指纹生成种子       |
-| `--css-seed`                       | `12lfisffwfaTYa`      | css指纹生成种子       |
-| `--font-seed`                       | `12lfisffwfaTYa`      | 字体指纹生成种子       |
-| `--audio-seed`                       | `12lfisffwfaTYa`      | 音频指纹生成种子       |
-| `--svg-seed`                       | `12lfisffwfaTYa`      | svg指纹生成种子       |
-| `--speech-seed`                       | `12lfisffwfaTYa`      | speechvoices指纹生成种子       |
-| `--rect-seed`                       | `12lfisffwfaTYa`      | domrect指纹生成种子       |
-| `--webrtc-ip-policy`                  | `disabled` or `proxy`      | 禁用webrtc或者使用自定义IP       |
-| `--webrtc-proxy-ip`                  | `127.0.0.1`      | webrtc的暴露IP       |
-| `--enable-features`                  | `TurnstileClicker`,`PXAutoHold`      | 启用通过cloudflare和px验证码      |
-| `--chrome-version`                   | `140.0.7339.185`       | Chrome 浏览器版本 |
-| `--nocrash`                          | -                     | 修复自动化工具崩溃问题  |
-| `--lang`                             | `zh-CN`               | 设置浏览器语言      |
-| `--accept-lang`                      | `zh-CN`               | 设置 HTTP 请求语言 |
-| `--proxy-server`                     | `socks5://ip:port`    | 设置代理服务器      |
-| `--proxy-auth`                       | `username:password`   | 设置代理认证       |
-| `--cpucores`                         | `6`                   | cpu核心数       |
-| `--platformversion`                  | `15.4.1`              | 系统版本         |
-| `--custom-screen`                    | `1792x1120,1792x1039` | 屏幕宽高         |
-| `--force-device-scale-factor`        | `1`                   | 物理像素和css像素比值 |
-| `--custom-geolocation`               | `110,220,70`          | 设置纬度和经度，精确距离 |
-| `--block-geolocation`               | -          | 屏蔽位置 （5.2版本以上可用）|
-| `--use-fake-device-for-media-stream` | -                     | 设置虚拟媒体设备     |
-| `--custom-brand`                     | `"Microsoft Edge"`    | 浏览器品牌        |
-| `--close-portscan`                   | -                     | 屏蔽端口扫描       |
-| `--iconumber`                        | 1                     | 浏览器编号        |
-| `--gpu-seed`                  |    `12lfisffwfaTYa`                | 渲染器（5.2版本以上可用）        |
+> **文档版本**：本页为新版使用说明。使用旧版浏览器，请查看 [旧版中文说明](docs/legacy/README.md) · [Legacy English documentation](docs/legacy/README-en.md)。不同版本的参数可能不同，请按所用版本查阅。
+
+## 简介
+
+YSbrowser 是基于 Chromium 定制的 Windows 桌面浏览器。新版本把环境配置放在浏览器底层完成，支持独立用户目录、认证代理、WebRTC 地址策略，以及 Canvas、WebGL、Audio、字体、屏幕和文本几何等可复现配置。
+
+同一套启动参数与种子会稳定选择同一套环境。不同实例使用不同的 `--user-data-dir` 后，Cookie、缓存、LocalStorage、IndexedDB 和站点权限彼此隔离。
+
+> 当前图形实现面向 Windows x64 和 Chromium 默认的 ANGLE D3D11 路径。强制使用 Vulkan、OpenGL 或 SwiftShader 时，WebGL 绘画结果不保证与 D3D11 相同。
+
+## 新版本特性
+
+<table>
+<tr>
+<td width="50%" valign="top">
 
 
----
+### 🧩 环境配置
 
-## 📝 参数详解
-### **`timezone`**  
-- **功能**：设置浏览器时区
-- **建议**：与代理 IP 所在地区时区保持一致
-- **示例**：`--timezone=America/New_York`
+- 时区、语言、CPU、内存和系统版本
+- 屏幕与设备缩放环境
+- 字体与 SpeechSynthesis 语音组合
+- DOMRect 与 SVGRect 独立配置
+- WebRTC 候选地址策略
 
-### **`fpseed`**  
-- **功能**：指纹生成种子
-- **影响范围**：canvas, webgl, audio, speech, DOMRect, 字体等指纹
-- **重要性**：保持相同种子可确保生成一致的浏览器指纹
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
 
-### **`chrome-version`**  
-- **功能**：指定 Chrome 浏览器版本
-- **注意**：
-  - 版本号与浏览器 API 紧密相关，随意修改可能导致检测风险
-  - 自动适配 TLS 指纹（支持版本有限）
-  - 仅建议在目标网站有严格版本控制时使用
-- **推荐**：使用官方发布的 Chrome 版本号
+### 🌐 网络能力
 
-### **`nocrash`**  
-- **功能**：修复 Playwright/Puppeteer 中 iframe 相关的崩溃问题
-- **修复问题**：`contentWindow.open` 导致的崩溃
+- HTTP、HTTPS、SOCKS5 代理
+- 用户名和密码认证
+- 支持浏览器运行期间按实例切换代理
+- A 浏览器实例切换代理不会修改 B 实例
+- WebRTC 展示地址可独立控制
 
-### **`lang` 与 `accept-lang`**
-- **功能**：控制浏览器语言和 HTTP 请求头
-- **影响**：语音识别(speech)、本地化相关指纹
-- **建议**：保持两者一致
+</td>
+<td width="50%" valign="top">
 
-### **`proxy-server`**  
-- **功能**：设置网络代理服务器
-- **格式**：`--proxy-server=[协议]://[地址]:[端口]`
-- **协议支持**：
-  - `http`：HTTP/HTTPS 代理
-  - `socks4`：SOCKS4 代理
-  - `socks5`：SOCKS5 代理
-- **示例**：
-  - `--proxy-server=http://127.0.0.1:8080`
+### 🛠️ 使用体验
 
-### **`proxy-auth`**  
-- **功能**：设置网络代理认证
-- **示例**：
-  - `--proxy-auth=username:password`
+- 支持 CDP、Playwright、Patchright 与 Puppeteer
+- 窗口和任务栏图标可显示实例编号
+- 扩展开发者模式默认开启
+- DevTools 控制台允许直接粘贴
+- JavaScript 源映射默认关闭
 
-### **`cpucores`**  
-- **功能**：cpu的核心数（比如i7是6核，对应navigator.hardwareConcurrency）
-- **建议**：使用常见的cpu核心数（6，8，10，12）
+</td>
+</tr>
+</table>
 
-### **`platformversion`**  
-- **功能**：系统的版本
-- **建议**：
-  - `macOS`：系统的版本,像15.4.1，15.5等
-  - `Windows`：
-    | Windows 版本 | 内部版本号 (Build) | Platform-Version | 状态 |
-    | :--- | :--- | :--- | :--- |
-    | **Windows 11 (24H2)** | 26100+ | `"19.0.0"` | 最新/预览 |
-    | **Windows 11 (23H2)** | 22631 | `"17.0.0"` | 主流推荐 |
-    | **Windows 11 (22H2)** | 22621 | `"15.0.0"` | 稳定版 |
-    | **Windows 11 (21H2)** | 22000 | `"13.0.0"` | 初始版 |
-    | **Windows 10 (22H2)** | 19045 | `"10.0.0"` | Win10 最常见 |
-    | **Windows 10 (21H2)** | 19044 | `"10.0.0"` | 稳定版 |
-    | **Windows 8.1** | 9600 | `"6.3.0"` | 已过时 |
-    | **Windows 8** | 9200 | `"6.2.0"` | 已过时 |
-    | **Windows 7** | 7601 | `"6.1.0"` | 已过时 |
+## 快速开始
 
-### **`custom-screen`**  
-- **功能**：屏幕的宽高和可用宽高，对应javascript里的screen中width,height,availwidth,availheight。
-- **建议**：如果设置它，width和height是必须的，availwidth和availheight如果不知道怎么设置可不加，浏览器会自动更改，尽量使用真实的分辨率。
-- **示例**：
-  - `1792x1120,1792x1039`
-  - `1792x1120`
+从 [Releases](https://github.com/selfshore/YSbrowser/releases) 下载 Windows 压缩包，解压后运行 `YSbrowser.exe`。
 
-### **`force-device-scale-factor`**  
-- **功能**：物理像素和css像素比值，也就是devicePixelRatio
-- **示例**：
-  - `1`
-  - `2`
+最小推荐配置：
 
-### **`custom-geolocation`和`block-geolocation`** 
-- **功能**：custom-geolocation设置经纬度（navigator.geolocation.getCurrentPosition）,block-geolocation屏蔽位置功能
-- **示例**：
-  - `--custom-geolocation=110,220,70`(纬度,经度,精度)
-
-### **`use-fake-device-for-media-stream`**
-- **功能**：伪造媒体设备（navigator.mediaDevices.enumerateDevices）
-
-### **`custom-brand`**
-- **功能**：伪装浏览器品牌
-- **建议**：如果伪装成真实的浏览器品牌，请携带user-agent这个参数，如果虚构不存在的品牌就不用携带user-agent。
-- **示例**：
-  - `--custom-brand="Microsoft Edge"
---user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"`
-  - `--custom-brand="fake brand"`
-
-### **`close-portscan`**
-- **功能**：屏蔽端口扫描
-
-### **`webrtc-ip-policy`**
-- **功能**：防止webrtc泄露真实IP
-- **示例**：
-  - `--webrtc-ip-policy=disabled`
-
-
-## 基本用法
-- **警告**：由于没签名，mac上要执行xattr -cr YSbrowser.app才能使用。
-- **警告**：下面是基本参数，保持环境隔离必须携带--user-data-dir。
-- **警告**：如果需要console打印对象请携带openConsole，例如console.log("openConsole",{})。
-```bash
-chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data 
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\profile-01" `
+  --fpseed="profile-01" `
+  --timezone="Asia/Shanghai" `
+  --lang="zh-CN" `
+  --accept-lang="zh-CN,zh,en"
 ```
 
-## 模拟brave
-```bash
-chrome --timezone=Asia/Hong_Kong --lang=zh-CN --accept-lang=zh-CN,en --fpseed=121e0opwlltx  --user-data-dir=./my_user_data --chrome-version=140.0.0.0 --custom-brand=Brave --enable-features=BraveAPI --disable-features=keyboardAPI,NetworkAPI
+每个同时运行的实例都必须使用不同的用户目录。不要让两个进程同时打开同一个目录，否则 Chromium 的目录锁和数据写入可能发生冲突。
+
+## 种子工作方式
+
+新版本使用“总体种子 + 模块种子”的结构：
+
+```mermaid
+flowchart LR
+    A[模块专用 seed] -->|存在| D[选择该模块配置]
+    B[fpseed] -->|模块 seed 不存在| D
+    C[Chromium 默认环境] -->|两者均不存在| D
 ```
 
-## 🤖 自动化工具支持
-### 已消除的自动化特征
-- ✅ CDP 检测
-- ✅ Selenium 特征
-- ✅ Playwright 特征(仅去掉部分，仍建议使用patchright)
-- ✅ DrissionPage 特征
+优先级为：
 
-### 关键技术改进
-1. **鼠标事件修复**：彻底解决 CDP 的 `Input.dispatchMouseEvent` 缺陷
-2. **Shadow DOM 访问**：通过 `opshadowRoot` 访问封闭式 shadow DOM
-3. **自动化检测绕过**：消除常见自动化工具特征标记
+```text
+模块专用 seed  >  fpseed  >  Chromium 默认行为
+```
 
----
+例如：
 
-## 🐞 调试支持
-- **重命名调试器**：`debugger` → `debuging`（绕过检测）
-- **控制台检查**：绕过常见的控制台属性检查
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\profile-02" `
+  --fpseed="account-02" `
+  --canvas-seed="canvas-02" `
+  --webgl-seed="webgl-02"
+```
 
----
+Canvas 使用 `canvas-02`，WebGL 使用 `webgl-02`；其余支持总体种子的模块从 `account-02` 派生。
 
-## 🚧 开发路线图
-> **提示**：项目持续更新中，欢迎提交 Issue！如果想帮助我收集更多指纹，请点击[网址](https://www.hanyiting.com)
+相同字符串始终映射到相同配置。修改种子后，不保证每个检测网站展示的每一项 hash 都变化，因为网站使用的绘画内容和采集 API 并不相同。
 
-## ⚖️ 免责声明
-> **注意：** 本项目严禁用于非法用途。
+## 命令行参数
+
+### 总体与模块种子
+
+| 参数 | 示例 | 作用 |
+| --- | --- | --- |
+| `--fpseed` | `profile-01` | 总体配置种子，作为各模块的后备来源 |
+| `--canvas-seed` | `canvas-01` | Canvas 指纹 |
+| `--webgl-seed` | `webgl-01` | WebGL指纹 |
+| `--audio-seed` | `audio-01` | OfflineAudioContext 输出配置 |
+| `--font-seed` | `font-01` | font指纹 |
+| `--speech-seed` | `speech-01` | 选择 SpeechSynthesis 语音组合 |
+| `--screen-seed` | `screen-01` | 选择一套内部一致的桌面屏幕配置 |
+| `--rect-seed` | `rect-01` | DOMRect 与 SVGRect 的共同后备种子 |
+| `--domrect-seed` | `dom-01` | 仅控制 DOMRect，优先于 `--rect-seed` |
+| `--svgrect-seed` | `svg-01` | 仅控制 SVGRect，优先于 `--rect-seed` |
+
+DOMRect 和 SVGRect 的优先级分别是：
+
+```text
+domrect-seed > rect-seed > fpseed > 默认行为
+svgrect-seed > rect-seed > fpseed > 默认行为
+```
+
+### 系统与区域
+
+| 参数 | 示例 | 作用 |
+| --- | --- | --- |
+| `--timezone` | `Asia/Kuala_Lumpur` | 设置网页环境使用的 IANA 时区 |
+| `--lang` | `en-US` | 设置浏览器界面语言 |
+| `--accept-lang` | `en-US,en` | 设置网页语言列表和 HTTP `Accept-Language` |
+| `--cpucores` | `8` | 设置 `navigator.hardwareConcurrency` |
+| `--memory` | `8` | 设置 `navigator.deviceMemory` |
+| `--platformversion` | `19.0.0` | 设置 Client Hints 的 `platformVersion` |
+| `--chrome-version` | `154.0.0.0` | 设置对外版本信息及相关 JavaScript 表面 |
+| `--geolocation` | `3.1390,101.6869,100` | 设置纬度、经度和精度（米） |
+| `--iconumber` | `12` | 在窗口图标和 Windows 任务栏图标上显示编号 |
+
+语言建议同时设置 `--lang` 和 `--accept-lang`。时区、语言和代理位置应组成合理的地区环境，例如：
+
+```powershell
+--timezone="Asia/Kuala_Lumpur" --lang="en-US" --accept-lang="en-US,en"
+```
+
+定位参数格式为 `--geolocation=latitude,longitude,accuracy`。精度可以省略，省略时默认为 `100` 米：
+
+```powershell
+--geolocation="3.1390,101.6869,100"
+--geolocation="3.1390,101.6869"
+```
+
+纬度范围是 `-90` 到 `90`，经度范围是 `-180` 到 `180`，精度必须是非负数。该参数修改 `navigator.geolocation` 返回的位置，但不会自动允许网站读取定位；网页仍需处于安全上下文并获得定位权限。
+
+### 网络代理
+
+| 参数 | 示例 | 作用 |
+| --- | --- | --- |
+| `--proxy-server` | `http://127.0.0.1:8080` | 设置 HTTP、HTTPS 或 SOCKS5 代理 |
+| `--proxy-auth` | `username:password` | 设置代理用户名和密码 |
+| `--webrtc-ip-policy` | `disabled` | 禁止 WebRTC 暴露地址候选 |
+| `--webrtc-ip-policy` | `proxy` | 启用自定义 WebRTC 地址策略 |
+| `--webrtc-proxy-ip` | `203.0.113.10` | 设置 WebRTC 展示地址 |
+
+认证代理示例：
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\proxy-01" `
+  --proxy-server="http://127.0.0.1:8080" `
+  --proxy-auth="username:password" `
+  --webrtc-ip-policy="proxy" `
+  --webrtc-proxy-ip="203.0.113.10"
+```
+
+`--webrtc-proxy-ip` 只控制 WebRTC 对外展示的候选地址，不会替代网络代理。HTTP 请求的出口仍由 `--proxy-server` 或系统网络决定。
+
+命令行参数可能被本机进程管理工具读取，不要在截图、日志或公开 Issue 中暴露真实代理密码。
+
+### 自动化与实例管理
+
+| 参数 | 示例 | 作用 |
+| --- | --- | --- |
+| `--user-data-dir` | `D:\YSbrowser\profiles\01` | 设置独立用户目录 |
+| `--remote-debugging-port` | `9222` | 开放 CDP 调试端口 |
+| `--iconumber` | `1` | 标记浏览器窗口和任务栏图标 |
+
+CDP 启动示例：
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\automation-01" `
+  --remote-debugging-port=9222 `
+  --iconumber=1 `
+  --fpseed="automation-01"
+```
+
+第二个实例应使用另一个目录和端口。CDP 调试端口只应开放在可信网络中。
+
+
+## 推荐配置示例
+
+下面的示例使用一套稳定的总体种子，并单独指定 Canvas、WebGL 和字体：
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\my-001" `
+  --fpseed="my-profile-001" `
+  --canvas-seed="my-canvas-001" `
+  --webgl-seed="my-webgl-001" `
+  --font-seed="my-font-001" `
+  --timezone="Asia/Kuala_Lumpur" `
+  --lang="en-US" `
+  --accept-lang="en-US,en" `
+  --cpucores=8 `
+  --memory=8 `
+  --platformversion="19.0.0" `
+  --geolocation="3.1390,101.6869,100" `
+  --proxy-server="socks5://127.0.0.1:1080" `
+  --webrtc-ip-policy="proxy" `
+  --webrtc-proxy-ip="203.0.113.10" `
+  --iconumber=1
+```
+
+长期复用同一个环境时，应同时保留用户目录、种子和完整启动参数。种子不会保存 Cookie、IndexedDB、登录状态或网站在服务端分配的 Visitor ID。
+
+
+### 在线抽样结果
+
+使用 3 套代表性配置进行了在线抽样：
+
+| 检测页面 | 观察结果 |
+| --- | --- |
+| [Fingerprint Playground](https://demo.fingerprint.com/playground) | `tampering=false`，`anti_detect_browser=false` |
+| [TZP Canvas Noise](https://arkenfox.github.io/TZP/tests/canvasnoise.html) | 写入 hash 与两次读取 hash 一致 |
+| [BrowserScan](https://www.browserscan.net/zh) | 未出现图形一致性警告，WebGL hash 随种子变化 |
+| [CreepJS](https://abrahamjuliot.github.io/creepjs/) | Canvas 和 WebGL hash 随种子变化 |
+| [PixelScan](https://pixelscan.net/fingerprint-check) | 显示浏览器指纹一致 |
+
+检测网站和规则会更新。上表是指定构建、驱动和测试日期下的结果，不代表对未来版本或所有网站的永久保证。
+
+## 一致性建议
+
+- 代理国家、时区、语言和地理位置应一致
+- Chrome 版本应与其支持的 API、Client Hints 和 TLS 能力一致
+- GPU 名称、WebGL 扩展、参数、Shader 精度和绘画结果应来自同一套配置
+- CPU 核心数与内存组合应符合常见桌面设备
+- 屏幕尺寸、可用区域、缩放比例和视口应合理
+- 同一个环境在主页面、iframe、Worker 和 OffscreenCanvas 中应保持一致
+- 不要在环境使用过程中频繁更换种子
+
+## 常见问题
+
 <details>
-<summary>点击展开详细法律合规声明</summary>
+<summary><strong>修改所有种子后，Visitor ID 为什么没有改变？</strong></summary>
 
-1. **法律合规性**：使用者应在遵守当地法律的前提下使用，严禁将本工具用于任何违法违规行为。
-2. **风险自担**：由于使用不当或用于非法目的所产生的一切后果（包括法律责任和经济损失），均由使用者本人承担，与开发者无关。
-3. **无担保性**：本工具按“原样”提供，开发者不对因使用本工具导致的任何损失负责。
-4. **禁止商用**：本工具仅供学习交流，严禁用于任何非法盈利活动。
+Visitor ID 通常不只依赖绘画指纹。Cookie、LocalStorage、IndexedDB、用户目录、IP、账号和服务端历史记录都可能参与识别。进行全新环境测试时，需要换用新的 `--user-data-dir` 并确认旧浏览器进程已经完全退出。
 
 </details>
 
-## 求职：有合适的爬虫和反爬岗位欢迎内推
+<details>
+<summary><strong>为什么某个网站的 Canvas 或 WebGL hash 没变？</strong></summary>
 
-### 交流群
-<img src="QQ20250723-104659.png" alt="Q群1043047569" width="400" height="400">
+不同网站使用不同的绘画内容和 API。一套配置可能影响文字光栅、复杂 Shader 或颜色量化，但测试页面没有覆盖相应路径时，结果可能相同。判断是否生效应结合多个网站和本地像素测试。
+
+</details>
+
+<details>
+<summary><strong>为什么 Chrome、CreepJS 和 BrowserScan 显示的结果不同？</strong></summary>
+
+这些页面采集的信号、绘画样本、hash 算法和展示方式不同。不同结果并不自动表示配置失败，应先检查同一网站在相同参数下能否稳定复现。
+
+</details>
+
+<details>
+<summary><strong>可以让多个实例共用一个 user-data-dir 吗？</strong></summary>
+
+不建议。Chromium 会锁定正在使用的用户目录，同时写入可能造成启动失败、数据损坏或配置串用。每个并行实例都应使用独立目录。
+
+</details>
+
+## 反馈问题
+
+请前往 [GitHub Issues](https://github.com/selfshore/YSbrowser/issues) 提交问题，并尽量包含：
+
+- YSbrowser 版本和 Chromium 主版本
+- Windows 版本及显卡驱动版本
+- 可公开的完整启动参数，真实 IP 和密码请替换为占位符
+- 使用全新用户目录后能否复现
+- 测试网址、截图和明确的复现步骤
+- 与图形相关的问题请附上 `chrome://gpu` 信息
+
+## 交流
+
+<div align="center">
+
+**QQ 交流群：1043047569**
+
+<img src="./qrcode_1791730257577.jpg" alt="YSbrowser QQ 交流群" width="360">
+
+</div>
+
+## 免责声明
+
+YSbrowser 仅供浏览器兼容性研究、隐私保护、自动化测试和个人学习使用。使用者应遵守所在地法律、目标网站服务条款及数据授权要求，不得将本项目用于未经授权的访问、欺诈、攻击或其他违法行为。
+
+本项目按现状提供。浏览器、显卡驱动、检测脚本和网站规则会持续变化，维护者不保证任何特定网站始终可用，也不对使用本项目产生的数据丢失、账号限制或其他损失承担责任。
+
+---
+
+<div align="center">
+
+如果这个项目对你有帮助，欢迎点一个 ⭐
+
+</div>
