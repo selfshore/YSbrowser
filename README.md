@@ -143,6 +143,56 @@ domrect-seed > rect-seed > fpseed > 默认行为
 svgrect-seed > rect-seed > fpseed > 默认行为
 ```
 
+### 服务器 GPU 配置
+
+`--server-gpu-profile` 用于在 Windows 服务器上选择对网页展示的 GPU 配置，适用于没有独立显卡的环境。该模式使用 WARP 软件图形后端执行绘制，并按所选型号配置 WebGL、WebGPU 的显卡身份信息。
+
+例如，使用 RTX 3060 配置启动：
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\server-01" `
+  --server-gpu-profile=rtx3060 `
+  --no-first-run
+```
+
+需要同时配置其他模块时，可以继续添加 `--fpseed` 或各模块专用种子。显式有效的 `--server-gpu-profile` 优先决定 GPU 身份；`--webgl-seed` 仍可参与绘制执行参数选择。
+
+当前支持以下 26 种显卡型号，将示例中的 `rtx3060` 替换为对应参数值即可：
+
+| 品牌 | 显卡型号 | 参数值 |
+| --- | --- | --- |
+| NVIDIA | GeForce GT 610 | `gt610` |
+| NVIDIA | GeForce GT 710 | `gt710` |
+| NVIDIA | GeForce GT 730 | `gt730` |
+| NVIDIA | GeForce GTX 750 Ti | `gtx750ti` |
+| NVIDIA | GeForce GTX 1050 Ti | `gtx1050ti` |
+| NVIDIA | GeForce GTX 1660 SUPER | `gtx1660super` |
+| NVIDIA | GeForce RTX 2060 SUPER | `rtx2060super` |
+| NVIDIA | GeForce RTX 2070 | `rtx2070` |
+| NVIDIA | GeForce RTX 2080 Ti | `rtx2080ti` |
+| NVIDIA | GeForce RTX 3060 | `rtx3060` |
+| NVIDIA | GeForce RTX 3060 Ti | `rtx3060ti` |
+| NVIDIA | GeForce RTX 3070 | `rtx3070` |
+| NVIDIA | GeForce RTX 3070 Ti | `rtx3070ti` |
+| NVIDIA | GeForce RTX 3080 Ti | `rtx3080ti` |
+| NVIDIA | GeForce RTX 4060 | `rtx4060` |
+| NVIDIA | GeForce RTX 4070 | `rtx4070` |
+| NVIDIA | GeForce RTX 4070 SUPER | `rtx4070super` |
+| NVIDIA | GeForce RTX 4090 | `rtx4090` |
+| NVIDIA | GeForce RTX 5080 | `rtx5080` |
+| AMD | Radeon RX 6500 XT | `rx6500xt` |
+| AMD | Radeon RX 6700 | `rx6700` |
+| AMD | Radeon RX 6750 GRE 12GB | `rx6750gre12gb` |
+| Intel | HD Graphics 630 | `hdgraphics630` |
+| Intel | UHD Graphics 630 | `uhdgraphics630` |
+| Intel | UHD Graphics 730 | `uhdgraphics730` |
+| Intel | UHD Graphics 770 | `uhdgraphics770` |
+
+例如，`--server-gpu-profile=rtx4060` 选择 RTX 4060，`--server-gpu-profile=rx6700` 选择 RX 6700。
+
+实际扩展、Shader 精度、功能支持、资源上限和绘制结果仍受运行后端限制，不能保证与目标实卡完全相同。其中 `gt610`、`rtx2060super`、`rx6750gre12gb`、`hdgraphics630` 暂无对应的 WebGPU 参考数据。
+
 ### 系统与区域
 
 | 参数 | 示例 | 作用 |

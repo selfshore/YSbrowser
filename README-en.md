@@ -142,6 +142,56 @@ domrect-seed > rect-seed > fpseed > Default behavior
 svgrect-seed > rect-seed > fpseed > Default behavior
 ```
 
+### Server GPU Configuration
+
+Use `--server-gpu-profile` to select the GPU configuration exposed to web pages on a Windows server, including environments without a dedicated graphics card. This mode uses the WARP software graphics backend for rendering and configures the GPU identity exposed through WebGL and WebGPU according to the selected model.
+
+For example, launch with the RTX 3060 profile:
+
+```powershell
+.\YSbrowser.exe `
+  --user-data-dir="D:\YSbrowser\profiles\server-01" `
+  --server-gpu-profile=rtx3060 `
+  --no-first-run
+```
+
+You can also add `--fpseed` or module-specific seeds to configure other modules. An explicitly selected, valid `--server-gpu-profile` takes precedence when choosing the GPU identity; `--webgl-seed` can still participate in selecting rendering execution parameters.
+
+The following 26 GPU models are currently supported. Replace `rtx3060` in the example with the corresponding option value:
+
+| Brand | GPU Model | Option Value |
+| --- | --- | --- |
+| NVIDIA | GeForce GT 610 | `gt610` |
+| NVIDIA | GeForce GT 710 | `gt710` |
+| NVIDIA | GeForce GT 730 | `gt730` |
+| NVIDIA | GeForce GTX 750 Ti | `gtx750ti` |
+| NVIDIA | GeForce GTX 1050 Ti | `gtx1050ti` |
+| NVIDIA | GeForce GTX 1660 SUPER | `gtx1660super` |
+| NVIDIA | GeForce RTX 2060 SUPER | `rtx2060super` |
+| NVIDIA | GeForce RTX 2070 | `rtx2070` |
+| NVIDIA | GeForce RTX 2080 Ti | `rtx2080ti` |
+| NVIDIA | GeForce RTX 3060 | `rtx3060` |
+| NVIDIA | GeForce RTX 3060 Ti | `rtx3060ti` |
+| NVIDIA | GeForce RTX 3070 | `rtx3070` |
+| NVIDIA | GeForce RTX 3070 Ti | `rtx3070ti` |
+| NVIDIA | GeForce RTX 3080 Ti | `rtx3080ti` |
+| NVIDIA | GeForce RTX 4060 | `rtx4060` |
+| NVIDIA | GeForce RTX 4070 | `rtx4070` |
+| NVIDIA | GeForce RTX 4070 SUPER | `rtx4070super` |
+| NVIDIA | GeForce RTX 4090 | `rtx4090` |
+| NVIDIA | GeForce RTX 5080 | `rtx5080` |
+| AMD | Radeon RX 6500 XT | `rx6500xt` |
+| AMD | Radeon RX 6700 | `rx6700` |
+| AMD | Radeon RX 6750 GRE 12GB | `rx6750gre12gb` |
+| Intel | HD Graphics 630 | `hdgraphics630` |
+| Intel | UHD Graphics 630 | `uhdgraphics630` |
+| Intel | UHD Graphics 730 | `uhdgraphics730` |
+| Intel | UHD Graphics 770 | `uhdgraphics770` |
+
+For example, `--server-gpu-profile=rtx4060` selects the RTX 4060 profile, and `--server-gpu-profile=rx6700` selects the RX 6700 profile.
+
+Actual extensions, shader precision, feature support, resource limits, and rendering results remain subject to the execution backend and are not guaranteed to match the target physical GPU exactly. The `gt610`, `rtx2060super`, `rx6750gre12gb`, and `hdgraphics630` profiles currently lack corresponding WebGPU reference data.
+
 ### System and Region
 
 | Option | Example | Description |
