@@ -1,0 +1,421 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ContextOptions · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html" aria-current="page">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.1 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="contextoptions">ContextOptions</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../context-options.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span><span class="n">viewport</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">720</span><span class="p">})</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">ContextOptions</span><span class="p">(</span><span class="n">viewport</span><span class="p">:</span> <span class="s1">'dict[str, int] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">accept_downloads</span><span class="p">:</span> <span class="s1">'bool | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="s1">'bool | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">http_credentials</span><span class="p">:</span> <span class="s1">'dict[str, Any] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">client_certificates</span><span class="p">:</span> <span class="s1">'list[dict[str, Any]] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extra_http_headers</span><span class="p">:</span> <span class="s1">'dict[str, str] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">permissions</span><span class="p">:</span> <span class="s1">'list[str] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_dir</span><span class="p">:</span> <span class="s1">'str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_size</span><span class="p">:</span> <span class="s1">'dict[str, int] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_fps</span><span class="p">:</span> <span class="s1">'int | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_path</span><span class="p">:</span> <span class="s1">'str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_content</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_mode</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_omit_content</span><span class="p">:</span> <span class="s1">'bool | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_url_filter</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">service_workers</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">java_script_enabled</span><span class="p">:</span> <span class="s1">'bool | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">offline</span><span class="p">:</span> <span class="s1">'bool | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_scheme</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduced_motion</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">forced_colors</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_scale_factor</span><span class="p">:</span> <span class="s1">'float | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_timeout_ms</span><span class="p">:</span> <span class="s1">'float | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">navigation_timeout_ms</span><span class="p">:</span> <span class="s1">'float | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>viewport</code></td>
+<td>dict[str, int] | None</td>
+<td><code>None</code></td>
+<td><code>{&quot;width&quot;: 1280, &quot;height&quot;: 720}</code>，两个值均为正整数，CSS 像素</td>
+</tr>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>bool | None</td>
+<td><code>None</code></td>
+<td>是否接受下载；需要长期保留时仍须调用 <code>Download.save_as()</code></td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>HTTP(S) 基础 URL，供 <code>page.goto(&quot;/path&quot;)</code> 等解析相对地址；禁止 URL 内嵌账号密码和 fragment</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>bool | None</td>
+<td><code>None</code></td>
+<td>是否忽略 HTTPS 证书错误</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>dict[str, Any] | None</td>
+<td><code>None</code></td>
+<td>网站 HTTP 认证对象，包含 username/password 和可选 origin/send；<a href="../context-options.html#http-认证">嵌套字段与示例</a>。独立于代理认证。</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>list[dict[str, Any]] | None</td>
+<td><code>None</code></td>
+<td>HTTPS 客户端证书；非空时 Context 只支持 <code>Direct()</code></td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>dict[str, str] | None</td>
+<td><code>None</code></td>
+<td>附加请求头；键值均为字符串，不允许换行和受管理的指纹/代理头</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>list[str] | None</td>
+<td><code>None</code></td>
+<td>预授权权限，例如 <code>[&quot;geolocation&quot;]</code>；权限名称遵循原生 BrowserContext</td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>str | Path | None</td>
+<td><code>None</code></td>
+<td>视频保存目录；关闭 Context 后完成视频写入</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>dict[str, int] | None</td>
+<td><code>None</code></td>
+<td>视频宽高，正整数；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>正整数帧率；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>str | Path | None</td>
+<td><code>None</code></td>
+<td>HAR 输出文件；关闭 Context 后完成写入</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>embed</code>：内嵌正文；<code>attach</code>：附加文件；<code>omit</code>：不保存正文；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>full</code> 或 <code>minimal</code>；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>bool | None</td>
+<td><code>None</code></td>
+<td>是否省略 HAR 响应内容；需要 HAR 路径；避免与 <code>record_har_content</code> 设置相互矛盾的策略</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>HAR URL glob 过滤规则，如 <code>&quot;**/api/**&quot;</code>；这里仅接受字符串；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>allow</code> 或 <code>block</code>；需要路由拦截时可按用途选择 <code>block</code></td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>bool | None</td>
+<td><code>None</code></td>
+<td>是否允许执行页面 JavaScript</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>bool | None</td>
+<td><code>None</code></td>
+<td>是否以离线网络状态创建 Context</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>light</code>、<code>dark</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>reduce</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>active</code>、<code>none</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>more</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>正的有限数，设备缩放比例；不能同时使用 <code>no_viewport=True</code></td>
+</tr>
+<tr>
+<td><code>default_timeout_ms</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>普通原生操作默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+<tr>
+<td><code>navigation_timeout_ms</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>导航默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="字段与返回结构">字段与返回结构</h2>
+<p>直接用 <code>对象.字段</code> 读取；需要普通字典时用 <code>dataclasses.asdict(对象)</code>，或使用本类型提供的 to_dict。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>viewport</code></td>
+<td>dict[str, int] | None</td>
+<td><code>{&quot;width&quot;: 1280, &quot;height&quot;: 720}</code>，两个值均为正整数，CSS 像素</td>
+</tr>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>bool | None</td>
+<td>是否接受下载；需要长期保留时仍须调用 <code>Download.save_as()</code></td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>str | None</td>
+<td>HTTP(S) 基础 URL，供 <code>page.goto(&quot;/path&quot;)</code> 等解析相对地址；禁止 URL 内嵌账号密码和 fragment</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>bool | None</td>
+<td>是否忽略 HTTPS 证书错误</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>dict[str, Any] | None</td>
+<td>网站 HTTP 认证对象，包含 username/password 和可选 origin/send；<a href="../context-options.html#http-认证">嵌套字段与示例</a>。独立于代理认证。</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>list[dict[str, Any]] | None</td>
+<td>HTTPS 客户端证书；非空时 Context 只支持 <code>Direct()</code></td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>dict[str, str] | None</td>
+<td>附加请求头；键值均为字符串，不允许换行和受管理的指纹/代理头</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>list[str] | None</td>
+<td>预授权权限，例如 <code>[&quot;geolocation&quot;]</code>；权限名称遵循原生 BrowserContext</td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>str | Path | None</td>
+<td>视频保存目录；关闭 Context 后完成视频写入</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>dict[str, int] | None</td>
+<td>视频宽高，正整数；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>int | None</td>
+<td>正整数帧率；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>str | Path | None</td>
+<td>HAR 输出文件；关闭 Context 后完成写入</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>str | None</td>
+<td><code>embed</code>：内嵌正文；<code>attach</code>：附加文件；<code>omit</code>：不保存正文；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>str | None</td>
+<td><code>full</code> 或 <code>minimal</code>；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>bool | None</td>
+<td>是否省略 HAR 响应内容；需要 HAR 路径；避免与 <code>record_har_content</code> 设置相互矛盾的策略</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>str | None</td>
+<td>HAR URL glob 过滤规则，如 <code>&quot;**/api/**&quot;</code>；这里仅接受字符串；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>str | None</td>
+<td><code>allow</code> 或 <code>block</code>；需要路由拦截时可按用途选择 <code>block</code></td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>bool | None</td>
+<td>是否允许执行页面 JavaScript</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>bool | None</td>
+<td>是否以离线网络状态创建 Context</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>str | None</td>
+<td><code>light</code>、<code>dark</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>str | None</td>
+<td><code>reduce</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>str | None</td>
+<td><code>active</code>、<code>none</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>str | None</td>
+<td><code>more</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>float | None</td>
+<td>正的有限数，设备缩放比例；不能同时使用 <code>no_viewport=True</code></td>
+</tr>
+<tr>
+<td><code>default_timeout_ms</code></td>
+<td>float | None</td>
+<td>普通原生操作默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+<tr>
+<td><code>navigation_timeout_ms</code></td>
+<td>float | None</td>
+<td>导航默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#contextoptions-from-dict">ContextOptions.from_dict</a></li>
+<li><a href="#contextoptions-to-dict">ContextOptions.to_dict</a></li>
+<li><a href="#contextoptions-to-native">ContextOptions.to_native</a></li>
+</ul>
+<h2 id="contextoptions-from-dict">ContextOptions.from_dict</h2>
+<p>data 为 values/requires 结构；overrides 为可选 ContextOptions，其非 None 值补充或覆盖。返回 ContextOptions，缺少 requires 指定项时抛 ConfigurationError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">overrides</span><span class="p">:</span> <span class="s1">'ContextOptions | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ContextOptions'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>dict[str, Any]</td>
+<td><code>必填</code></td>
+<td>本类型 to_dict() 返回的结构；ContextConfig 为 schema 1/2，ContextOptions 为 values/requires。</td>
+</tr>
+<tr>
+<td><code>overrides</code></td>
+<td>ContextOptions | None</td>
+<td><code>None</code></td>
+<td>用非 None 字段补充/覆盖序列化选项，尤其 requires 指定字段。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回 ContextOptions；字段与校验规则见本页。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">restored</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>None 表示未指定，不等于 False。客户端证书仅支持直连；不要通过附加请求头覆盖专用指纹/代理字段。</p>
+<p><a href="../context-options.html">更多示例和完整业务规则</a></p>
+<h2 id="contextoptions-to-dict">ContextOptions.to_dict</h2>
+<p>返回 {values: dict, requires: list[str]}。include_sensitive 默认 False，省略 http_credentials、client_certificates、extra_http_headers 的内容。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">to_dict</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">include_sensitive</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-2">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include_sensitive</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否在 ContextOptions.values 中写出敏感选项；默认放入 requires。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 dict：values 为已保存选项；requires 为缺失的敏感选项名列表。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"values"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">"requires"</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>None 表示未指定，不等于 False。客户端证书仅支持直连；不要通过附加请求头覆盖专用指纹/代理字段。</p>
+<p><a href="../context-options.html">更多示例和完整业务规则</a></p>
+<h2 id="contextoptions-to-native">ContextOptions.to_native</h2>
+<p>验证字段并返回原生创建参数字典，省略 None 和两个 SDK 默认超时字段，路径转换为 str。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">to_native</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-3">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-3">返回值</h3>
+<p>返回原生 Context 参数 dict，字段名同本页，省略 None/default_timeout_ms/navigation_timeout_ms，路径转换为 str。</p>
+<h3 id="示例-3">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">to_native</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"viewport"</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="注意事项-3">注意事项</h3>
+<p>None 表示未指定，不等于 False。客户端证书仅支持直连；不要通过附加请求头覆盖专用指纹/代理字段。</p>
+<p><a href="../context-options.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#字段与返回结构">字段与返回结构</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#contextoptions-from-dict">ContextOptions.from_dict</a><a class="level2" href="#contextoptions-to-dict">ContextOptions.to_dict</a><a class="level2" href="#contextoptions-to-native">ContextOptions.to_native</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

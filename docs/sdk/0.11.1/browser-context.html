@@ -1,0 +1,452 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>浏览器与 Context · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html" aria-current="page">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.1 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="浏览器与-context">浏览器与 Context</h1>
+<p><a href="README.html">返回目录</a></p>
+<h2 id="ysbrowser">YSBrowser</h2>
+<div class="code-block"><div class="code-toolbar"><span>文本</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code>YSBrowser(
+    executable_path=None, *, headless=False, server_gpu_profile=None,
+    media_router=True, context_gpu=True, server_gpu_backend="warp",
+    default_proxy=None, args=None, cdp_port=None,
+)
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>executable_path</code></td>
+<td><code>str | Path | None = None</code></td>
+<td>省略时查找安装目录；也可传 <code>./browser/chrome.exe</code> 等相对路径。相对路径基于进程工作目录。</td>
+</tr>
+<tr>
+<td><code>headless</code></td>
+<td><code>bool = False</code></td>
+<td><code>True</code> 无界面运行</td>
+</tr>
+<tr>
+<td><code>server_gpu_profile</code></td>
+<td><code>str | None = None</code></td>
+<td>浏览器启动级 GPU 呈现配置；Context 可进一步指定支持的型号</td>
+</tr>
+<tr>
+<td><code>media_router</code></td>
+<td><code>bool = True</code></td>
+<td>保留浏览器 Media Router 功能；<code>False</code> 使用原生启动策略中的禁用行为</td>
+</tr>
+<tr>
+<td><code>context_gpu</code></td>
+<td><code>bool = True</code></td>
+<td>准备支持 Context GPU 配置的软件执行后端</td>
+</tr>
+<tr>
+<td><code>server_gpu_backend</code></td>
+<td><code>str = &quot;warp&quot;</code></td>
+<td><code>warp</code> 或 <code>swiftshader</code>；整个浏览器进程共享</td>
+</tr>
+<tr>
+<td><code>default_proxy</code></td>
+<td><code>ProxyConfig | Direct | None</code></td>
+<td>未单独指定代理的 Context 使用此配置；<code>None</code> 等同 <code>Direct()</code></td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td><code>list[str] | None</code></td>
+<td>附加浏览器参数，例如 <code>['--window-size=1280,900']</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>args</code> 不允许覆盖 SDK 管理的 <code>--disable-features</code>、<code>--enable-features</code>、<code>--proxy-</code>、<code>--user-data-dir</code>、<code>--remote-debugging</code>、<code>--server-gpu-</code> 前缀参数。代理使用 <code>ProxyConfig</code>，指纹使用 <code>FingerprintProfile</code>，GPU 使用相应构造参数。</p>
+<p>默认先读取 <code>YSBROWSER_BROWSERS_PATH</code> 指定的目录；未设置时读取当前工作目录的 <code>./browsers/installed.json</code>。未安装时抛 <code>BROWSER_NOT_INSTALLED</code>；构造函数不会联网下载。安装、目录设置和示例见<a href="installation.html">安装指南</a>。</p>
+<h3 id="启动和关闭">启动和关闭</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>调用</th>
+<th>返回</th>
+<th>异步入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>browser.start()</code></td>
+<td>当前 <code>YSBrowser</code></td>
+<td><code>await browser.start()</code></td>
+</tr>
+<tr>
+<td><code>browser.close()</code></td>
+<td><code>None</code></td>
+<td><code>await browser.close()</code></td>
+</tr>
+<tr>
+<td><code>with YSBrowser(...) as browser:</code></td>
+<td>自动启动与关闭</td>
+<td><code>async with YSBrowser(...) as browser:</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>已启动且仍连接时，重复 <code>start()</code> 返回当前对象。<code>close()</code> 关闭 SDK 所有 Context、浏览器与驱动，重复关闭可用。连接意外断开后先关闭旧实例，再新建浏览器并恢复保存的配置及登录状态。</p>
+<p>不用上下文管理器时，应使用 <code>try/finally</code>：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="n">browser</span> <span class="o">=</span> <span class="n">YSBrowser</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">set_content</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Hello&lt;/h1&gt;"</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="创建-context">创建 Context</h2>
+<div class="code-block"><div class="code-toolbar"><span>文本</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code>browser.new_context(
+    *, name=None, fingerprint=None, proxy=None, check=None,
+    no_viewport=None, config=None, options=None, storage_state=None,
+) -&gt; YSContext
+</code></pre></div>
+<p>异步入口使用 <code>await</code>。各 Context 隔离 Cookie、站点存储、指纹配置和代理配置。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str | None</code></td>
+<td>在当前浏览器的未关闭 Context 中唯一；省略自动使用 <code>context-1</code> 等名称</td>
+</tr>
+<tr>
+<td><code>fingerprint</code></td>
+<td><code>FingerprintProfile | None</code></td>
+<td>页面创建前应用的指纹</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td><code>ProxyConfig | Direct | None</code></td>
+<td>Context 独立代理；<code>Direct()</code> 显式直连</td>
+</tr>
+<tr>
+<td><code>check</code></td>
+<td><code>ProxyCheck | None</code></td>
+<td>创建时做一次出口检查；失败不返回可用 Context</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td><code>bool | None</code></td>
+<td><code>True</code> 不固定模拟视口；通常省略</td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td><code>ContextConfig | None</code></td>
+<td>一组可保存、复用的配置</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td><code>ContextOptions | None</code></td>
+<td>原生 Context 选项与默认超时</td>
+</tr>
+<tr>
+<td><code>storage_state</code></td>
+<td><code>dict | str | Path | None</code></td>
+<td>登录状态字典或 JSON 文件路径</td>
+</tr>
+</tbody>
+</table></div>
+<p>优先级：显式传入的 <code>fingerprint</code>、<code>proxy</code>、<code>options</code>、<code>no_viewport</code> 优先于 <code>config</code>。未提供 <code>config</code> 时，指纹为空配置、代理使用 <code>browser.default_proxy</code>、选项为空、<code>no_viewport=True</code>。<code>options</code> 覆盖的是整组 <code>config.options</code>，不会逐字段合并。</p>
+<p>指定 <code>options.viewport</code> 且省略 <code>no_viewport</code> 时，自动采用 <code>False</code>；同时显式传 <code>no_viewport=True</code> 会报配置错误。使用 <code>device_scale_factor</code> 也需要固定视口或 <code>no_viewport=False</code>。</p>
+<p>创建顺序为指纹 → 代理与可选检查 → 登录状态恢复 → 返回 Context。创建失败会关闭未完成的 Context。不要同时通过 <code>browser.raw.new_context()</code> 或另一个 CDP 客户端创建 Context，以免上下文 ID 归属不明确。</p>
+<h2 id="yscontext-的日常接口">YSContext 的日常接口</h2>
+<p>Context 通过 <code>browser.new_context()</code> 取得，不需要直接调用 <code>YSContext(...)</code> 构造器。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>返回 / 用法</th>
+<th>异步入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>context.name</code></td>
+<td><code>str</code>；SDK 名称</td>
+<td>普通属性</td>
+</tr>
+<tr>
+<td><code>context.context_id</code></td>
+<td><code>str</code>；浏览器 Context ID</td>
+<td>普通属性</td>
+</tr>
+<tr>
+<td><code>context.raw</code></td>
+<td>原生 <code>BrowserContext</code>，可操作 Cookie、权限、路由等</td>
+<td>普通属性</td>
+</tr>
+<tr>
+<td><code>context.new_page()</code></td>
+<td>原生 <code>Page</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.close()</code></td>
+<td><code>None</code>；关闭全部所属页面并移出名称索引</td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.set_fingerprint(profile)</code></td>
+<td><code>None</code>；仅未锁定时可设置，见指纹章节</td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.fingerprint_status()</code></td>
+<td>原生状态字典</td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.proxy_status()</code></td>
+<td><code>ProxyStatus</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.set_proxy(...)</code></td>
+<td><code>ProxyStatus</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.check_proxy(...)</code></td>
+<td><code>ProxyHealthResult</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.export_config(...)</code></td>
+<td>配置 <code>dict</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.save_storage_state(...)</code></td>
+<td>登录状态 <code>dict</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.restore_storage_state(state)</code></td>
+<td><code>None</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.mouse(page, ...)</code></td>
+<td><code>TrajectoryMouse</code></td>
+<td><strong>不加 await</strong></td>
+</tr>
+<tr>
+<td><code>context.diagnostics()</code></td>
+<td>诊断 <code>dict</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.start_diagnostics(...)</code></td>
+<td><code>None</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.capture_diagnostics(...)</code></td>
+<td>文件清单及结果 <code>dict</code></td>
+<td><code>await</code></td>
+</tr>
+<tr>
+<td><code>context.stop_diagnostics()</code></td>
+<td><code>None</code></td>
+<td><code>await</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>raw</code> 是原生对象，直接调用其方法遵循原生 API 的规则。通过 <code>raw</code> 修改设置可能绕过 SDK 的状态记录；需要后续导出、恢复的设置优先通过 SDK 配置。</p>
+<h2 id="按名称管理">按名称管理</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># browser 是已启动的同步 YSBrowser</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"account-001"</span><span class="p">)</span>
+<span class="n">same_context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s2">"account-001"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">browser</span><span class="o">.</span><span class="n">contexts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">context_id</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">close_context</span><span class="p">(</span><span class="s2">"account-001"</span><span class="p">)</span>
+</code></pre></div>
+<p><code>browser.contexts</code> 返回当前 SDK Context 的元组；<code>get_context(name)</code> 返回对象，找不到名称抛 <code>ConfigurationError</code>。<code>close_context(name)</code> 返回 <code>None</code>，异步入口需要 <code>await</code>。关闭后可以复用该名称。</p>
+<h2 id="能力查询-browsercapabilities">能力查询：BrowserCapabilities</h2>
+<p>浏览器启动后读取 <code>browser.capabilities</code>，无需 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>protocol_version</code></td>
+<td><code>str</code></td>
+<td>自定义协议版本</td>
+</tr>
+<tr>
+<td><code>features</code></td>
+<td><code>tuple[str, ...]</code></td>
+<td>支持的功能标识</td>
+</tr>
+<tr>
+<td><code>gpu_profiles</code></td>
+<td><code>tuple[str, ...]</code></td>
+<td>可选择的 GPU 型号 ID</td>
+</tr>
+<tr>
+<td><code>fingerprint_fields</code></td>
+<td><code>tuple[str, ...]</code></td>
+<td>支持的原生 camelCase 指纹字段</td>
+</tr>
+<tr>
+<td><code>context_gpu_available</code></td>
+<td><code>bool</code></td>
+<td>当前启动方式是否可使用 Context GPU 配置</td>
+</tr>
+<tr>
+<td><code>check_timeout_min_ms</code></td>
+<td><code>int</code></td>
+<td>检查超时下限，配套版本为 1000</td>
+</tr>
+<tr>
+<td><code>check_timeout_max_ms</code></td>
+<td><code>int</code></td>
+<td>检查超时上限，配套版本为 60000</td>
+</tr>
+<tr>
+<td><code>check_body_max_bytes</code></td>
+<td><code>int</code></td>
+<td>检查正文上限，配套版本为 65536</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>capabilities.supports(feature: str) -&gt; bool</code> 按完整名称查询，例如 <code>proxySwitchBarrier</code>。<code>to_dict() -&gt; dict</code> 导出字段。<code>BrowserCapabilities.from_cdp(value: dict)</code> 把原生字段转换为该对象，不发起网络调用；通常直接使用 <code>browser.capabilities</code>。</p>
+<p>基础必需功能为 <code>contextFingerprint</code>、<code>contextProxy</code>、<code>proxyCheck</code>、<code>proxyGeneration</code>。Context GPU 使用 <code>contextGpuProfile</code>，有等待屏障的代理切换使用 <code>proxySwitchBarrier</code>。</p>
+<h2 id="断线回调与浏览器诊断">断线回调与浏览器诊断</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># 同步和异步入口都不加 await；回调必须是普通 def。</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">disconnected</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">"unexpected"</span><span class="p">],</span> <span class="n">event</span><span class="p">[</span><span class="s2">"at"</span><span class="p">],</span> <span class="n">event</span><span class="p">[</span><span class="s2">"context_count"</span><span class="p">])</span>
+
+<span class="n">browser</span><span class="o">.</span><span class="n">on_disconnected</span><span class="p">(</span><span class="n">disconnected</span><span class="p">)</span>
+<span class="n">snapshot</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">diagnostics</span><span class="p">()</span>
+</code></pre></div>
+<p><code>on_disconnected(callback) -&gt; None</code> 注册接收一个字典的同步回调。<code>unexpected: bool</code> 表示是否意外断线，<code>at: float</code> 为 Unix 毫秒时间戳，<code>context_count: int</code> 为事件发生时 Context 数量。回调异常不向外传播；异步处理可由同步回调安排任务。</p>
+<p><code>browser.diagnostics() -&gt; dict</code> 返回当前快照，不加 <code>await</code>。启动后的字段包括运行时版本信息、<code>capabilities</code>、原生 <code>browser</code> 版本信息、<code>context_gpu</code>、<code>server_gpu_backend</code>、<code>media_router</code>、<code>server_gpu_profile</code>、<code>context_count</code>、<code>connected</code> 和 <code>contexts: [{&quot;context_id&quot;: &quot;...&quot;}]</code>。未启动时版本字段可能尚不存在。该接口不输出自定义启动参数、代理凭据、seed 或用户指定名称。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>返回字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sdk_version</code></td>
+<td><code>str</code></td>
+<td>SDK 版本</td>
+</tr>
+<tr>
+<td><code>patchright_version</code></td>
+<td><code>str</code></td>
+<td>Python Patchright 包版本</td>
+</tr>
+<tr>
+<td><code>driver_version</code></td>
+<td><code>str</code></td>
+<td>内置 driver 版本</td>
+</tr>
+<tr>
+<td><code>adapter_id</code></td>
+<td><code>str</code></td>
+<td>SDK 运行时适配标识</td>
+</tr>
+<tr>
+<td><code>validated_platform</code></td>
+<td><code>str</code></td>
+<td>当前支持平台 Windows</td>
+</tr>
+<tr>
+<td><code>browser_bundled</code></td>
+<td><code>bool</code></td>
+<td>是否随 SDK 附带浏览器，当前为 False</td>
+</tr>
+<tr>
+<td><code>capabilities</code></td>
+<td><code>dict</code></td>
+<td>BrowserCapabilities 的字段结构</td>
+</tr>
+<tr>
+<td><code>browser</code></td>
+<td><code>dict</code></td>
+<td>原生版本信息：protocolVersion、product、revision、userAgent、jsVersion，均为字符串</td>
+</tr>
+<tr>
+<td><code>context_gpu</code></td>
+<td><code>bool</code></td>
+<td>是否启用 Context GPU 启动配置</td>
+</tr>
+<tr>
+<td><code>server_gpu_backend</code></td>
+<td><code>str | None</code></td>
+<td>warp、swiftshader 或未使用该配置时的 None</td>
+</tr>
+<tr>
+<td><code>media_router</code></td>
+<td><code>bool</code></td>
+<td>Media Router 启动选项</td>
+</tr>
+<tr>
+<td><code>server_gpu_profile</code></td>
+<td><code>str | None</code></td>
+<td>浏览器启动级 GPU profile</td>
+</tr>
+<tr>
+<td><code>context_count</code></td>
+<td><code>int</code></td>
+<td>当前 SDK 管理的 Context 数量</td>
+</tr>
+<tr>
+<td><code>connected</code></td>
+<td><code>bool</code></td>
+<td>当前是否连接浏览器</td>
+</tr>
+<tr>
+<td><code>contexts</code></td>
+<td><code>list[dict]</code></td>
+<td>每项仅含 context_id</td>
+</tr>
+<tr>
+<td><code>disconnect</code></td>
+<td><code>dict</code>，可选</td>
+<td>断线后出现，结构同 on_disconnected 的事件字典</td>
+</tr>
+<tr>
+<td><code>disconnect_callback_error</code></td>
+<td><code>str</code>，可选</td>
+<td>断线回调抛出异常时的异常类型名</td>
+</tr>
+</tbody>
+</table></div>
+<p>构造参数也保存为浏览器实例的同名配置属性，其中 <code>executable_path</code> 为解析后的路径字符串。通过构造参数配置启动行为；修改已启动实例的这些属性不会自动重启或重新配置浏览器。</p>
+<h2 id="并发">并发</h2>
+<p>不同异步 Context 可使用 <code>asyncio.gather()</code> 运行独立业务。对同一页面的定位、滚动和鼠标动作应由调用方顺序安排。同一页面的 SDK 轨迹鼠标共享位置与执行锁，但不能协调同时发生的原生 <code>page.mouse</code> 或 <code>locator.click()</code> 操作。</p>
+<h2 id="接入-browser-use-等本机-cdp-客户端">接入 Browser Use 等本机 CDP 客户端</h2>
+<p>启动参数 <code>cdp_port=None</code> 默认保持管道连接。<code>cdp_port=0</code> 额外开放自动分配的本机端口，或传入 1–65535 指定端口。启动后 <code>browser.cdp_endpoint</code> 返回 HTTP 调试地址；关闭后不可继续使用。端口占用或启动失败会报错。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="s2">"./browser/chrome.exe"</span><span class="p">,</span> <span class="n">cdp_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">cdp_endpoint</span><span class="p">)</span>
+</code></pre></div>
+<p>需要原生 Browser Use 时安装 ysbrowser-agent，使用异步 SDK 与 <code>await YSBrowserSession.attach(browser, context)</code>，不要把原始浏览器端点直接交给不管理 Context 的客户端。Context 的配置可通过 <code>context.options</code> 读取独立副本。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#ysbrowser">YSBrowser</a><a class="level3" href="#启动和关闭">启动和关闭</a><a class="level2" href="#创建-context">创建 Context</a><a class="level2" href="#yscontext-的日常接口">YSContext 的日常接口</a><a class="level2" href="#按名称管理">按名称管理</a><a class="level2" href="#能力查询-browsercapabilities">能力查询：BrowserCapabilities</a><a class="level2" href="#断线回调与浏览器诊断">断线回调与浏览器诊断</a><a class="level2" href="#并发">并发</a><a class="level2" href="#接入-browser-use-等本机-cdp-客户端">接入 Browser Use 等本机 CDP 客户端</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

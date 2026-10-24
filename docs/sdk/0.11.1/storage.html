@@ -1,0 +1,205 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>配置与登录状态 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html" aria-current="page">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.1 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="配置与登录状态">配置与登录状态</h1>
+<p><a href="README.html">返回目录</a></p>
+<p>配置保存指纹、代理和 Context 选项；登录状态保存 Cookie、LocalStorage 和可选 IndexedDB。两类文件分别保存、分别恢复。</p>
+<h2 id="contextconfig">ContextConfig</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ContextConfig</span><span class="p">,</span> <span class="n">ContextOptions</span><span class="p">,</span> <span class="n">FingerprintProfile</span><span class="p">,</span> <span class="n">Direct</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="p">(</span>
+    <span class="n">fingerprint</span><span class="o">=</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">"account-001"</span><span class="p">),</span>
+    <span class="n">proxy</span><span class="o">=</span><span class="n">Direct</span><span class="p">(),</span>
+    <span class="n">no_viewport</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">ContextOptions</span><span class="p">(</span><span class="n">viewport</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">720</span><span class="p">}),</span>
+<span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"config/account-001.json"</span><span class="p">)</span>
+<span class="n">loaded</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"config/account-001.json"</span><span class="p">)</span>
+<span class="c1"># browser 为已启动的 YSBrowser。</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">loaded</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>构造字段</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fingerprint</code></td>
+<td><code>FingerprintProfile = FingerprintProfile()</code></td>
+<td>指纹配置</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td><code>ProxyConfig | Direct = Direct()</code></td>
+<td>显式保存代理策略</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td><code>bool = True</code></td>
+<td>是否不固定视口；有 <code>options.viewport</code> 时必须为 <code>False</code></td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td><code>ContextOptions = ContextOptions()</code></td>
+<td>Context 选项</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="保存与加载方法">保存与加载方法</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>调用</th>
+<th>返回值</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config.to_dict(include_proxy_credentials=False, include_sensitive_options=False)</code></td>
+<td><code>dict</code></td>
+<td>两个开关均默认 <code>False</code></td>
+</tr>
+<tr>
+<td><code>config.save(path, include_proxy_credentials=False, include_sensitive_options=False)</code></td>
+<td><code>None</code></td>
+<td><code>path: str | Path</code>；自动创建父目录并写入 JSON</td>
+</tr>
+<tr>
+<td><code>ContextConfig.from_dict(data, proxy_username=None, proxy_password=None, options=None)</code></td>
+<td><code>ContextConfig</code></td>
+<td>字典输入；认证信息和选项可在加载时补齐</td>
+</tr>
+<tr>
+<td><code>ContextConfig.load(path, proxy_username=None, proxy_password=None, options=None)</code></td>
+<td><code>ContextConfig</code></td>
+<td>从 JSON 文件读取，补齐规则同 <code>from_dict</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>除第一个位置参数外，以上可选参数都只能用关键字传入。它们是本地同步操作，异步程序中也不使用 <code>await</code>。</p>
+<h3 id="从已有-context-导出">从已有 Context 导出</h3>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">config_data</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">export_config</span><span class="p">(</span><span class="s2">"config/current.json"</span><span class="p">)</span>
+</code></pre></div>
+<p>签名：<code>context.export_config(path=None, *, include_proxy_credentials=False, include_sensitive_options=False) -&gt; dict</code>。异步入口使用 <code>await</code>。不传路径只返回字典；传路径后同时保存并返回字典。</p>
+<p>如果代理或指纹被 SDK 以外的客户端修改，SDK 无法确认可复用配置时抛 <code>CONFIG_CHANGED_EXTERNALLY</code>。需要在合适的 Context 中重新成功应用明确配置；指纹已锁定时新建 Context。通过原生对象修改的其他选项不一定能反映在导出文件中。</p>
+<h3 id="json-格式">JSON 格式</h3>
+<p>无额外选项时使用 schema 1；包含选项值或待补齐字段时使用 schema 2：</p>
+<div class="code-block"><div class="code-toolbar"><span>JSON</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"fpseed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"account-001"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cpu_cores"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"proxy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"direct"</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"no_viewport"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"viewport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w"> </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">}},</span>
+<span class="w">    </span><span class="nt">"requires"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>JSON 字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>1</code> 或 <code>2</code>；版本 1 不含 <code>options</code>，版本 2 必须包含</td>
+</tr>
+<tr>
+<td><code>fingerprint</code></td>
+<td>Python snake_case 字段，只包含已指定值</td>
+</tr>
+<tr>
+<td><code>proxy.mode</code></td>
+<td><code>direct</code> 或 <code>fixed_servers</code></td>
+</tr>
+<tr>
+<td><code>proxy.server</code></td>
+<td>固定代理的 URL</td>
+</tr>
+<tr>
+<td><code>proxy.bypass_list</code></td>
+<td>固定代理绕过规则，可为 <code>null</code></td>
+</tr>
+<tr>
+<td><code>proxy.requires_auth</code></td>
+<td>固定代理是否需要认证，布尔值</td>
+</tr>
+<tr>
+<td><code>proxy.username/password</code></td>
+<td>仅显式包含凭据时出现</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>布尔值</td>
+</tr>
+<tr>
+<td><code>options.values</code></td>
+<td>已保存的 ContextOptions 值</td>
+</tr>
+<tr>
+<td><code>options.requires</code></td>
+<td>默认被省略且加载时需要补齐的选项字段名</td>
+</tr>
+</tbody>
+</table></div>
+<p>不要把 <code>profile.to_cdp()</code> 的 camelCase 字典直接用作配置中的 <code>fingerprint</code>。</p>
+<h3 id="补齐认证与敏感选项">补齐认证与敏感选项</h3>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextConfig</span><span class="p">,</span> <span class="n">ContextOptions</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s2">"config/account-with-proxy.json"</span><span class="p">,</span>
+    <span class="n">proxy_username</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PROXY_USERNAME"</span><span class="p">],</span>
+    <span class="n">proxy_password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PROXY_PASSWORD"</span><span class="p">],</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">ContextOptions</span><span class="p">(</span><span class="n">extra_http_headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"Authorization"</span><span class="p">:</span> <span class="s2">"Bearer "</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"SITE_TOKEN"</span><span class="p">],</span>
+    <span class="p">}),</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>此例要求文件声明了需要代理认证及附加请求头。代理用户名和密码必须成对补齐；直连配置不接受代理凭据。<code>options</code> 中非 <code>None</code> 字段覆盖或补充文件值。默认不保存认证信息，但指纹 seed 仍保存在配置中。</p>
+<h2 id="保存登录状态">保存登录状态</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">state</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">save_storage_state</span><span class="p">(</span><span class="s2">"state/account-001.json"</span><span class="p">,</span> <span class="n">indexed_db</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>签名：<code>save_storage_state(path=None, *, indexed_db=True) -&gt; dict</code>。异步入口使用 <code>await</code>。<code>path</code> 为 <code>str | Path | None</code>；省略时只返回字典。<code>indexed_db</code> 默认为 <code>True</code>，用于包含 IndexedDB 中的登录数据。</p>
+<p>返回原生存储状态结构：</p>
+<div class="code-block"><div class="code-toolbar"><span>JSON</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"cookies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nt">"origins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.example.com"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"localStorage"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"theme"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"light"</span><span class="p">}]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Cookie 项通常包括 <code>name</code>、<code>value</code>、<code>domain</code>、<code>path</code>、<code>expires</code>、<code>httpOnly</code>、<code>secure</code>、<code>sameSite</code>，以及原生版本支持的可选分区字段；<code>expires</code> 为 Unix 秒。启用 IndexedDB 时相应 origin 可以带 <code>indexedDB</code> 数据。使用原样返回的结构恢复，避免自行改写 IndexedDB 的内部表示。</p>
+<p>不包含 SessionStorage、内存中的页面状态、打开的标签页、缓存或完整用户目录。需要站点专用 SessionStorage 时自行读取并在目标页面导航前恢复。</p>
+<h2 id="恢复登录状态">恢复登录状态</h2>
+<p>优先在创建时恢复：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"config/account-001.json"</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">storage_state</span><span class="o">=</span><span class="s2">"state/account-001.json"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+<span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">"https://app.example.com"</span><span class="p">)</span>  <span class="c1"># 替换为实际站点</span>
+</code></pre></div>
+<p>也可在尚未打开页面的 Context 中调用：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="n">context</span><span class="o">.</span><span class="n">restore_storage_state</span><span class="p">(</span><span class="s2">"state/account-001.json"</span><span class="p">)</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+</code></pre></div>
+<p><code>restore_storage_state(state: dict | str | Path) -&gt; None</code>，异步入口使用 <code>await</code>。若已有页面，抛 <code>STORAGE_RESTORE_REQUIRES_EMPTY_CONTEXT</code>。状态文件含登录凭据，应放在应用自己的受控目录，不上传公共仓库。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#contextconfig">ContextConfig</a><a class="level3" href="#保存与加载方法">保存与加载方法</a><a class="level3" href="#从已有-context-导出">从已有 Context 导出</a><a class="level3" href="#json-格式">JSON 格式</a><a class="level3" href="#补齐认证与敏感选项">补齐认证与敏感选项</a><a class="level2" href="#保存登录状态">保存登录状态</a><a class="level2" href="#恢复登录状态">恢复登录状态</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

@@ -1,0 +1,353 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生 Request · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html" aria-current="page">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.1 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="原生-request">原生 Request</h1>
+<p><a href="README.html">原生 API 目录</a> · <a href="../README.html">手册目录</a></p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#all-headers">all_headers</a></li>
+<li><a href="#existing-response">existing_response</a></li>
+<li><a href="#failure">failure</a></li>
+<li><a href="#frame">frame</a></li>
+<li><a href="#header-value">header_value</a></li>
+<li><a href="#headers">headers</a></li>
+<li><a href="#headers-array">headers_array</a></li>
+<li><a href="#is-navigation-request">is_navigation_request</a></li>
+<li><a href="#method">method</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#post-data">post_data</a></li>
+<li><a href="#post-data-buffer">post_data_buffer</a></li>
+<li><a href="#post-data-json">post_data_json</a></li>
+<li><a href="#redirected-from">redirected_from</a></li>
+<li><a href="#redirected-to">redirected_to</a></li>
+<li><a href="#remove-listener">remove_listener</a></li>
+<li><a href="#resource-type">resource_type</a></li>
+<li><a href="#response">response</a></li>
+<li><a href="#service-worker">service_worker</a></li>
+<li><a href="#sizes">sizes</a></li>
+<li><a href="#timing">timing</a></li>
+<li><a href="#url">url</a></li>
+</ul>
+<h2 id="all-headers">all_headers</h2>
+<h3 id="同步">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">all_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.all_headers</p>
+<p>An object with all the request HTTP headers associated with this request. The header names are lower-cased.</p>
+<h4 id="returns">Returns</h4>
+<p>Dict[str, str]</p>
+<h3 id="异步">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">all_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.all_headers</p>
+<p>An object with all the request HTTP headers associated with this request. The header names are lower-cased.</p>
+<h4 id="returns-2">Returns</h4>
+<p>Dict[str, str]</p>
+<h2 id="existing-response">existing_response</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">existing_response</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Response'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.existing_response</p>
+<p>Returns the <code>Response</code> object if the response has already been received, <code>null</code> otherwise.</p>
+<p>Unlike <code>request.response()</code>, this method does not wait for the response to arrive. It returns immediately with the
+response object if the response has been received, or <code>null</code> if the response has not been received yet.</p>
+<h4 id="returns-3">Returns</h4>
+<p>Union[Response, None]</p>
+<h2 id="failure">failure</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">failure</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.failure</p>
+<p>The method returns <code>null</code> unless this request has failed, as reported by <code>requestfailed</code> event.</p>
+<p><strong>Usage</strong></p>
+<p>Example of logging of all the failed requests:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"requestfailed"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">request</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">failure</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="returns-4">Returns</h4>
+<p>Union[str, None]</p>
+<h2 id="frame">frame</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span> <span class="n">Frame</span>
+</code></pre></div>
+<p>Request.frame</p>
+<p>Returns the <code>Frame</code> that initiated this request.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">frame_url</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">url</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Note that in some cases the frame is not available, and this method will throw.</p>
+<ul>
+<li>When request originates in the Service Worker. You can use <code>request.serviceWorker()</code> to check that.</li>
+<li>When navigation request is issued before the corresponding frame is created. You can use
+<code>request.is_navigation_request()</code> to check that.</li>
+</ul>
+<p>Here is an example that handles all the cases:</p>
+<h4 id="returns-5">Returns</h4>
+<p>Frame</p>
+<h2 id="header-value">header_value</h2>
+<h3 id="同步-2">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">header_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.header_value</p>
+<p>Returns the value of the header matching the name. The name is case-insensitive.</p>
+<h4 id="parameters">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the header.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-6">Returns</h4>
+<p>Union[str, None]</p>
+<h3 id="异步-2">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">header_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.header_value</p>
+<p>Returns the value of the header matching the name. The name is case-insensitive.</p>
+<h4 id="parameters-2">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the header.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-7">Returns</h4>
+<p>Union[str, None]</p>
+<h2 id="headers">headers</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.headers</p>
+<p>An object with the request HTTP headers. The header names are lower-cased. Note that this method does not return
+security-related headers, including cookie-related ones. You can use <code>request.all_headers()</code> for complete list of
+headers that include <code>cookie</code> information.</p>
+<h4 id="returns-8">Returns</h4>
+<p>Dict[str, str]</p>
+<h2 id="headers-array">headers_array</h2>
+<h3 id="同步-3">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">headers_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">NameValue</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.headers_array</p>
+<p>An array with all the request HTTP headers associated with this request. Unlike <code>request.all_headers()</code>, header
+names are NOT lower-cased. Headers with multiple entries, such as <code>Set-Cookie</code>, appear in the array multiple times.</p>
+<h4 id="returns-9">Returns</h4>
+<p>List[{name: str, value: str}]</p>
+<h3 id="异步-3">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">headers_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">NameValue</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.headers_array</p>
+<p>An array with all the request HTTP headers associated with this request. Unlike <code>request.all_headers()</code>, header
+names are NOT lower-cased. Headers with multiple entries, such as <code>Set-Cookie</code>, appear in the array multiple times.</p>
+<h4 id="returns-10">Returns</h4>
+<p>List[{name: str, value: str}]</p>
+<h2 id="is-navigation-request">is_navigation_request</h2>
+<h3 id="同步-4">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">is_navigation_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+<p>Request.is_navigation_request</p>
+<p>Whether this request is driving frame's navigation.</p>
+<p>Some navigation requests are issued before the corresponding frame is created, and therefore do not have
+<code>request.frame</code> available.</p>
+<h4 id="returns-11">Returns</h4>
+<p>bool</p>
+<h3 id="异步-4">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">is_navigation_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+<p>Request.is_navigation_request</p>
+<p>Whether this request is driving frame's navigation.</p>
+<p>Some navigation requests are issued before the corresponding frame is created, and therefore do not have
+<code>request.frame</code> available.</p>
+<h4 id="returns-12">Returns</h4>
+<p>bool</p>
+<h2 id="method">method</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">method</span><span class="p">:</span> <span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">'</span><span class="nc">str</span><span class="s1">'&gt;</span>
+</code></pre></div>
+<p>Request.method</p>
+<p>Request's method (GET, POST, etc.)</p>
+<h4 id="returns-13">Returns</h4>
+<p>str</p>
+<h2 id="on">on</h2>
+<h3 id="同步-5">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h3 id="异步-5">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h2 id="once">once</h2>
+<h3 id="同步-6">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h3 id="异步-6">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h2 id="post-data">post_data</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">post_data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.post_data</p>
+<p>Request's post body, if any.</p>
+<h4 id="returns-14">Returns</h4>
+<p>Union[str, None]</p>
+<h2 id="post-data-buffer">post_data_buffer</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">post_data_buffer</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.post_data_buffer</p>
+<p>Request's post body in a binary form, if any.</p>
+<h4 id="returns-15">Returns</h4>
+<p>Union[bytes, None]</p>
+<h2 id="post-data-json">post_data_json</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">post_data_json</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+<p>Request.post_data_json</p>
+<p>Returns parsed request's body for <code>form-urlencoded</code> and JSON as a fallback if any.</p>
+<p>When the response is <code>application/x-www-form-urlencoded</code> then a key/value object of the values will be returned.
+Otherwise it will be parsed as JSON.</p>
+<h4 id="returns-16">Returns</h4>
+<p>Union[Any, None]</p>
+<h2 id="redirected-from">redirected_from</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">redirected_from</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Request'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.redirected_from</p>
+<p>Request that was redirected by the server to this one, if any.</p>
+<p>When the server responds with a redirect, Playwright creates a new <code>Request</code> object. The two requests are connected
+by <code>redirectedFrom()</code> and <code>redirectedTo()</code> methods. When multiple server redirects has happened, it is possible to
+construct the whole redirect chain by repeatedly calling <code>redirectedFrom()</code>.</p>
+<p><strong>Usage</strong></p>
+<p>For example, if the website <code>http://example.com</code> redirects to <code>https://example.com</code>:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">"http://example.com"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">redirected_from</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="c1"># "http://example.com"</span>
+</code></pre></div>
+<p>If the website <code>https://google.com</code> has no redirects:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">"https://google.com"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">redirected_from</span><span class="p">)</span> <span class="c1"># None</span>
+</code></pre></div>
+<h4 id="returns-17">Returns</h4>
+<p>Union[Request, None]</p>
+<h2 id="redirected-to">redirected_to</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">redirected_to</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Request'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.redirected_to</p>
+<p>New request issued by the browser if the server responded with redirect.</p>
+<p><strong>Usage</strong></p>
+<p>This method is the opposite of <code>request.redirected_from</code>:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">assert</span> <span class="n">request</span><span class="o">.</span><span class="n">redirected_from</span><span class="o">.</span><span class="n">redirected_to</span> <span class="o">==</span> <span class="n">request</span>
+</code></pre></div>
+<h4 id="returns-18">Returns</h4>
+<p>Union[Request, None]</p>
+<h2 id="remove-listener">remove_listener</h2>
+<h3 id="同步-7">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h3 id="异步-7">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h2 id="resource-type">resource_type</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">resource_type</span><span class="p">:</span> <span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">'</span><span class="nc">str</span><span class="s1">'&gt;</span>
+</code></pre></div>
+<p>Request.resource_type</p>
+<p>Contains the request's resource type as it was perceived by the rendering engine. ResourceType will be one of the
+following: <code>document</code>, <code>stylesheet</code>, <code>image</code>, <code>media</code>, <code>font</code>, <code>script</code>, <code>texttrack</code>, <code>xhr</code>, <code>fetch</code>,
+<code>eventsource</code>, <code>websocket</code>, <code>manifest</code>, <code>beacon</code>, <code>ping</code>, <code>cspreport</code>, <code>other</code>.</p>
+<h4 id="returns-19">Returns</h4>
+<p>str</p>
+<h2 id="response">response</h2>
+<h3 id="同步-8">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">response</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Response'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.response</p>
+<p>Returns the matching <code>Response</code> object, or <code>null</code> if the response was not received due to error.</p>
+<h4 id="returns-20">Returns</h4>
+<p>Union[Response, None]</p>
+<h3 id="异步-8">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">response</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Response'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.response</p>
+<p>Returns the matching <code>Response</code> object, or <code>null</code> if the response was not received due to error.</p>
+<h4 id="returns-21">Returns</h4>
+<p>Union[Response, None]</p>
+<h2 id="service-worker">service_worker</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">service_worker</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Worker'</span><span class="p">)]</span>
+</code></pre></div>
+<p>Request.service_worker</p>
+<p>The Service <code>Worker</code> that is performing the request.</p>
+<p><strong>Details</strong></p>
+<p>This method is Chromium only. It's safe to call when using other browsers, but it will always be <code>null</code>.</p>
+<p>Requests originated in a Service Worker do not have a <code>request.frame</code> available.</p>
+<h4 id="returns-22">Returns</h4>
+<p>Union[Worker, None]</p>
+<h2 id="sizes">sizes</h2>
+<h3 id="同步-9">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">RequestSizes</span>
+</code></pre></div>
+<p>Request.sizes</p>
+<p>Returns resource size information for given request.</p>
+<h4 id="returns-23">Returns</h4>
+<p>{requestBodySize: int, requestHeadersSize: int, responseBodySize: int, responseHeadersSize: int}</p>
+<h3 id="异步-9">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">RequestSizes</span>
+</code></pre></div>
+<p>Request.sizes</p>
+<p>Returns resource size information for given request.</p>
+<h4 id="returns-24">Returns</h4>
+<p>{requestBodySize: int, requestHeadersSize: int, responseBodySize: int, responseHeadersSize: int}</p>
+<h2 id="timing">timing</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">timing</span><span class="p">:</span> <span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">'</span><span class="nc">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ResourceTiming</span><span class="s1">'&gt;</span>
+</code></pre></div>
+<p>Request.timing</p>
+<p>Returns resource timing information for given request. Most of the timing values become available upon the
+response, <code>responseEnd</code> becomes available when request finishes. Find more information at
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">Resource Timing API</a>.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">with</span> <span class="n">page</span><span class="o">.</span><span class="n">expect_event</span><span class="p">(</span><span class="s2">"requestfinished"</span><span class="p">)</span> <span class="k">as</span> <span class="n">request_info</span><span class="p">:</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">"http://example.com"</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">request_info</span><span class="o">.</span><span class="n">value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">timing</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="returns-25">Returns</h4>
+<p>{startTime: float, domainLookupStart: float, domainLookupEnd: float, connectStart: float, secureConnectionStart: float, connectEnd: float, requestStart: float, responseStart: float, responseEnd: float}</p>
+<h2 id="url">url</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Request</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">'</span><span class="nc">str</span><span class="s1">'&gt;</span>
+</code></pre></div>
+<p>Request.url</p>
+<p>URL of the request.</p>
+<h4 id="returns-26">Returns</h4>
+<p>str</p>
+<footer class="page-footer"><span>适用 SDK 0.11.1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#all-headers">all_headers</a><a class="level2" href="#existing-response">existing_response</a><a class="level2" href="#failure">failure</a><a class="level2" href="#frame">frame</a><a class="level2" href="#header-value">header_value</a><a class="level2" href="#headers">headers</a><a class="level2" href="#headers-array">headers_array</a><a class="level2" href="#is-navigation-request">is_navigation_request</a><a class="level2" href="#method">method</a><a class="level2" href="#on">on</a><a class="level2" href="#once">once</a><a class="level2" href="#post-data">post_data</a><a class="level2" href="#post-data-buffer">post_data_buffer</a><a class="level2" href="#post-data-json">post_data_json</a><a class="level2" href="#redirected-from">redirected_from</a><a class="level2" href="#redirected-to">redirected_to</a><a class="level2" href="#remove-listener">remove_listener</a><a class="level2" href="#resource-type">resource_type</a><a class="level2" href="#response">response</a><a class="level2" href="#service-worker">service_worker</a><a class="level2" href="#sizes">sizes</a><a class="level2" href="#timing">timing</a><a class="level2" href="#url">url</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>
