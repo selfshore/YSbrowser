@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patchright 原生 API 参考 · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.3</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html" aria-current="page">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.3 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="patchright-原生-api-参考">Patchright 原生 API 参考</h1>
+<p><a href="../README.html">返回手册目录</a></p>
+<p>本附录对应 SDK 固定依赖 Patchright Python 1.64.2。常用操作的中文说明见<a href="../page-locator.html">页面与定位器</a>。下列各页包含该对象所有公开方法/属性的同步及异步签名，并保留随包提供的英文参数、返回值及示例说明，便于核对每个可选字段。</p>
+<p>这些接口通过 <code>Page</code>、<code>Locator</code>、<code>context.raw</code> 等原生对象调用，不是 YSContext 的新增方法。BrowserType/Playwright 的原生启动接口仅作参考；使用本 SDK 管理指纹和代理时从 YSBrowser 启动。原生 APIRequestContext 不能据此假设跟随自定义 Context 代理。</p>
+<p>异步 API 的普通工厂和属性仍直接使用；声明为 <code>async def</code> 的操作使用 await，事件等待上下文管理器使用 async with。参数超时通常以毫秒计，详细默认行为见各方法正文。</p>
+<p>原生说明保留上游命名和示例（可能使用 <code>playwright</code> 变量名称），本 SDK 返回的对象属于 <code>patchright</code>。上游对于平台、Shadow DOM 等通用行为的说明不扩大本 SDK 的 Windows 支持范围；配套浏览器的差异按中文手册说明使用。</p>
+<p>第三方 API 说明源自已安装依赖，版权与许可见 <a href="../THIRD_PARTY_NOTICES.html">第三方声明</a>。</p>
+<h2 id="对象">对象</h2>
+<ul>
+<li><a href="APIRequest.html">APIRequest</a></li>
+<li><a href="APIRequestContext.html">APIRequestContext</a></li>
+<li><a href="APIResponse.html">APIResponse</a></li>
+<li><a href="APIResponseAssertions.html">APIResponseAssertions</a></li>
+<li><a href="Browser.html">Browser</a></li>
+<li><a href="BrowserContext.html">BrowserContext</a></li>
+<li><a href="BrowserType.html">BrowserType</a></li>
+<li><a href="CDPSession.html">CDPSession</a></li>
+<li><a href="Clock.html">Clock</a></li>
+<li><a href="ConsoleMessage.html">ConsoleMessage</a></li>
+<li><a href="Credentials.html">Credentials</a></li>
+<li><a href="Debugger.html">Debugger</a></li>
+<li><a href="Dialog.html">Dialog</a></li>
+<li><a href="Disposable.html">Disposable</a></li>
+<li><a href="Download.html">Download</a></li>
+<li><a href="ElementHandle.html">ElementHandle</a></li>
+<li><a href="Expect.html">Expect</a></li>
+<li><a href="FileChooser.html">FileChooser</a></li>
+<li><a href="FormData.html">FormData</a></li>
+<li><a href="Frame.html">Frame</a></li>
+<li><a href="FrameLocator.html">FrameLocator</a></li>
+<li><a href="JSHandle.html">JSHandle</a></li>
+<li><a href="Keyboard.html">Keyboard</a></li>
+<li><a href="Locator.html">Locator</a></li>
+<li><a href="LocatorAssertions.html">LocatorAssertions</a></li>
+<li><a href="Mouse.html">Mouse</a></li>
+<li><a href="Page.html">Page</a></li>
+<li><a href="PageAssertions.html">PageAssertions</a></li>
+<li><a href="Playwright.html">Playwright</a></li>
+<li><a href="Request.html">Request</a></li>
+<li><a href="Response.html">Response</a></li>
+<li><a href="Route.html">Route</a></li>
+<li><a href="Screencast.html">Screencast</a></li>
+<li><a href="Selectors.html">Selectors</a></li>
+<li><a href="Touchscreen.html">Touchscreen</a></li>
+<li><a href="Tracing.html">Tracing</a></li>
+<li><a href="Video.html">Video</a></li>
+<li><a href="WebError.html">WebError</a></li>
+<li><a href="WebMCP.html">WebMCP</a></li>
+<li><a href="WebSocket.html">WebSocket</a></li>
+<li><a href="WebSocketRoute.html">WebSocketRoute</a></li>
+<li><a href="WebStorage.html">WebStorage</a></li>
+<li><a href="Worker.html">Worker</a></li>
+</ul>
+<p><code>ChromiumBrowserContext</code> 是该版本的 BrowserContext 类型别名，参照 <a href="BrowserContext.html">BrowserContext</a>。</p>
+<p><a href="types.html">字典输入输出结构</a></p>
+<p>原生异常为 <code>patchright.sync_api.Error</code> / <code>TimeoutError</code>（异步入口同名）；TimeoutError 继承 Error。使用 SDK 时同时处理这些原生异常和 <a href="../diagnostics-errors.html">SDK 异常</a>。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.3 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#对象">对象</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

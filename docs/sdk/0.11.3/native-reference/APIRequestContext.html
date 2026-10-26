@@ -1,0 +1,1566 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生 APIRequestContext · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.3</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html" aria-current="page">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.3 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="原生-apirequestcontext">原生 APIRequestContext</h1>
+<p><a href="README.html">原生 API 目录</a> · <a href="../README.html">手册目录</a></p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#add-cookies">add_cookies</a></li>
+<li><a href="#clear-cookies">clear_cookies</a></li>
+<li><a href="#cookies">cookies</a></li>
+<li><a href="#delete">delete</a></li>
+<li><a href="#dispose">dispose</a></li>
+<li><a href="#fetch">fetch</a></li>
+<li><a href="#get">get</a></li>
+<li><a href="#head">head</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#patch">patch</a></li>
+<li><a href="#post">post</a></li>
+<li><a href="#put">put</a></li>
+<li><a href="#remove-listener">remove_listener</a></li>
+<li><a href="#storage-state">storage_state</a></li>
+<li><a href="#tracing">tracing</a></li>
+</ul>
+<h2 id="add-cookies">add_cookies</h2>
+<h3 id="同步">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">add_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookies</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">SetCookieParam</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.add_cookies</p>
+<p>Adds cookies into this request context. They will be sent with matching subsequent requests. For
+<code>browser_context.request</code> and <code>page.request</code>, this is equivalent to calling <code>browser_context.add_cookies()</code> on the
+corresponding browser context.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">request</span><span class="o">.</span><span class="n">add_cookies</span><span class="p">([</span><span class="n">cookie_object1</span><span class="p">,</span> <span class="n">cookie_object2</span><span class="p">])</span>
+</code></pre></div>
+<h4 id="parameters">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cookies</code></td>
+<td>Sequence[{name: str, value: str, url: Union[str, None], domain: Union[str, None], path: Union[str, None], expires: Union[float, None], httpOnly: Union[bool, None], secure: Union[bool, None], sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;, None], partitionKey: Union[str, None]}]</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookies</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">SetCookieParam</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.add_cookies</p>
+<p>Adds cookies into this request context. They will be sent with matching subsequent requests. For
+<code>browser_context.request</code> and <code>page.request</code>, this is equivalent to calling <code>browser_context.add_cookies()</code> on the
+corresponding browser context.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">add_cookies</span><span class="p">([</span><span class="n">cookie_object1</span><span class="p">,</span> <span class="n">cookie_object2</span><span class="p">])</span>
+</code></pre></div>
+<h4 id="parameters-2">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cookies</code></td>
+<td>Sequence[{name: str, value: str, url: Union[str, None], domain: Union[str, None], path: Union[str, None], expires: Union[float, None], httpOnly: Union[bool, None], secure: Union[bool, None], sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;, None], partitionKey: Union[str, None]}]</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="clear-cookies">clear_cookies</h2>
+<h3 id="同步-2">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">clear_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.clear_cookies</p>
+<p>Removes cookies from this request context. Accepts optional filter. For <code>browser_context.request</code> and
+<code>page.request</code>, this is equivalent to calling <code>browser_context.clear_cookies()</code> on the corresponding browser
+context.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">()</span>
+<span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"session-id"</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">"my-origin.com"</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"/api/v1"</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"session-id"</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s2">"my-origin.com"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-3">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given domain.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given name.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given path.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-2">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">clear_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.clear_cookies</p>
+<p>Removes cookies from this request context. Accepts optional filter. For <code>browser_context.request</code> and
+<code>page.request</code>, this is equivalent to calling <code>browser_context.clear_cookies()</code> on the corresponding browser
+context.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">()</span>
+<span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"session-id"</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">"my-origin.com"</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"/api/v1"</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"session-id"</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s2">"my-origin.com"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-4">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given domain.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given name.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Only removes cookies with the given path.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="cookies">cookies</h2>
+<h3 id="同步-3">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Cookie</span><span class="p">]</span>
+</code></pre></div>
+<p>APIRequestContext.cookies</p>
+<p>If no URLs are specified, this method returns all cookies. If URLs are specified, only cookies that affect those
+URLs are returned. For <code>browser_context.request</code> and <code>page.request</code>, this is equivalent to calling
+<code>browser_context.cookies()</code> on the corresponding browser context.</p>
+<h4 id="parameters-5">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>urls</code></td>
+<td>Union[Sequence[str], str, None]</td>
+<td>Optional list of URLs.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns">Returns</h4>
+<p>List[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;], partitionKey: Union[str, None]}]</p>
+<h3 id="异步-3">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Cookie</span><span class="p">]</span>
+</code></pre></div>
+<p>APIRequestContext.cookies</p>
+<p>If no URLs are specified, this method returns all cookies. If URLs are specified, only cookies that affect those
+URLs are returned. For <code>browser_context.request</code> and <code>page.request</code>, this is equivalent to calling
+<code>browser_context.cookies()</code> on the corresponding browser context.</p>
+<h4 id="parameters-6">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>urls</code></td>
+<td>Union[Sequence[str], str, None]</td>
+<td>Optional list of URLs.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-2">Returns</h4>
+<p>List[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;], partitionKey: Union[str, None]}]</p>
+<h2 id="delete">delete</h2>
+<h3 id="同步-4">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.delete</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE">DELETE</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-7">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-3">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-4">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.delete</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE">DELETE</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-8">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-4">Returns</h4>
+<p>APIResponse</p>
+<h2 id="dispose">dispose</h2>
+<h3 id="同步-5">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">dispose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.dispose</p>
+<p>All responses returned by <code>api_request_context.get()</code> and similar methods are stored in the memory, so that you can
+later call <code>api_response.body()</code>.This method discards all its resources, calling any method on disposed
+<code>APIRequestContext</code> will throw an exception.</p>
+<h4 id="parameters-9">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>Union[str, None]</td>
+<td>The reason to be reported to the operations interrupted by the context disposal.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-5">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">dispose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>APIRequestContext.dispose</p>
+<p>All responses returned by <code>api_request_context.get()</code> and similar methods are stored in the memory, so that you can
+later call <code>api_response.body()</code>.This method discards all its resources, calling any method on disposed
+<code>APIRequestContext</code> will throw an exception.</p>
+<h4 id="parameters-10">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>Union[str, None]</td>
+<td>The reason to be reported to the operations interrupted by the context disposal.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fetch">fetch</h2>
+<h3 id="同步-6">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_request</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Request'</span><span class="p">)],</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.fetch</p>
+<p>Sends HTTP(S) request and returns its response. The method will populate request cookies from the context and
+update context cookies from the response. The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>JSON objects can be passed directly to the request:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">"https://example.com/api/createBook"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>The common way to send file(s) in the body of a request is to upload them as form fields with <code>multipart/form-data</code>
+encoding, by specifiying the <code>multipart</code> parameter:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">api_request_context</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span>
+  <span class="s2">"https://example.com/api/uploadScript"</span><span class="p">,</span>  <span class="n">method</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span>
+  <span class="n">multipart</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"fileField"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"f.js"</span><span class="p">,</span>
+      <span class="s2">"mimeType"</span><span class="p">:</span> <span class="s2">"text/javascript"</span><span class="p">,</span>
+      <span class="s2">"buffer"</span><span class="p">:</span> <span class="sa">b</span><span class="s2">"console.log(2022);"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">})</span>
+</code></pre></div>
+<h4 id="parameters-11">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url_or_request</code></td>
+<td>Union[Request, str]</td>
+<td>Target URL or Request to get all parameters from.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the fetch method (e.g. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">PUT</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">POST</a>). If not specified, GET method is used.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-5">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-6">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_request</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Request'</span><span class="p">)],</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.fetch</p>
+<p>Sends HTTP(S) request and returns its response. The method will populate request cookies from the context and
+update context cookies from the response. The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>JSON objects can be passed directly to the request:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">"https://example.com/api/createBook"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>The common way to send file(s) in the body of a request is to upload them as form fields with <code>multipart/form-data</code>
+encoding, by specifiying the <code>multipart</code> parameter:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">api_request_context</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span>
+  <span class="s2">"https://example.com/api/uploadScript"</span><span class="p">,</span>  <span class="n">method</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span>
+  <span class="n">multipart</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"fileField"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"f.js"</span><span class="p">,</span>
+      <span class="s2">"mimeType"</span><span class="p">:</span> <span class="s2">"text/javascript"</span><span class="p">,</span>
+      <span class="s2">"buffer"</span><span class="p">:</span> <span class="sa">b</span><span class="s2">"console.log(2022);"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">})</span>
+</code></pre></div>
+<h4 id="parameters-12">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url_or_request</code></td>
+<td>Union[Request, str]</td>
+<td>Target URL or Request to get all parameters from.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the fetch method (e.g. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">PUT</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">POST</a>). If not specified, GET method is used.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-6">Returns</h4>
+<p>APIResponse</p>
+<h2 id="get">get</h2>
+<h3 id="同步-7">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.get</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">GET</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>Request parameters can be configured with <code>params</code> option, they will be serialized into the URL search parameters:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">query_params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"isbn"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+  <span class="s2">"page"</span><span class="p">:</span> <span class="s2">"23"</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://example.com/api/getText"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query_params</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-13">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-7">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-7">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.get</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">GET</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>Request parameters can be configured with <code>params</code> option, they will be serialized into the URL search parameters:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">query_params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"isbn"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+  <span class="s2">"page"</span><span class="p">:</span> <span class="s2">"23"</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://example.com/api/getText"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query_params</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-14">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-8">Returns</h4>
+<p>APIResponse</p>
+<h2 id="head">head</h2>
+<h3 id="同步-8">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.head</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD">HEAD</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-15">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-9">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-8">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.head</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD">HEAD</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-16">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-10">Returns</h4>
+<p>APIResponse</p>
+<h2 id="on">on</h2>
+<h3 id="同步-9">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h3 id="异步-9">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h2 id="once">once</h2>
+<h3 id="同步-10">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h3 id="异步-10">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h2 id="patch">patch</h2>
+<h3 id="同步-11">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.patch</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH">PATCH</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-17">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-11">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-11">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.patch</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH">PATCH</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-18">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-12">Returns</h4>
+<p>APIResponse</p>
+<h2 id="post">post</h2>
+<h3 id="同步-12">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.post</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">POST</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>JSON objects can be passed directly to the request:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"https://example.com/api/createBook"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>To send form data to the server use <code>form</code> option. Its value will be encoded into the request body with
+<code>application/x-www-form-urlencoded</code> encoding (see below how to use <code>multipart/form-data</code> form encoding to send
+files):</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">formData</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"https://example.com/api/findBook"</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">formData</span><span class="p">)</span>
+</code></pre></div>
+<p>The common way to send file(s) in the body of a request is to upload them as form fields with <code>multipart/form-data</code>
+encoding. Use <code>FormData</code> to construct request body and pass it to the request as <code>multipart</code> parameter:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+  <span class="s2">"https://example.com/api/uploadScript'"</span><span class="p">,</span>
+  <span class="n">multipart</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"fileField"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"f.js"</span><span class="p">,</span>
+      <span class="s2">"mimeType"</span><span class="p">:</span> <span class="s2">"text/javascript"</span><span class="p">,</span>
+      <span class="s2">"buffer"</span><span class="p">:</span> <span class="sa">b</span><span class="s2">"console.log(2022);"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">})</span>
+</code></pre></div>
+<h4 id="parameters-19">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-13">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-12">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.post</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">POST</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<p><strong>Usage</strong></p>
+<p>JSON objects can be passed directly to the request:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"https://example.com/api/createBook"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>To send form data to the server use <code>form</code> option. Its value will be encoded into the request body with
+<code>application/x-www-form-urlencoded</code> encoding (see below how to use <code>multipart/form-data</code> form encoding to send
+files):</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">formData</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Book Title"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"https://example.com/api/findBook"</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">formData</span><span class="p">)</span>
+</code></pre></div>
+<p>The common way to send file(s) in the body of a request is to upload them as form fields with <code>multipart/form-data</code>
+encoding. Use <code>FormData</code> to construct request body and pass it to the request as <code>multipart</code> parameter:</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">api_request_context</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+  <span class="s2">"https://example.com/api/uploadScript'"</span><span class="p">,</span>
+  <span class="n">multipart</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"fileField"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"f.js"</span><span class="p">,</span>
+      <span class="s2">"mimeType"</span><span class="p">:</span> <span class="s2">"text/javascript"</span><span class="p">,</span>
+      <span class="s2">"buffer"</span><span class="p">:</span> <span class="sa">b</span><span class="s2">"console.log(2022);"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">})</span>
+</code></pre></div>
+<h4 id="parameters-20">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-14">Returns</h4>
+<p>APIResponse</p>
+<h2 id="put">put</h2>
+<h3 id="同步-13">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.put</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">PUT</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-21">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-15">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-13">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fail_on_status_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multipart</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">FilePayload</span><span class="p">]],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'FormData'</span><span class="p">),</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>APIRequestContext.put</p>
+<p>Sends HTTP(S) <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">PUT</a> request and returns its
+response. The method will populate request cookies from the context and update context cookies from the response.
+The method will automatically follow redirects.</p>
+<h4 id="parameters-22">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>str</td>
+<td>Target URL.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>fail_on_status_code</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to throw on response codes other than 2xx and 3xx. By default response object is returned for all status codes.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>application/x-www-form-urlencoded</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>application/x-www-form-urlencoded</code> unless explicitly provided. Use <code>FormData</code> to send multiple values for the same field.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Allows to set HTTP headers. These headers will apply to the fetched request as well as any redirects initiated by it.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>multipart</code></td>
+<td>Union[Dict[str, Union[bool, bytes, float, str, {name: str, mimeType: str, buffer: bytes}]], FormData, None]</td>
+<td>Provides an object that will be serialized as html form using <code>multipart/form-data</code> encoding and sent as this request body. If this parameter is specified <code>content-type</code> header will be set to <code>multipart/form-data</code> unless explicitly provided. File values can be passed as file-like object containing file name, mime-type and its content. Use <code>FormData</code> to send multiple files in the same field.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>Union[Dict[str, Union[bool, float, str]], str, None]</td>
+<td>Query parameters to be sent with the URL.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-16">Returns</h4>
+<p>APIResponse</p>
+<h2 id="remove-listener">remove_listener</h2>
+<h3 id="同步-14">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h3 id="异步-14">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h2 id="storage-state">storage_state</h2>
+<h3 id="同步-15">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">storage_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">indexed_db</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">opfs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span>
+</code></pre></div>
+<p>APIRequestContext.storage_state</p>
+<p>Returns storage state for this request context, contains current cookies and local storage snapshot if it was
+passed to the constructor.</p>
+<h4 id="parameters-23">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>indexed_db</code></td>
+<td>Union[bool, None]</td>
+<td>Set to <code>true</code> to include IndexedDB in the storage state snapshot.</td>
+</tr>
+<tr>
+<td><code>opfs</code></td>
+<td>Union[bool, None]</td>
+<td>Set to <code>true</code> to include the origin private file system in the storage state snapshot.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>The file path to save the storage state to. If <code>path</code> is a relative path, then it is resolved relative to current working directory. If no path is provided, storage state is still returned, but won't be saved to the disk.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-17">Returns</h4>
+<p>{cookies: List[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: List[{origin: str, localStorage: List[{name: str, value: str}]}]}</p>
+<h3 id="异步-15">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">storage_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">indexed_db</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">opfs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span>
+</code></pre></div>
+<p>APIRequestContext.storage_state</p>
+<p>Returns storage state for this request context, contains current cookies and local storage snapshot if it was
+passed to the constructor.</p>
+<h4 id="parameters-24">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>indexed_db</code></td>
+<td>Union[bool, None]</td>
+<td>Set to <code>true</code> to include IndexedDB in the storage state snapshot.</td>
+</tr>
+<tr>
+<td><code>opfs</code></td>
+<td>Union[bool, None]</td>
+<td>Set to <code>true</code> to include the origin private file system in the storage state snapshot.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>The file path to save the storage state to. If <code>path</code> is a relative path, then it is resolved relative to current working directory. If no path is provided, storage state is still returned, but won't be saved to the disk.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-18">Returns</h4>
+<p>{cookies: List[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: List[{origin: str, localStorage: List[{name: str, value: str}]}]}</p>
+<h2 id="tracing">tracing</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">APIRequestContext</span><span class="o">.</span><span class="n">tracing</span><span class="p">:</span> <span class="n">Tracing</span>
+</code></pre></div>
+<p>APIRequestContext.tracing</p>
+<p>Tracing recorder for requests made through this API request context.</p>
+<h4 id="returns-19">Returns</h4>
+<p>Tracing</p>
+<footer class="page-footer"><span>适用 SDK 0.11.3 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#add-cookies">add_cookies</a><a class="level2" href="#clear-cookies">clear_cookies</a><a class="level2" href="#cookies">cookies</a><a class="level2" href="#delete">delete</a><a class="level2" href="#dispose">dispose</a><a class="level2" href="#fetch">fetch</a><a class="level2" href="#get">get</a><a class="level2" href="#head">head</a><a class="level2" href="#on">on</a><a class="level2" href="#once">once</a><a class="level2" href="#patch">patch</a><a class="level2" href="#post">post</a><a class="level2" href="#put">put</a><a class="level2" href="#remove-listener">remove_listener</a><a class="level2" href="#storage-state">storage_state</a><a class="level2" href="#tracing">tracing</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

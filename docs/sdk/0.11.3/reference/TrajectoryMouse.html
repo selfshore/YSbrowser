@@ -1,0 +1,1438 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TrajectoryMouse · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.3</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html" aria-current="page">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.3 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="trajectorymouse">TrajectoryMouse</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../mouse.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrajectoryMouse</span>
+
+<span class="c1"># page 为已有同步 Page。</span>
+<span class="n">mouse</span> <span class="o">=</span> <span class="n">TrajectoryMouse</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">synchronize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">TrajectoryMouse</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">'TrajectoryModel | str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="s1">'error'</span><span class="p">,</span> <span class="n">viewport</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">model_options</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page</code></td>
+<td>Page | None</td>
+<td><code>必填</code></td>
+<td>当前 Context 的原生页面；context.mouse 和鼠标构造必须提供；截图采集省略时选择 Context 页面。</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>TrajectoryModel | str | Path | None</td>
+<td><code>None</code></td>
+<td>模型实例或含 model.json、vector_field.onnx 的目录；None 使用随包模型。</td>
+</tr>
+<tr>
+<td><code>fallback</code></td>
+<td>str</td>
+<td><code>'error'</code></td>
+<td>只接受 error。范围/采样错误会抛异常，不替换为其他算法。</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>轨迹边界 (width,height)，均为正数；鼠标省略时读取 Page.viewport_size，离线生成省略则不裁定视口。</td>
+</tr>
+<tr>
+<td><code>model_options</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>steps、threads、drag_source、move_source、click_source、allow_extrapolation；model 为实例时须在实例构造时配置。</td>
+</tr>
+<tr>
+<td><code>steps</code>（展开）</td>
+<td>int</td>
+<td><code>24</code></td>
+<td>ODE 积分步数，4–128；值增大通常增加耗时，不保证效果提高。</td>
+</tr>
+<tr>
+<td><code>threads</code>（展开）</td>
+<td>int</td>
+<td><code>2</code></td>
+<td>ONNX CPU 线程数，1–16。</td>
+</tr>
+<tr>
+<td><code>drag_source</code>（展开）</td>
+<td>str</td>
+<td><code>'auto'</code></td>
+<td>auto 按范围选择 user_mousedata/bogazici/sapimouse，或显式指定其中一个来源。</td>
+</tr>
+<tr>
+<td><code>move_source</code>（展开）</td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>普通移动条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>click_source</code>（展开）</td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>接近点击和按住时长条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>allow_extrapolation</code>（展开）</td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>允许距离/方向超出已观察范围；True 不代表范围外质量已验证。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="实例状态">实例状态</h2>
+<p><code>page</code> 为绑定页面，<code>model</code> 为模型，<code>viewport</code> 为显式边界，<code>fallback</code> 只能为 error。<code>last_click_hold</code> 为自动预测的点击时长元数据，显式指定 hold_ms 时为 None。只读 position/pressed_buttons 见下文。</p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#trajectorymouse-click">TrajectoryMouse.click</a></li>
+<li><a href="#trajectorymouse-click-element">TrajectoryMouse.click_element</a></li>
+<li><a href="#trajectorymouse-dblclick">TrajectoryMouse.dblclick</a></li>
+<li><a href="#trajectorymouse-down">TrajectoryMouse.down</a></li>
+<li><a href="#trajectorymouse-drag-between">TrajectoryMouse.drag_between</a></li>
+<li><a href="#trajectorymouse-drag-by">TrajectoryMouse.drag_by</a></li>
+<li><a href="#trajectorymouse-drag-element">TrajectoryMouse.drag_element</a></li>
+<li><a href="#trajectorymouse-drag-element-to">TrajectoryMouse.drag_element_to</a></li>
+<li><a href="#trajectorymouse-drag-to">TrajectoryMouse.drag_to</a></li>
+<li><a href="#trajectorymouse-hover">TrajectoryMouse.hover</a></li>
+<li><a href="#trajectorymouse-hover-element">TrajectoryMouse.hover_element</a></li>
+<li><a href="#trajectorymouse-move">TrajectoryMouse.move</a></li>
+<li><a href="#trajectorymouse-move-between">TrajectoryMouse.move_between</a></li>
+<li><a href="#trajectorymouse-move-by">TrajectoryMouse.move_by</a></li>
+<li><a href="#trajectorymouse-move-to">TrajectoryMouse.move_to</a></li>
+<li><a href="#trajectorymouse-move-to-element">TrajectoryMouse.move_to_element</a></li>
+<li><a href="#trajectorymouse-position">TrajectoryMouse.position</a></li>
+<li><a href="#trajectorymouse-pressed-buttons">TrajectoryMouse.pressed_buttons</a></li>
+<li><a href="#trajectorymouse-synchronize">TrajectoryMouse.synchronize</a></li>
+<li><a href="#trajectorymouse-up">TrajectoryMouse.up</a></li>
+<li><a href="#trajectorymouse-wheel">TrajectoryMouse.wheel</a></li>
+</ul>
+<h2 id="trajectorymouse-click">TrajectoryMouse.click</h2>
+<p>按接近点击任务移动，然后按下、等待并释放。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">click</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">hold_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>hold_ms</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>按下至释放时间，毫秒，显式值 0–5000；None 预测左/右键时长。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>坐标点击不进行元素命中检查；中键必须显式 hold_ms。自动时长可从 last_click_hold 读取。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-click-element">TrajectoryMouse.click_element</h2>
+<p>检查元素、生成接近路径并完成点击。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">click_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">hold_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-2">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>属于当前 Page 的唯一 Locator 或选择器字符串。iframe 使用 frame_locator 得到的 Locator。</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>相对元素边界框左上角的偏移，必须在框内；None 为中心。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>hold_ms</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>按下至释放时间，毫秒，显式值 0–5000；None 预测左/右键时长。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>见说明</td>
+<td><code>30000</code></td>
+<td>元素检查/边界框步骤的毫秒超时，非负有限数；0 为不设超时，不是整个交互总预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">click_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"保存"</span><span class="p">))</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">click_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"保存"</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>需已知起点。trial hover 后页面仍可能布局变化；它不是原生 Locator.click 的完整重试流程。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-dblclick">TrajectoryMouse.dblclick</h2>
+<p>接近目标后连续点击两次，设置正确的 click_count。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">dblclick</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">hold_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval_ms</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-3">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>hold_ms</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>按下至释放时间，毫秒，显式值 0–5000；None 预测左/右键时长。</td>
+</tr>
+<tr>
+<td><code>interval_ms</code></td>
+<td>float</td>
+<td><code>80</code></td>
+<td>双击两次点击之间的等待，0–5000 毫秒；固定调用参数，不由模型预测。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-3">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-3">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">dblclick</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">interval_ms</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">dblclick</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">interval_ms</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-3">注意事项</h3>
+<p>两次按住使用本次采样的同一 hold_ms；双击间隔没有学习模型。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-down">TrajectoryMouse.down</h2>
+<p>按住一个鼠标按钮。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">down</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-4">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-4">返回值</h3>
+<p>返回 None，不返回轨迹执行对象。</p>
+<h3 id="示例-4">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span><span class="o">.</span><span class="n">down</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">down</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-4">注意事项</h3>
+<p>调用前需已知位置。成功后由调用者负责 finally 中 up；不要重复按下同一按钮。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-drag-between">TrajectoryMouse.drag_between</h2>
+<p>即时定位 A，按下后由模型拖至 B，再释放。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">drag_between</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">'model'</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-5">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x1</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>A 点横坐标；先即时定位到 A，再执行轨迹。</td>
+</tr>
+<tr>
+<td><code>y1</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>A 点纵坐标。</td>
+</tr>
+<tr>
+<td><code>x2</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>B 点横坐标。</td>
+</tr>
+<tr>
+<td><code>y2</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>B 点纵坐标。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>trajectory</code></td>
+<td>str</td>
+<td><code>'model'</code></td>
+<td>只接受 model。旧 minimum_jerk 选项已移除。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>按下后、开始移动前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>移动结束后、释放前的等待，0–5000 毫秒。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-5">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-5">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">350</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">350</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-5">注意事项</h3>
+<p>无需预先 synchronize；起终点必须不同，定位 A 的动作不是模型轨迹。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-drag-by">TrajectoryMouse.drag_by</h2>
+<p>从当前位置按下，按相对距离拖动，再释放。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">drag_by</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">'model'</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-6">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dx</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>相对起点的水平位移，正数向右、负数向左。拖动时与 dy 不能同时为 0。</td>
+</tr>
+<tr>
+<td><code>dy</code></td>
+<td>float</td>
+<td><code>0</code></td>
+<td>相对起点的垂直位移，正数向下、负数向上。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>trajectory</code></td>
+<td>str</td>
+<td><code>'model'</code></td>
+<td>只接受 model。旧 minimum_jerk 选项已移除。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>按下后、开始移动前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>移动结束后、释放前的等待，0–5000 毫秒。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-6">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-6">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_by</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_by</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-6">注意事项</h3>
+<p>必须已知位置且位移非零；不要预先手动 down。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-drag-element">TrajectoryMouse.drag_element</h2>
+<p>定位元素内起点，按下后拖动指定距离并释放。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">drag_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">start_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">'model'</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-7">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>属于当前 Page 的唯一 Locator 或选择器字符串。iframe 使用 frame_locator 得到的 Locator。</td>
+</tr>
+<tr>
+<td><code>dx</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>相对起点的水平位移，正数向右、负数向左。拖动时与 dy 不能同时为 0。</td>
+</tr>
+<tr>
+<td><code>dy</code></td>
+<td>float</td>
+<td><code>0</code></td>
+<td>相对起点的垂直位移，正数向下、负数向上。</td>
+</tr>
+<tr>
+<td><code>start_offset</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>拖动起点相对源元素边界框左上角的偏移；None 为中心，必须在框内。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>trajectory</code></td>
+<td>str</td>
+<td><code>'model'</code></td>
+<td>只接受 model。旧 minimum_jerk 选项已移除。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>按下后、开始移动前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>移动结束后、释放前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>见说明</td>
+<td><code>30000</code></td>
+<td>元素检查/边界框步骤的毫秒超时，非负有限数；0 为不设超时，不是整个交互总预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-7">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-7">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"slider"</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_offset</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"slider"</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_offset</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-7">注意事项</h3>
+<p>API 保留。dx/dy 是距离。无需先同步或手动 down；不会在拖动途中自动滚动页面。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-drag-element-to">TrajectoryMouse.drag_element_to</h2>
+<p>从源元素拖到目标元素内的指定点。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">drag_element_to</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">start_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-8">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>属于当前 Page 的唯一 Locator 或选择器字符串。iframe 使用 frame_locator 得到的 Locator。</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>拖动目标元素，须属于同一 Page；可以是另一个 frame 内可定位的元素。</td>
+</tr>
+<tr>
+<td><code>start_offset</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>拖动起点相对源元素边界框左上角的偏移；None 为中心，必须在框内。</td>
+</tr>
+<tr>
+<td><code>target_offset</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>终点相对目标元素边界框左上角的偏移；None 为中心，必须在框内。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>按下后、开始移动前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>移动结束后、释放前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>见说明</td>
+<td><code>30000</code></td>
+<td>元素检查/边界框步骤的毫秒超时，非负有限数；0 为不设超时，不是整个交互总预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-8">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-8">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element_to</span><span class="p">(</span><span class="s2">"#item"</span><span class="p">,</span> <span class="s2">"#drop-zone"</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element_to</span><span class="p">(</span><span class="s2">"#item"</span><span class="p">,</span> <span class="s2">"#drop-zone"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-8">注意事项</h3>
+<p>滚动后重新读取两端坐标，须同时可见；鼠标事件不保证实现网站的 HTML5 DataTransfer 拖放协议。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-drag-to">TrajectoryMouse.drag_to</h2>
+<p>从当前位置拖动到绝对坐标。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">drag_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s1">'model'</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-9">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>trajectory</code></td>
+<td>str</td>
+<td><code>'model'</code></td>
+<td>只接受 model。旧 minimum_jerk 选项已移除。</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>按下后、开始移动前的等待，0–5000 毫秒。</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td><code>40</code></td>
+<td>移动结束后、释放前的等待，0–5000 毫秒。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-9">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-9">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_to</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_to</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-9">注意事项</h3>
+<p>x/y 为终点，不是距离；不要预先手动 down。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-hover">TrajectoryMouse.hover</h2>
+<p>move 的同义接口，用于坐标悬停。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">hover</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-10">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>kwargs</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>转发参数；本页下方展开支持的字段，不接受任意未知字段。</td>
+</tr>
+<tr>
+<td><code>seed</code>（展开）</td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code>（展开）</td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code>（展开）</td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-10">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-10">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">hover</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">hover</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-10">注意事项</h3>
+<p>不会等待某个 CSS 悬停效果完成；需要时另加页面条件等待。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-hover-element">TrajectoryMouse.hover_element</h2>
+<p>move_to_element 的同义接口。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">hover_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-11">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>属于当前 Page 的唯一 Locator 或选择器字符串。iframe 使用 frame_locator 得到的 Locator。</td>
+</tr>
+<tr>
+<td><code>kwargs</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>转发参数；本页下方展开支持的字段，不接受任意未知字段。</td>
+</tr>
+<tr>
+<td><code>offset</code>（展开）</td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>相对元素边界框左上角的偏移，必须在框内；None 为中心。</td>
+</tr>
+<tr>
+<td><code>seed</code>（展开）</td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code>（展开）</td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code>（展开）</td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code>（展开）</td>
+<td>float</td>
+<td><code>30000</code></td>
+<td>元素检查/边界框步骤的毫秒超时，非负有限数；0 为不设超时，不是整个交互总预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-11">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-11">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">hover_element</span><span class="p">(</span><span class="s2">"#target"</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">hover_element</span><span class="p">(</span><span class="s2">"#target"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-11">注意事项</h3>
+<p>kwargs 与 move_to_element 一致；不能把其他 Page 的 Locator 传入。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-move">TrajectoryMouse.move</h2>
+<p>从已知位置移动到绝对视口坐标。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-12">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-12">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-12">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-12">注意事项</h3>
+<p>首次使用需同步位置；move 的参数不是相对距离。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-move-between">TrajectoryMouse.move_between</h2>
+<p>即时定位 A，然后由模型完成 A→B 移动。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">move_between</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-13">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x1</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>A 点横坐标；先即时定位到 A，再执行轨迹。</td>
+</tr>
+<tr>
+<td><code>y1</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>A 点纵坐标。</td>
+</tr>
+<tr>
+<td><code>x2</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>B 点横坐标。</td>
+</tr>
+<tr>
+<td><code>y2</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>B 点纵坐标。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-13">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-13">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-13">注意事项</h3>
+<p>先验证计划才定位 A；当前已有按住的按钮时拒绝执行。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-move-by">TrajectoryMouse.move_by</h2>
+<p>从已知位置按相对距离移动。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">move_by</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-14">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dx</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>相对起点的水平位移，正数向右、负数向左。拖动时与 dy 不能同时为 0。</td>
+</tr>
+<tr>
+<td><code>dy</code></td>
+<td>float</td>
+<td><code>0</code></td>
+<td>相对起点的垂直位移，正数向下、负数向上。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-14">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-14">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_by</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_by</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-14">注意事项</h3>
+<p>先建立位置；手动按住按钮时采用 drag 任务，结束不会自动释放。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-move-to">TrajectoryMouse.move_to</h2>
+<p>move 的同义接口，移到绝对坐标。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">move_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-15">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+<tr>
+<td><code>kwargs</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>转发参数；本页下方展开支持的字段，不接受任意未知字段。</td>
+</tr>
+<tr>
+<td><code>seed</code>（展开）</td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code>（展开）</td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code>（展开）</td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-15">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-15">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-15">注意事项</h3>
+<p>kwargs 与 move 完全一致。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-move-to-element">TrajectoryMouse.move_to_element</h2>
+<p>检查并滚动元素后，沿模型轨迹移到元素内的目标点。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">move_to_element</span><span class="p">(</span><span class="n">locator</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-16">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator | str</td>
+<td><code>必填</code></td>
+<td>属于当前 Page 的唯一 Locator 或选择器字符串。iframe 使用 frame_locator 得到的 Locator。</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>相对元素边界框左上角的偏移，必须在框内；None 为中心。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>目标宽、高，均为正数；仅验证并保留兼容，本模型未学习目标尺寸条件。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>见说明</td>
+<td><code>30000</code></td>
+<td>元素检查/边界框步骤的毫秒超时，非负有限数；0 为不设超时，不是整个交互总预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-16">返回值</h3>
+<p>返回 <a href="MotionExecution.html">MotionExecution</a>，嵌套 <a href="MotionPlan.html">MotionPlan</a>；<a href="../result-structures.html">逐字段用法</a>。不是业务成功布尔值。</p>
+<h3 id="示例-16">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_to_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"保存"</span><span class="p">),</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_to_element</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"保存"</span><span class="p">),</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="注意事项-16">注意事项</h3>
+<p>起点必须已知。offset 相对边界框左上角，不是元素中心。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-position">TrajectoryMouse.position</h2>
+<p>最后确认的 (x,y) CSS 坐标；未知位置为 None。只读。</p>
+<p><strong>只读属性；异步程序也直接读取，不加 await。</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nb">print</span><span class="p">(</span><span class="n">mouse</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="trajectorymouse-pressed-buttons">TrajectoryMouse.pressed_buttons</h2>
+<p>当前 Page 由此 API 记录的按住按钮集合 frozenset[str]；多个适配器共享状态。只读。</p>
+<p><strong>只读属性；异步程序也直接读取，不加 await。</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nb">print</span><span class="p">(</span><span class="n">mouse</span><span class="o">.</span><span class="n">pressed_buttons</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="trajectorymouse-synchronize">TrajectoryMouse.synchronize</h2>
+<p>即时移动到指定位置并记录状态。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">synchronize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-17">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点横坐标，主 Frame 视口 CSS 像素；synchronize 中为即时定位坐标。</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>终点纵坐标，主 Frame 视口 CSS 像素，向下为正。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-17">返回值</h3>
+<p>返回 None，不返回轨迹执行对象。</p>
+<h3 id="示例-17">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span><span class="o">.</span><span class="n">synchronize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">synchronize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-17">注意事项</h3>
+<p>不会生成模型轨迹；外部原生鼠标动作后重新同步。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-up">TrajectoryMouse.up</h2>
+<p>释放指定按钮。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">up</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-18">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>left/right/middle；预测按住时长仅支持 left/right，中键点击须显式传 hold_ms。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-18">返回值</h3>
+<p>返回 None，不返回轨迹执行对象。</p>
+<h3 id="示例-18">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span><span class="o">.</span><span class="n">up</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">up</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-18">注意事项</h3>
+<p>释放失败会抛原生异常；页面关闭时清理已记录的按键状态。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymouse-wheel">TrajectoryMouse.wheel</h2>
+<p>派发原生滚轮事件。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">wheel</span><span class="p">(</span><span class="n">delta_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta_y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-19">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>delta_x</code></td>
+<td>float</td>
+<td><code>0</code></td>
+<td>原生滚轮水平滚动像素；有限数。</td>
+</tr>
+<tr>
+<td><code>delta_y</code></td>
+<td>float</td>
+<td><code>0</code></td>
+<td>原生滚轮垂直滚动像素；正数通常向下。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-19">返回值</h3>
+<p>返回 None，不返回轨迹执行对象。</p>
+<h3 id="示例-19">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span><span class="o">.</span><span class="n">wheel</span><span class="p">(</span><span class="n">delta_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta_y</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">wheel</span><span class="p">(</span><span class="n">delta_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta_y</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-19">注意事项</h3>
+<p>没有滚轮轨迹模型；返回不表示滚动动画已结束。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.3 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#实例状态">实例状态</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#trajectorymouse-click">TrajectoryMouse.click</a><a class="level2" href="#trajectorymouse-click-element">TrajectoryMouse.click_element</a><a class="level2" href="#trajectorymouse-dblclick">TrajectoryMouse.dblclick</a><a class="level2" href="#trajectorymouse-down">TrajectoryMouse.down</a><a class="level2" href="#trajectorymouse-drag-between">TrajectoryMouse.drag_between</a><a class="level2" href="#trajectorymouse-drag-by">TrajectoryMouse.drag_by</a><a class="level2" href="#trajectorymouse-drag-element">TrajectoryMouse.drag_element</a><a class="level2" href="#trajectorymouse-drag-element-to">TrajectoryMouse.drag_element_to</a><a class="level2" href="#trajectorymouse-drag-to">TrajectoryMouse.drag_to</a><a class="level2" href="#trajectorymouse-hover">TrajectoryMouse.hover</a><a class="level2" href="#trajectorymouse-hover-element">TrajectoryMouse.hover_element</a><a class="level2" href="#trajectorymouse-move">TrajectoryMouse.move</a><a class="level2" href="#trajectorymouse-move-between">TrajectoryMouse.move_between</a><a class="level2" href="#trajectorymouse-move-by">TrajectoryMouse.move_by</a><a class="level2" href="#trajectorymouse-move-to">TrajectoryMouse.move_to</a><a class="level2" href="#trajectorymouse-move-to-element">TrajectoryMouse.move_to_element</a><a class="level2" href="#trajectorymouse-position">TrajectoryMouse.position</a><a class="level2" href="#trajectorymouse-pressed-buttons">TrajectoryMouse.pressed_buttons</a><a class="level2" href="#trajectorymouse-synchronize">TrajectoryMouse.synchronize</a><a class="level2" href="#trajectorymouse-up">TrajectoryMouse.up</a><a class="level2" href="#trajectorymouse-wheel">TrajectoryMouse.wheel</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

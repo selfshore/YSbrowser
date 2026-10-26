@@ -1,0 +1,188 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>页面与定位器 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.3</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html" aria-current="page">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.3 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="页面与定位器">页面与定位器</h1>
+<p><a href="README.html">返回目录</a></p>
+<p><code>context.new_page()</code> 返回当前入口对应的 Patchright <code>Page</code>，<code>context.raw</code> 返回原生 <code>BrowserContext</code>，<code>browser.raw</code> 返回原生 <code>Browser</code>。以下片段使用已创建的同步 <code>page</code> / <code>context</code>。完整可运行启动代码见<a href="installation.html">快速开始</a>。所有原生对象的详细参数与返回类型见<a href="native-reference/README.html">原生 API 参考</a>。</p>
+<h2 id="导航与页面内容">导航与页面内容</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">response</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">"https://app.example.com"</span><span class="p">,</span> <span class="n">wait_until</span><span class="o">=</span><span class="s2">"domcontentloaded"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
+<span class="n">page</span><span class="o">.</span><span class="n">screenshot</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"page.png"</span><span class="p">,</span> <span class="n">full_page</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>示例 URL 需替换。<code>goto()</code> 返回 <code>Response | None</code>；<code>response.status</code> 是 HTTP 状态码。HTTP 404/500 通常返回响应而非触发导航异常。<code>wait_until</code> 可为 <code>commit</code>、<code>domcontentloaded</code>、<code>load</code>、<code>networkidle</code>；业务准备状态通常通过元素或明确响应判断。<code>timeout</code> 使用毫秒，0 禁用超时。</p>
+<p><code>page.set_content(html)</code> 用字符串设置页面；<code>content()</code> 返回 HTML 字符串；<code>title()</code> 返回标题；<code>screenshot()</code> 返回图片字节，传 <code>path=</code> 时同时保存文件。<code>reload()</code>、<code>go_back()</code>、<code>go_forward()</code> 用于刷新与历史导航。</p>
+<h2 id="定位-读取与输入">定位、读取与输入</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">button</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"提交"</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"用户名"</span><span class="p">)</span>
+<span class="n">username</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"alice"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_placeholder</span><span class="p">(</span><span class="s2">"请输入密码"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"example-password"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"记住我"</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"#result"</span><span class="p">)</span><span class="o">.</span><span class="n">inner_text</span><span class="p">()</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">username</span><span class="o">.</span><span class="n">input_value</span><span class="p">()</span>
+<span class="n">href</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"a.details"</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">".item"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>返回 / 用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator(selector)</code></td>
+<td>Locator，支持 CSS 等原生选择器</td>
+</tr>
+<tr>
+<td><code>get_by_role(role, name=..., exact=...)</code></td>
+<td>按可访问角色和名称定位</td>
+</tr>
+<tr>
+<td><code>get_by_label(text)</code> / <code>get_by_placeholder(text)</code></td>
+<td>定位表单控件</td>
+</tr>
+<tr>
+<td><code>get_by_text(text)</code> / <code>get_by_test_id(test_id)</code></td>
+<td>按文本或测试属性定位</td>
+</tr>
+<tr>
+<td><code>locator.filter(has_text=...)</code></td>
+<td>缩小元素集合</td>
+</tr>
+<tr>
+<td><code>locator.nth(index)</code> / <code>.first</code> / <code>.last</code></td>
+<td>选择集合中的元素；nth 从 0 开始</td>
+</tr>
+<tr>
+<td><code>inner_text()</code> / <code>text_content()</code></td>
+<td>返回可见文本 <code>str</code> / DOM 文本 <code>str | None</code></td>
+</tr>
+<tr>
+<td><code>input_value()</code></td>
+<td>输入框值 <code>str</code></td>
+</tr>
+<tr>
+<td><code>get_attribute(name)</code></td>
+<td>属性值 <code>str | None</code></td>
+</tr>
+<tr>
+<td><code>count()</code></td>
+<td>当前匹配元素数量 <code>int</code></td>
+</tr>
+<tr>
+<td><code>bounding_box()</code></td>
+<td><code>{&quot;x&quot;, &quot;y&quot;, &quot;width&quot;, &quot;height&quot;}</code> 或 <code>None</code>，坐标相对主页面视口</td>
+</tr>
+<tr>
+<td><code>fill(value)</code></td>
+<td>替换输入框文字，返回 <code>None</code></td>
+</tr>
+<tr>
+<td><code>press(key)</code></td>
+<td>发送键盘组合，例如 <code>&quot;Control+A&quot;</code>、<code>&quot;Enter&quot;</code></td>
+</tr>
+<tr>
+<td><code>press_sequentially(text, delay=...)</code></td>
+<td>逐字符输入，delay 为字符间毫秒</td>
+</tr>
+<tr>
+<td><code>check()</code> / <code>uncheck()</code> / <code>set_checked(bool)</code></td>
+<td>操作复选框</td>
+</tr>
+<tr>
+<td><code>select_option(value=...)</code></td>
+<td>选择 select，返回选中项值的字符串列表</td>
+</tr>
+</tbody>
+</table></div>
+<p>Locator 是延迟定位对象，构造时不等于元素已存在。要求单个元素的操作匹配到多个元素时会抛严格模式错误；优先改进定位条件。</p>
+<h2 id="等待与断言">等待与断言</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">patchright.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">expect</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"#result"</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">"visible"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"#result"</span><span class="p">))</span><span class="o">.</span><span class="n">to_have_text</span><span class="p">(</span><span class="s2">"完成"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"提交"</span><span class="p">))</span><span class="o">.</span><span class="n">to_be_enabled</span><span class="p">()</span>
+</code></pre></div>
+<p><code>wait_for(state=...)</code> 的状态为 <code>attached</code>、<code>detached</code>、<code>visible</code>、<code>hidden</code>。<code>expect(...)</code> 断言按条件重试；异步入口从 <code>patchright.async_api</code> 导入 expect，并使用 <code>await expect(locator).to_have_text(...)</code>。</p>
+<p><code>is_visible()</code>、<code>count()</code> 等即时查询不能替代等待断言。<code>page.wait_for_timeout(ms)</code> 是固定等待，返回 <code>None</code>；通常优先等待可观察的页面状态。</p>
+<h2 id="iframe-嵌套-iframe-和-shadow-dom">iframe、嵌套 iframe 和 Shadow DOM</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">frame</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">frame_locator</span><span class="p">(</span><span class="s2">"iframe#login"</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"用户名"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"alice"</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"登录"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="n">nested</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">frame_locator</span><span class="p">(</span><span class="s2">"iframe#outer"</span><span class="p">)</span><span class="o">.</span><span class="n">frame_locator</span><span class="p">(</span><span class="s2">"iframe#inner"</span><span class="p">)</span>
+<span class="n">nested</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"#submit"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"user-panel"</span><span class="p">)</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"保存"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<p>Page 的定位器不自动跨越 iframe；使用 <code>frame_locator</code> 或 <code>page.frame(...)</code>。Shadow DOM 使用配套浏览器/Patchright 支持的 CSS/role 定位路径；不要依赖 XPath 跨越 shadow root，也不要把页面 JavaScript 读取 closed <code>shadowRoot</code> 当作通用方法。轨迹拖动直接接受这些 Locator，详见<a href="mouse.html">鼠标</a>。</p>
+<h2 id="新页面-弹窗与对话框">新页面、弹窗与对话框</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">with</span> <span class="n">page</span><span class="o">.</span><span class="n">expect_popup</span><span class="p">()</span> <span class="k">as</span> <span class="n">popup_info</span><span class="p">:</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"link"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"打开详情"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">popup</span> <span class="o">=</span> <span class="n">popup_info</span><span class="o">.</span><span class="n">value</span>
+<span class="n">popup</span><span class="o">.</span><span class="n">wait_for_load_state</span><span class="p">(</span><span class="s2">"domcontentloaded"</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"dialog"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">dialog</span><span class="p">:</span> <span class="n">dialog</span><span class="o">.</span><span class="n">accept</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">pages</span><span class="p">])</span>
+<span class="n">popup</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p><code>expect_popup()</code> 返回事件上下文管理器，<code>.value</code> 得到新 Page；必须先开始等待再触发动作。无原页面可关联时使用 <code>context.raw.expect_page()</code>。注册 dialog 监听后，需要调用 <code>accept(prompt_text=...)</code> 或 <code>dismiss()</code> 处理，否则触发该对话框的操作可能等待不结束。</p>
+<p>异步模式使用 <code>async with page.expect_popup() as info:</code>，随后 <code>popup = await info.value</code>；页面属性如 <code>.url</code>、<code>.context</code>、<code>.mouse</code> 不加 <code>await</code>。</p>
+<h2 id="下载与上传">下载与上传</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">with</span> <span class="n">page</span><span class="o">.</span><span class="n">expect_download</span><span class="p">()</span> <span class="k">as</span> <span class="n">download_info</span><span class="p">:</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"link"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"下载"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">download</span> <span class="o">=</span> <span class="n">download_info</span><span class="o">.</span><span class="n">value</span>
+<span class="n">download</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="s2">"downloads/"</span> <span class="o">+</span> <span class="n">download</span><span class="o">.</span><span class="n">suggested_filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">download</span><span class="o">.</span><span class="n">failure</span><span class="p">())</span>  <span class="c1"># 成功通常为 None</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s1">'input[type="file"]'</span><span class="p">)</span><span class="o">.</span><span class="n">set_input_files</span><span class="p">(</span><span class="sa">r</span><span class="s2">"./files/sample.pdf"</span><span class="p">)</span>
+</code></pre></div>
+<p>创建 Context 时可设置 <code>accept_downloads=True</code>。下载临时文件随 Context 生命周期清理，需要长期保存时在关闭前 <code>save_as(path)</code>。上传可传一个路径、路径列表或原生文件内容对象；清空选择用空列表。</p>
+<p>自定义上传按钮可用 <code>page.expect_file_chooser()</code>，触发按钮后对 <code>info.value</code> 调用 <code>set_files(...)</code>。异步版本同样使用 <code>async with</code> 和 <code>await info.value</code>。</p>
+<h2 id="网络请求与路由">网络请求与路由</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/api/profile"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span>
+    <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="s1">'{"name":"Alice"}'</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="k">with</span> <span class="n">page</span><span class="o">.</span><span class="n">expect_response</span><span class="p">(</span><span class="s2">"**/api/items"</span><span class="p">)</span> <span class="k">as</span> <span class="n">response_info</span><span class="p">:</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"刷新"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">response_info</span><span class="o">.</span><span class="n">value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"requestfailed"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">request</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">failure</span><span class="p">))</span>
+</code></pre></div>
+<p><code>route.fulfill()</code> 返回模拟响应，<code>route.continue_()</code> 放行或覆盖请求参数，<code>route.abort()</code> 中止请求。可以使用 <code>context.raw.route(...)</code> 覆盖多个页面。Service Worker 接管的请求可能不经过普通路由拦截；按用途设置 <code>ContextOptions(service_workers=&quot;block&quot;)</code>。</p>
+<p><code>requestfailed</code> 关注网络失败；HTTP 4xx/5xx 应通过 <code>response.status</code> 判断。<code>page.request</code>、<code>context.raw.request</code> 属于原生 APIRequestContext，不能假设跟随 SDK 自定义 CDP 代理及运行时切换；需要确认页面出口时使用 <code>context.check_proxy()</code>。</p>
+<h2 id="javascript-cookie-与权限">JavaScript、Cookie 与权限</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">value</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"([a, b]) =&gt; a + b"</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># 5</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"h1"</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"element =&gt; element.textContent"</span><span class="p">)</span>
+
+<span class="n">cookies</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">cookies</span><span class="p">()</span>
+<span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">add_cookies</span><span class="p">([{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"theme"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"light"</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://app.example.com"</span><span class="p">,</span>
+<span class="p">}])</span>
+<span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">clear_cookies</span><span class="p">()</span>
+<span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">grant_permissions</span><span class="p">([</span><span class="s2">"geolocation"</span><span class="p">],</span> <span class="n">origin</span><span class="o">=</span><span class="s2">"https://app.example.com"</span><span class="p">)</span>
+</code></pre></div>
+<p><code>evaluate(expression, arg=None)</code> 接受一个可序列化参数，多个值可封装成列表/字典。返回可序列化的 JS 值；需要对象句柄使用 <code>evaluate_handle()</code> 并在结束后 <code>dispose()</code>。Cookie 与权限的完整参数见原生 BrowserContext 参考。</p>
+<h2 id="原生鼠标-键盘及底层协议">原生鼠标、键盘及底层协议</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s2">"Control+A"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">insert_text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">mouse</span><span class="o">.</span><span class="n">wheel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">new_cdp_session</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">"Page.getLayoutMetrics"</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+</code></pre></div>
+<p>原生 <code>page.mouse.move/click/down/up/wheel</code> 仍可用，路径不自动经过 SDK 模型。原生操作后再使用坐标轨迹时重新 <code>synchronize()</code>。CDP 的可用方法由浏览器版本决定；直接修改 SDK 管理的配置会影响配置导出的可靠性。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.3 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导航与页面内容">导航与页面内容</a><a class="level2" href="#定位-读取与输入">定位、读取与输入</a><a class="level2" href="#等待与断言">等待与断言</a><a class="level2" href="#iframe-嵌套-iframe-和-shadow-dom">iframe、嵌套 iframe 和 Shadow DOM</a><a class="level2" href="#新页面-弹窗与对话框">新页面、弹窗与对话框</a><a class="level2" href="#下载与上传">下载与上传</a><a class="level2" href="#网络请求与路由">网络请求与路由</a><a class="level2" href="#javascript-cookie-与权限">JavaScript、Cookie 与权限</a><a class="level2" href="#原生鼠标-键盘及底层协议">原生鼠标、键盘及底层协议</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

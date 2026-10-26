@@ -1,0 +1,646 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生 Route · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.3</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html" aria-current="page">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.3 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="原生-route">原生 Route</h1>
+<p><a href="README.html">原生 API 目录</a> · <a href="../README.html">手册目录</a></p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#abort">abort</a></li>
+<li><a href="#continue">continue_</a></li>
+<li><a href="#fallback">fallback</a></li>
+<li><a href="#fetch">fetch</a></li>
+<li><a href="#fulfill">fulfill</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#remove-listener">remove_listener</a></li>
+<li><a href="#request">request</a></li>
+</ul>
+<h2 id="abort">abort</h2>
+<h3 id="同步">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.abort</p>
+<p>Aborts the route's request.</p>
+<h4 id="parameters">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error_code</code></td>
+<td>Union[str, None]</td>
+<td>Optional error code. Defaults to <code>failed</code>, could be one of the following: - <code>'aborted'</code> - An operation was aborted (due to user action) - <code>'accessdenied'</code> - Permission to access a resource, other than the network, was denied - <code>'addressunreachable'</code> - The IP address is unreachable. This usually means that there is no route to the specified host or network. - <code>'blockedbyclient'</code> - The client chose to block the request. - <code>'blockedbyresponse'</code> - The request failed because the response was delivered along with requirements which are not met ('X-Frame-Options' and 'Content-Security-Policy' ancestor checks, for instance). - <code>'connectionaborted'</code> - A connection timed out as a result of not receiving an ACK for data sent. - <code>'connectionclosed'</code> - A connection was closed (corresponding to a TCP FIN). - <code>'connectionfailed'</code> - A connection attempt failed. - <code>'connectionrefused'</code> - A connection attempt was refused. - <code>'connectionreset'</code> - A connection was reset (corresponding to a TCP RST). - <code>'internetdisconnected'</code> - The Internet connection has been lost. - <code>'namenotresolved'</code> - The host name could not be resolved. - <code>'timedout'</code> - An operation timed out. - <code>'failed'</code> - A generic failure occurred.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.abort</p>
+<p>Aborts the route's request.</p>
+<h4 id="parameters-2">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error_code</code></td>
+<td>Union[str, None]</td>
+<td>Optional error code. Defaults to <code>failed</code>, could be one of the following: - <code>'aborted'</code> - An operation was aborted (due to user action) - <code>'accessdenied'</code> - Permission to access a resource, other than the network, was denied - <code>'addressunreachable'</code> - The IP address is unreachable. This usually means that there is no route to the specified host or network. - <code>'blockedbyclient'</code> - The client chose to block the request. - <code>'blockedbyresponse'</code> - The request failed because the response was delivered along with requirements which are not met ('X-Frame-Options' and 'Content-Security-Policy' ancestor checks, for instance). - <code>'connectionaborted'</code> - A connection timed out as a result of not receiving an ACK for data sent. - <code>'connectionclosed'</code> - A connection was closed (corresponding to a TCP FIN). - <code>'connectionfailed'</code> - A connection attempt failed. - <code>'connectionrefused'</code> - A connection attempt was refused. - <code>'connectionreset'</code> - A connection was reset (corresponding to a TCP RST). - <code>'internetdisconnected'</code> - The Internet connection has been lost. - <code>'namenotresolved'</code> - The host name could not be resolved. - <code>'timedout'</code> - An operation timed out. - <code>'failed'</code> - A generic failure occurred.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="continue">continue_</h2>
+<h3 id="同步-2">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">continue_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">patchrightInitScript</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.continue_</p>
+<p>Sends route's request to the network with optional overrides.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="c1"># override headers</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+        <span class="s2">"foo"</span><span class="p">:</span> <span class="s2">"foo-value"</span><span class="p">,</span> <span class="c1"># set "foo" header</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="kc">None</span> <span class="c1"># remove "bar" header</span>
+    <span class="p">}</span>
+    <span class="n">route</span><span class="o">.</span><span class="n">continue_</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>The <code>headers</code> option applies to both the routed request and any redirects it initiates. However, <code>url</code>, <code>method</code>,
+and <code>post_data</code> only apply to the original request and are not carried over to redirected requests.</p>
+<p><code>route.continue_()</code> will immediately send the request to the network, other matching handlers won't be invoked. Use
+<code>route.fallback()</code> If you want next matching handler in the chain to be invoked.</p>
+<p><strong>NOTE</strong> Some request headers are <strong>forbidden</strong> and cannot be overridden (for example, <code>Cookie</code>, <code>Host</code>,
+<code>Content-Length</code> and others, see
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_request_header">this MDN page</a> for full list). If an
+override is provided for a forbidden header, it will be ignored and the original request header will be used.</p>
+<p>To set custom cookies, use <code>browser_context.add_cookies()</code>.</p>
+<h4 id="parameters-3">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>If set changes the post data of request.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-2">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">continue_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">patchrightInitScript</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.continue_</p>
+<p>Sends route's request to the network with optional overrides.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="c1"># override headers</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+        <span class="s2">"foo"</span><span class="p">:</span> <span class="s2">"foo-value"</span><span class="p">,</span> <span class="c1"># set "foo" header</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="kc">None</span> <span class="c1"># remove "bar" header</span>
+    <span class="p">}</span>
+    <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">continue_</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>The <code>headers</code> option applies to both the routed request and any redirects it initiates. However, <code>url</code>, <code>method</code>,
+and <code>post_data</code> only apply to the original request and are not carried over to redirected requests.</p>
+<p><code>route.continue_()</code> will immediately send the request to the network, other matching handlers won't be invoked. Use
+<code>route.fallback()</code> If you want next matching handler in the chain to be invoked.</p>
+<p><strong>NOTE</strong> Some request headers are <strong>forbidden</strong> and cannot be overridden (for example, <code>Cookie</code>, <code>Host</code>,
+<code>Content-Length</code> and others, see
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_request_header">this MDN page</a> for full list). If an
+override is provided for a forbidden header, it will be ignored and the original request header will be used.</p>
+<p>To set custom cookies, use <code>browser_context.add_cookies()</code>.</p>
+<h4 id="parameters-4">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>If set changes the post data of request.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fallback">fallback</h2>
+<h3 id="同步-3">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">patchrightInitScript</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.fallback</p>
+<p>Continues route's request with optional overrides. The method is similar to <code>route.continue_()</code> with the difference
+that other matching handlers will be invoked before sending the request.</p>
+<p><strong>Usage</strong></p>
+<p>When several routes match the given pattern, they run in the order opposite to their registration. That way the
+last registered route can always override all the previous ones. In the example below, request will be handled by
+the bottom-most handler first, then it'll fall back to the previous one and in the end will be aborted by the first
+registered route.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">abort</span><span class="p">())</span>  <span class="c1"># Runs last.</span>
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">())</span>  <span class="c1"># Runs second.</span>
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">())</span>  <span class="c1"># Runs first.</span>
+</code></pre></div>
+<p>Registering multiple routes is useful when you want separate handlers to handle different kinds of requests, for
+example API calls vs page resources or GET requests vs POST requests as in the example below.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># Handle GET requests.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_get</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">route</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s2">"GET"</span><span class="p">:</span>
+        <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">()</span>
+        <span class="k">return</span>
+  <span class="c1"># Handling GET only.</span>
+  <span class="c1"># ...</span>
+
+<span class="c1"># Handle POST requests.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_post</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">route</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s2">"POST"</span><span class="p">:</span>
+        <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">()</span>
+        <span class="k">return</span>
+  <span class="c1"># Handling POST only.</span>
+  <span class="c1"># ...</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle_get</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle_post</span><span class="p">)</span>
+</code></pre></div>
+<p>One can also modify request while falling back to the subsequent handler, that way intermediate route handler can
+modify url, method, headers and postData of the request.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="c1"># override headers</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+        <span class="s2">"foo"</span><span class="p">:</span> <span class="s2">"foo-value"</span><span class="p">,</span> <span class="c1"># set "foo" header</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="kc">None</span> <span class="c1"># remove "bar" header</span>
+    <span class="p">}</span>
+    <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p>Use <code>route.continue_()</code> to immediately send the request to the network, other matching handlers won't be invoked in
+that case.</p>
+<h4 id="parameters-5">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>If set changes the post data of request.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one. Changing the URL won't affect the route matching, all the routes are matched using the original request URL.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-3">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">patchrightInitScript</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.fallback</p>
+<p>Continues route's request with optional overrides. The method is similar to <code>route.continue_()</code> with the difference
+that other matching handlers will be invoked before sending the request.</p>
+<p><strong>Usage</strong></p>
+<p>When several routes match the given pattern, they run in the order opposite to their registration. That way the
+last registered route can always override all the previous ones. In the example below, request will be handled by
+the bottom-most handler first, then it'll fall back to the previous one and in the end will be aborted by the first
+registered route.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">abort</span><span class="p">())</span>  <span class="c1"># Runs last.</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">())</span>  <span class="c1"># Runs second.</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">())</span>  <span class="c1"># Runs first.</span>
+</code></pre></div>
+<p>Registering multiple routes is useful when you want separate handlers to handle different kinds of requests, for
+example API calls vs page resources or GET requests vs POST requests as in the example below.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># Handle GET requests.</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_get</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">route</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s2">"GET"</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">()</span>
+        <span class="k">return</span>
+  <span class="c1"># Handling GET only.</span>
+  <span class="c1"># ...</span>
+
+<span class="c1"># Handle POST requests.</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_post</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">route</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s2">"POST"</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">()</span>
+        <span class="k">return</span>
+  <span class="c1"># Handling POST only.</span>
+  <span class="c1"># ...</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle_get</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle_post</span><span class="p">)</span>
+</code></pre></div>
+<p>One can also modify request while falling back to the subsequent handler, that way intermediate route handler can
+modify url, method, headers and postData of the request.</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="c1"># override headers</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">**</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+        <span class="s2">"foo"</span><span class="p">:</span> <span class="s2">"foo-value"</span><span class="p">,</span> <span class="c1"># set "foo" header</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="kc">None</span> <span class="c1"># remove "bar" header</span>
+    <span class="p">}</span>
+    <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p>Use <code>route.continue_()</code> to immediately send the request to the network, other matching handlers won't be invoked in
+that case.</p>
+<h4 id="parameters-6">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>If set changes the post data of request.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one. Changing the URL won't affect the route matching, all the routes are matched using the original request URL.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fetch">fetch</h2>
+<h3 id="同步-4">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>Route.fetch</p>
+<p>Performs the request and fetches result without fulfilling it, so that the response could be modified and then
+fulfilled.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">route</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">"message"</span><span class="p">][</span><span class="s2">"big_red_dog"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"https://dog.ceo/api/breeds/list/all"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Note that <code>headers</code> option will apply to the fetched request as well as any redirects initiated by it. If you want
+to only apply <code>headers</code> to the original request, but not to redirects, look into <code>route.continue_()</code> instead.</p>
+<h4 id="parameters-7">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns">Returns</h4>
+<p>APIResponse</p>
+<h3 id="异步-4">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_redirects</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">post_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'APIResponse'</span>
+</code></pre></div>
+<p>Route.fetch</p>
+<p>Performs the request and fetches result without fulfilling it, so that the response could be modified and then
+fulfilled.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">"message"</span><span class="p">][</span><span class="s2">"big_red_dog"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">await</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"https://dog.ceo/api/breeds/list/all"</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Note that <code>headers</code> option will apply to the fetched request as well as any redirects initiated by it. If you want
+to only apply <code>headers</code> to the original request, but not to redirects, look into <code>route.continue_()</code> instead.</p>
+<h4 id="parameters-8">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>If set changes the request HTTP headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>max_redirects</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded. Defaults to <code>20</code>. Pass <code>0</code> to not follow redirects.</td>
+</tr>
+<tr>
+<td><code>max_retries</code></td>
+<td>Union[int, None]</td>
+<td>Maximum number of times network errors should be retried. Currently only <code>ECONNRESET</code> error is retried. Does not retry based on HTTP response codes. An error will be thrown if the limit is exceeded. Defaults to <code>0</code> - no retries.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request method (e.g. GET or POST).</td>
+</tr>
+<tr>
+<td><code>post_data</code></td>
+<td>Union[Any, bytes, str, None]</td>
+<td>Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string and <code>content-type</code> header will be set to <code>application/json</code> if not explicitly set. Otherwise the <code>content-type</code> header will be set to <code>application/octet-stream</code> if not explicitly set.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Union[float, None]</td>
+<td>Request timeout in milliseconds. Defaults to <code>30000</code> (30 seconds). Pass <code>0</code> to disable timeout.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Union[str, None]</td>
+<td>If set changes the request URL. New URL must have same protocol as original one.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-2">Returns</h4>
+<p>APIResponse</p>
+<h2 id="fulfill">fulfill</h2>
+<h3 id="同步-5">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">fulfill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'APIResponse'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.fulfill</p>
+<p>Fulfills route's request with given response.</p>
+<p><strong>Usage</strong></p>
+<p>An example of fulfilling all requests with 404 responses:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span>
+    <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s2">"text/plain"</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="s2">"not found!"</span><span class="p">))</span>
+</code></pre></div>
+<p>An example of serving static file:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/xhr_endpoint"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"mock_data.json"</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="parameters-9">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body</code></td>
+<td>Union[bytes, str, None]</td>
+<td>Response body.</td>
+</tr>
+<tr>
+<td><code>content_type</code></td>
+<td>Union[str, None]</td>
+<td>If set, equals to setting <code>Content-Type</code> response header.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Response headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>Union[Any, None]</td>
+<td>JSON response. This method will set the content type to <code>application/json</code> if not set.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>File path to respond with. The content type will be inferred from file extension. If <code>path</code> is a relative path, then it is resolved relative to the current working directory.</td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>Union[APIResponse, None]</td>
+<td><code>APIResponse</code> to fulfill route's request with. Individual fields of the response (such as headers) can be overridden using fulfill options.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Union[int, None]</td>
+<td>Response status code, defaults to <code>200</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-5">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fulfill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'APIResponse'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Route.fulfill</p>
+<p>Fulfills route's request with given response.</p>
+<p><strong>Usage</strong></p>
+<p>An example of fulfilling all requests with 404 responses:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/*"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span>
+    <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s2">"text/plain"</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="s2">"not found!"</span><span class="p">))</span>
+</code></pre></div>
+<p>An example of serving static file:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"**/xhr_endpoint"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">route</span><span class="p">:</span> <span class="n">route</span><span class="o">.</span><span class="n">fulfill</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"mock_data.json"</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="parameters-10">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body</code></td>
+<td>Union[bytes, str, None]</td>
+<td>Response body.</td>
+</tr>
+<tr>
+<td><code>content_type</code></td>
+<td>Union[str, None]</td>
+<td>If set, equals to setting <code>Content-Type</code> response header.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>Response headers. Header values will be converted to a string.</td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>Union[Any, None]</td>
+<td>JSON response. This method will set the content type to <code>application/json</code> if not set.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>File path to respond with. The content type will be inferred from file extension. If <code>path</code> is a relative path, then it is resolved relative to the current working directory.</td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>Union[APIResponse, None]</td>
+<td><code>APIResponse</code> to fulfill route's request with. Individual fields of the response (such as headers) can be overridden using fulfill options.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Union[int, None]</td>
+<td>Response status code, defaults to <code>200</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="on">on</h2>
+<h3 id="同步-6">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h3 id="异步-6">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h2 id="once">once</h2>
+<h3 id="同步-7">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h3 id="异步-7">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h2 id="remove-listener">remove_listener</h2>
+<h3 id="同步-8">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h3 id="异步-8">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h2 id="request">request</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Route</span><span class="o">.</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span>
+</code></pre></div>
+<p>Route.request</p>
+<p>A request to be routed.</p>
+<h4 id="returns-3">Returns</h4>
+<p>Request</p>
+<footer class="page-footer"><span>适用 SDK 0.11.3 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#abort">abort</a><a class="level2" href="#continue">continue_</a><a class="level2" href="#fallback">fallback</a><a class="level2" href="#fetch">fetch</a><a class="level2" href="#fulfill">fulfill</a><a class="level2" href="#on">on</a><a class="level2" href="#once">once</a><a class="level2" href="#remove-listener">remove_listener</a><a class="level2" href="#request">request</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>
