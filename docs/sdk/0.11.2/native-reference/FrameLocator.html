@@ -1,0 +1,959 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生 FrameLocator · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.2</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html" aria-current="page">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.2 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="原生-framelocator">原生 FrameLocator</h1>
+<p><a href="README.html">原生 API 目录</a> · <a href="../README.html">手册目录</a></p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#first">first</a></li>
+<li><a href="#frame-locator">frame_locator</a></li>
+<li><a href="#get-by-alt-text">get_by_alt_text</a></li>
+<li><a href="#get-by-label">get_by_label</a></li>
+<li><a href="#get-by-placeholder">get_by_placeholder</a></li>
+<li><a href="#get-by-role">get_by_role</a></li>
+<li><a href="#get-by-test-id">get_by_test_id</a></li>
+<li><a href="#get-by-text">get_by_text</a></li>
+<li><a href="#get-by-title">get_by_title</a></li>
+<li><a href="#last">last</a></li>
+<li><a href="#locator">locator</a></li>
+<li><a href="#nth">nth</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#owner">owner</a></li>
+<li><a href="#remove-listener">remove_listener</a></li>
+</ul>
+<h2 id="first">first</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">FrameLocator</span><span class="o">.</span><span class="n">first</span><span class="p">:</span> <span class="n">FrameLocator</span>
+</code></pre></div>
+<p>FrameLocator.first</p>
+<p>Returns locator to the first matching frame.</p>
+<h4 id="returns">Returns</h4>
+<p>FrameLocator</p>
+<h2 id="frame-locator">frame_locator</h2>
+<h3 id="同步">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">frame_locator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FrameLocator'</span>
+</code></pre></div>
+<p>FrameLocator.frame_locator</p>
+<p>When working with iframes, you can create a frame locator that will enter the iframe and allow selecting elements
+in that iframe.</p>
+<h4 id="parameters">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selector</code></td>
+<td>str</td>
+<td>A selector to use when resolving DOM element.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-2">Returns</h4>
+<p>FrameLocator</p>
+<h3 id="异步">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">frame_locator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FrameLocator'</span>
+</code></pre></div>
+<p>FrameLocator.frame_locator</p>
+<p>When working with iframes, you can create a frame locator that will enter the iframe and allow selecting elements
+in that iframe.</p>
+<h4 id="parameters-2">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selector</code></td>
+<td>str</td>
+<td>A selector to use when resolving DOM element.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-3">Returns</h4>
+<p>FrameLocator</p>
+<h2 id="get-by-alt-text">get_by_alt_text</h2>
+<h3 id="同步-2">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_alt_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_alt_text</p>
+<p>Allows locating elements by their alt text.</p>
+<p><strong>Usage</strong></p>
+<p>For example, this method will find the image by alt text &quot;Playwright logo&quot;:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">img</span> <span class="na">alt</span><span class="o">=</span><span class="s">'Playwright logo'</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">get_by_alt_text</span><span class="p">(</span><span class="s2">"Playwright logo"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-3">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-4">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-2">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_alt_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_alt_text</p>
+<p>Allows locating elements by their alt text.</p>
+<p><strong>Usage</strong></p>
+<p>For example, this method will find the image by alt text &quot;Playwright logo&quot;:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">img</span> <span class="na">alt</span><span class="o">=</span><span class="s">'Playwright logo'</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_alt_text</span><span class="p">(</span><span class="s2">"Playwright logo"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-4">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-5">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-label">get_by_label</h2>
+<h3 id="同步-3">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_label</p>
+<p>Allows locating input elements by the text of the associated <code>&lt;label&gt;</code> or <code>aria-labelledby</code> element, or by the
+<code>aria-label</code> attribute.</p>
+<p><strong>Usage</strong></p>
+<p>For example, this method will find inputs by label &quot;Username&quot; and &quot;Password&quot; in the following DOM:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Username"</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"password-input"</span><span class="p">&gt;</span>Password:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"password-input"</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"Username"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"john"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"Password"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"secret"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-5">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-6">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-3">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_label</p>
+<p>Allows locating input elements by the text of the associated <code>&lt;label&gt;</code> or <code>aria-labelledby</code> element, or by the
+<code>aria-label</code> attribute.</p>
+<p><strong>Usage</strong></p>
+<p>For example, this method will find inputs by label &quot;Username&quot; and &quot;Password&quot; in the following DOM:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Username"</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"password-input"</span><span class="p">&gt;</span>Password:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"password-input"</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"Username"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"john"</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"Password"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"secret"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-6">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-7">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-placeholder">get_by_placeholder</h2>
+<h3 id="同步-4">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_placeholder</p>
+<p>Allows locating input elements by the placeholder text.</p>
+<p><strong>Usage</strong></p>
+<p>For example, consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"name@example.com"</span> <span class="p">/&gt;</span>
+</code></pre></div>
+<p>You can fill the input after locating it by the placeholder text:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">get_by_placeholder</span><span class="p">(</span><span class="s2">"name@example.com"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"playwright@microsoft.com"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-7">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-8">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-4">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_placeholder</p>
+<p>Allows locating input elements by the placeholder text.</p>
+<p><strong>Usage</strong></p>
+<p>For example, consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"name@example.com"</span> <span class="p">/&gt;</span>
+</code></pre></div>
+<p>You can fill the input after locating it by the placeholder text:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_placeholder</span><span class="p">(</span><span class="s2">"name@example.com"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"playwright@microsoft.com"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-8">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-9">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-role">get_by_role</h2>
+<h3 id="同步-5">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">'alert'</span><span class="p">,</span> <span class="s1">'alertdialog'</span><span class="p">,</span> <span class="s1">'application'</span><span class="p">,</span> <span class="s1">'article'</span><span class="p">,</span> <span class="s1">'banner'</span><span class="p">,</span> <span class="s1">'blockquote'</span><span class="p">,</span> <span class="s1">'button'</span><span class="p">,</span> <span class="s1">'caption'</span><span class="p">,</span> <span class="s1">'cell'</span><span class="p">,</span> <span class="s1">'checkbox'</span><span class="p">,</span> <span class="s1">'code'</span><span class="p">,</span> <span class="s1">'columnheader'</span><span class="p">,</span> <span class="s1">'combobox'</span><span class="p">,</span> <span class="s1">'complementary'</span><span class="p">,</span> <span class="s1">'contentinfo'</span><span class="p">,</span> <span class="s1">'definition'</span><span class="p">,</span> <span class="s1">'deletion'</span><span class="p">,</span> <span class="s1">'dialog'</span><span class="p">,</span> <span class="s1">'directory'</span><span class="p">,</span> <span class="s1">'document'</span><span class="p">,</span> <span class="s1">'emphasis'</span><span class="p">,</span> <span class="s1">'feed'</span><span class="p">,</span> <span class="s1">'figure'</span><span class="p">,</span> <span class="s1">'form'</span><span class="p">,</span> <span class="s1">'generic'</span><span class="p">,</span> <span class="s1">'grid'</span><span class="p">,</span> <span class="s1">'gridcell'</span><span class="p">,</span> <span class="s1">'group'</span><span class="p">,</span> <span class="s1">'heading'</span><span class="p">,</span> <span class="s1">'img'</span><span class="p">,</span> <span class="s1">'insertion'</span><span class="p">,</span> <span class="s1">'link'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">,</span> <span class="s1">'listbox'</span><span class="p">,</span> <span class="s1">'listitem'</span><span class="p">,</span> <span class="s1">'log'</span><span class="p">,</span> <span class="s1">'main'</span><span class="p">,</span> <span class="s1">'marquee'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">,</span> <span class="s1">'menu'</span><span class="p">,</span> <span class="s1">'menubar'</span><span class="p">,</span> <span class="s1">'menuitem'</span><span class="p">,</span> <span class="s1">'menuitemcheckbox'</span><span class="p">,</span> <span class="s1">'menuitemradio'</span><span class="p">,</span> <span class="s1">'meter'</span><span class="p">,</span> <span class="s1">'navigation'</span><span class="p">,</span> <span class="s1">'none'</span><span class="p">,</span> <span class="s1">'note'</span><span class="p">,</span> <span class="s1">'option'</span><span class="p">,</span> <span class="s1">'paragraph'</span><span class="p">,</span> <span class="s1">'presentation'</span><span class="p">,</span> <span class="s1">'progressbar'</span><span class="p">,</span> <span class="s1">'radio'</span><span class="p">,</span> <span class="s1">'radiogroup'</span><span class="p">,</span> <span class="s1">'region'</span><span class="p">,</span> <span class="s1">'row'</span><span class="p">,</span> <span class="s1">'rowgroup'</span><span class="p">,</span> <span class="s1">'rowheader'</span><span class="p">,</span> <span class="s1">'scrollbar'</span><span class="p">,</span> <span class="s1">'search'</span><span class="p">,</span> <span class="s1">'searchbox'</span><span class="p">,</span> <span class="s1">'separator'</span><span class="p">,</span> <span class="s1">'slider'</span><span class="p">,</span> <span class="s1">'spinbutton'</span><span class="p">,</span> <span class="s1">'status'</span><span class="p">,</span> <span class="s1">'strong'</span><span class="p">,</span> <span class="s1">'subscript'</span><span class="p">,</span> <span class="s1">'superscript'</span><span class="p">,</span> <span class="s1">'switch'</span><span class="p">,</span> <span class="s1">'tab'</span><span class="p">,</span> <span class="s1">'table'</span><span class="p">,</span> <span class="s1">'tablist'</span><span class="p">,</span> <span class="s1">'tabpanel'</span><span class="p">,</span> <span class="s1">'term'</span><span class="p">,</span> <span class="s1">'textbox'</span><span class="p">,</span> <span class="s1">'time'</span><span class="p">,</span> <span class="s1">'timer'</span><span class="p">,</span> <span class="s1">'toolbar'</span><span class="p">,</span> <span class="s1">'tooltip'</span><span class="p">,</span> <span class="s1">'tree'</span><span class="p">,</span> <span class="s1">'treegrid'</span><span class="p">,</span> <span class="s1">'treeitem'</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">checked</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">disabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">expanded</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">include_hidden</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pressed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">selected</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_role</p>
+<p>Allows locating elements by their <a href="https://www.w3.org/TR/wai-aria-1.2/#roles">ARIA role</a>,
+<a href="https://www.w3.org/TR/wai-aria-1.2/#aria-attributes">ARIA attributes</a> and
+<a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Sign up<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="p">/&gt;</span> Subscribe
+<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate each element by its implicit role:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"heading"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Sign up"</span><span class="p">))</span><span class="o">.</span><span class="n">to_be_visible</span><span class="p">()</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"checkbox"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Subscribe"</span><span class="p">)</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Role selector <strong>does not replace</strong> accessibility audits and conformance tests, but rather gives early feedback
+about the ARIA guidelines.</p>
+<p>Many html elements have an implicitly <a href="https://w3c.github.io/html-aam/#html-element-role-mappings">defined role</a>
+that is recognized by the role selector. You can find all the
+<a href="https://www.w3.org/TR/wai-aria-1.2/#role_definitions">supported roles here</a>. ARIA guidelines <strong>do not recommend</strong>
+duplicating implicit roles and attributes by setting <code>role</code> and/or <code>aria-*</code> attributes to default values.</p>
+<h4 id="parameters-9">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>role</code></td>
+<td>Union[&quot;alert&quot;, &quot;alertdialog&quot;, &quot;application&quot;, &quot;article&quot;, &quot;banner&quot;, &quot;blockquote&quot;, &quot;button&quot;, &quot;caption&quot;, &quot;cell&quot;, &quot;checkbox&quot;, &quot;code&quot;, &quot;columnheader&quot;, &quot;combobox&quot;, &quot;complementary&quot;, &quot;contentinfo&quot;, &quot;definition&quot;, &quot;deletion&quot;, &quot;dialog&quot;, &quot;directory&quot;, &quot;document&quot;, &quot;emphasis&quot;, &quot;feed&quot;, &quot;figure&quot;, &quot;form&quot;, &quot;generic&quot;, &quot;grid&quot;, &quot;gridcell&quot;, &quot;group&quot;, &quot;heading&quot;, &quot;img&quot;, &quot;insertion&quot;, &quot;link&quot;, &quot;list&quot;, &quot;listbox&quot;, &quot;listitem&quot;, &quot;log&quot;, &quot;main&quot;, &quot;marquee&quot;, &quot;math&quot;, &quot;menu&quot;, &quot;menubar&quot;, &quot;menuitem&quot;, &quot;menuitemcheckbox&quot;, &quot;menuitemradio&quot;, &quot;meter&quot;, &quot;navigation&quot;, &quot;none&quot;, &quot;note&quot;, &quot;option&quot;, &quot;paragraph&quot;, &quot;presentation&quot;, &quot;progressbar&quot;, &quot;radio&quot;, &quot;radiogroup&quot;, &quot;region&quot;, &quot;row&quot;, &quot;rowgroup&quot;, &quot;rowheader&quot;, &quot;scrollbar&quot;, &quot;search&quot;, &quot;searchbox&quot;, &quot;separator&quot;, &quot;slider&quot;, &quot;spinbutton&quot;, &quot;status&quot;, &quot;strong&quot;, &quot;subscript&quot;, &quot;superscript&quot;, &quot;switch&quot;, &quot;tab&quot;, &quot;table&quot;, &quot;tablist&quot;, &quot;tabpanel&quot;, &quot;term&quot;, &quot;textbox&quot;, &quot;time&quot;, &quot;timer&quot;, &quot;toolbar&quot;, &quot;tooltip&quot;, &quot;tree&quot;, &quot;treegrid&quot;, &quot;treeitem&quot;]</td>
+<td>Required aria role.</td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-checked</code> or native <code>&lt;input type=checkbox&gt;</code> controls.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-checked"><code>aria-checked</code></a>.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Option to match the <a href="https://w3c.github.io/accname/#dfn-accessible-description">accessible description</a>. By default, matching is case-insensitive and searches for a substring, use <code>exact</code> to control this behavior.  Learn more about <a href="https://w3c.github.io/accname/#dfn-accessible-description">accessible description</a>.</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-disabled</code> or <code>disabled</code>.  <strong>NOTE</strong> Unlike most other attributes, <code>disabled</code> is inherited through the DOM hierarchy. Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-disabled"><code>aria-disabled</code></a>.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether <code>name</code> and <code>description</code> are matched exactly: case-sensitive and whole-string. Defaults to false. Ignored when the value is a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+<tr>
+<td><code>expanded</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-expanded</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-expanded"><code>aria-expanded</code></a>.</td>
+</tr>
+<tr>
+<td><code>include_hidden</code></td>
+<td>Union[bool, None]</td>
+<td>Option that controls whether hidden elements are matched. By default, only non-hidden elements, as <a href="https://www.w3.org/TR/wai-aria-1.2/#tree_exclusion">defined by ARIA</a>, are matched by role selector.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-hidden"><code>aria-hidden</code></a>.</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>Union[int, None]</td>
+<td>A number attribute that is usually present for roles <code>heading</code>, <code>listitem</code>, <code>row</code>, <code>treeitem</code>, with default values for <code>&lt;h1&gt;-&lt;h6&gt;</code> elements.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-level"><code>aria-level</code></a>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Option to match the <a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>. By default, matching is case-insensitive and searches for a substring, use <code>exact</code> to control this behavior.  Learn more about <a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>.</td>
+</tr>
+<tr>
+<td><code>pressed</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-pressed</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-pressed"><code>aria-pressed</code></a>.</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-selected</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-selected"><code>aria-selected</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-10">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-5">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">'alert'</span><span class="p">,</span> <span class="s1">'alertdialog'</span><span class="p">,</span> <span class="s1">'application'</span><span class="p">,</span> <span class="s1">'article'</span><span class="p">,</span> <span class="s1">'banner'</span><span class="p">,</span> <span class="s1">'blockquote'</span><span class="p">,</span> <span class="s1">'button'</span><span class="p">,</span> <span class="s1">'caption'</span><span class="p">,</span> <span class="s1">'cell'</span><span class="p">,</span> <span class="s1">'checkbox'</span><span class="p">,</span> <span class="s1">'code'</span><span class="p">,</span> <span class="s1">'columnheader'</span><span class="p">,</span> <span class="s1">'combobox'</span><span class="p">,</span> <span class="s1">'complementary'</span><span class="p">,</span> <span class="s1">'contentinfo'</span><span class="p">,</span> <span class="s1">'definition'</span><span class="p">,</span> <span class="s1">'deletion'</span><span class="p">,</span> <span class="s1">'dialog'</span><span class="p">,</span> <span class="s1">'directory'</span><span class="p">,</span> <span class="s1">'document'</span><span class="p">,</span> <span class="s1">'emphasis'</span><span class="p">,</span> <span class="s1">'feed'</span><span class="p">,</span> <span class="s1">'figure'</span><span class="p">,</span> <span class="s1">'form'</span><span class="p">,</span> <span class="s1">'generic'</span><span class="p">,</span> <span class="s1">'grid'</span><span class="p">,</span> <span class="s1">'gridcell'</span><span class="p">,</span> <span class="s1">'group'</span><span class="p">,</span> <span class="s1">'heading'</span><span class="p">,</span> <span class="s1">'img'</span><span class="p">,</span> <span class="s1">'insertion'</span><span class="p">,</span> <span class="s1">'link'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">,</span> <span class="s1">'listbox'</span><span class="p">,</span> <span class="s1">'listitem'</span><span class="p">,</span> <span class="s1">'log'</span><span class="p">,</span> <span class="s1">'main'</span><span class="p">,</span> <span class="s1">'marquee'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">,</span> <span class="s1">'menu'</span><span class="p">,</span> <span class="s1">'menubar'</span><span class="p">,</span> <span class="s1">'menuitem'</span><span class="p">,</span> <span class="s1">'menuitemcheckbox'</span><span class="p">,</span> <span class="s1">'menuitemradio'</span><span class="p">,</span> <span class="s1">'meter'</span><span class="p">,</span> <span class="s1">'navigation'</span><span class="p">,</span> <span class="s1">'none'</span><span class="p">,</span> <span class="s1">'note'</span><span class="p">,</span> <span class="s1">'option'</span><span class="p">,</span> <span class="s1">'paragraph'</span><span class="p">,</span> <span class="s1">'presentation'</span><span class="p">,</span> <span class="s1">'progressbar'</span><span class="p">,</span> <span class="s1">'radio'</span><span class="p">,</span> <span class="s1">'radiogroup'</span><span class="p">,</span> <span class="s1">'region'</span><span class="p">,</span> <span class="s1">'row'</span><span class="p">,</span> <span class="s1">'rowgroup'</span><span class="p">,</span> <span class="s1">'rowheader'</span><span class="p">,</span> <span class="s1">'scrollbar'</span><span class="p">,</span> <span class="s1">'search'</span><span class="p">,</span> <span class="s1">'searchbox'</span><span class="p">,</span> <span class="s1">'separator'</span><span class="p">,</span> <span class="s1">'slider'</span><span class="p">,</span> <span class="s1">'spinbutton'</span><span class="p">,</span> <span class="s1">'status'</span><span class="p">,</span> <span class="s1">'strong'</span><span class="p">,</span> <span class="s1">'subscript'</span><span class="p">,</span> <span class="s1">'superscript'</span><span class="p">,</span> <span class="s1">'switch'</span><span class="p">,</span> <span class="s1">'tab'</span><span class="p">,</span> <span class="s1">'table'</span><span class="p">,</span> <span class="s1">'tablist'</span><span class="p">,</span> <span class="s1">'tabpanel'</span><span class="p">,</span> <span class="s1">'term'</span><span class="p">,</span> <span class="s1">'textbox'</span><span class="p">,</span> <span class="s1">'time'</span><span class="p">,</span> <span class="s1">'timer'</span><span class="p">,</span> <span class="s1">'toolbar'</span><span class="p">,</span> <span class="s1">'tooltip'</span><span class="p">,</span> <span class="s1">'tree'</span><span class="p">,</span> <span class="s1">'treegrid'</span><span class="p">,</span> <span class="s1">'treeitem'</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">checked</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">disabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">expanded</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">include_hidden</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pressed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">selected</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_role</p>
+<p>Allows locating elements by their <a href="https://www.w3.org/TR/wai-aria-1.2/#roles">ARIA role</a>,
+<a href="https://www.w3.org/TR/wai-aria-1.2/#aria-attributes">ARIA attributes</a> and
+<a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Sign up<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="p">/&gt;</span> Subscribe
+<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate each element by its implicit role:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"heading"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Sign up"</span><span class="p">))</span><span class="o">.</span><span class="n">to_be_visible</span><span class="p">()</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"checkbox"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Subscribe"</span><span class="p">)</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Role selector <strong>does not replace</strong> accessibility audits and conformance tests, but rather gives early feedback
+about the ARIA guidelines.</p>
+<p>Many html elements have an implicitly <a href="https://w3c.github.io/html-aam/#html-element-role-mappings">defined role</a>
+that is recognized by the role selector. You can find all the
+<a href="https://www.w3.org/TR/wai-aria-1.2/#role_definitions">supported roles here</a>. ARIA guidelines <strong>do not recommend</strong>
+duplicating implicit roles and attributes by setting <code>role</code> and/or <code>aria-*</code> attributes to default values.</p>
+<h4 id="parameters-10">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>role</code></td>
+<td>Union[&quot;alert&quot;, &quot;alertdialog&quot;, &quot;application&quot;, &quot;article&quot;, &quot;banner&quot;, &quot;blockquote&quot;, &quot;button&quot;, &quot;caption&quot;, &quot;cell&quot;, &quot;checkbox&quot;, &quot;code&quot;, &quot;columnheader&quot;, &quot;combobox&quot;, &quot;complementary&quot;, &quot;contentinfo&quot;, &quot;definition&quot;, &quot;deletion&quot;, &quot;dialog&quot;, &quot;directory&quot;, &quot;document&quot;, &quot;emphasis&quot;, &quot;feed&quot;, &quot;figure&quot;, &quot;form&quot;, &quot;generic&quot;, &quot;grid&quot;, &quot;gridcell&quot;, &quot;group&quot;, &quot;heading&quot;, &quot;img&quot;, &quot;insertion&quot;, &quot;link&quot;, &quot;list&quot;, &quot;listbox&quot;, &quot;listitem&quot;, &quot;log&quot;, &quot;main&quot;, &quot;marquee&quot;, &quot;math&quot;, &quot;menu&quot;, &quot;menubar&quot;, &quot;menuitem&quot;, &quot;menuitemcheckbox&quot;, &quot;menuitemradio&quot;, &quot;meter&quot;, &quot;navigation&quot;, &quot;none&quot;, &quot;note&quot;, &quot;option&quot;, &quot;paragraph&quot;, &quot;presentation&quot;, &quot;progressbar&quot;, &quot;radio&quot;, &quot;radiogroup&quot;, &quot;region&quot;, &quot;row&quot;, &quot;rowgroup&quot;, &quot;rowheader&quot;, &quot;scrollbar&quot;, &quot;search&quot;, &quot;searchbox&quot;, &quot;separator&quot;, &quot;slider&quot;, &quot;spinbutton&quot;, &quot;status&quot;, &quot;strong&quot;, &quot;subscript&quot;, &quot;superscript&quot;, &quot;switch&quot;, &quot;tab&quot;, &quot;table&quot;, &quot;tablist&quot;, &quot;tabpanel&quot;, &quot;term&quot;, &quot;textbox&quot;, &quot;time&quot;, &quot;timer&quot;, &quot;toolbar&quot;, &quot;tooltip&quot;, &quot;tree&quot;, &quot;treegrid&quot;, &quot;treeitem&quot;]</td>
+<td>Required aria role.</td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-checked</code> or native <code>&lt;input type=checkbox&gt;</code> controls.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-checked"><code>aria-checked</code></a>.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Option to match the <a href="https://w3c.github.io/accname/#dfn-accessible-description">accessible description</a>. By default, matching is case-insensitive and searches for a substring, use <code>exact</code> to control this behavior.  Learn more about <a href="https://w3c.github.io/accname/#dfn-accessible-description">accessible description</a>.</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-disabled</code> or <code>disabled</code>.  <strong>NOTE</strong> Unlike most other attributes, <code>disabled</code> is inherited through the DOM hierarchy. Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-disabled"><code>aria-disabled</code></a>.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether <code>name</code> and <code>description</code> are matched exactly: case-sensitive and whole-string. Defaults to false. Ignored when the value is a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+<tr>
+<td><code>expanded</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-expanded</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-expanded"><code>aria-expanded</code></a>.</td>
+</tr>
+<tr>
+<td><code>include_hidden</code></td>
+<td>Union[bool, None]</td>
+<td>Option that controls whether hidden elements are matched. By default, only non-hidden elements, as <a href="https://www.w3.org/TR/wai-aria-1.2/#tree_exclusion">defined by ARIA</a>, are matched by role selector.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-hidden"><code>aria-hidden</code></a>.</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>Union[int, None]</td>
+<td>A number attribute that is usually present for roles <code>heading</code>, <code>listitem</code>, <code>row</code>, <code>treeitem</code>, with default values for <code>&lt;h1&gt;-&lt;h6&gt;</code> elements.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-level"><code>aria-level</code></a>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Option to match the <a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>. By default, matching is case-insensitive and searches for a substring, use <code>exact</code> to control this behavior.  Learn more about <a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a>.</td>
+</tr>
+<tr>
+<td><code>pressed</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-pressed</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-pressed"><code>aria-pressed</code></a>.</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>Union[bool, None]</td>
+<td>An attribute that is usually set by <code>aria-selected</code>.  Learn more about <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-selected"><code>aria-selected</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-11">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-test-id">get_by_test_id</h2>
+<h3 id="同步-6">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_test_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_test_id</p>
+<p>Locate element by the test id.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">data-testid</span><span class="o">=</span><span class="s">"directions"</span><span class="p">&gt;</span>Itinéraire<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate the element by its test id:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span><span class="o">.</span><span class="n">get_by_test_id</span><span class="p">(</span><span class="s2">"directions"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>By default, the <code>data-testid</code> attribute is used as a test id. Use <code>selectors.set_test_id_attribute()</code> to configure
+a different test id attribute if necessary.</p>
+<h4 id="parameters-11">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test_id</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Id to locate the element by.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-12">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-6">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_test_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_test_id</p>
+<p>Locate element by the test id.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">data-testid</span><span class="o">=</span><span class="s">"directions"</span><span class="p">&gt;</span>Itinéraire<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate the element by its test id:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_test_id</span><span class="p">(</span><span class="s2">"directions"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>By default, the <code>data-testid</code> attribute is used as a test id. Use <code>selectors.set_test_id_attribute()</code> to configure
+a different test id attribute if necessary.</p>
+<h4 id="parameters-12">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test_id</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Id to locate the element by.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-13">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-text">get_by_text</h2>
+<h3 id="同步-7">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_text</p>
+<p>Allows locating elements that contain given text.</p>
+<p>See also <code>locator.filter()</code> that allows to match by another criteria, like an accessible role, and then filter by
+the text content.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>world<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate by text substring, exact string, or a regular expression:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># Matches &lt;span&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"world"</span><span class="p">)</span>
+
+<span class="c1"># Matches first &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">)</span>
+
+<span class="c1"># Matches second &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Matches both &lt;div&gt;s</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">))</span>
+
+<span class="c1"># Matches second &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"^hello$"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Matching by text always normalizes whitespace, even with exact match. For example, it turns multiple spaces into
+one, turns line breaks into spaces and ignores leading and trailing whitespace.</p>
+<p>Input elements of the type <code>button</code> and <code>submit</code> are matched by their <code>value</code> instead of the text content. For
+example, locating by text <code>&quot;Log in&quot;</code> matches <code>&lt;input type=button value=&quot;Log in&quot;&gt;</code>.</p>
+<h4 id="parameters-13">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-14">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-7">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_text</p>
+<p>Allows locating elements that contain given text.</p>
+<p>See also <code>locator.filter()</code> that allows to match by another criteria, like an accessible role, and then filter by
+the text content.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure:</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>world<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can locate by text substring, exact string, or a regular expression:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># Matches &lt;span&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"world"</span><span class="p">)</span>
+
+<span class="c1"># Matches first &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">)</span>
+
+<span class="c1"># Matches second &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Matches both &lt;div&gt;s</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">))</span>
+
+<span class="c1"># Matches second &lt;div&gt;</span>
+<span class="n">page</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"^hello$"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Details</strong></p>
+<p>Matching by text always normalizes whitespace, even with exact match. For example, it turns multiple spaces into
+one, turns line breaks into spaces and ignores leading and trailing whitespace.</p>
+<p>Input elements of the type <code>button</code> and <code>submit</code> are matched by their <code>value</code> instead of the text content. For
+example, locating by text <code>&quot;Log in&quot;</code> matches <code>&lt;input type=button value=&quot;Log in&quot;&gt;</code>.</p>
+<h4 id="parameters-14">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-15">Returns</h4>
+<p>Locator</p>
+<h2 id="get-by-title">get_by_title</h2>
+<h3 id="同步-8">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_title</p>
+<p>Allows locating elements by their title attribute.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">title</span><span class="o">=</span><span class="s">'Issues count'</span><span class="p">&gt;</span>25 issues<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can check the issues count after locating it by the title text:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_title</span><span class="p">(</span><span class="s2">"Issues count"</span><span class="p">))</span><span class="o">.</span><span class="n">to_have_text</span><span class="p">(</span><span class="s2">"25 issues"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-15">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-16">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-8">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">get_by_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.get_by_title</p>
+<p>Allows locating elements by their title attribute.</p>
+<p><strong>Usage</strong></p>
+<p>Consider the following DOM structure.</p>
+<div class="code-block"><div class="code-toolbar"><span>html</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">title</span><span class="o">=</span><span class="s">'Issues count'</span><span class="p">&gt;</span>25 issues<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>You can check the issues count after locating it by the title text:</p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_title</span><span class="p">(</span><span class="s2">"Issues count"</span><span class="p">))</span><span class="o">.</span><span class="n">to_have_text</span><span class="p">(</span><span class="s2">"25 issues"</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters-16">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Union[Pattern[str], str]</td>
+<td>Text to locate the element for.</td>
+</tr>
+<tr>
+<td><code>exact</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to find an exact match: case-sensitive and whole-string. Default to false. Ignored when locating by a regular expression. Note that exact match still trims whitespace.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-17">Returns</h4>
+<p>Locator</p>
+<h2 id="last">last</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">FrameLocator</span><span class="o">.</span><span class="n">last</span><span class="p">:</span> <span class="n">FrameLocator</span>
+</code></pre></div>
+<p>FrameLocator.last</p>
+<p>Returns locator to the last matching frame.</p>
+<h4 id="returns-18">Returns</h4>
+<p>FrameLocator</p>
+<h2 id="locator">locator</h2>
+<h3 id="同步-9">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">locator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector_or_locator</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)],</span> <span class="o">*</span><span class="p">,</span> <span class="n">has</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_not</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_not_text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.locator</p>
+<p>The method finds an element matching the specified selector in the locator's subtree. It also accepts filter
+options, similar to <code>locator.filter()</code> method.</p>
+<p><a href="https://playwright.dev/python/docs/locators">Learn more about locators</a>.</p>
+<h4 id="parameters-17">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selector_or_locator</code></td>
+<td>Union[Locator, str]</td>
+<td>A selector or locator to use when resolving DOM element.</td>
+</tr>
+<tr>
+<td><code>has</code></td>
+<td>Union[Locator, None]</td>
+<td>Narrows down the results of the method to those which contain elements matching this relative locator. For example, <code>article</code> that has <code>text=Playwright</code> matches <code>&lt;article&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/article&gt;</code>.  Inner locator <strong>must be relative</strong> to the outer locator and is queried starting with the outer locator match, not the document root. For example, you can find <code>content</code> that has <code>div</code> in <code>&lt;article&gt;&lt;content&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/content&gt;&lt;/article&gt;</code>. However, looking for <code>content</code> that has <code>article div</code> will fail, because the inner locator must be relative and should not use any elements outside the <code>content</code>.  Note that outer and inner locators must belong to the same frame. Inner locator must not contain <code>FrameLocator</code>s.</td>
+</tr>
+<tr>
+<td><code>has_not</code></td>
+<td>Union[Locator, None]</td>
+<td>Matches elements that do not contain an element that matches an inner locator. Inner locator is queried against the outer one. For example, <code>article</code> that does not have <code>div</code> matches <code>&lt;article&gt;&lt;span&gt;Playwright&lt;/span&gt;&lt;/article&gt;</code>.  Note that outer and inner locators must belong to the same frame. Inner locator must not contain <code>FrameLocator</code>s.</td>
+</tr>
+<tr>
+<td><code>has_not_text</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Matches elements that do not contain specified text somewhere inside, possibly in a child or a descendant element. When passed a [string], matching is case-insensitive and searches for a substring.</td>
+</tr>
+<tr>
+<td><code>has_text</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Matches elements containing specified text somewhere inside, possibly in a child or a descendant element. When passed a [string], matching is case-insensitive and searches for a substring. For example, <code>&quot;Playwright&quot;</code> matches <code>&lt;article&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/article&gt;</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-19">Returns</h4>
+<p>Locator</p>
+<h3 id="异步-9">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">locator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector_or_locator</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)],</span> <span class="o">*</span><span class="p">,</span> <span class="n">has</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_not</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">'Locator'</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_not_text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_text</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Locator'</span>
+</code></pre></div>
+<p>FrameLocator.locator</p>
+<p>The method finds an element matching the specified selector in the locator's subtree. It also accepts filter
+options, similar to <code>locator.filter()</code> method.</p>
+<p><a href="https://playwright.dev/python/docs/locators">Learn more about locators</a>.</p>
+<h4 id="parameters-18">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selector_or_locator</code></td>
+<td>Union[Locator, str]</td>
+<td>A selector or locator to use when resolving DOM element.</td>
+</tr>
+<tr>
+<td><code>has</code></td>
+<td>Union[Locator, None]</td>
+<td>Narrows down the results of the method to those which contain elements matching this relative locator. For example, <code>article</code> that has <code>text=Playwright</code> matches <code>&lt;article&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/article&gt;</code>.  Inner locator <strong>must be relative</strong> to the outer locator and is queried starting with the outer locator match, not the document root. For example, you can find <code>content</code> that has <code>div</code> in <code>&lt;article&gt;&lt;content&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/content&gt;&lt;/article&gt;</code>. However, looking for <code>content</code> that has <code>article div</code> will fail, because the inner locator must be relative and should not use any elements outside the <code>content</code>.  Note that outer and inner locators must belong to the same frame. Inner locator must not contain <code>FrameLocator</code>s.</td>
+</tr>
+<tr>
+<td><code>has_not</code></td>
+<td>Union[Locator, None]</td>
+<td>Matches elements that do not contain an element that matches an inner locator. Inner locator is queried against the outer one. For example, <code>article</code> that does not have <code>div</code> matches <code>&lt;article&gt;&lt;span&gt;Playwright&lt;/span&gt;&lt;/article&gt;</code>.  Note that outer and inner locators must belong to the same frame. Inner locator must not contain <code>FrameLocator</code>s.</td>
+</tr>
+<tr>
+<td><code>has_not_text</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Matches elements that do not contain specified text somewhere inside, possibly in a child or a descendant element. When passed a [string], matching is case-insensitive and searches for a substring.</td>
+</tr>
+<tr>
+<td><code>has_text</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td>Matches elements containing specified text somewhere inside, possibly in a child or a descendant element. When passed a [string], matching is case-insensitive and searches for a substring. For example, <code>&quot;Playwright&quot;</code> matches <code>&lt;article&gt;&lt;div&gt;Playwright&lt;/div&gt;&lt;/article&gt;</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-20">Returns</h4>
+<p>Locator</p>
+<h2 id="nth">nth</h2>
+<h3 id="同步-10">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">nth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FrameLocator'</span>
+</code></pre></div>
+<p>FrameLocator.nth</p>
+<p>Returns locator to the n-th matching frame. It's zero based, <code>nth(0)</code> selects the first frame.</p>
+<h4 id="parameters-19">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code></td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-21">Returns</h4>
+<p>FrameLocator</p>
+<h3 id="异步-10">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">nth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FrameLocator'</span>
+</code></pre></div>
+<p>FrameLocator.nth</p>
+<p>Returns locator to the n-th matching frame. It's zero based, <code>nth(0)</code> selects the first frame.</p>
+<h4 id="parameters-20">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code></td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-22">Returns</h4>
+<p>FrameLocator</p>
+<h2 id="on">on</h2>
+<h3 id="同步-11">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h3 id="异步-11">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h2 id="once">once</h2>
+<h3 id="同步-12">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h3 id="异步-12">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h2 id="owner">owner</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">FrameLocator</span><span class="o">.</span><span class="n">owner</span><span class="p">:</span> <span class="n">Locator</span>
+</code></pre></div>
+<p>FrameLocator.owner</p>
+<p>Returns a <code>Locator</code> object pointing to the same <code>iframe</code> as this frame locator.</p>
+<p>Useful when you have a <code>FrameLocator</code> object obtained somewhere, and later on would like to interact with the
+<code>iframe</code> element.</p>
+<p>For a reverse operation, use <code>locator.content_frame</code>.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">frame_locator</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"iframe[name=</span><span class="se">\"</span><span class="s2">embedded</span><span class="se">\"</span><span class="s2">]"</span><span class="p">)</span><span class="o">.</span><span class="n">content_frame</span>
+<span class="c1"># ...</span>
+<span class="n">locator</span> <span class="o">=</span> <span class="n">frame_locator</span><span class="o">.</span><span class="n">owner</span>
+<span class="n">expect</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span><span class="o">.</span><span class="n">to_be_visible</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns-23">Returns</h4>
+<p>Locator</p>
+<h2 id="remove-listener">remove_listener</h2>
+<h3 id="同步-13">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h3 id="异步-13">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<footer class="page-footer"><span>适用 SDK 0.11.2 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#first">first</a><a class="level2" href="#frame-locator">frame_locator</a><a class="level2" href="#get-by-alt-text">get_by_alt_text</a><a class="level2" href="#get-by-label">get_by_label</a><a class="level2" href="#get-by-placeholder">get_by_placeholder</a><a class="level2" href="#get-by-role">get_by_role</a><a class="level2" href="#get-by-test-id">get_by_test_id</a><a class="level2" href="#get-by-text">get_by_text</a><a class="level2" href="#get-by-title">get_by_title</a><a class="level2" href="#last">last</a><a class="level2" href="#locator">locator</a><a class="level2" href="#nth">nth</a><a class="level2" href="#on">on</a><a class="level2" href="#once">once</a><a class="level2" href="#owner">owner</a><a class="level2" href="#remove-listener">remove_listener</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

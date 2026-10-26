@@ -1,0 +1,385 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>安装与快速开始 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.2</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html" aria-current="page">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.2 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="安装与快速开始">安装与快速开始</h1>
+<p><a href="README.html">返回目录</a></p>
+<h2 id="环境要求">环境要求</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统</td>
+<td>Windows、Linux；macOS 尚未验证</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.10+</td>
+</tr>
+<tr>
+<td>Python 包</td>
+<td><code>ysbrowser-sdk</code> 0.11.2，导入名称 <code>ysbrowser_sdk</code></td>
+</tr>
+<tr>
+<td>配套依赖</td>
+<td>Patchright Python 1.64.2，内置 driver 1.64.1；不要单独升级</td>
+</tr>
+<tr>
+<td>浏览器</td>
+<td>提供 Context 指纹、代理、能力查询和代理检查扩展的 YSbrowser</td>
+</tr>
+<tr>
+<td>浏览器文件</td>
+<td>通过安装命令下载，或手动提供浏览器文件；同时保留目录内的依赖文件</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="安装-python-包">安装 Python 包</h2>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">ysbrowser-sdk</span>
+</code></pre></div>
+<p>更新时使用 <code>pip install --upgrade ysbrowser-sdk</code>。如果电脑上有多个 Python，请在运行脚本的同一环境里安装，也可使用 <code>python -m pip install ysbrowser-sdk</code>。</p>
+<h2 id="linux-浏览器准备">Linux 浏览器准备</h2>
+<p>Linux 使用原生 <code>chrome</code> 和对应资源。可以将本平台压缩包直链设置为
+<code>YSBROWSER_LINUX_BROWSER_URL</code>，或在命令中显式传入发布者提供的地址：</p>
+<div class="code-block"><div class="code-toolbar"><span>Shell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code>python<span class="w"> </span>-m<span class="w"> </span>ysbrowser_sdk<span class="w"> </span>install<span class="w"> </span>--url<span class="w"> </span><span class="s2">"</span><span class="nv">$YSBROWSER_LINUX_BROWSER_URL</span><span class="s2">"</span>
+</code></pre></div>
+<p>也可直接传 <code>YSBrowser(&quot;./browser/chrome&quot;)</code>。SDK 不会在 Linux 默认下载 Windows
+浏览器。首次运行需要 Chromium 的共享库、字体和沙箱依赖；WSL 中显示界面及
+播放系统语音需要可用的 WSLg 桌面/音频连接。下面的目录图和未指定地址的下载
+命令展示 Windows 安装；注册完成后，两端都可用 <code>YSBrowser()</code> 查找当前入口。</p>
+<h2 id="自动下载浏览器">自动下载浏览器</h2>
+<p>以下未指定 --url 的命令适用于 Windows。在项目工作目录执行，默认下载本包内置的 <a href="https://github.com/selfshore/YSbrowser/releases/download/6.2/chrome.7z">YSBrowser 6.2</a>：</p>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="n">-m</span> <span class="n">ysbrowser_sdk</span> <span class="n">install</span>
+</code></pre></div>
+<p>等价的控制台命令：</p>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">ysbrowser-sdk</span> <span class="n">install</span>
+</code></pre></div>
+<p>可选的 <code>--url</code> 用于覆盖内置地址，支持 <code>.7z</code> 和 <code>.zip</code>，包括 GitHub Release 的资产下载地址和 HTTP 跳转。传入的是压缩包直链，不是 Release 网页。压缩包内可以有外层目录，但必须包含当前平台唯一的入口（Windows 为 <code>chrome.exe</code>，Linux 为 <code>chrome</code>）。</p>
+<p>默认目录结构如下，<code>&lt;安装标识&gt;</code> 由安装器生成：</p>
+<div class="code-block"><div class="code-toolbar"><span>文本</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code>你的项目/
+├─ main.py
+└─ browsers/
+   ├─ installed.json
+   ├─ .install.lock
+   └─ &lt;安装标识&gt;/
+      └─ Chrome-bin/
+         ├─ chrome.exe
+         └─ 其他浏览器文件
+</code></pre></div>
+<p>安装成功后，标准输出为 JSON：</p>
+<div class="code-block"><div class="code-toolbar"><span>JSON</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"executable_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;安装得到的 chrome.exe 绝对路径&gt;"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>executable_path</code> 是字符串，可以直接传给 <code>YSBrowser</code>。返回绝对路径便于程序确定同一个文件；调用示例不依赖个人电脑路径。下载进度写入标准错误，不混入 JSON。</p>
+<p>安装结束会删除下载压缩包及临时解压目录。浏览器文件、<code>installed.json</code> 和用于并发控制的 <code>.install.lock</code> 会保留。安装目录不是用户数据目录；登录状态的保存和恢复见<a href="storage.html">配置与登录状态</a>。</p>
+<p>安装命令只负责下载、校验、解压和记录入口，不会启动浏览器。下载成功不代表浏览器版本兼容，扩展接口可用性用后面的 <code>doctor</code> 检查。</p>
+<h3 id="安装命令全部参数">安装命令全部参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--url</code></td>
+<td>内置的 YSBrowser 6.2 下载地址</td>
+<td>HTTP(S) 压缩包直链，支持查询参数；不接受 URL 内嵌用户名和密码。</td>
+</tr>
+<tr>
+<td><code>--directory</code></td>
+<td>环境变量或 <code>./browsers</code></td>
+<td>安装目录；显式传入优先，相对路径以当前工作目录为基准。</td>
+</tr>
+<tr>
+<td><code>--sha256</code></td>
+<td>不指定</td>
+<td>压缩包 SHA256，64 位十六进制字符串，不区分大小写；不匹配则失败。</td>
+</tr>
+<tr>
+<td><code>--timeout</code></td>
+<td><code>60</code></td>
+<td>网络 socket 超时，单位秒，必须大于 0；不是整个任务的总时限。</td>
+</tr>
+<tr>
+<td><code>--quiet</code></td>
+<td>不启用</td>
+<td>隐藏进度，仍输出成功结果或错误 JSON。</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="n">-m</span> <span class="n">ysbrowser_sdk</span> <span class="n">install</span> <span class="p">-</span><span class="n">-directory</span> <span class="p">./</span><span class="n">runtime</span><span class="p">/</span><span class="n">browsers</span> <span class="p">-</span><span class="n">-timeout</span> <span class="n">120</span>
+</code></pre></div>
+<p>相同 URL 已安装、入口文件存在，且指定的 SHA256 与记录一致时会复用，并设为当前版本。未指定 SHA256 时，同 URL 也会复用，不再联网检查远端是否变化。因此发布新版应使用新版本 URL；同 URL 内容变化时，应提供新的 SHA256。</p>
+<p>切换新版本不会删除旧版已解压的浏览器，也不会改变正在运行的浏览器。新的 <code>YSBrowser()</code> 实例才读取当前安装；下载、校验或解压失败时原有有效安装不变。缓存复用检查入口存在和记录的压缩包校验值，不会逐个重新校验已解压文件。</p>
+<h2 id="自定义目录和相对路径">自定义目录和相对路径</h2>
+<p><code>YSBrowser()</code> 的查找顺序为：显式 <code>executable_path</code> → <code>YSBROWSER_BROWSERS_PATH</code> 下的清单 → 当前工作目录 <code>./browsers</code> 下的清单。未找到时抛 <code>BROWSER_NOT_INSTALLED</code>，构造函数不会联网下载。</p>
+<p><code>--directory</code> 不会永久修改环境变量。使用自定义目录时，可在当前 PowerShell 会话中设置：</p>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nv">$env:YSBROWSER_BROWSERS_PATH</span> <span class="p">=</span> <span class="s2">"./runtime/browsers"</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">ysbrowser_sdk</span> <span class="n">install</span>
+<span class="n">python</span> <span class="n">main</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+<p>也可在代码中显式获取路径：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_browser_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">get_browser_path</span><span class="p">(</span><span class="s2">"./runtime/browsers"</span><span class="p">))</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+</code></pre></div>
+<p>手动解压浏览器时，直接传相对路径，不需要安装清单：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="s2">"./browser/chrome.exe"</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+</code></pre></div>
+<p>相对路径按<strong>进程工作目录</strong>解释，不是按脚本所在目录解释。IDE 和定时任务需保持工作目录一致；也可固定到脚本所在项目目录：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_browser_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">get_browser_path</span><span class="p">(</span><span class="n">project</span> <span class="o">/</span> <span class="s2">"browsers"</span><span class="p">))</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="python-安装-api">Python 安装 API</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">install_browser</span><span class="p">,</span> <span class="n">get_browser_path</span>
+</code></pre></div>
+<h3 id="install-browser">install_browser</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">install_browser</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">sha256</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+                <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td><code>str | None = None</code></td>
+<td>Windows 省略时使用内置 YSBrowser 6.2 地址；Linux 省略时读取 YSBROWSER_LINUX_BROWSER_URL，未配置则报 LINUX_BROWSER_URL_REQUIRED。也可显式提供本平台原生压缩包直链。</td>
+</tr>
+<tr>
+<td><code>directory</code></td>
+<td><code>str | Path | None = None</code></td>
+<td>安装目录；<code>None</code> 先读取 <code>YSBROWSER_BROWSERS_PATH</code>，未设置时使用 <code>./browsers</code>。</td>
+</tr>
+<tr>
+<td><code>sha256</code></td>
+<td><code>str | None = None</code></td>
+<td>预期压缩包 SHA256；64 位十六进制字符串。用于校验本次下载或匹配现有安装记录。</td>
+</tr>
+<tr>
+<td><code>timeout_s</code></td>
+<td><code>float = 60</code></td>
+<td>网络 socket 超时秒数，有限且大于 0。</td>
+</tr>
+<tr>
+<td><code>progress</code></td>
+<td><code>bool = False</code></td>
+<td>为 <code>True</code> 时向标准错误打印下载和解压进度。</td>
+</tr>
+</tbody>
+</table></div>
+<p>返回 <code>pathlib.Path</code>，指向安装成功后的本平台入口绝对路径（Windows chrome.exe / Linux chrome）；缓存命中时同样返回 Path。失败抛 <code>SDKError</code>，非法参数抛其子类 <code>ConfigurationError</code>，不会返回 <code>None</code>。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">install_browser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="n">executable</span> <span class="o">=</span> <span class="n">install_browser</span><span class="p">(</span>
+    <span class="n">directory</span><span class="o">=</span><span class="s2">"./browsers"</span><span class="p">,</span>
+    <span class="n">timeout_s</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+    <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+</code></pre></div>
+<p>这是同步函数，通常在业务启动前调用。已有异步事件循环中需要安装时，用线程调用以免阻塞其他任务：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">install_browser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.async_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">executable</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">to_thread</span><span class="p">(</span>
+        <span class="n">install_browser</span><span class="p">,</span>
+        <span class="n">directory</span><span class="o">=</span><span class="s2">"./browsers"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="get-browser-path">get_browser_path</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">get_browser_path</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span>
+</code></pre></div>
+<p>唯一参数 <code>directory</code> 与 <code>install_browser</code> 的同名参数含义相同，可按位置传入。返回当前有效安装的本平台入口绝对 Path；只读取清单和检查入口存在，不联网、不启动浏览器。无有效安装时抛 <code>BROWSER_NOT_INSTALLED</code>，清单损坏时抛 <code>BROWSER_INSTALL_INVALID</code>。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.installer</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_browser_path</span>
+
+<span class="n">executable</span> <span class="o">=</span> <span class="n">get_browser_path</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">executable</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># chrome.exe</span>
+</code></pre></div>
+<h2 id="安装常见问题">安装常见问题</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LINUX_BROWSER_URL_REQUIRED</code></td>
+<td>提供本平台原生压缩包 --url、配置 YSBROWSER_LINUX_BROWSER_URL，或直接指定已有 Linux 浏览器路径。</td>
+</tr>
+<tr>
+<td><code>BROWSER_NOT_INSTALLED</code></td>
+<td>执行安装命令；核对工作目录和 <code>YSBROWSER_BROWSERS_PATH</code>。</td>
+</tr>
+<tr>
+<td><code>BROWSER_DOWNLOAD_FAILED</code></td>
+<td>检查直链、网络、HTTP 状态、代理、权限及空间；失败可重试，重新下载，不支持断点续传。</td>
+</tr>
+<tr>
+<td><code>BROWSER_CHECKSUM_MISMATCH</code></td>
+<td>核对发布者提供的 SHA256 与版本地址；旧安装仍有效。</td>
+</tr>
+<tr>
+<td><code>BROWSER_ARCHIVE_INVALID</code></td>
+<td>需要包含当前平台唯一原生入口的压缩包（Windows chrome.exe / Linux chrome），不能是网页或安装器。</td>
+</tr>
+<tr>
+<td><code>BROWSER_ARCHIVE_UNSAFE</code></td>
+<td>不支持加密包、链接、特殊文件、越界或冲突路径，请重新生成常规发行包。</td>
+</tr>
+<tr>
+<td><code>BROWSER_EXTRACT_FAILED</code></td>
+<td>压缩包损坏、编码不支持或文件写入失败；推荐常规 LZMA/LZMA2 的 7z 或 zip，不支持 7z BCJ2 编码。</td>
+</tr>
+<tr>
+<td><code>BROWSER_INSTALL_DISK_FULL</code></td>
+<td>释放安装盘空间，下载和解压需要同时占用空间。</td>
+</tr>
+<tr>
+<td><code>BROWSER_INSTALL_BUSY</code></td>
+<td>等待同目录的安装任务结束，不要删除正在使用的锁文件。</td>
+</tr>
+<tr>
+<td><code>BROWSER_INSTALL_INVALID</code></td>
+<td>恢复安装清单，或选择新的目录重新安装。</td>
+</tr>
+<tr>
+<td><code>BROWSER_INSTALL_FAILED</code></td>
+<td>激活失败，检查目录权限、文件占用和空间；上一次有效安装不变。</td>
+</tr>
+<tr>
+<td><code>BROWSER_CAPABILITIES_UNAVAILABLE</code></td>
+<td>安装包含 SDK 配套扩展接口的浏览器版本。</td>
+</tr>
+</tbody>
+</table></div>
+<p>下载使用 Python 的网络配置，可通过 <code>HTTP_PROXY</code> / <code>HTTPS_PROXY</code> 环境变量配置代理；不使用尚未启动的 Context 的 <code>ProxyConfig</code>。</p>
+<p>正常成功、异常或取消时会清理临时目录。断电或强制结束进程可能残留 <code>.download-*</code>，确认没有安装任务运行后可删除；不要删除当前安装清单和浏览器文件。</p>
+<p>录制视频还需要 Patchright 对应的 FFmpeg；仅在使用录屏且未安装该资源时执行：</p>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="n">-m</span> <span class="n">patchright</span> <span class="n">install</span> <span class="n">ffmpeg</span>
+</code></pre></div>
+<p>接下来保存同步或异步示例为 <code>main.py</code>，在安装浏览器的同一工作目录执行 <code>python main.py</code>。默认显示浏览器，程序结束关闭会话，但安装文件保留。</p>
+<h2 id="同步程序">同步程序</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">YSBrowser</span><span class="p">,</span> <span class="n">FingerprintProfile</span><span class="p">,</span> <span class="n">ContextOptions</span><span class="p">,</span> <span class="n">Direct</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"demo"</span><span class="p">,</span>
+            <span class="n">fingerprint</span><span class="o">=</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">"demo"</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">device_memory</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+            <span class="n">proxy</span><span class="o">=</span><span class="n">Direct</span><span class="p">(),</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">ContextOptions</span><span class="p">(</span><span class="n">viewport</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">720</span><span class="p">}),</span>
+        <span class="p">)</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">set_content</span><span class="p">(</span><span class="s1">'&lt;input aria-label="姓名"&gt;&lt;button&gt;提交&lt;/button&gt;'</span><span class="p">)</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"姓名"</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">"张三"</span><span class="p">)</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"提交"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">get_by_label</span><span class="p">(</span><span class="s2">"姓名"</span><span class="p">)</span><span class="o">.</span><span class="n">input_value</span><span class="p">())</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">save_storage_state</span><span class="p">(</span><span class="s2">"state/demo.json"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p>同步对象必须在创建它的线程使用。已有正在运行的 asyncio 事件循环时，使用异步入口。</p>
+<h2 id="异步程序">异步程序</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.async_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span><span class="p">,</span> <span class="n">FingerprintProfile</span><span class="p">,</span> <span class="n">ContextOptions</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">YSBrowser</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span>
+            <span class="n">fingerprint</span><span class="o">=</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">"async-demo"</span><span class="p">),</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">ContextOptions</span><span class="p">(</span><span class="n">viewport</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">720</span><span class="p">}),</span>
+        <span class="p">)</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">set_content</span><span class="p">(</span><span class="s1">'&lt;button onclick="this.textContent=</span><span class="se">\'</span><span class="s1">完成</span><span class="se">\'</span><span class="s1">"&gt;开始&lt;/button&gt;'</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"开始"</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">"button"</span><span class="p">)</span><span class="o">.</span><span class="n">inner_text</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">diagnostics</span><span class="p">())</span>  <span class="c1"># 此方法不加 await</span>
+        <span class="n">mouse</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">mouse</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>  <span class="c1"># 工厂不加 await</span>
+        <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">synchronize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">duration_s</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">elapsed_s</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="命令行">命令行</h2>
+<p>安装后提供 <code>ysbrowser-sdk</code> 命令，也可使用 <code>python -m ysbrowser_sdk</code>。</p>
+<h3 id="info">info</h3>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="n">-m</span> <span class="n">ysbrowser_sdk</span> <span class="n">info</span>
+</code></pre></div>
+<p>不启动浏览器。成功时向标准输出写入 JSON：</p>
+<div class="code-block"><div class="code-toolbar"><span>JSON</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"sdk_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.11.2"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"patchright_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.64.2"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"driver_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.64.1"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"adapter_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patchright-python-1.64.2-driver-1.64.1"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"validated_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"browser_bundled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="doctor">doctor</h3>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="n">-m</span> <span class="n">ysbrowser_sdk</span> <span class="n">doctor</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>必填</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--executable</code></td>
+<td>否</td>
+<td>配套浏览器可执行文件路径，如 <code>./browser/chrome.exe</code>；省略时读取安装清单</td>
+</tr>
+<tr>
+<td><code>--headless</code></td>
+<td>否</td>
+<td>无界面启动；省略时显示浏览器</td>
+</tr>
+</tbody>
+</table></div>
+<p>临时启动浏览器和 Context，查询能力、指纹锁定状态、代理状态，然后关闭。输出包含 <code>info</code> 字段及 <code>capabilities</code>、<code>browser</code>、<code>context_gpu</code>、<code>server_gpu_backend</code>、<code>media_router</code>、<code>server_gpu_profile</code>、<code>context_count</code>、<code>connected</code>、<code>contexts</code>、<code>custom_cdp</code>、<code>fingerprint_locked</code>、<code>proxy_status</code>。各结构见<a href="browser-context.html">浏览器与 Context</a>和<a href="proxy.html">代理</a>。命令不验证某个代理供应商是否可用。</p>
+<p>成功退出码为 <code>0</code>；捕获到 SDK 异常时输出异常 JSON 并以 <code>1</code> 退出；命令行参数错误由参数解析器报告并以 <code>2</code> 退出。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.2 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#环境要求">环境要求</a><a class="level2" href="#安装-python-包">安装 Python 包</a><a class="level2" href="#linux-浏览器准备">Linux 浏览器准备</a><a class="level2" href="#自动下载浏览器">自动下载浏览器</a><a class="level3" href="#安装命令全部参数">安装命令全部参数</a><a class="level2" href="#自定义目录和相对路径">自定义目录和相对路径</a><a class="level2" href="#python-安装-api">Python 安装 API</a><a class="level3" href="#install-browser">install_browser</a><a class="level3" href="#get-browser-path">get_browser_path</a><a class="level2" href="#安装常见问题">安装常见问题</a><a class="level2" href="#同步程序">同步程序</a><a class="level2" href="#异步程序">异步程序</a><a class="level2" href="#命令行">命令行</a><a class="level3" href="#info">info</a><a class="level3" href="#doctor">doctor</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>
