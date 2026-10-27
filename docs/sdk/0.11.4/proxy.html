@@ -1,0 +1,371 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>代理与出口检查 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.4</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html" aria-current="page">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.4 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="代理与出口检查">代理与出口检查</h1>
+<p><a href="README.html">返回目录</a></p>
+<h2 id="配置代理">配置代理</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span><span class="p">,</span> <span class="n">ProxyConfig</span><span class="p">,</span> <span class="n">ProxyCheck</span>
+
+<span class="n">proxy</span> <span class="o">=</span> <span class="n">ProxyConfig</span><span class="p">(</span>
+    <span class="n">server</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PROXY_SERVER"</span><span class="p">],</span>  <span class="c1"># 例如 http://proxy.example.com:8000</span>
+    <span class="n">username</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PROXY_USERNAME"</span><span class="p">],</span>
+    <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"PROXY_PASSWORD"</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="n">YSBrowser</span><span class="p">()</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span>
+        <span class="n">proxy</span><span class="o">=</span><span class="n">proxy</span><span class="p">,</span>
+        <span class="n">check</span><span class="o">=</span><span class="n">ProxyCheck</span><span class="p">(</span><span class="n">check_url</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"IP_CHECK_URL"</span><span class="p">]),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">proxy_status</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>无认证代理省略 <code>username</code> 和 <code>password</code>；不要把账号密码拼在 <code>server</code> URL 内。<code>IP_CHECK_URL</code> 应为自己可访问、返回请求出口 IP 的检查服务，格式见下文。</p>
+<h3 id="proxyconfig">ProxyConfig</h3>
+<p><code>ProxyConfig(server, username=None, password=None, bypass_list=None)</code> 为不可重新赋值字段的数据类。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server</code></td>
+<td><code>str</code>，必填</td>
+<td><code>http://host:port</code>、<code>https://host:port</code> 或 <code>socks5://host:port</code>；端口 1–65535，不能带路径、查询、fragment、空白或内嵌账号密码</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td><code>str | None = None</code></td>
+<td>代理用户名，与密码同时提供或同时省略</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td><code>str | None = None</code></td>
+<td>代理密码</td>
+</tr>
+<tr>
+<td><code>bypass_list</code></td>
+<td><code>str | None = None</code></td>
+<td>Chromium 代理绕过规则，例如 <code>&quot;localhost;127.0.0.1;*.internal.example&quot;</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>需要让本机回环请求也经过代理时，按用途使用 <code>bypass_list=&quot;&lt;-loopback&gt;&quot;</code> 关闭隐式回环绕过规则。具体主机能否通过代理访问取决于代理服务。</p>
+<p><code>proxy.to_cdp() -&gt; dict</code> 返回原生字段 <code>proxyServer</code>、可选 <code>username</code>、<code>password</code>、<code>bypassList</code>；此结果含实际凭据。该方法只转换数据，不连接代理。</p>
+<h3 id="direct">Direct</h3>
+<p><code>Direct()</code> 显式直连，无构造字段。<code>Direct().to_cdp()</code> 返回 <code>{&quot;proxyServer&quot;: &quot;direct://&quot;}</code>。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direct</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">proxy</span><span class="o">=</span><span class="n">Direct</span><span class="p">())</span>
+<span class="n">context</span><span class="o">.</span><span class="n">set_proxy</span><span class="p">(</span><span class="n">Direct</span><span class="p">())</span>
+</code></pre></div>
+<p><code>YSBrowser(default_proxy=...)</code> 设置新 Context 的默认代理；<code>new_context(proxy=...)</code> 可覆盖。SDK 不会自动提取供应商代理、轮换代理或切回直连。</p>
+<h2 id="创建或切换时检查-proxycheck">创建或切换时检查：ProxyCheck</h2>
+<p><code>ProxyCheck(check_url, expected_exit_ip=None, timeout_ms=10000, rollback_on_failure=True)</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>check_url</code></td>
+<td><code>str</code>，必填</td>
+<td>可匿名 GET 的 HTTP(S) 出口检查 URL，不含内嵌认证或 fragment</td>
+</tr>
+<tr>
+<td><code>expected_exit_ip</code></td>
+<td><code>str | None = None</code></td>
+<td>预期的合法 IPv4/IPv6；省略则只验证返回有效 IP，不固定出口</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td><code>int = 10000</code></td>
+<td>整数，1000–60000 毫秒</td>
+</tr>
+<tr>
+<td><code>rollback_on_failure</code></td>
+<td><code>bool = True</code></td>
+<td>切换检查失败后是否恢复旧代理配置</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>to_cdp() -&gt; dict</code> 转为 <code>checkUrl</code>、<code>checkTimeoutMs</code>、<code>rollbackOnFailure</code> 和可选 <code>expectedExitIp</code>。创建和切换时使用 <code>check=ProxyCheck(...)</code>；检查失败通常抛 <code>ProxyCheckError</code>。滚动出口代理不宜固定 <code>expected_exit_ip</code>。</p>
+<h3 id="检查服务响应">检查服务响应</h3>
+<p>最终响应需为 HTTP 2xx，正文不超过 65536 字节，并能解析合法 IP。推荐返回：</p>
+<div class="code-block"><div class="code-toolbar"><span>JSON</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="p">{</span><span class="nt">"ip"</span><span class="p">:</span><span class="s2">"203.0.113.10"</span><span class="p">}</span>
+</code></pre></div>
+<p>这里的 IP 仅是格式示例；服务应返回它实际观察到的请求来源 IP。也接受顶层 <code>query</code> / <code>origin</code> 字符串、JSON 字符串、纯文本 IP 和 IPv6。不能只放在 <code>data.ip</code> 中，也不能返回 HTML 登录页或空正文。</p>
+<p>原生检查使用当前 Context 网络配置，绕过缓存，不附带站点 Cookie；检查服务不应要求站点登录。代理认证由 <code>ProxyConfig</code> 提供。</p>
+<h2 id="运行期间切换">运行期间切换</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">set_proxy</span><span class="p">(</span>
+    <span class="n">new_proxy</span><span class="p">,</span>
+    <span class="n">check</span><span class="o">=</span><span class="n">ProxyCheck</span><span class="p">(</span><span class="n">check_url</span><span class="o">=</span><span class="n">check_url</span><span class="p">),</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">"drain"</span><span class="p">,</span>
+    <span class="n">drain_timeout_ms</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>set_proxy(proxy, *, check=None, mode=None, drain_timeout_ms=None) -&gt; ProxyStatus</code>；异步入口使用 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>proxy</code></td>
+<td><code>ProxyConfig | Direct</code>，必填</td>
+<td>目标网络配置</td>
+</tr>
+<tr>
+<td><code>check</code></td>
+<td><code>ProxyCheck | None</code></td>
+<td>可选出口检查，失败按配置回滚</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td><code>str | None = None</code></td>
+<td><code>None</code>、<code>drain</code> 或 <code>immediate</code>，区别如下</td>
+</tr>
+<tr>
+<td><code>drain_timeout_ms</code></td>
+<td><code>int | None = None</code></td>
+<td><code>drain</code> 模式的旧请求等待时间，1–60000，省略使用 10000；不包含出口检查耗时</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>行为</th>
+<th>使用条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>原有设置行为，不提供新请求暂停屏障</td>
+<td>调用方自行安排空闲时机</td>
+</tr>
+<tr>
+<td><code>drain</code></td>
+<td>暂停新请求，等待旧请求结束，再切换和检查</td>
+<td>适合允许等待在途请求的业务</td>
+</tr>
+<tr>
+<td><code>immediate</code></td>
+<td>暂停新请求，取消旧请求/连接，然后切换和检查</td>
+<td>允许当前请求失败的业务</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>drain</code> / <code>immediate</code> 需要浏览器支持 <code>proxySwitchBarrier</code>。<code>drain</code> 超时抛 <code>PROXY_DRAIN_TIMEOUT</code>，保留旧配置并恢复暂停请求；长连接可能使等待一直无法结束。</p>
+<p>切换成功或检查回滚完成后再放行新请求。已取消请求不会自动重发；取消不能证明服务端没有处理提交。调用期间页面定时器与自动化超时继续计时。取消 Python <code>await</code> 不等于撤回浏览器已收到的切换命令。</p>
+<p>切换范围针对浏览器 Context 默认分区的原生网络请求。独立 Python <code>requests/httpx</code>、原生 <code>APIRequestContext</code>、WebRTC 等不能据此认定共用同一切换机制。</p>
+<h2 id="只检查当前代理">只检查当前代理</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">check_proxy</span><span class="p">(</span><span class="n">check_url</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ok</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">stale</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"当前出口："</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">exit_ip</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">network_error</span><span class="p">)</span>
+</code></pre></div>
+<p><code>check_proxy(check_url, *, expected_exit_ip=None, timeout_ms=10000) -&gt; ProxyHealthResult</code>；异步入口使用 <code>await</code>。参数格式与 <code>ProxyCheck</code> 相同，但没有回滚开关：它不重新设置代理，也不主动关闭连接。</p>
+<p>正常的网络/HTTP 检查失败以 <code>ok=False</code> 返回；协议调用或生命周期错误仍会抛异常。结果更新 <code>proxy_status().health</code>，不会覆盖配置时的历史 <code>check_state</code>。</p>
+<h3 id="proxyhealthresult-全部字段">ProxyHealthResult 全部字段</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ok</code></td>
+<td><code>bool</code></td>
+<td>本次检查是否成功</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>str</code></td>
+<td>结果分类，如 <code>success</code>、<code>network_error</code>、<code>timeout</code>、<code>http_error</code>、<code>invalid_ip</code>、<code>exit_ip_mismatch</code>；还可能有取消或被新操作替代的分类</td>
+</tr>
+<tr>
+<td><code>check_id</code></td>
+<td><code>str</code></td>
+<td>本次检查标识</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td><code>str</code></td>
+<td>检查关联的代理配置版本，按不透明标识比较</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td><code>bool</code></td>
+<td>返回时是否已被更新的配置/检查替代；<code>True</code> 不应用于判定当前代理</td>
+</tr>
+<tr>
+<td><code>checked_at</code></td>
+<td><code>float</code></td>
+<td>检查时间，Unix 毫秒</td>
+</tr>
+<tr>
+<td><code>elapsed_ms</code></td>
+<td><code>float</code></td>
+<td>本次检查耗时，毫秒</td>
+</tr>
+<tr>
+<td><code>exit_ip</code></td>
+<td><code>str | None</code></td>
+<td>解析到的出口 IP</td>
+</tr>
+<tr>
+<td><code>http_status</code></td>
+<td><code>int | None</code></td>
+<td>HTTP 状态码，没有响应时可为 <code>None</code></td>
+</tr>
+<tr>
+<td><code>network_error</code></td>
+<td><code>str | None</code></td>
+<td>浏览器网络错误码或说明</td>
+</tr>
+</tbody>
+</table></div>
+<p>调用 <code>result.to_dict()</code> 返回全部字段字典。<code>ProxyHealthResult.from_cdp(value)</code> 可将原生 camelCase 结果转换为对象，不执行检查。</p>
+<h2 id="查询状态-proxystatus">查询状态：ProxyStatus</h2>
+<p><code>context.proxy_status() -&gt; ProxyStatus</code>；异步入口使用 <code>await</code>。查询配置及已有检查记录，本身不会请求出口服务。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>str</code></td>
+<td><code>direct</code>、<code>fixed_servers</code>、<code>system</code>，未知原生值可显示 <code>unknown</code>；表示路由配置</td>
+</tr>
+<tr>
+<td><code>check_state</code></td>
+<td><code>str</code></td>
+<td>配置/切换时的检查记录，见下表</td>
+</tr>
+<tr>
+<td><code>context_id</code></td>
+<td><code>str</code></td>
+<td>浏览器 Context ID</td>
+</tr>
+<tr>
+<td><code>auth_configured</code></td>
+<td><code>bool</code></td>
+<td>是否配置代理认证</td>
+</tr>
+<tr>
+<td><code>runtime_override</code></td>
+<td><code>bool</code></td>
+<td>是否存在运行时代理覆盖</td>
+</tr>
+<tr>
+<td><code>last_exit_ip</code></td>
+<td><code>str | None</code></td>
+<td>最近配置检查解析到的出口</td>
+</tr>
+<tr>
+<td><code>last_http_status</code></td>
+<td><code>int | None</code></td>
+<td>最近配置检查的 HTTP 状态</td>
+</tr>
+<tr>
+<td><code>last_rollback</code></td>
+<td><code>bool | None</code></td>
+<td>最近配置检查失败后是否回滚</td>
+</tr>
+<tr>
+<td><code>proxy_server</code></td>
+<td><code>str</code></td>
+<td>已去除凭据等信息的代理地址，直连为 <code>direct://</code></td>
+</tr>
+<tr>
+<td><code>check_url</code></td>
+<td><code>str | None</code></td>
+<td>已去除路径/query 等信息的检查来源地址</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td><code>str | None</code></td>
+<td>当前配置版本标识</td>
+</tr>
+<tr>
+<td><code>health_check_in_progress</code></td>
+<td><code>bool</code></td>
+<td>是否有独立健康检查正在执行</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td><code>ProxyHealthResult | None</code></td>
+<td>最近独立健康检查结果</td>
+</tr>
+<tr>
+<td><code>last_error_kind</code></td>
+<td><code>str | None</code></td>
+<td>最近配置检查错误分类，如 <code>proxy_auth_error</code>、<code>http_error</code>、<code>network_error</code>、<code>timeout</code>、<code>invalid_ip</code>、<code>exit_ip_mismatch</code>、<code>cancelled</code>、<code>unknown</code></td>
+</tr>
+<tr>
+<td><code>last_network_error</code></td>
+<td><code>str | None</code></td>
+<td>最近配置检查提取的 <code>net::ERR_...</code> 错误码</td>
+</tr>
+<tr>
+<td><code>switch_in_progress</code></td>
+<td><code>bool</code></td>
+<td>是否处于有屏障的代理切换过程</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><code>check_state</code></th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unchecked</code></td>
+<td>没有配置检查记录</td>
+</tr>
+<tr>
+<td><code>checking</code></td>
+<td>配置检查进行中</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>最近一次配置检查成功</td>
+</tr>
+<tr>
+<td><code>failed_rolled_back</code></td>
+<td>最近配置检查失败，已回滚</td>
+</tr>
+<tr>
+<td><code>failed_no_rollback</code></td>
+<td>最近配置检查失败，未回滚</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>status.to_dict()</code> 返回全部字段，<code>health</code> 转成嵌套字典。<code>ProxyStatus.from_cdp(status)</code> 接收原生状态字典，转换字段、计算 <code>check_state</code> 并对地址做裁剪，不访问网络。</p>
+<p><code>check_state=&quot;success&quot;</code> 只说明历史检查成功。代理随后失效或页面导航失败时，该字段仍可能保持成功；需要调用 <code>check_proxy()</code> 获取新结果。回滚后的 <code>last_exit_ip</code> 等字段可能描述失败尝试，不保证是回滚后的当前出口。SDK 没有后台心跳、自动到期通知或自动切换代理。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.4 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#配置代理">配置代理</a><a class="level3" href="#proxyconfig">ProxyConfig</a><a class="level3" href="#direct">Direct</a><a class="level2" href="#创建或切换时检查-proxycheck">创建或切换时检查：ProxyCheck</a><a class="level3" href="#检查服务响应">检查服务响应</a><a class="level2" href="#运行期间切换">运行期间切换</a><a class="level2" href="#只检查当前代理">只检查当前代理</a><a class="level3" href="#proxyhealthresult-全部字段">ProxyHealthResult 全部字段</a><a class="level2" href="#查询状态-proxystatus">查询状态：ProxyStatus</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

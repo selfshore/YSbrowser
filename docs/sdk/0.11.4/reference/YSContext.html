@@ -1,0 +1,683 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YSContext · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.4</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html" aria-current="page">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.4 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="yscontext">YSContext</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../browser-context.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">YSBrowser</span><span class="p">,</span> <span class="n">ContextOptions</span><span class="p">,</span> <span class="n">FingerprintProfile</span><span class="p">,</span> <span class="n">Direct</span>
+
+<span class="c1"># browser 为已启动的 YSBrowser；使用完后关闭 browser。</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"account-001"</span><span class="p">)</span>
+<span class="c1"># page = context.new_page()，仅在需要页面的方法示例前创建。</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">YSContext</span><span class="p">(</span><span class="n">owner</span><span class="p">:</span> <span class="s1">'YSBrowser'</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="s1">'BrowserContext'</span><span class="p">,</span> <span class="n">context_id</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>owner</code></td>
+<td>YSBrowser</td>
+<td><code>必填</code></td>
+<td>所属浏览器；YSContext 由 browser.new_context() 创建，不建议直接构造。</td>
+</tr>
+<tr>
+<td><code>raw</code></td>
+<td>BrowserContext</td>
+<td><code>必填</code></td>
+<td>原生 Context；由 SDK 管理其归属与生命周期。</td>
+</tr>
+<tr>
+<td><code>context_id</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>相关浏览器 Context ID；无相关 Context 时为 None。</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>当前浏览器中唯一的 Context 名称；创建时 None 自动命名，查询/关闭时须为已有名称。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="实例属性">实例属性</h2>
+<p><code>name: str</code> 为 SDK 名称；<code>context_id: str</code> 为浏览器 ID；<code>raw</code> 是原生 BrowserContext。通过 browser.new_context 创建，不手动组装构造参数。</p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#yscontext-capture-diagnostics">YSContext.capture_diagnostics</a></li>
+<li><a href="#yscontext-check-proxy">YSContext.check_proxy</a></li>
+<li><a href="#yscontext-close">YSContext.close</a></li>
+<li><a href="#yscontext-diagnostics">YSContext.diagnostics</a></li>
+<li><a href="#yscontext-export-config">YSContext.export_config</a></li>
+<li><a href="#yscontext-fingerprint-status">YSContext.fingerprint_status</a></li>
+<li><a href="#yscontext-mouse">YSContext.mouse</a></li>
+<li><a href="#yscontext-new-page">YSContext.new_page</a></li>
+<li><a href="#yscontext-proxy-status">YSContext.proxy_status</a></li>
+<li><a href="#yscontext-restore-storage-state">YSContext.restore_storage_state</a></li>
+<li><a href="#yscontext-save-storage-state">YSContext.save_storage_state</a></li>
+<li><a href="#yscontext-set-fingerprint">YSContext.set_fingerprint</a></li>
+<li><a href="#yscontext-set-proxy">YSContext.set_proxy</a></li>
+<li><a href="#yscontext-start-diagnostics">YSContext.start_diagnostics</a></li>
+<li><a href="#yscontext-stop-diagnostics">YSContext.stop_diagnostics</a></li>
+</ul>
+<h2 id="yscontext-capture-diagnostics">YSContext.capture_diagnostics</h2>
+<p>在 directory 下新建独立诊断目录，返回包含 report_path、pages、errors、trace 等的字典。page 可限定页面，max_pages 为 1–100，timeout_ms 为每次截图的正有限超时。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">capture_diagnostics</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="s1">'str | Path'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">screenshot</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">full_page</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">stop_trace</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">max_pages</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="s1">'float'</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'dict'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>directory</code></td>
+<td>str | Path</td>
+<td><code>必填</code></td>
+<td>诊断输出父目录；每次生成独立子目录，返回实际路径。</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>Page | None</td>
+<td><code>None</code></td>
+<td>当前 Context 的原生页面；context.mouse 和鼠标构造必须提供；截图采集省略时选择 Context 页面。</td>
+</tr>
+<tr>
+<td><code>screenshot</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>是否保存选中页面的 PNG 截图。</td>
+</tr>
+<tr>
+<td><code>full_page</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否包含页面完整可滚动区域。</td>
+</tr>
+<tr>
+<td><code>stop_trace</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>结束已启动的 SDK trace 并写文件；False 本次不保存 trace，继续录制。</td>
+</tr>
+<tr>
+<td><code>max_pages</code></td>
+<td>int</td>
+<td><code>5</code></td>
+<td>最多截图的页面数，1–100。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>float</td>
+<td><code>5000</code></td>
+<td>每次截图的正有限毫秒超时，不是总采集预算。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回诊断文件清单 dict；<a href="../diagnostics-errors.html#返回字段">pages/errors/trace 等嵌套结构</a>。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">report</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">capture_diagnostics</span><span class="p">(</span><span class="s2">"diagnostics"</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">screenshot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s2">"report_path"</span><span class="p">],</span> <span class="n">report</span><span class="p">[</span><span class="s2">"pages"</span><span class="p">])</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">report</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">capture_diagnostics</span><span class="p">(</span><span class="s2">"diagnostics"</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">screenshot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-check-proxy">YSContext.check_proxy</h2>
+<p>通过当前 Context 做独立出口检查。check_url 为 HTTP(S) URL；timeout_ms 为 1000–60000；expected_exit_ip 可省略。返回 ProxyHealthResult，普通检查失败以 ok=False 表示；命令失败抛 SDKError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">check_proxy</span><span class="p">(</span><span class="n">check_url</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expected_exit_ip</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ProxyHealthResult'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-2">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>check_url</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>HTTP(S) 出口检查 URL；不含内嵌账号密码或 fragment；需返回支持格式的出口 IP。</td>
+</tr>
+<tr>
+<td><code>expected_exit_ip</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>期望的 IPv4/IPv6；None 不做固定 IP 比对。轮换出口不要盲目固定。</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>int</td>
+<td><code>10000</code></td>
+<td>代理检查超时，整数 1000–60000 毫秒。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 <a href="ProxyHealthResult.html">ProxyHealthResult</a>。普通检查失败以 ok=False 表示，命令失败抛 SDKError。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">health</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">check_proxy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"IP_CHECK_URL"</span><span class="p">],</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">health</span><span class="o">.</span><span class="n">ok</span><span class="p">,</span> <span class="n">health</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="n">health</span><span class="o">.</span><span class="n">exit_ip</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">health</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">check_proxy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"IP_CHECK_URL"</span><span class="p">],</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-close">YSContext.close</h2>
+<p>关闭当前 Context 的所有页面和采集器，并从浏览器名称索引移除。返回 None。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'None'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-3">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-3">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-3">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-3">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-diagnostics">YSContext.diagnostics</h2>
+<p>返回 Context 当前状态与近期事件摘要，含 context_id、closed、browser_connected、versions、recent_network_errors、recent_page_events 等字段。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">diagnostics</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-4">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-4">返回值</h3>
+<p>返回 Context 状态 dict；<a href="../diagnostics-errors.html#读取-context-状态">全部字段</a>。</p>
+<h3 id="示例-4">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">info</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">diagnostics</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"closed"</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="s2">"recent_network_errors"</span><span class="p">])</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">info</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">diagnostics</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-4">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-export-config">YSContext.export_config</h2>
+<p>返回可复用配置 dict；path 非 None 时同时写 JSON。两个 include 开关决定是否包含代理凭据和敏感选项。外部修改导致配置无法确认时抛 CONFIG_CHANGED_EXTERNALLY。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">export_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s1">'str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include_proxy_credentials</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">include_sensitive_options</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-5">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>str | Path | None</td>
+<td><code>None</code></td>
+<td>读写的 JSON 路径；省略的导出/保存只返回字典；load/save 必须提供路径。</td>
+</tr>
+<tr>
+<td><code>include_proxy_credentials</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否在配置中写出代理账号密码；默认省略并标记需要补齐。</td>
+</tr>
+<tr>
+<td><code>include_sensitive_options</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否写出网站认证、客户端证书、附加请求头等敏感选项。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-5">返回值</h3>
+<p>返回配置 dict；<a href="../storage.html#json-格式">schema 1/2、proxy 和 options 的嵌套结构</a>。</p>
+<h3 id="示例-5">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">export_config</span><span class="p">(</span><span class="s2">"config/account.json"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"schema_version"</span><span class="p">])</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">export_config</span><span class="p">(</span><span class="s2">"config/account.json"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-5">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-fingerprint-status">YSContext.fingerprint_status</h2>
+<p>返回原生状态 dict，主要字段 locked: bool、profile: dict；profile 使用 camelCase 字段。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">fingerprint_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-6">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-6">返回值</h3>
+<p>返回 dict：locked（bool，是否锁定）、profile（dict，camelCase 指纹字段）。</p>
+<h3 id="示例-6">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">fingerprint_status</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s2">"locked"</span><span class="p">])</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">fingerprint_status</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-6">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-mouse">YSContext.mouse</h2>
+<p>创建使用随包 Transformer 的鼠标适配器。Page 归属与关闭状态会被检查；不会替换原生 page.mouse。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="s1">'Page'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="s1">'TrajectoryModel | str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fallback</span><span class="p">:</span> <span class="s1">'str'</span> <span class="o">=</span> <span class="s1">'error'</span><span class="p">,</span> <span class="n">viewport</span><span class="p">:</span> <span class="s1">'tuple[float, float] | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">model_options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TrajectoryMouse'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-7">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page</code></td>
+<td>Page</td>
+<td><code>必填</code></td>
+<td>当前 Context 的原生页面；context.mouse 和鼠标构造必须提供；截图采集省略时选择 Context 页面。</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>TrajectoryModel | str | Path | None</td>
+<td><code>None</code></td>
+<td>模型实例或含 model.json、vector_field.onnx 的目录；None 使用随包模型。</td>
+</tr>
+<tr>
+<td><code>fallback</code></td>
+<td>str</td>
+<td><code>'error'</code></td>
+<td>只接受 error。范围/采样错误会抛异常，不替换为其他算法。</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>tuple[float, float] | None</td>
+<td><code>None</code></td>
+<td>轨迹边界 (width,height)，均为正数；鼠标省略时读取 Page.viewport_size，离线生成省略则不裁定视口。</td>
+</tr>
+<tr>
+<td><code>model_options</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>steps、threads、drag_source、move_source、click_source、allow_extrapolation；model 为实例时须在实例构造时配置。</td>
+</tr>
+<tr>
+<td><code>steps</code>（展开）</td>
+<td>int</td>
+<td><code>24</code></td>
+<td>ODE 积分步数，4–128；值增大通常增加耗时，不保证效果提高。</td>
+</tr>
+<tr>
+<td><code>threads</code>（展开）</td>
+<td>int</td>
+<td><code>2</code></td>
+<td>ONNX CPU 线程数，1–16。</td>
+</tr>
+<tr>
+<td><code>drag_source</code>（展开）</td>
+<td>str</td>
+<td><code>'auto'</code></td>
+<td>auto 按范围选择 user_mousedata/bogazici/sapimouse，或显式指定其中一个来源。</td>
+</tr>
+<tr>
+<td><code>move_source</code>（展开）</td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>普通移动条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>click_source</code>（展开）</td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>接近点击和按住时长条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>allow_extrapolation</code>（展开）</td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>允许距离/方向超出已观察范围；True 不代表范围外质量已验证。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-7">返回值</h3>
+<p>返回 <a href="TrajectoryMouse.html">TrajectoryMouse</a>，工厂本身不移动鼠标。</p>
+<h3 id="示例-7">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">mouse</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">mouse</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">move_between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-7">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-new-page">YSContext.new_page</h2>
+<p>创建当前 Context 的页面并返回原生 Page。已关闭或断线时抛 SDKError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">new_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'Page'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-8">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-8">返回值</h3>
+<p>返回原生 <a href="../native-reference/Page.html">Page</a>，其操作遵循 Patchright 同步/异步入口。</p>
+<h3 id="示例-8">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-8">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-proxy-status">YSContext.proxy_status</h2>
+<p>返回 ProxyStatus，仅查询配置与既有检查结果，不发起出口请求。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">proxy_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'ProxyStatus'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-9">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-9">返回值</h3>
+<p>返回 <a href="ProxyStatus.html">ProxyStatus</a>，字段与嵌套 health 见类型表。</p>
+<h3 id="示例-9">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">proxy_status</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">check_state</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">health</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">proxy_status</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-9">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-restore-storage-state">YSContext.restore_storage_state</h2>
+<p>state 为原生存储字典或 JSON 文件路径。要求 Context 尚无页面；返回 None。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">restore_storage_state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="s1">'dict[str, Any] | str | Path'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-10">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>dict[str, Any] | str | Path</td>
+<td><code>必填</code></td>
+<td>cookies/origins 结构或其 JSON 路径；仅能恢复到尚无页面的 Context。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-10">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-10">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">restore_storage_state</span><span class="p">(</span><span class="s2">"state/account.json"</span><span class="p">)</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">restore_storage_state</span><span class="p">(</span><span class="s2">"state/account.json"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-10">注意事项</h3>
+<p>必须在 Context 尚无页面时恢复；之后再 new_page。只恢复 cookies/origins，不恢复 SessionStorage 或页面现场。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-save-storage-state">YSContext.save_storage_state</h2>
+<p>返回 cookies/origins 结构；默认包含 IndexedDB。path 为可选 JSON 路径。文件与 Context 错误包装为 STORAGE_SAVE_FAILED。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">save_storage_state</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s1">'str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">indexed_db</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'dict[str, Any]'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-11">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>str | Path | None</td>
+<td><code>None</code></td>
+<td>读写的 JSON 路径；省略的导出/保存只返回字典；load/save 必须提供路径。</td>
+</tr>
+<tr>
+<td><code>indexed_db</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>是否把 IndexedDB 包含在登录状态中；不包括 SessionStorage。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-11">返回值</h3>
+<p>返回 cookies/origins 字典；<a href="../storage.html#保存登录状态">完整结构与字段</a>。</p>
+<h3 id="示例-11">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">state</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">save_storage_state</span><span class="p">(</span><span class="s2">"state/account.json"</span><span class="p">,</span> <span class="n">indexed_db</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"cookies"</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"origins"</span><span class="p">]))</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">state</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">save_storage_state</span><span class="p">(</span><span class="s2">"state/account.json"</span><span class="p">,</span> <span class="n">indexed_db</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-11">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-set-fingerprint">YSContext.set_fingerprint</h2>
+<p>profile 为完整 FingerprintProfile。必须在 renderer 创建前设置，成功返回 None，锁定时抛 FingerprintLockedError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">set_fingerprint</span><span class="p">(</span><span class="n">profile</span><span class="p">:</span> <span class="s1">'FingerprintProfile'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-12">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>profile</code></td>
+<td>FingerprintProfile</td>
+<td><code>必填</code></td>
+<td>完整配置；须在指纹锁定前设置。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-12">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-12">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">set_fingerprint</span><span class="p">(</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">"account-001"</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">set_fingerprint</span><span class="p">(</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">"account-001"</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="注意事项-12">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-set-proxy">YSContext.set_proxy</h2>
+<p>proxy 为 ProxyConfig 或 Direct；check 为可选 ProxyCheck。mode 支持 None、drain、immediate。返回本次操作后的 ProxyStatus；检查失败抛 ProxyCheckError，切换屏障错误可抛 SDKError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">set_proxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">:</span> <span class="s1">'ProxyConfig | Direct'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">check</span><span class="p">:</span> <span class="s1">'ProxyCheck | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="s1">'str | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">drain_timeout_ms</span><span class="p">:</span> <span class="s1">'int | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ProxyStatus'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-13">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>proxy</code></td>
+<td>ProxyConfig | Direct</td>
+<td><code>必填</code></td>
+<td>代理或显式直连策略；创建时 None 按 config/浏览器默认配置决定，set_proxy 不接受 None。</td>
+</tr>
+<tr>
+<td><code>check</code></td>
+<td>ProxyCheck | None</td>
+<td><code>None</code></td>
+<td>创建/切换时的一次出口检查；None 不执行该次检查。</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>set_proxy 的切换策略：None 旧行为、drain 等旧请求结束、immediate 取消旧请求；后两者需浏览器能力支持。</td>
+</tr>
+<tr>
+<td><code>drain_timeout_ms</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>drain 等待上限，1–60000 毫秒，不包含出口检查时间。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-13">返回值</h3>
+<p>返回 <a href="ProxyStatus.html">ProxyStatus</a>，检查失败可能抛 ProxyCheckError；不是简单 bool。</p>
+<h3 id="示例-13">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">set_proxy</span><span class="p">(</span><span class="n">Direct</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"drain"</span><span class="p">,</span> <span class="n">drain_timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">status</span><span class="o">.</span><span class="n">generation</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">set_proxy</span><span class="p">(</span><span class="n">Direct</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"drain"</span><span class="p">,</span> <span class="n">drain_timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-13">注意事项</h3>
+<p>drain/immediate 需要 proxySwitchBarrier；取消 await 不等于撤销浏览器端操作。immediate 不自动重放已取消业务请求。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-start-diagnostics">YSContext.start_diagnostics</h2>
+<p>开始有界事件采集，返回 None。max_events 为 1–10000；trace 开启截图/DOM trace；include_messages 控制正文；runtime_events 控制 Runtime 事件。重复开始抛 DIAGNOSTICS_ACTIVE。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">start_diagnostics</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">include_messages</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">max_events</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">trace</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">runtime_events</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-14">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include_messages</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否保存 console/异常正文；单条最多 2000 字符。</td>
+</tr>
+<tr>
+<td><code>max_events</code></td>
+<td>int</td>
+<td><code>100</code></td>
+<td>事件缓冲上限，1–10000，超出后保留最近事件。</td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否开始包含截图与 DOM 快照的 trace。</td>
+</tr>
+<tr>
+<td><code>runtime_events</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>是否启用页面 CDP Runtime 事件采集；False 使用原生事件，可能不完整。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-14">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-14">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">start_diagnostics</span><span class="p">(</span><span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_events</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">include_messages</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">start_diagnostics</span><span class="p">(</span><span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_events</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">include_messages</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-14">注意事项</h3>
+<p>重复开始会抛 DIAGNOSTICS_ACTIVE。需要 trace 文件时先 capture，再 stop；stop 会丢弃未保存的 SDK trace。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-stop-diagnostics">YSContext.stop_diagnostics</h2>
+<p>停止事件收集并解除监听，返回 None。尚未 capture 的 trace 会被丢弃。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="n">stop_diagnostics</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'None'</span>
+</code></pre></div>
+<p><strong>异步入口：需要 await。同步入口：直接调用。</strong></p>
+<h3 id="参数-15">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-15">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-15">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">stop_diagnostics</span><span class="p">()</span>
+</code></pre></div>
+<p>异步调用（在 async def 内，使用异步入口创建的对象）：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python · 异步</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">stop_diagnostics</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="注意事项-15">注意事项</h3>
+<p>同步方法直接调用；标为 await 的方法在异步入口必须等待。页面/Context 关闭后多数操作会抛异常。</p>
+<p><a href="../browser-context.html">更多示例和完整业务规则</a></p>
+<h2 id="yscontext-options">YSContext.options</h2>
+<p>只读属性，返回创建 Context 时所用 ContextOptions 的独立副本。修改该副本不会改变运行中的 Context。同步和异步都直接读取，不加 await。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.4 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#实例属性">实例属性</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#yscontext-capture-diagnostics">YSContext.capture_diagnostics</a><a class="level2" href="#yscontext-check-proxy">YSContext.check_proxy</a><a class="level2" href="#yscontext-close">YSContext.close</a><a class="level2" href="#yscontext-diagnostics">YSContext.diagnostics</a><a class="level2" href="#yscontext-export-config">YSContext.export_config</a><a class="level2" href="#yscontext-fingerprint-status">YSContext.fingerprint_status</a><a class="level2" href="#yscontext-mouse">YSContext.mouse</a><a class="level2" href="#yscontext-new-page">YSContext.new_page</a><a class="level2" href="#yscontext-proxy-status">YSContext.proxy_status</a><a class="level2" href="#yscontext-restore-storage-state">YSContext.restore_storage_state</a><a class="level2" href="#yscontext-save-storage-state">YSContext.save_storage_state</a><a class="level2" href="#yscontext-set-fingerprint">YSContext.set_fingerprint</a><a class="level2" href="#yscontext-set-proxy">YSContext.set_proxy</a><a class="level2" href="#yscontext-start-diagnostics">YSContext.start_diagnostics</a><a class="level2" href="#yscontext-stop-diagnostics">YSContext.stop_diagnostics</a><a class="level2" href="#yscontext-options">YSContext.options</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

@@ -1,0 +1,256 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TrajectoryModel · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.4</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html" aria-current="page">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.4 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="trajectorymodel">TrajectoryModel</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../mouse.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.motion</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrajectoryModel</span><span class="p">,</span> <span class="n">MotionRequest</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TrajectoryModel</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">TrajectoryModel</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s1">'str | Path | None'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span> <span class="n">threads</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">drag_source</span><span class="p">:</span> <span class="s1">'str'</span> <span class="o">=</span> <span class="s1">'auto'</span><span class="p">,</span> <span class="n">move_source</span><span class="p">:</span> <span class="s1">'str'</span> <span class="o">=</span> <span class="s1">'bogazici'</span><span class="p">,</span> <span class="n">click_source</span><span class="p">:</span> <span class="s1">'str'</span> <span class="o">=</span> <span class="s1">'bogazici'</span><span class="p">,</span> <span class="n">allow_extrapolation</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>str | Path | None</td>
+<td><code>None</code></td>
+<td>模型目录，含 model.json 与 vector_field.onnx；None 使用随包模型，不接受旧模型 JSON。</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>int</td>
+<td><code>24</code></td>
+<td>ODE 积分步数，4–128；值增大通常增加耗时，不保证效果提高。</td>
+</tr>
+<tr>
+<td><code>threads</code></td>
+<td>int</td>
+<td><code>2</code></td>
+<td>ONNX CPU 线程数，1–16。</td>
+</tr>
+<tr>
+<td><code>drag_source</code></td>
+<td>str</td>
+<td><code>'auto'</code></td>
+<td>auto 按范围选择 user_mousedata/bogazici/sapimouse，或显式指定其中一个来源。</td>
+</tr>
+<tr>
+<td><code>move_source</code></td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>普通移动条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>click_source</code></td>
+<td>str</td>
+<td><code>'bogazici'</code></td>
+<td>接近点击和按住时长条件来源：bogazici 或 sapimouse。</td>
+</tr>
+<tr>
+<td><code>allow_extrapolation</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>允许距离/方向超出已观察范围；True 不代表范围外质量已验证。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="实例状态">实例状态</h2>
+<p><code>core</code> 是 MultitaskMouseModel；<code>routes</code> 为 drag/move/click 的来源配置；建议通过构造参数设置，不直接修改运行中实例。</p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#trajectorymodel-domain">TrajectoryModel.domain</a></li>
+<li><a href="#trajectorymodel-generate">TrajectoryModel.generate</a></li>
+<li><a href="#trajectorymodel-generate-single-trajectory">TrajectoryModel.generate_single_trajectory</a></li>
+<li><a href="#trajectorymodel-model-id">TrajectoryModel.model_id</a></li>
+<li><a href="#trajectorymodel-sample-click-hold">TrajectoryModel.sample_click_hold</a></li>
+</ul>
+<h2 id="trajectorymodel-domain">TrajectoryModel.domain</h2>
+<p>各来源/任务的已观察训练范围独立副本；包括 distance、direction_low/high、duration。不是精确联合支持区域。</p>
+<p><strong>只读属性；异步程序也直接读取，不加 await。</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="trajectorymodel-generate">TrajectoryModel.generate</h2>
+<p>验证 MotionRequest，按任务与来源选择同一个网络的条件，生成绝对坐标的 MotionPlan。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">generate</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s1">'MotionRequest'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">viewport</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="s1">'error'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MotionPlan'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>request</code></td>
+<td>MotionRequest</td>
+<td><code>必填</code></td>
+<td>包含 start/end/action/duration_s/target_size/seed 的模型请求。</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>tuple[float,float] | None</td>
+<td><code>None</code></td>
+<td>轨迹边界 (width,height)，均为正数；鼠标省略时读取 Page.viewport_size，离线生成省略则不裁定视口。</td>
+</tr>
+<tr>
+<td><code>fallback</code></td>
+<td>str</td>
+<td><code>'error'</code></td>
+<td>只接受 error。范围/采样错误会抛异常，不替换为其他算法。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回 <a href="MotionPlan.html">MotionPlan</a>，绝对坐标 points 及来源、时间等字段见类型表。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">plan</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">MotionRequest</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="n">action</span><span class="o">=</span><span class="s2">"move"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plan</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">data_source</span><span class="p">,</span> <span class="n">plan</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>只有一种网络。自动选源不等于范围外质量保证；target_size 尚未作为模型条件学习。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymodel-generate-single-trajectory">TrajectoryModel.generate_single_trajectory</h2>
+<p>按相对位移生成轨迹字典；默认使用 drag 任务与本模型的自动来源路由。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">generate_single_trajectory</span><span class="p">(</span><span class="n">end_x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'dict'</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-2">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>end_x</code></td>
+<td>float</td>
+<td><code>必填</code></td>
+<td>相对起点的水平位移；返回相对坐标轨迹，不操作浏览器。</td>
+</tr>
+<tr>
+<td><code>kwargs</code></td>
+<td>关键字参数</td>
+<td><code>展开字段见下表</code></td>
+<td>转发参数；本页下方展开支持的字段，不接受任意未知字段。</td>
+</tr>
+<tr>
+<td><code>dy</code>（展开）</td>
+<td>float</td>
+<td><code>0</code></td>
+<td>相对起点的垂直位移，正数向下、负数向上。</td>
+</tr>
+<tr>
+<td><code>task</code>（展开）</td>
+<td>str</td>
+<td><code>'drag'</code></td>
+<td>轨迹任务：drag、move/hover、click/approach_click。</td>
+</tr>
+<tr>
+<td><code>source</code>（展开）</td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>明确的数据来源条件：user_mousedata、bogazici、sapimouse；须存在对应训练任务。 不传时 TrajectoryModel 采用路由配置，低层模型采用固定默认来源。</td>
+</tr>
+<tr>
+<td><code>duration_s</code>（展开）</td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>运动总时长（秒）。None 由模型预测；显式值为 (0,30]，不含推理和按键前后等待。</td>
+</tr>
+<tr>
+<td><code>seed</code>（展开）</td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+<tr>
+<td><code>allow_extrapolation</code>（展开）</td>
+<td>bool</td>
+<td><code>沿用实例</code></td>
+<td>允许距离/方向超出已观察范围；True 不代表范围外质量已验证。 不传时 TrajectoryModel 沿用实例配置，低层模型默认 False；这里不要传 None。</td>
+</tr>
+<tr>
+<td><code>n_points</code>（展开）</td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>输出点数，显式整数 2–4096；None 按预测典型间隔选择 8–2049 个点。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 <a href="../result-structures.html#相对轨迹字典">相对轨迹字典</a>。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_single_trajectory</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"engine"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">"source"</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">"trajectory"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>只有一种网络。自动选源不等于范围外质量保证；target_size 尚未作为模型条件学习。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<h2 id="trajectorymodel-model-id">TrajectoryModel.model_id</h2>
+<p>当前模型标识字符串。</p>
+<p><strong>只读属性；异步程序也直接读取，不加 await。</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">model_id</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="trajectorymodel-sample-click-hold">TrajectoryModel.sample_click_hold</h2>
+<p>采样左/右键按住至释放的时长；使用 click_source 指定来源。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">sample_click_hold</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-3">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td><code>'left'</code></td>
+<td>仅接受 left / right；该预测方法没有中键时长分支。</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>随机种子；None 每次采样。相同模型、参数、种子可复现计划，不保证浏览器派发时序相同。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-3">返回值</h3>
+<p>返回 <a href="../result-structures.html#点击时长字典">点击时长字典</a>。</p>
+<h3 id="示例-3">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">hold</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sample_click_hold</span><span class="p">(</span><span class="n">button</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hold</span><span class="p">[</span><span class="s2">"hold_ms"</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="注意事项-3">注意事项</h3>
+<p>只有一种网络。自动选源不等于范围外质量保证；target_size 尚未作为模型条件学习。</p>
+<p><a href="../mouse.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.4 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#实例状态">实例状态</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#trajectorymodel-domain">TrajectoryModel.domain</a><a class="level2" href="#trajectorymodel-generate">TrajectoryModel.generate</a><a class="level2" href="#trajectorymodel-generate-single-trajectory">TrajectoryModel.generate_single_trajectory</a><a class="level2" href="#trajectorymodel-model-id">TrajectoryModel.model_id</a><a class="level2" href="#trajectorymodel-sample-click-hold">TrajectoryModel.sample_click_hold</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

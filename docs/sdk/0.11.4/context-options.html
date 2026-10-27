@@ -1,0 +1,285 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Context 选项 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.4</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html" aria-current="page">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.4 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="context-选项">Context 选项</h1>
+<p><a href="README.html">返回目录</a></p>
+<p><code>ContextOptions(...)</code> 将页面环境、网络认证、录制与超时配置传给 <code>browser.new_context(options=...)</code>。所有字段默认 <code>None</code>：不传给原生创建接口，使用原生默认值；不是一律关闭功能。</p>
+<h2 id="全部字段">全部字段</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>取值、作用与约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>viewport</code></td>
+<td><code>dict[str, int] | None</code></td>
+<td><code>{&quot;width&quot;: 1280, &quot;height&quot;: 720}</code>，两个值均为正整数，CSS 像素</td>
+</tr>
+<tr>
+<td><code>accept_downloads</code></td>
+<td><code>bool | None</code></td>
+<td>是否接受下载；需要长期保留时仍须调用 <code>Download.save_as()</code></td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td><code>str | None</code></td>
+<td>HTTP(S) 基础 URL，供 <code>page.goto(&quot;/path&quot;)</code> 等解析相对地址；禁止 URL 内嵌账号密码和 fragment</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td><code>bool | None</code></td>
+<td>是否忽略 HTTPS 证书错误</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td><code>dict | None</code></td>
+<td>网站 HTTP 认证，结构见下文；不用于代理认证</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td><code>list[dict] | None</code></td>
+<td>HTTPS 客户端证书；非空时 Context 只支持 <code>Direct()</code></td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td><code>dict[str, str] | None</code></td>
+<td>附加请求头；键值均为字符串，不允许换行和受管理的指纹/代理头</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td><code>list[str] | None</code></td>
+<td>预授权权限，例如 <code>[&quot;geolocation&quot;]</code>；权限名称遵循原生 BrowserContext</td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td><code>str | Path | None</code></td>
+<td>视频保存目录；关闭 Context 后完成视频写入</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td><code>dict[str, int] | None</code></td>
+<td>视频宽高，正整数；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td><code>int | None</code></td>
+<td>正整数帧率；需要 <code>record_video_dir</code></td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td><code>str | Path | None</code></td>
+<td>HAR 输出文件；关闭 Context 后完成写入</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td><code>str | None</code></td>
+<td><code>embed</code>：内嵌正文；<code>attach</code>：附加文件；<code>omit</code>：不保存正文；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td><code>str | None</code></td>
+<td><code>full</code> 或 <code>minimal</code>；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td><code>bool | None</code></td>
+<td>是否省略 HAR 响应内容；需要 HAR 路径；避免与 <code>record_har_content</code> 设置相互矛盾的策略</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td><code>str | None</code></td>
+<td>HAR URL glob 过滤规则，如 <code>&quot;**/api/**&quot;</code>；这里仅接受字符串；需要 HAR 路径</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td><code>str | None</code></td>
+<td><code>allow</code> 或 <code>block</code>；需要路由拦截时可按用途选择 <code>block</code></td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td><code>bool | None</code></td>
+<td>是否允许执行页面 JavaScript</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td><code>bool | None</code></td>
+<td>是否以离线网络状态创建 Context</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td><code>str | None</code></td>
+<td><code>light</code>、<code>dark</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td><code>str | None</code></td>
+<td><code>reduce</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td><code>str | None</code></td>
+<td><code>active</code>、<code>none</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td><code>str | None</code></td>
+<td><code>more</code>、<code>no-preference</code> 或字符串 <code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td><code>float | None</code></td>
+<td>正的有限数，设备缩放比例；不能同时使用 <code>no_viewport=True</code></td>
+</tr>
+<tr>
+<td><code>default_timeout_ms</code></td>
+<td><code>float | None</code></td>
+<td>普通原生操作默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+<tr>
+<td><code>navigation_timeout_ms</code></td>
+<td><code>float | None</code></td>
+<td>导航默认超时；非负有限数，<code>0</code> 禁用超时</td>
+</tr>
+</tbody>
+</table></div>
+<p>媒体选项中，Python <code>None</code> 表示不设置；字符串 <code>&quot;null&quot;</code> 表示原生 API 的重置值。单次操作显式传入的 <code>timeout=</code> 优先于默认超时；这些设置不替代 <code>ProxyCheck.timeout_ms</code> 或鼠标 <code>duration_s</code>。</p>
+<h2 id="视口-权限和超时">视口、权限和超时</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span><span class="p">,</span> <span class="n">FingerprintProfile</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span>
+    <span class="n">viewport</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1440</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">900</span><span class="p">},</span>
+    <span class="n">device_scale_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">permissions</span><span class="o">=</span><span class="p">[</span><span class="s2">"geolocation"</span><span class="p">],</span>
+    <span class="n">color_scheme</span><span class="o">=</span><span class="s2">"light"</span><span class="p">,</span>
+    <span class="n">default_timeout_ms</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
+    <span class="n">navigation_timeout_ms</span><span class="o">=</span><span class="mi">45000</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># browser 为已启动的 YSBrowser。</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+    <span class="n">fingerprint</span><span class="o">=</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">geolocation</span><span class="o">=</span><span class="s2">"31.2304,121.4737,50"</span><span class="p">),</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>指定固定视口不会等同设置屏幕指纹。<code>ContextConfig</code> 内包含视口时，还应显式设置 <code>no_viewport=False</code>。</p>
+<h2 id="http-认证">HTTP 认证</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span><span class="n">http_credentials</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"username"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"SITE_USERNAME"</span><span class="p">],</span>
+    <span class="s2">"password"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"SITE_PASSWORD"</span><span class="p">],</span>
+    <span class="s2">"origin"</span><span class="p">:</span> <span class="s2">"https://app.example.com"</span><span class="p">,</span>
+    <span class="s2">"send"</span><span class="p">:</span> <span class="s2">"unauthorized"</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>子字段</th>
+<th>必填</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>是</td>
+<td>网站认证用户名，字符串</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>是</td>
+<td>网站认证密码，字符串</td>
+</tr>
+<tr>
+<td><code>origin</code></td>
+<td>否</td>
+<td>限定认证来源，HTTP(S) scheme + host + 可选端口，不含业务路径或 query</td>
+</tr>
+<tr>
+<td><code>send</code></td>
+<td>否</td>
+<td><code>unauthorized</code> 或 <code>always</code>；影响原生 APIRequestContext 的认证发送策略，不改变浏览器页面请求的认证策略</td>
+</tr>
+</tbody>
+</table></div>
+<p>代理用户名和密码应放在 <code>ProxyConfig</code> 中。</p>
+<h2 id="客户端证书">客户端证书</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span><span class="p">,</span> <span class="n">Direct</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span><span class="n">client_certificates</span><span class="o">=</span><span class="p">[{</span>
+    <span class="s2">"origin"</span><span class="p">:</span> <span class="s2">"https://secure.example.com"</span><span class="p">,</span>
+    <span class="s2">"certPath"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"./certs/client.pem"</span><span class="p">,</span>
+    <span class="s2">"keyPath"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"./certs/client-key.pem"</span><span class="p">,</span>
+<span class="p">}])</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">proxy</span><span class="o">=</span><span class="n">Direct</span><span class="p">(),</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>也可用 PFX/P12：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span><span class="n">client_certificates</span><span class="o">=</span><span class="p">[{</span>
+    <span class="s2">"origin"</span><span class="p">:</span> <span class="s2">"https://secure.example.com"</span><span class="p">,</span>
+    <span class="s2">"pfxPath"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"./certs/client.p12"</span><span class="p">,</span>
+    <span class="s2">"passphrase"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CERT_PASSPHRASE"</span><span class="p">],</span>
+<span class="p">}])</span>
+</code></pre></div>
+<p><code>origin</code> 必填，精确到 scheme、host、可选端口。二选一：<code>certPath</code> 与 <code>keyPath</code> 成对传入，或 <code>pfxPath</code>；<code>passphrase</code> 为可选字符串。字段名使用上述 camelCase。此封装仅支持文件路径，不接受内联证书字节。</p>
+<p>配置非空客户端证书列表的 Context 只能使用直连；创建时传代理、继承非直连默认代理、或之后 <code>set_proxy(ProxyConfig(...))</code> 均会被拒绝。</p>
+<h2 id="附加请求头">附加请求头</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span><span class="n">extra_http_headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"X-Client-Name"</span><span class="p">:</span> <span class="s2">"my-app"</span><span class="p">})</span>
+</code></pre></div>
+<p>禁止通过此字段设置 <code>User-Agent</code>、<code>Accept-Language</code>、<code>Proxy-Authorization</code>、<code>Proxy-Connection</code> 和 <code>sec-ch-ua</code> 开头的请求头，匹配不区分大小写。指纹相关值通过 <code>FingerprintProfile</code> 设置。</p>
+<h2 id="视频与-har">视频与 HAR</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextOptions</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">ContextOptions</span><span class="p">(</span>
+    <span class="n">record_video_dir</span><span class="o">=</span><span class="s2">"recordings/video"</span><span class="p">,</span>
+    <span class="n">record_video_size</span><span class="o">=</span><span class="p">{</span><span class="s2">"width"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span> <span class="s2">"height"</span><span class="p">:</span> <span class="mi">720</span><span class="p">},</span>
+    <span class="n">record_video_fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">record_har_path</span><span class="o">=</span><span class="s2">"recordings/network.har"</span><span class="p">,</span>
+    <span class="n">record_har_mode</span><span class="o">=</span><span class="s2">"full"</span><span class="p">,</span>
+    <span class="n">record_har_content</span><span class="o">=</span><span class="s2">"embed"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+<span class="n">page</span><span class="o">.</span><span class="n">set_content</span><span class="p">(</span><span class="s2">"&lt;h1&gt;Recording&lt;/h1&gt;"</span><span class="p">)</span>
+<span class="n">video</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">video</span>
+<span class="n">context</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># 先完成视频和 HAR 写入</span>
+<span class="k">if</span> <span class="n">video</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">video</span><span class="o">.</span><span class="n">path</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="序列化方法">序列化方法</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>返回</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options.to_native()</code></td>
+<td><code>dict</code></td>
+<td>验证并生成原生 Context 参数；省略 <code>None</code> 与两个 SDK 默认超时字段，路径转换为字符串</td>
+</tr>
+<tr>
+<td><code>options.to_dict(include_sensitive=False)</code></td>
+<td><code>dict</code></td>
+<td>返回 <code>{&quot;values&quot;: {...}, &quot;requires&quot;: [...]}</code>；默认省略网站认证、证书、附加请求头，记录需要补齐的字段名</td>
+</tr>
+<tr>
+<td><code>ContextOptions.from_dict(data, overrides=None)</code></td>
+<td><code>ContextOptions</code></td>
+<td><code>data</code> 为上述结构；用 <code>overrides</code> 中非 <code>None</code> 字段补充或覆盖值</td>
+</tr>
+</tbody>
+</table></div>
+<p>三个方法在异步入口也直接调用，不使用 <code>await</code>。<code>include_sensitive=True</code> 会把 <code>http_credentials</code>、<code>client_certificates</code>、<code>extra_http_headers</code> 也写入结果。缺少 <code>requires</code> 声明的必需字段时，加载抛 <code>ConfigurationError</code>。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.4 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#全部字段">全部字段</a><a class="level2" href="#视口-权限和超时">视口、权限和超时</a><a class="level2" href="#http-认证">HTTP 认证</a><a class="level2" href="#客户端证书">客户端证书</a><a class="level2" href="#附加请求头">附加请求头</a><a class="level2" href="#视频与-har">视频与 HAR</a><a class="level2" href="#序列化方法">序列化方法</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

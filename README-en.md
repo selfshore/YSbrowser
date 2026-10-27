@@ -14,7 +14,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.3/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
+[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.4/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
 
 </div>
 
