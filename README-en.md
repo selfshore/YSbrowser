@@ -2,7 +2,7 @@
 
 <h1>YSbrowser</h1>
 
-<p><strong>A deeply customized Chromium-based browser for Windows</strong></p>
+<p><strong>A deeply customized Chromium-based browser for Windows and Linux</strong></p>
 <p>A stable, reproducible browser environment with independent configuration for each instance</p>
 
 [![Release](https://img.shields.io/github/v/release/selfshore/YSbrowser?display_name=tag&style=for-the-badge&color=0969da)](https://github.com/selfshore/YSbrowser/releases/latest)
@@ -14,7 +14,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.4/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
+[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.5/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
 
 </div>
 
@@ -24,11 +24,11 @@
 
 ## Introduction
 
-YSbrowser is a customized Chromium-based desktop browser for Windows. The new version configures the browser environment at the browser engine level, with support for separate user data directories, authenticated proxies, WebRTC address policies, and reproducible configurations for Canvas, WebGL, Audio, fonts, screens, and text geometry.
+YSbrowser is a customized Chromium-based desktop browser for Windows and Linux. The new version configures the browser environment at the browser engine level, with support for separate user data directories, authenticated proxies, WebRTC address policies, and reproducible configurations for Canvas, WebGL, Audio, fonts, screens, and text geometry.
 
 The same launch options and seeds consistently select the same environment. When each instance uses a different `--user-data-dir`, its cookies, cache, LocalStorage, IndexedDB, and site permissions are isolated from those of other instances.
 
-> The current graphics implementation targets Windows x64 and Chromium's default ANGLE D3D11 rendering path. If you force Vulkan, OpenGL, or SwiftShader, WebGL rendering results are not guaranteed to match those produced by D3D11.
+> The Windows graphics implementation targets Windows x64 and Chromium's default ANGLE D3D11 rendering path. If you force Vulkan, OpenGL, or SwiftShader, WebGL rendering results are not guaranteed to match those produced by D3D11.
 
 ## What's New
 
@@ -74,12 +74,19 @@ The same launch options and seeds consistently select the same environment. When
 
 ## Quick Start
 
-Download the Windows archive from [Releases](https://github.com/selfshore/YSbrowser/releases), extract it, and run `YSbrowser.exe`.
+Download the Windows archive from [Releases](https://github.com/selfshore/YSbrowser/releases), extract it, and run `chrome.exe`.
+
+Release 6.4 provides `chrome.7z` for Windows (entry point: `Chrome-bin/chrome.exe`) and `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage` for Ubuntu 24.04 x86_64. The Linux build requires AVX2, FMA and F16C. Make the AppImage executable with `chmod +x`; see the release asset `AppImage-README.txt` for sandbox and AppArmor setup. SDK 0.11.5 downloads the matching platform asset and verifies its pinned SHA-256:
+
+```shell
+python -m pip install --upgrade ysbrowser-sdk
+python -m ysbrowser_sdk install
+```
 
 Recommended minimal configuration:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\profile-01" `
   --fpseed="profile-01" `
   --timezone="Asia/Shanghai" `
@@ -109,7 +116,7 @@ Module-specific seed  >  fpseed  >  Default Chromium behavior
 For example:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\profile-02" `
   --fpseed="account-02" `
   --canvas-seed="canvas-02" `
@@ -151,7 +158,7 @@ Use `--server-gpu-profile` to select the GPU configuration exposed to web pages 
 For example, launch with the RTX 3060 profile:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\server-01" `
   --server-gpu-profile=rtx3060 `
   --no-first-run
@@ -236,7 +243,7 @@ Latitude must be between `-90` and `90`, longitude between `-180` and `180`, and
 Authenticated proxy example:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\proxy-01" `
   --proxy-server="http://127.0.0.1:8080" `
   --proxy-auth="username:password" `
@@ -259,7 +266,7 @@ Command-line options may be visible to local process management tools. Do not ex
 CDP launch example:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\automation-01" `
   --remote-debugging-port=9222 `
   --iconumber=1 `
@@ -273,7 +280,7 @@ A second instance should use a different directory and port. CDP debugging ports
 The following example uses a stable general seed with separate seeds for Canvas, WebGL, and fonts:
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\my-001" `
   --fpseed="my-profile-001" `
   --canvas-seed="my-canvas-001" `

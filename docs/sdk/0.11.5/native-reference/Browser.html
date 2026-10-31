@@ -1,0 +1,1234 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生 Browser · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.0</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details open><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html" aria-current="page">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.0 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>Patchright 原生参考 / YSBROWSER SDK</div><h1 id="原生-browser">原生 Browser</h1>
+<p><a href="README.html">原生 API 目录</a> · <a href="../README.html">手册目录</a></p>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#bind">bind</a></li>
+<li><a href="#browser-type">browser_type</a></li>
+<li><a href="#close">close</a></li>
+<li><a href="#contexts">contexts</a></li>
+<li><a href="#is-connected">is_connected</a></li>
+<li><a href="#new-browser-cdp-session">new_browser_cdp_session</a></li>
+<li><a href="#new-context">new_context</a></li>
+<li><a href="#new-page">new_page</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#remove-listener">remove_listener</a></li>
+<li><a href="#start-tracing">start_tracing</a></li>
+<li><a href="#stop-tracing">stop_tracing</a></li>
+<li><a href="#unbind">unbind</a></li>
+<li><a href="#version">version</a></li>
+</ul>
+<h2 id="bind">bind</h2>
+<h3 id="同步">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">workspace_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">BrowserBindResult</span>
+</code></pre></div>
+<p>Browser.bind</p>
+<p>Binds the browser to a named pipe or web socket, making it available for other clients to connect to.</p>
+<h4 id="parameters">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>str</td>
+<td>Title of the browser server, used for identification.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>Union[str, None]</td>
+<td>Host to bind the web socket server to. When specified, a web socket server is created instead of a named pipe.</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>Union[int, None]</td>
+<td>Port to bind the web socket server to. When specified, a web socket server is created instead of a named pipe. Use <code>0</code> to let the OS pick an available port.</td>
+</tr>
+<tr>
+<td><code>workspace_dir</code></td>
+<td>Union[str, None]</td>
+<td>Working directory associated with this browser server.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns">Returns</h4>
+<p>{endpoint: str}</p>
+<h3 id="异步">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">workspace_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">BrowserBindResult</span>
+</code></pre></div>
+<p>Browser.bind</p>
+<p>Binds the browser to a named pipe or web socket, making it available for other clients to connect to.</p>
+<h4 id="parameters-2">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>str</td>
+<td>Title of the browser server, used for identification.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>Union[str, None]</td>
+<td>Host to bind the web socket server to. When specified, a web socket server is created instead of a named pipe.</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>Union[int, None]</td>
+<td>Port to bind the web socket server to. When specified, a web socket server is created instead of a named pipe. Use <code>0</code> to let the OS pick an available port.</td>
+</tr>
+<tr>
+<td><code>workspace_dir</code></td>
+<td>Union[str, None]</td>
+<td>Working directory associated with this browser server.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-2">Returns</h4>
+<p>{endpoint: str}</p>
+<h2 id="browser-type">browser_type</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Browser</span><span class="o">.</span><span class="n">browser_type</span><span class="p">:</span> <span class="n">BrowserType</span>
+</code></pre></div>
+<p>Browser.browser_type</p>
+<p>Get the browser type (chromium, firefox or webkit) that the browser belongs to.</p>
+<h4 id="returns-3">Returns</h4>
+<p>BrowserType</p>
+<h2 id="close">close</h2>
+<h3 id="同步-2">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.close</p>
+<p>In case this browser is obtained using <code>browser_type.launch()</code>, closes the browser and all of its pages (if any
+were opened).</p>
+<p>In case this browser is connected to, clears all created contexts belonging to this browser and disconnects from
+the browser server.</p>
+<p><strong>NOTE</strong> This is similar to force-quitting the browser. To close pages gracefully and ensure you receive page close
+events, call <code>browser_context.close()</code> on any <code>BrowserContext</code> instances you explicitly created earlier using
+<code>browser.new_context()</code> <strong>before</strong> calling <code>browser.close()</code>.</p>
+<p>The <code>Browser</code> object itself is considered to be disposed and cannot be used anymore.</p>
+<h4 id="parameters-3">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>Union[str, None]</td>
+<td>The reason to be reported to the operations interrupted by the browser closure.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-2">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.close</p>
+<p>In case this browser is obtained using <code>browser_type.launch()</code>, closes the browser and all of its pages (if any
+were opened).</p>
+<p>In case this browser is connected to, clears all created contexts belonging to this browser and disconnects from
+the browser server.</p>
+<p><strong>NOTE</strong> This is similar to force-quitting the browser. To close pages gracefully and ensure you receive page close
+events, call <code>browser_context.close()</code> on any <code>BrowserContext</code> instances you explicitly created earlier using
+<code>browser.new_context()</code> <strong>before</strong> calling <code>browser.close()</code>.</p>
+<p>The <code>Browser</code> object itself is considered to be disposed and cannot be used anymore.</p>
+<h4 id="parameters-4">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>Union[str, None]</td>
+<td>The reason to be reported to the operations interrupted by the browser closure.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="contexts">contexts</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Browser</span><span class="o">.</span><span class="n">contexts</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BrowserContext&#39;</span><span class="p">)]</span>
+</code></pre></div>
+<p>Browser.contexts</p>
+<p>Returns an array of all open browser contexts. In a newly created browser, this will return zero browser contexts.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">browser</span> <span class="o">=</span> <span class="n">pw</span><span class="o">.</span><span class="n">webkit</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">contexts</span><span class="p">))</span> <span class="c1"># prints `0`</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">contexts</span><span class="p">))</span> <span class="c1"># prints `1`</span>
+</code></pre></div>
+<h4 id="returns-4">Returns</h4>
+<p>List[BrowserContext]</p>
+<h2 id="is-connected">is_connected</h2>
+<h3 id="同步-3">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">is_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+<p>Browser.is_connected</p>
+<p>Indicates that the browser is connected.</p>
+<h4 id="returns-5">Returns</h4>
+<p>bool</p>
+<h3 id="异步-3">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">is_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+<p>Browser.is_connected</p>
+<p>Indicates that the browser is connected.</p>
+<h4 id="returns-6">Returns</h4>
+<p>bool</p>
+<h2 id="new-browser-cdp-session">new_browser_cdp_session</h2>
+<h3 id="同步-4">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">new_browser_cdp_session</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CDPSession&#39;</span>
+</code></pre></div>
+<p>Browser.new_browser_cdp_session</p>
+<p><strong>NOTE</strong> CDP Sessions are only supported on Chromium-based browsers.</p>
+<p>Returns the newly created browser session.</p>
+<h4 id="returns-7">Returns</h4>
+<p>CDPSession</p>
+<h3 id="异步-4">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">new_browser_cdp_session</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CDPSession&#39;</span>
+</code></pre></div>
+<p>Browser.new_browser_cdp_session</p>
+<p><strong>NOTE</strong> CDP Sessions are only supported on Chromium-based browsers.</p>
+<p>Returns the newly created browser session.</p>
+<h4 id="returns-8">Returns</h4>
+<p>CDPSession</p>
+<h2 id="new-context">new_context</h2>
+<h3 id="同步-5">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">new_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">accept_downloads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bypass_csp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">client_certificates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ClientCertificate</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_scheme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;more&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_browser_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_scale_factor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extra_http_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">forced_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">geolocation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Geolocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_touch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">http_credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_mobile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">java_script_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">offline</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ProxySettings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">,</span> <span class="s1">&#39;omit&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;minimal&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_omit_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_url_filter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_fps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduced_motion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;reduce&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screen</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">service_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;block&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">storage_state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">strict_selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">focus_control</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BrowserContext&#39;</span>
+</code></pre></div>
+<p>Browser.new_context</p>
+<p>Creates a new browser context. It won't share cookies/cache with other browser contexts.</p>
+<p><strong>NOTE</strong> If directly using this method to create <code>BrowserContext</code>s, it is best practice to explicitly close the
+returned context via <code>browser_context.close()</code> when your code is done with the <code>BrowserContext</code>, and before calling
+<code>browser.close()</code>. This will ensure the <code>context</code> is closed gracefully and any artifacts—like HARs and videos—are
+fully flushed and saved.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">browser</span> <span class="o">=</span> <span class="n">playwright</span><span class="o">.</span><span class="n">firefox</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span> <span class="c1"># or &quot;chromium&quot; or &quot;webkit&quot;.</span>
+<span class="c1"># create a new incognito browser context.</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+<span class="c1"># create a new page in a pristine context.</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+<span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+<span class="c1"># gracefully close up everything</span>
+<span class="n">context</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-5">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to automatically download all the attachments. Defaults to <code>true</code> where all the downloads are accepted.</td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>Union[str, None]</td>
+<td>When using <code>page.goto()</code>, <code>page.route()</code>, <code>page.wait_for_url()</code>, <code>page.expect_request()</code>, or <code>page.expect_response()</code> it takes the base URL in consideration by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/URL"><code>URL()</code></a> constructor for building the corresponding URL. Unset by default. Examples: - baseURL: <code>http://localhost:3000</code> and navigating to <code>/bar.html</code> results in <code>http://localhost:3000/bar.html</code> - baseURL: <code>http://localhost:3000/foo/</code> and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/foo/bar.html</code> - baseURL: <code>http://localhost:3000/foo</code> (without trailing slash) and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/bar.html</code></td>
+</tr>
+<tr>
+<td><code>bypass_csp</code></td>
+<td>Union[bool, None]</td>
+<td>Toggles bypassing page's Content-Security-Policy. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>Union[Sequence[{origin: str, certPath: Union[pathlib.Path, str, None], cert: Union[bytes, None], keyPath: Union[pathlib.Path, str, None], key: Union[bytes, None], pfxPath: Union[pathlib.Path, str, None], pfx: Union[bytes, None], passphrase: Union[str, None]}], None]</td>
+<td>TLS Client Authentication allows the server to request a client certificate and verify it.  <strong>Details</strong>  An array of client certificates to be used. Each certificate object must have either both <code>certPath</code> and <code>keyPath</code>, a single <code>pfxPath</code>, or their corresponding direct value equivalents (<code>cert</code> and <code>key</code>, or <code>pfx</code>). Optionally, <code>passphrase</code> property should be provided if the certificate is encrypted. The <code>origin</code> property should be provided with an exact match to the request origin that the certificate is valid for.  Client certificate authentication is only active when at least one client certificate is provided. If you want to reject all client certificates sent by the server, you need to provide a client certificate with an <code>origin</code> that does not match any of the domains you plan to visit.  <strong>NOTE</strong> When using WebKit on macOS, accessing <code>localhost</code> will not pick up client certificates. You can make it work by replacing <code>localhost</code> with <code>local.playwright</code>.</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>Union[&quot;dark&quot;, &quot;light&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">prefers-colors-scheme</a> media feature, supported values are <code>'light'</code> and <code>'dark'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'light'</code>.</td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>Union[&quot;more&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'prefers-contrast'</code> media feature, supported values are <code>'no-preference'</code>, <code>'more'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>Union[float, None]</td>
+<td>Specify device scale factor (can be thought of as dpr). Defaults to <code>1</code>. Learn more about emulating devices with device scale factor.</td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>An object containing additional HTTP headers to be sent with every request. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>Union[&quot;active&quot;, &quot;none&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'forced-colors'</code> media feature, supported values are <code>'active'</code>, <code>'none'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'none'</code>.</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>Union[{latitude: float, longitude: float, accuracy: Union[float, None]}, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>has_touch</code></td>
+<td>Union[bool, None]</td>
+<td>Specifies if viewport supports touch events. Defaults to false. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>Union[Sequence[{username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}], {username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}, None]</td>
+<td>Credentials for <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</a>. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.  Pass an array to use different credentials for different origins. The first entry that matches the request origin is used, and entries with no origin match any request.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>is_mobile</code></td>
+<td>Union[bool, None]</td>
+<td>Whether the <code>meta viewport</code> tag is taken into account and touch events are enabled. isMobile is a part of device, so you don't actually need to set it manually. Defaults to <code>false</code>. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>Union[bool, None]</td>
+<td>Whether or not to enable JavaScript in the context. Defaults to <code>true</code>. Learn more about disabling JavaScript.</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>Union[str, None]</td>
+<td>Specify user locale, for example <code>en-GB</code>, <code>de-DE</code>, etc. Locale will affect <code>navigator.language</code> value, <code>Accept-Language</code> request header value as well as number and date formatting rules. Defaults to the system default locale. Learn more about emulation in our emulation guide.</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>Union[bool, None]</td>
+<td>Does not enforce fixed viewport, allows resizing window in the headed mode.</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to emulate network being offline. Defaults to <code>false</code>. Learn more about network emulation.</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>A list of permissions to grant to all pages in this context. See <code>browser_context.grant_permissions()</code> for more details. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>Union[{server: str, bypass: Union[str, None], username: Union[str, None], password: Union[str, None]}, None]</td>
+<td>Network proxy settings to use with this context. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>Union[&quot;attach&quot;, &quot;embed&quot;, &quot;omit&quot;, None]</td>
+<td>Optional setting to control resource content management. If <code>omit</code> is specified, content is not persisted. If <code>attach</code> is specified, resources are persisted as separate files and all of these files are archived along with the HAR file. Defaults to <code>embed</code>, which stores content inline the HAR file as per HAR specification.</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>Union[&quot;full&quot;, &quot;minimal&quot;, None]</td>
+<td>When set to <code>minimal</code>, only record information necessary for routing from HAR. This omits sizes, timing, page, cookies, security and other types of HAR information that are not used when replaying from HAR. Defaults to <code>full</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>Union[bool, None]</td>
+<td>Optional setting to control whether to omit request content from the HAR. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables <a href="http://www.softwareishard.com/blog/har-12-spec">HAR</a> recording for all pages into the specified HAR file on the filesystem. If not specified, the HAR is not recorded. Make sure to call <code>browser_context.close()</code> for the HAR to be saved.</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables video recording for all pages into the specified directory. If not specified videos are not recorded. Make sure to call <code>browser_context.close()</code> for videos to be saved.</td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>Union[int, None]</td>
+<td>Frame rate of the recorded videos in frames per second. Defaults to <code>25</code>. Firefox and WebKit currently capture up to 25 frames per second.</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Dimensions of the recorded videos. If not specified the size will be equal to <code>viewport</code> scaled down to fit into 800x800. If <code>viewport</code> is not configured explicitly the video size defaults to 800x450. Actual picture of each page will be scaled down if necessary to fit the specified size.</td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>Union[&quot;no-preference&quot;, &quot;null&quot;, &quot;reduce&quot;, None]</td>
+<td>Emulates <code>'prefers-reduced-motion'</code> media feature, supported values are <code>'reduce'</code>, <code>'no-preference'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Emulates consistent window screen size available inside web page via <code>window.screen</code>. Is only used when the <code>viewport</code> is set.</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>Union[&quot;allow&quot;, &quot;block&quot;, None]</td>
+<td>Whether to allow sites to register Service workers. Defaults to <code>'allow'</code>. - <code>'allow'</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">Service Workers</a> can be registered. - <code>'block'</code>: Playwright will block all registration of Service Workers.</td>
+</tr>
+<tr>
+<td><code>storage_state</code></td>
+<td>Union[pathlib.Path, str, {cookies: Sequence[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: Sequence[{origin: str, localStorage: Sequence[{name: str, value: str}]}]}, None]</td>
+<td>Learn more about storage state and auth.  Populates context with given storage state. This option can be used to initialize context with logged-in information obtained via <code>browser_context.storage_state()</code>.</td>
+</tr>
+<tr>
+<td><code>strict_selectors</code></td>
+<td>Union[bool, None]</td>
+<td>If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on selectors that imply single target DOM element will throw when more than one element matches the selector. This option does not affect any Locator APIs (Locators are always strict). Defaults to <code>false</code>. See <code>Locator</code> to learn more about the strict mode.</td>
+</tr>
+<tr>
+<td><code>timezone_id</code></td>
+<td>Union[str, None]</td>
+<td>Changes the timezone of the context. See <a href="https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1">ICU's metaZones.txt</a> for a list of supported timezone IDs. Defaults to the system timezone.</td>
+</tr>
+<tr>
+<td><code>user_agent</code></td>
+<td>Union[str, None]</td>
+<td>Specific user agent to use in this context.</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Sets a consistent viewport for each page. Defaults to an 1280x720 viewport. <code>no_viewport</code> disables the fixed viewport. Learn more about viewport emulation.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-9">Returns</h4>
+<p>BrowserContext</p>
+<h3 id="异步-5">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">new_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">accept_downloads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bypass_csp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">client_certificates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ClientCertificate</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_scheme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;more&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_browser_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_scale_factor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extra_http_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">forced_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">geolocation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Geolocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_touch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">http_credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_mobile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">java_script_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">offline</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ProxySettings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">,</span> <span class="s1">&#39;omit&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;minimal&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_omit_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_url_filter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_fps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduced_motion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;reduce&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screen</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">service_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;block&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">storage_state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">strict_selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">focus_control</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BrowserContext&#39;</span>
+</code></pre></div>
+<p>Browser.new_context</p>
+<p>Creates a new browser context. It won't share cookies/cache with other browser contexts.</p>
+<p><strong>NOTE</strong> If directly using this method to create <code>BrowserContext</code>s, it is best practice to explicitly close the
+returned context via <code>browser_context.close()</code> when your code is done with the <code>BrowserContext</code>, and before calling
+<code>browser.close()</code>. This will ensure the <code>context</code> is closed gracefully and any artifacts—like HARs and videos—are
+fully flushed and saved.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="n">playwright</span><span class="o">.</span><span class="n">firefox</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span> <span class="c1"># or &quot;chromium&quot; or &quot;webkit&quot;.</span>
+<span class="c1"># create a new incognito browser context.</span>
+<span class="n">context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_context</span><span class="p">()</span>
+<span class="c1"># create a new page in a pristine context.</span>
+<span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+
+<span class="c1"># gracefully close up everything</span>
+<span class="k">await</span> <span class="n">context</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-6">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to automatically download all the attachments. Defaults to <code>true</code> where all the downloads are accepted.</td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>Union[str, None]</td>
+<td>When using <code>page.goto()</code>, <code>page.route()</code>, <code>page.wait_for_url()</code>, <code>page.expect_request()</code>, or <code>page.expect_response()</code> it takes the base URL in consideration by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/URL"><code>URL()</code></a> constructor for building the corresponding URL. Unset by default. Examples: - baseURL: <code>http://localhost:3000</code> and navigating to <code>/bar.html</code> results in <code>http://localhost:3000/bar.html</code> - baseURL: <code>http://localhost:3000/foo/</code> and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/foo/bar.html</code> - baseURL: <code>http://localhost:3000/foo</code> (without trailing slash) and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/bar.html</code></td>
+</tr>
+<tr>
+<td><code>bypass_csp</code></td>
+<td>Union[bool, None]</td>
+<td>Toggles bypassing page's Content-Security-Policy. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>Union[Sequence[{origin: str, certPath: Union[pathlib.Path, str, None], cert: Union[bytes, None], keyPath: Union[pathlib.Path, str, None], key: Union[bytes, None], pfxPath: Union[pathlib.Path, str, None], pfx: Union[bytes, None], passphrase: Union[str, None]}], None]</td>
+<td>TLS Client Authentication allows the server to request a client certificate and verify it.  <strong>Details</strong>  An array of client certificates to be used. Each certificate object must have either both <code>certPath</code> and <code>keyPath</code>, a single <code>pfxPath</code>, or their corresponding direct value equivalents (<code>cert</code> and <code>key</code>, or <code>pfx</code>). Optionally, <code>passphrase</code> property should be provided if the certificate is encrypted. The <code>origin</code> property should be provided with an exact match to the request origin that the certificate is valid for.  Client certificate authentication is only active when at least one client certificate is provided. If you want to reject all client certificates sent by the server, you need to provide a client certificate with an <code>origin</code> that does not match any of the domains you plan to visit.  <strong>NOTE</strong> When using WebKit on macOS, accessing <code>localhost</code> will not pick up client certificates. You can make it work by replacing <code>localhost</code> with <code>local.playwright</code>.</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>Union[&quot;dark&quot;, &quot;light&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">prefers-colors-scheme</a> media feature, supported values are <code>'light'</code> and <code>'dark'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'light'</code>.</td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>Union[&quot;more&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'prefers-contrast'</code> media feature, supported values are <code>'no-preference'</code>, <code>'more'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>Union[float, None]</td>
+<td>Specify device scale factor (can be thought of as dpr). Defaults to <code>1</code>. Learn more about emulating devices with device scale factor.</td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>An object containing additional HTTP headers to be sent with every request. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>Union[&quot;active&quot;, &quot;none&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'forced-colors'</code> media feature, supported values are <code>'active'</code>, <code>'none'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'none'</code>.</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>Union[{latitude: float, longitude: float, accuracy: Union[float, None]}, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>has_touch</code></td>
+<td>Union[bool, None]</td>
+<td>Specifies if viewport supports touch events. Defaults to false. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>Union[Sequence[{username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}], {username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}, None]</td>
+<td>Credentials for <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</a>. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.  Pass an array to use different credentials for different origins. The first entry that matches the request origin is used, and entries with no origin match any request.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>is_mobile</code></td>
+<td>Union[bool, None]</td>
+<td>Whether the <code>meta viewport</code> tag is taken into account and touch events are enabled. isMobile is a part of device, so you don't actually need to set it manually. Defaults to <code>false</code>. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>Union[bool, None]</td>
+<td>Whether or not to enable JavaScript in the context. Defaults to <code>true</code>. Learn more about disabling JavaScript.</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>Union[str, None]</td>
+<td>Specify user locale, for example <code>en-GB</code>, <code>de-DE</code>, etc. Locale will affect <code>navigator.language</code> value, <code>Accept-Language</code> request header value as well as number and date formatting rules. Defaults to the system default locale. Learn more about emulation in our emulation guide.</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>Union[bool, None]</td>
+<td>Does not enforce fixed viewport, allows resizing window in the headed mode.</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to emulate network being offline. Defaults to <code>false</code>. Learn more about network emulation.</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>A list of permissions to grant to all pages in this context. See <code>browser_context.grant_permissions()</code> for more details. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>Union[{server: str, bypass: Union[str, None], username: Union[str, None], password: Union[str, None]}, None]</td>
+<td>Network proxy settings to use with this context. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>Union[&quot;attach&quot;, &quot;embed&quot;, &quot;omit&quot;, None]</td>
+<td>Optional setting to control resource content management. If <code>omit</code> is specified, content is not persisted. If <code>attach</code> is specified, resources are persisted as separate files and all of these files are archived along with the HAR file. Defaults to <code>embed</code>, which stores content inline the HAR file as per HAR specification.</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>Union[&quot;full&quot;, &quot;minimal&quot;, None]</td>
+<td>When set to <code>minimal</code>, only record information necessary for routing from HAR. This omits sizes, timing, page, cookies, security and other types of HAR information that are not used when replaying from HAR. Defaults to <code>full</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>Union[bool, None]</td>
+<td>Optional setting to control whether to omit request content from the HAR. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables <a href="http://www.softwareishard.com/blog/har-12-spec">HAR</a> recording for all pages into the specified HAR file on the filesystem. If not specified, the HAR is not recorded. Make sure to call <code>browser_context.close()</code> for the HAR to be saved.</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables video recording for all pages into the specified directory. If not specified videos are not recorded. Make sure to call <code>browser_context.close()</code> for videos to be saved.</td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>Union[int, None]</td>
+<td>Frame rate of the recorded videos in frames per second. Defaults to <code>25</code>. Firefox and WebKit currently capture up to 25 frames per second.</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Dimensions of the recorded videos. If not specified the size will be equal to <code>viewport</code> scaled down to fit into 800x800. If <code>viewport</code> is not configured explicitly the video size defaults to 800x450. Actual picture of each page will be scaled down if necessary to fit the specified size.</td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>Union[&quot;no-preference&quot;, &quot;null&quot;, &quot;reduce&quot;, None]</td>
+<td>Emulates <code>'prefers-reduced-motion'</code> media feature, supported values are <code>'reduce'</code>, <code>'no-preference'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Emulates consistent window screen size available inside web page via <code>window.screen</code>. Is only used when the <code>viewport</code> is set.</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>Union[&quot;allow&quot;, &quot;block&quot;, None]</td>
+<td>Whether to allow sites to register Service workers. Defaults to <code>'allow'</code>. - <code>'allow'</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">Service Workers</a> can be registered. - <code>'block'</code>: Playwright will block all registration of Service Workers.</td>
+</tr>
+<tr>
+<td><code>storage_state</code></td>
+<td>Union[pathlib.Path, str, {cookies: Sequence[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: Sequence[{origin: str, localStorage: Sequence[{name: str, value: str}]}]}, None]</td>
+<td>Learn more about storage state and auth.  Populates context with given storage state. This option can be used to initialize context with logged-in information obtained via <code>browser_context.storage_state()</code>.</td>
+</tr>
+<tr>
+<td><code>strict_selectors</code></td>
+<td>Union[bool, None]</td>
+<td>If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on selectors that imply single target DOM element will throw when more than one element matches the selector. This option does not affect any Locator APIs (Locators are always strict). Defaults to <code>false</code>. See <code>Locator</code> to learn more about the strict mode.</td>
+</tr>
+<tr>
+<td><code>timezone_id</code></td>
+<td>Union[str, None]</td>
+<td>Changes the timezone of the context. See <a href="https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1">ICU's metaZones.txt</a> for a list of supported timezone IDs. Defaults to the system timezone.</td>
+</tr>
+<tr>
+<td><code>user_agent</code></td>
+<td>Union[str, None]</td>
+<td>Specific user agent to use in this context.</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Sets a consistent viewport for each page. Defaults to an 1280x720 viewport. <code>no_viewport</code> disables the fixed viewport. Learn more about viewport emulation.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-10">Returns</h4>
+<p>BrowserContext</p>
+<h2 id="new-page">new_page</h2>
+<h3 id="同步-6">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">new_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">accept_downloads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bypass_csp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">client_certificates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ClientCertificate</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_scheme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;more&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_browser_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_scale_factor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extra_http_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">forced_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">geolocation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Geolocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_touch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">http_credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_mobile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">java_script_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">offline</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ProxySettings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">,</span> <span class="s1">&#39;omit&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;minimal&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_omit_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_url_filter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_fps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduced_motion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;reduce&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screen</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">service_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;block&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">storage_state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">strict_selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">focus_control</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Page&#39;</span>
+</code></pre></div>
+<p>Browser.new_page</p>
+<p>Creates a new page in a new browser context. Closing this page will close the context as well.</p>
+<p>This is a convenience API that should only be used for the single-page scenarios and short snippets. Production
+code and testing frameworks should explicitly create <code>browser.new_context()</code> followed by the
+<code>browser_context.new_page()</code> to control their exact life times.</p>
+<h4 id="parameters-7">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to automatically download all the attachments. Defaults to <code>true</code> where all the downloads are accepted.</td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>Union[str, None]</td>
+<td>When using <code>page.goto()</code>, <code>page.route()</code>, <code>page.wait_for_url()</code>, <code>page.expect_request()</code>, or <code>page.expect_response()</code> it takes the base URL in consideration by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/URL"><code>URL()</code></a> constructor for building the corresponding URL. Unset by default. Examples: - baseURL: <code>http://localhost:3000</code> and navigating to <code>/bar.html</code> results in <code>http://localhost:3000/bar.html</code> - baseURL: <code>http://localhost:3000/foo/</code> and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/foo/bar.html</code> - baseURL: <code>http://localhost:3000/foo</code> (without trailing slash) and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/bar.html</code></td>
+</tr>
+<tr>
+<td><code>bypass_csp</code></td>
+<td>Union[bool, None]</td>
+<td>Toggles bypassing page's Content-Security-Policy. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>Union[Sequence[{origin: str, certPath: Union[pathlib.Path, str, None], cert: Union[bytes, None], keyPath: Union[pathlib.Path, str, None], key: Union[bytes, None], pfxPath: Union[pathlib.Path, str, None], pfx: Union[bytes, None], passphrase: Union[str, None]}], None]</td>
+<td>TLS Client Authentication allows the server to request a client certificate and verify it.  <strong>Details</strong>  An array of client certificates to be used. Each certificate object must have either both <code>certPath</code> and <code>keyPath</code>, a single <code>pfxPath</code>, or their corresponding direct value equivalents (<code>cert</code> and <code>key</code>, or <code>pfx</code>). Optionally, <code>passphrase</code> property should be provided if the certificate is encrypted. The <code>origin</code> property should be provided with an exact match to the request origin that the certificate is valid for.  Client certificate authentication is only active when at least one client certificate is provided. If you want to reject all client certificates sent by the server, you need to provide a client certificate with an <code>origin</code> that does not match any of the domains you plan to visit.  <strong>NOTE</strong> When using WebKit on macOS, accessing <code>localhost</code> will not pick up client certificates. You can make it work by replacing <code>localhost</code> with <code>local.playwright</code>.</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>Union[&quot;dark&quot;, &quot;light&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">prefers-colors-scheme</a> media feature, supported values are <code>'light'</code> and <code>'dark'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'light'</code>.</td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>Union[&quot;more&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'prefers-contrast'</code> media feature, supported values are <code>'no-preference'</code>, <code>'more'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>Union[float, None]</td>
+<td>Specify device scale factor (can be thought of as dpr). Defaults to <code>1</code>. Learn more about emulating devices with device scale factor.</td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>An object containing additional HTTP headers to be sent with every request. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>Union[&quot;active&quot;, &quot;none&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'forced-colors'</code> media feature, supported values are <code>'active'</code>, <code>'none'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'none'</code>.</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>Union[{latitude: float, longitude: float, accuracy: Union[float, None]}, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>has_touch</code></td>
+<td>Union[bool, None]</td>
+<td>Specifies if viewport supports touch events. Defaults to false. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>Union[Sequence[{username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}], {username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}, None]</td>
+<td>Credentials for <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</a>. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.  Pass an array to use different credentials for different origins. The first entry that matches the request origin is used, and entries with no origin match any request.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>is_mobile</code></td>
+<td>Union[bool, None]</td>
+<td>Whether the <code>meta viewport</code> tag is taken into account and touch events are enabled. isMobile is a part of device, so you don't actually need to set it manually. Defaults to <code>false</code>. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>Union[bool, None]</td>
+<td>Whether or not to enable JavaScript in the context. Defaults to <code>true</code>. Learn more about disabling JavaScript.</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>Union[str, None]</td>
+<td>Specify user locale, for example <code>en-GB</code>, <code>de-DE</code>, etc. Locale will affect <code>navigator.language</code> value, <code>Accept-Language</code> request header value as well as number and date formatting rules. Defaults to the system default locale. Learn more about emulation in our emulation guide.</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>Union[bool, None]</td>
+<td>Does not enforce fixed viewport, allows resizing window in the headed mode.</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to emulate network being offline. Defaults to <code>false</code>. Learn more about network emulation.</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>A list of permissions to grant to all pages in this context. See <code>browser_context.grant_permissions()</code> for more details. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>Union[{server: str, bypass: Union[str, None], username: Union[str, None], password: Union[str, None]}, None]</td>
+<td>Network proxy settings to use with this context. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>Union[&quot;attach&quot;, &quot;embed&quot;, &quot;omit&quot;, None]</td>
+<td>Optional setting to control resource content management. If <code>omit</code> is specified, content is not persisted. If <code>attach</code> is specified, resources are persisted as separate files and all of these files are archived along with the HAR file. Defaults to <code>embed</code>, which stores content inline the HAR file as per HAR specification.</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>Union[&quot;full&quot;, &quot;minimal&quot;, None]</td>
+<td>When set to <code>minimal</code>, only record information necessary for routing from HAR. This omits sizes, timing, page, cookies, security and other types of HAR information that are not used when replaying from HAR. Defaults to <code>full</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>Union[bool, None]</td>
+<td>Optional setting to control whether to omit request content from the HAR. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables <a href="http://www.softwareishard.com/blog/har-12-spec">HAR</a> recording for all pages into the specified HAR file on the filesystem. If not specified, the HAR is not recorded. Make sure to call <code>browser_context.close()</code> for the HAR to be saved.</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables video recording for all pages into the specified directory. If not specified videos are not recorded. Make sure to call <code>browser_context.close()</code> for videos to be saved.</td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>Union[int, None]</td>
+<td>Frame rate of the recorded videos in frames per second. Defaults to <code>25</code>. Firefox and WebKit currently capture up to 25 frames per second.</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Dimensions of the recorded videos. If not specified the size will be equal to <code>viewport</code> scaled down to fit into 800x800. If <code>viewport</code> is not configured explicitly the video size defaults to 800x450. Actual picture of each page will be scaled down if necessary to fit the specified size.</td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>Union[&quot;no-preference&quot;, &quot;null&quot;, &quot;reduce&quot;, None]</td>
+<td>Emulates <code>'prefers-reduced-motion'</code> media feature, supported values are <code>'reduce'</code>, <code>'no-preference'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Emulates consistent window screen size available inside web page via <code>window.screen</code>. Is only used when the <code>viewport</code> is set.</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>Union[&quot;allow&quot;, &quot;block&quot;, None]</td>
+<td>Whether to allow sites to register Service workers. Defaults to <code>'allow'</code>. - <code>'allow'</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">Service Workers</a> can be registered. - <code>'block'</code>: Playwright will block all registration of Service Workers.</td>
+</tr>
+<tr>
+<td><code>storage_state</code></td>
+<td>Union[pathlib.Path, str, {cookies: Sequence[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: Sequence[{origin: str, localStorage: Sequence[{name: str, value: str}]}]}, None]</td>
+<td>Learn more about storage state and auth.  Populates context with given storage state. This option can be used to initialize context with logged-in information obtained via <code>browser_context.storage_state()</code>.</td>
+</tr>
+<tr>
+<td><code>strict_selectors</code></td>
+<td>Union[bool, None]</td>
+<td>If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on selectors that imply single target DOM element will throw when more than one element matches the selector. This option does not affect any Locator APIs (Locators are always strict). Defaults to <code>false</code>. See <code>Locator</code> to learn more about the strict mode.</td>
+</tr>
+<tr>
+<td><code>timezone_id</code></td>
+<td>Union[str, None]</td>
+<td>Changes the timezone of the context. See <a href="https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1">ICU's metaZones.txt</a> for a list of supported timezone IDs. Defaults to the system timezone.</td>
+</tr>
+<tr>
+<td><code>user_agent</code></td>
+<td>Union[str, None]</td>
+<td>Specific user agent to use in this context.</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Sets a consistent viewport for each page. Defaults to an 1280x720 viewport. <code>no_viewport</code> disables the fixed viewport. Learn more about viewport emulation.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-11">Returns</h4>
+<p>Page</p>
+<h3 id="异步-6">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">new_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">accept_downloads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bypass_csp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">client_certificates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ClientCertificate</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_scheme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;more&#39;</span><span class="p">,</span> <span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_browser_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_scale_factor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extra_http_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">forced_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">geolocation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">Geolocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">has_touch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">http_credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">HttpCredentials</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_https_errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_mobile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">java_script_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">no_viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">offline</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ProxySettings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">,</span> <span class="s1">&#39;omit&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="s1">&#39;minimal&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_omit_content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_har_url_filter</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_fps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">record_video_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduced_motion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;no-preference&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;reduce&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screen</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">service_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;block&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">storage_state</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">StorageState</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">strict_selectors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">viewport</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">patchright</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">_api_structures</span><span class="o">.</span><span class="n">ViewportSize</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">focus_control</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Page&#39;</span>
+</code></pre></div>
+<p>Browser.new_page</p>
+<p>Creates a new page in a new browser context. Closing this page will close the context as well.</p>
+<p>This is a convenience API that should only be used for the single-page scenarios and short snippets. Production
+code and testing frameworks should explicitly create <code>browser.new_context()</code> followed by the
+<code>browser_context.new_page()</code> to control their exact life times.</p>
+<h4 id="parameters-8">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accept_downloads</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to automatically download all the attachments. Defaults to <code>true</code> where all the downloads are accepted.</td>
+</tr>
+<tr>
+<td><code>base_url</code></td>
+<td>Union[str, None]</td>
+<td>When using <code>page.goto()</code>, <code>page.route()</code>, <code>page.wait_for_url()</code>, <code>page.expect_request()</code>, or <code>page.expect_response()</code> it takes the base URL in consideration by using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/URL"><code>URL()</code></a> constructor for building the corresponding URL. Unset by default. Examples: - baseURL: <code>http://localhost:3000</code> and navigating to <code>/bar.html</code> results in <code>http://localhost:3000/bar.html</code> - baseURL: <code>http://localhost:3000/foo/</code> and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/foo/bar.html</code> - baseURL: <code>http://localhost:3000/foo</code> (without trailing slash) and navigating to <code>./bar.html</code> results in <code>http://localhost:3000/bar.html</code></td>
+</tr>
+<tr>
+<td><code>bypass_csp</code></td>
+<td>Union[bool, None]</td>
+<td>Toggles bypassing page's Content-Security-Policy. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>client_certificates</code></td>
+<td>Union[Sequence[{origin: str, certPath: Union[pathlib.Path, str, None], cert: Union[bytes, None], keyPath: Union[pathlib.Path, str, None], key: Union[bytes, None], pfxPath: Union[pathlib.Path, str, None], pfx: Union[bytes, None], passphrase: Union[str, None]}], None]</td>
+<td>TLS Client Authentication allows the server to request a client certificate and verify it.  <strong>Details</strong>  An array of client certificates to be used. Each certificate object must have either both <code>certPath</code> and <code>keyPath</code>, a single <code>pfxPath</code>, or their corresponding direct value equivalents (<code>cert</code> and <code>key</code>, or <code>pfx</code>). Optionally, <code>passphrase</code> property should be provided if the certificate is encrypted. The <code>origin</code> property should be provided with an exact match to the request origin that the certificate is valid for.  Client certificate authentication is only active when at least one client certificate is provided. If you want to reject all client certificates sent by the server, you need to provide a client certificate with an <code>origin</code> that does not match any of the domains you plan to visit.  <strong>NOTE</strong> When using WebKit on macOS, accessing <code>localhost</code> will not pick up client certificates. You can make it work by replacing <code>localhost</code> with <code>local.playwright</code>.</td>
+</tr>
+<tr>
+<td><code>color_scheme</code></td>
+<td>Union[&quot;dark&quot;, &quot;light&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">prefers-colors-scheme</a> media feature, supported values are <code>'light'</code> and <code>'dark'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'light'</code>.</td>
+</tr>
+<tr>
+<td><code>contrast</code></td>
+<td>Union[&quot;more&quot;, &quot;no-preference&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'prefers-contrast'</code> media feature, supported values are <code>'no-preference'</code>, <code>'more'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>device_scale_factor</code></td>
+<td>Union[float, None]</td>
+<td>Specify device scale factor (can be thought of as dpr). Defaults to <code>1</code>. Learn more about emulating devices with device scale factor.</td>
+</tr>
+<tr>
+<td><code>extra_http_headers</code></td>
+<td>Union[Dict[str, str], None]</td>
+<td>An object containing additional HTTP headers to be sent with every request. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>forced_colors</code></td>
+<td>Union[&quot;active&quot;, &quot;none&quot;, &quot;null&quot;, None]</td>
+<td>Emulates <code>'forced-colors'</code> media feature, supported values are <code>'active'</code>, <code>'none'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'none'</code>.</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>Union[{latitude: float, longitude: float, accuracy: Union[float, None]}, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>has_touch</code></td>
+<td>Union[bool, None]</td>
+<td>Specifies if viewport supports touch events. Defaults to false. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>http_credentials</code></td>
+<td>Union[Sequence[{username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}], {username: str, password: str, origin: Union[str, None], send: Union[&quot;always&quot;, &quot;unauthorized&quot;, None]}, None]</td>
+<td>Credentials for <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP authentication</a>. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.  Pass an array to use different credentials for different origins. The first entry that matches the request origin is used, and entries with no origin match any request.</td>
+</tr>
+<tr>
+<td><code>ignore_https_errors</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to ignore HTTPS errors when sending network requests. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>is_mobile</code></td>
+<td>Union[bool, None]</td>
+<td>Whether the <code>meta viewport</code> tag is taken into account and touch events are enabled. isMobile is a part of device, so you don't actually need to set it manually. Defaults to <code>false</code>. Learn more about mobile emulation.</td>
+</tr>
+<tr>
+<td><code>java_script_enabled</code></td>
+<td>Union[bool, None]</td>
+<td>Whether or not to enable JavaScript in the context. Defaults to <code>true</code>. Learn more about disabling JavaScript.</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>Union[str, None]</td>
+<td>Specify user locale, for example <code>en-GB</code>, <code>de-DE</code>, etc. Locale will affect <code>navigator.language</code> value, <code>Accept-Language</code> request header value as well as number and date formatting rules. Defaults to the system default locale. Learn more about emulation in our emulation guide.</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>Union[bool, None]</td>
+<td>Does not enforce fixed viewport, allows resizing window in the headed mode.</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>Union[bool, None]</td>
+<td>Whether to emulate network being offline. Defaults to <code>false</code>. Learn more about network emulation.</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>A list of permissions to grant to all pages in this context. See <code>browser_context.grant_permissions()</code> for more details. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>Union[{server: str, bypass: Union[str, None], username: Union[str, None], password: Union[str, None]}, None]</td>
+<td>Network proxy settings to use with this context. Defaults to none.</td>
+</tr>
+<tr>
+<td><code>record_har_content</code></td>
+<td>Union[&quot;attach&quot;, &quot;embed&quot;, &quot;omit&quot;, None]</td>
+<td>Optional setting to control resource content management. If <code>omit</code> is specified, content is not persisted. If <code>attach</code> is specified, resources are persisted as separate files and all of these files are archived along with the HAR file. Defaults to <code>embed</code>, which stores content inline the HAR file as per HAR specification.</td>
+</tr>
+<tr>
+<td><code>record_har_mode</code></td>
+<td>Union[&quot;full&quot;, &quot;minimal&quot;, None]</td>
+<td>When set to <code>minimal</code>, only record information necessary for routing from HAR. This omits sizes, timing, page, cookies, security and other types of HAR information that are not used when replaying from HAR. Defaults to <code>full</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_omit_content</code></td>
+<td>Union[bool, None]</td>
+<td>Optional setting to control whether to omit request content from the HAR. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>record_har_path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables <a href="http://www.softwareishard.com/blog/har-12-spec">HAR</a> recording for all pages into the specified HAR file on the filesystem. If not specified, the HAR is not recorded. Make sure to call <code>browser_context.close()</code> for the HAR to be saved.</td>
+</tr>
+<tr>
+<td><code>record_har_url_filter</code></td>
+<td>Union[Pattern[str], str, None]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>record_video_dir</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>Enables video recording for all pages into the specified directory. If not specified videos are not recorded. Make sure to call <code>browser_context.close()</code> for videos to be saved.</td>
+</tr>
+<tr>
+<td><code>record_video_fps</code></td>
+<td>Union[int, None]</td>
+<td>Frame rate of the recorded videos in frames per second. Defaults to <code>25</code>. Firefox and WebKit currently capture up to 25 frames per second.</td>
+</tr>
+<tr>
+<td><code>record_video_size</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Dimensions of the recorded videos. If not specified the size will be equal to <code>viewport</code> scaled down to fit into 800x800. If <code>viewport</code> is not configured explicitly the video size defaults to 800x450. Actual picture of each page will be scaled down if necessary to fit the specified size.</td>
+</tr>
+<tr>
+<td><code>reduced_motion</code></td>
+<td>Union[&quot;no-preference&quot;, &quot;null&quot;, &quot;reduce&quot;, None]</td>
+<td>Emulates <code>'prefers-reduced-motion'</code> media feature, supported values are <code>'reduce'</code>, <code>'no-preference'</code>. See <code>page.emulate_media()</code> for more details. Passing <code>'null'</code> resets emulation to system defaults. Defaults to <code>'no-preference'</code>.</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Emulates consistent window screen size available inside web page via <code>window.screen</code>. Is only used when the <code>viewport</code> is set.</td>
+</tr>
+<tr>
+<td><code>service_workers</code></td>
+<td>Union[&quot;allow&quot;, &quot;block&quot;, None]</td>
+<td>Whether to allow sites to register Service workers. Defaults to <code>'allow'</code>. - <code>'allow'</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">Service Workers</a> can be registered. - <code>'block'</code>: Playwright will block all registration of Service Workers.</td>
+</tr>
+<tr>
+<td><code>storage_state</code></td>
+<td>Union[pathlib.Path, str, {cookies: Sequence[{name: str, value: str, domain: str, path: str, expires: float, httpOnly: bool, secure: bool, sameSite: Union[&quot;Lax&quot;, &quot;None&quot;, &quot;Strict&quot;]}], origins: Sequence[{origin: str, localStorage: Sequence[{name: str, value: str}]}]}, None]</td>
+<td>Learn more about storage state and auth.  Populates context with given storage state. This option can be used to initialize context with logged-in information obtained via <code>browser_context.storage_state()</code>.</td>
+</tr>
+<tr>
+<td><code>strict_selectors</code></td>
+<td>Union[bool, None]</td>
+<td>If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on selectors that imply single target DOM element will throw when more than one element matches the selector. This option does not affect any Locator APIs (Locators are always strict). Defaults to <code>false</code>. See <code>Locator</code> to learn more about the strict mode.</td>
+</tr>
+<tr>
+<td><code>timezone_id</code></td>
+<td>Union[str, None]</td>
+<td>Changes the timezone of the context. See <a href="https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1">ICU's metaZones.txt</a> for a list of supported timezone IDs. Defaults to the system timezone.</td>
+</tr>
+<tr>
+<td><code>user_agent</code></td>
+<td>Union[str, None]</td>
+<td>Specific user agent to use in this context.</td>
+</tr>
+<tr>
+<td><code>viewport</code></td>
+<td>Union[{width: int, height: int}, None]</td>
+<td>Sets a consistent viewport for each page. Defaults to an 1280x720 viewport. <code>no_viewport</code> disables the fixed viewport. Learn more about viewport emulation.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="returns-12">Returns</h4>
+<p>Page</p>
+<h2 id="on">on</h2>
+<h3 id="同步-7">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>支持的重载：</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BrowserContext&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;disconnected&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Browser&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h3 id="异步-7">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Awaitable</span><span class="p">[</span><span class="n">NoneType</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>支持的重载：</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BrowserContext&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Union[Awaitable[None], None]&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;disconnected&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Browser&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Union[Awaitable[None], None]&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Registers the function <code>f</code> to the event name <code>event</code>.</p>
+<h2 id="once">once</h2>
+<h3 id="同步-8">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>支持的重载：</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BrowserContext&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;disconnected&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Browser&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h3 id="异步-8">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Awaitable</span><span class="p">[</span><span class="n">NoneType</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>支持的重载：</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BrowserContext&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Union[Awaitable[None], None]&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;disconnected&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Browser&#39;</span><span class="p">)],</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Union[Awaitable[None], None]&#39;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>The same as <code>self.on</code>, except that the listener is automatically
+removed after being called.</p>
+<h2 id="remove-listener">remove_listener</h2>
+<h3 id="同步-9">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h3 id="异步-9">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Removes the function <code>f</code> from <code>event</code>.</p>
+<h2 id="start-tracing">start_tracing</h2>
+<h3 id="同步-10">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">start_tracing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">categories</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Page&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screenshots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.start_tracing</p>
+<p><strong>NOTE</strong> This API controls
+<a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool">Chromium Tracing</a> which is a low-level
+chromium-specific debugging tool. API to control <a href="https://playwright.dev/python/docs/trace-viewer">Playwright Tracing</a> could be found
+<a href="https://playwright.dev/python/docs/api/class-tracing">here</a>.</p>
+<p>You can use <code>browser.start_tracing()</code> and <code>browser.stop_tracing()</code> to create a trace file that can be opened in
+Chrome DevTools performance panel.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">browser</span><span class="o">.</span><span class="n">start_tracing</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;trace.json&quot;</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://www.google.com&quot;</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">stop_tracing</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-9">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>categories</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>specify custom categories to use instead of default.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>Union[Page, None]</td>
+<td>Optional, if specified, tracing includes screenshots of the given page.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>A path to write the trace file to.</td>
+</tr>
+<tr>
+<td><code>screenshots</code></td>
+<td>Union[bool, None]</td>
+<td>captures screenshots in the trace.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="异步-10">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_tracing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">categories</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Page&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screenshots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.start_tracing</p>
+<p><strong>NOTE</strong> This API controls
+<a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool">Chromium Tracing</a> which is a low-level
+chromium-specific debugging tool. API to control <a href="https://playwright.dev/python/docs/trace-viewer">Playwright Tracing</a> could be found
+<a href="https://playwright.dev/python/docs/api/class-tracing">here</a>.</p>
+<p>You can use <code>browser.start_tracing()</code> and <code>browser.stop_tracing()</code> to create a trace file that can be opened in
+Chrome DevTools performance panel.</p>
+<p><strong>Usage</strong></p>
+<div class="code-block"><div class="code-toolbar"><span>py</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">start_tracing</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;trace.json&quot;</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://www.google.com&quot;</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">stop_tracing</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="parameters-10">Parameters</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>categories</code></td>
+<td>Union[Sequence[str], None]</td>
+<td>specify custom categories to use instead of default.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>Union[Page, None]</td>
+<td>Optional, if specified, tracing includes screenshots of the given page.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Union[pathlib.Path, str, None]</td>
+<td>A path to write the trace file to.</td>
+</tr>
+<tr>
+<td><code>screenshots</code></td>
+<td>Union[bool, None]</td>
+<td>captures screenshots in the trace.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="stop-tracing">stop_tracing</h2>
+<h3 id="同步-11">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">stop_tracing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</code></pre></div>
+<p>Browser.stop_tracing</p>
+<p><strong>NOTE</strong> This API controls
+<a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool">Chromium Tracing</a> which is a low-level
+chromium-specific debugging tool. API to control <a href="https://playwright.dev/python/docs/trace-viewer">Playwright Tracing</a> could be found
+<a href="https://playwright.dev/python/docs/api/class-tracing">here</a>.</p>
+<p>Returns the buffer with trace data.</p>
+<h4 id="returns-13">Returns</h4>
+<p>bytes</p>
+<h3 id="异步-11">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stop_tracing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</code></pre></div>
+<p>Browser.stop_tracing</p>
+<p><strong>NOTE</strong> This API controls
+<a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool">Chromium Tracing</a> which is a low-level
+chromium-specific debugging tool. API to control <a href="https://playwright.dev/python/docs/trace-viewer">Playwright Tracing</a> could be found
+<a href="https://playwright.dev/python/docs/api/class-tracing">here</a>.</p>
+<p>Returns the buffer with trace data.</p>
+<h4 id="returns-14">Returns</h4>
+<p>bytes</p>
+<h2 id="unbind">unbind</h2>
+<h3 id="同步-12">同步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">def</span><span class="w"> </span><span class="nf">unbind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.unbind</p>
+<p>Unbinds the browser server previously bound with <code>browser.bind()</code>.</p>
+<h3 id="异步-12">异步</h3>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">unbind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Browser.unbind</p>
+<p>Unbinds the browser server previously bound with <code>browser.bind()</code>.</p>
+<h2 id="version">version</h2>
+<p>属性，直接读取；异步入口也不加 await。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">Browser</span><span class="o">.</span><span class="n">version</span><span class="p">:</span> <span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+<p>Browser.version</p>
+<p>Returns the browser version.</p>
+<h4 id="returns-15">Returns</h4>
+<p>str</p>
+<footer class="page-footer"><span>适用 SDK 0.11.0 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#bind">bind</a><a class="level2" href="#browser-type">browser_type</a><a class="level2" href="#close">close</a><a class="level2" href="#contexts">contexts</a><a class="level2" href="#is-connected">is_connected</a><a class="level2" href="#new-browser-cdp-session">new_browser_cdp_session</a><a class="level2" href="#new-context">new_context</a><a class="level2" href="#new-page">new_page</a><a class="level2" href="#on">on</a><a class="level2" href="#once">once</a><a class="level2" href="#remove-listener">remove_listener</a><a class="level2" href="#start-tracing">start_tracing</a><a class="level2" href="#stop-tracing">stop_tracing</a><a class="level2" href="#unbind">unbind</a><a class="level2" href="#version">version</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

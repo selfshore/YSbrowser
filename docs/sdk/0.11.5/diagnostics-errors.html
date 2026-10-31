@@ -1,0 +1,484 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>诊断与异常处理 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.0</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html" aria-current="page">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.0 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="诊断与异常处理">诊断与异常处理</h1>
+<p><a href="README.html">返回目录</a></p>
+<p>本节说明应用运行时如何取得状态和保存诊断文件。诊断采集默认关闭，由调用者主动开始。</p>
+<h2 id="读取-context-状态">读取 Context 状态</h2>
+<p><code>context.diagnostics() -&gt; dict</code>；异步入口使用 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>context_id</code></td>
+<td><code>str</code></td>
+<td>浏览器 Context ID</td>
+</tr>
+<tr>
+<td><code>closed</code></td>
+<td><code>bool</code></td>
+<td>Context 是否已关闭</td>
+</tr>
+<tr>
+<td><code>browser_connected</code></td>
+<td><code>bool</code></td>
+<td>浏览器连接是否仍存在</td>
+</tr>
+<tr>
+<td><code>versions</code></td>
+<td><code>dict</code></td>
+<td><code>browser.diagnostics()</code> 的快照，包含运行时、能力及浏览器状态</td>
+</tr>
+<tr>
+<td><code>recent_network_errors</code></td>
+<td><code>list[dict]</code></td>
+<td>最近最多 20 条导航级网络失败或 HTTP 错误</td>
+</tr>
+<tr>
+<td><code>recent_page_events</code></td>
+<td><code>list[dict]</code></td>
+<td>已采集页面事件摘要，此接口移除 message 正文</td>
+</tr>
+<tr>
+<td><code>diagnostics_collecting</code></td>
+<td><code>bool</code></td>
+<td>是否正在采集页面事件</td>
+</tr>
+<tr>
+<td><code>fingerprint</code></td>
+<td><code>dict</code>，可选</td>
+<td><code>locked</code>、<code>configured_fields</code>、<code>server_gpu_profile</code></td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td><code>dict</code>，可选</td>
+<td><code>ProxyStatus.to_dict()</code> 结构</td>
+</tr>
+<tr>
+<td><code>status_error</code></td>
+<td><code>dict</code>，可选</td>
+<td>查询原生状态失败时的 SDK 异常结构</td>
+</tr>
+</tbody>
+</table></div>
+<p>Context 已关闭或浏览器意外断开时，仍可返回已有摘要，但不包含新的指纹和代理查询结果。</p>
+<p>导航错误项有 <code>kind</code>、<code>at</code>（Unix 毫秒）、<code>origin</code>；<code>navigation_network_error</code> 附 <code>network_error</code>，<code>navigation_http_error</code> 附 <code>http_status</code>。<code>origin</code> 去除 URL 的账号密码、路径、query 和 fragment。</p>
+<h2 id="开始采集">开始采集</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="n">start_diagnostics</span><span class="p">(</span>
+    <span class="n">include_messages</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_events</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">trace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">runtime_events</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>start_diagnostics(*, include_messages=False, max_events=100, trace=False, runtime_events=True) -&gt; None</code>；异步入口使用 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include_messages</code></td>
+<td><code>bool = False</code></td>
+<td>是否保存 console/页面异常的文字；开启后每条最多 2000 字符</td>
+</tr>
+<tr>
+<td><code>max_events</code></td>
+<td><code>int = 100</code></td>
+<td>事件环形缓冲上限，1–10000，超过后保留最近事件</td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td><code>bool = False</code></td>
+<td>是否开始原生 trace，包含截图和 DOM 快照，不包含源码收集</td>
+</tr>
+<tr>
+<td><code>runtime_events</code></td>
+<td><code>bool = True</code></td>
+<td>是否通过页面 CDP Runtime 事件收集 console 与异常</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>runtime_events=True</code> 会对页面启用 Runtime 事件。设为 <code>False</code> 使用原生 Patchright 事件，其 console/pageerror 在部分运行方式下可能不完整。默认只在明确调用本方法后启用诊断。</p>
+<p>采集期间重复开始会抛 <code>DIAGNOSTICS_ACTIVE</code>。已有页面和随后经 SDK 创建的页面会附加采集；原生弹窗在完成附加前的早期事件可能遗漏。该接口不保证覆盖所有 worker 或跨进程 frame 的 console。</p>
+<h2 id="保存诊断文件">保存诊断文件</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">report</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">capture_diagnostics</span><span class="p">(</span>
+    <span class="s2">&quot;diagnostics&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">screenshot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">full_page</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">stop_trace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_pages</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;report_path&quot;</span><span class="p">])</span>
+<span class="n">context</span><span class="o">.</span><span class="n">stop_diagnostics</span><span class="p">()</span>
+</code></pre></div>
+<p><code>capture_diagnostics(directory, *, page=None, screenshot=True, full_page=False, stop_trace=True, max_pages=5, timeout_ms=5000) -&gt; dict</code>；异步入口使用 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型 / 默认值</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>directory</code></td>
+<td><code>str | Path</code>，必填</td>
+<td>输出父目录；每次新建独立 <code>ysdiagnostics-...</code> 子目录</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>Page | None</code></td>
+<td>只截图此页面；省略时从 Context 页面列表选择；必须属于当前 Context</td>
+</tr>
+<tr>
+<td><code>screenshot</code></td>
+<td><code>bool = True</code></td>
+<td>是否保存页面 PNG</td>
+</tr>
+<tr>
+<td><code>full_page</code></td>
+<td><code>bool = False</code></td>
+<td>是否截图完整可滚动页面</td>
+</tr>
+<tr>
+<td><code>stop_trace</code></td>
+<td><code>bool = True</code></td>
+<td>是否结束已开启的 trace 并保存为 <code>trace.zip</code></td>
+</tr>
+<tr>
+<td><code>max_pages</code></td>
+<td><code>int = 5</code></td>
+<td>最多处理页面数，1–100</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td><code>float = 5000</code></td>
+<td>每次截图的正有限超时；不是整个诊断采集的总超时</td>
+</tr>
+</tbody>
+</table></div>
+<p>无需提前 <code>start_diagnostics()</code> 也能取得当前状态与截图，但不会有之前的事件或 trace。要保存 trace，必须先 <code>start_diagnostics(trace=True)</code>，再 capture，最后 stop。<code>stop_trace=False</code> 继续录制，本次不生成 trace 文件。</p>
+<h3 id="返回字段">返回字段</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td><code>int</code></td>
+<td>当前为 1</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>float</code></td>
+<td>创建时间，Unix 毫秒</td>
+</tr>
+<tr>
+<td><code>directory</code></td>
+<td><code>str</code></td>
+<td>本次子目录绝对路径</td>
+</tr>
+<tr>
+<td><code>report_path</code></td>
+<td><code>str</code></td>
+<td><code>report.json</code> 绝对路径</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>dict</code>，可选</td>
+<td>Context 诊断快照</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td><code>list[dict]</code></td>
+<td>页面结果，每项字段见下文</td>
+</tr>
+<tr>
+<td><code>pages_omitted</code></td>
+<td><code>int</code></td>
+<td>因 <code>max_pages</code> 未处理的页面数</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td><code>list[dict]</code></td>
+<td>非截图采集失败项：<code>stage</code> 和 <code>error_type</code></td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td><code>str | None</code></td>
+<td>相对子目录的 <code>trace.zip</code> 文件名；未保存时为 <code>None</code></td>
+</tr>
+<tr>
+<td><code>trace_still_recording</code></td>
+<td><code>bool</code></td>
+<td>是否仍录制 SDK 开启的 trace</td>
+</tr>
+<tr>
+<td><code>messages_included</code></td>
+<td><code>bool</code></td>
+<td>是否允许在事件中包含正文</td>
+</tr>
+<tr>
+<td><code>page_events</code></td>
+<td><code>list[dict]</code></td>
+<td>最近页面事件</td>
+</tr>
+<tr>
+<td><code>runtime_events</code></td>
+<td><code>bool</code></td>
+<td>是否选择 Runtime 事件采集</td>
+</tr>
+<tr>
+<td><code>event_attachment_errors</code></td>
+<td><code>list[dict]</code></td>
+<td>页面附加事件采集失败，字段为 <code>origin</code>、<code>error_type</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>pages</code> 每项包含 <code>origin: str</code>、<code>closed: bool</code>、<code>screenshot: str | None</code>；失败时额外有 <code>screenshot_error: str</code>。截图文件名相对子目录，例如 <code>page-1.png</code>。</p>
+<p><code>page_events</code> 每项包含 <code>kind</code>（如 <code>console</code>、<code>page_error</code>、<code>page_crash</code>）、<code>at</code>（Unix 毫秒）、<code>origin</code>，console 可带 <code>level</code>；只有允许正文且存在文字时才带 <code>message</code>。</p>
+<p>单页截图或状态查询失败时尽量返回其他结果，在相应字段记录失败；目录不可写等文件系统错误仍可能直接抛出。此方法不会重试页面业务操作，也不会停止事件收集。</p>
+<p><code>stop_diagnostics() -&gt; None</code> 解除采集，异步入口使用 <code>await</code>。尚未 capture 的 SDK trace 会被丢弃。不要同时用 <code>context.raw.tracing</code> 管理同一段 SDK trace。</p>
+<p>诊断元数据不自动导出登录状态、Cookie 文件、启动参数或完整 HTML 文件。截图、trace 内的页面/网络内容以及开启的 message 正文仍可能含业务数据；<code>include_messages=False</code> 不会对图片和 trace 做内容脱敏。</p>
+<h2 id="异常类型">异常类型</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SDKError</span><span class="p">,</span> <span class="n">ConfigurationError</span><span class="p">,</span> <span class="n">CompatibilityError</span><span class="p">,</span>
+    <span class="n">FingerprintLockedError</span><span class="p">,</span> <span class="n">ProxyCheckError</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">patchright.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span> <span class="k">as</span> <span class="n">BrowserError</span><span class="p">,</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">BrowserTimeoutError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://app.example.com&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">BrowserTimeoutError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;页面操作超时：&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+<span class="k">except</span> <span class="n">BrowserError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;页面操作失败：&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+<span class="k">except</span> <span class="n">SDKError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<p>URL 为占位地址；将 <code>try</code> 内替换为自己的 SDK 或页面操作。异步程序从 <code>patchright.async_api</code> 导入原生异常，并对异步操作使用 <code>await</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>基类 / 用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SDKError</code></td>
+<td>继承 <code>RuntimeError</code>；SDK 生命周期、协议操作等错误</td>
+</tr>
+<tr>
+<td><code>ConfigurationError</code></td>
+<td>继承 <code>SDKError</code>；参数、格式或组合不合法</td>
+</tr>
+<tr>
+<td><code>CompatibilityError</code></td>
+<td>继承 <code>SDKError</code>；运行时版本或浏览器扩展不兼容</td>
+</tr>
+<tr>
+<td><code>FingerprintLockedError</code></td>
+<td>继承 <code>SDKError</code>；Context 指纹已锁定</td>
+</tr>
+<tr>
+<td><code>ProxyCheckError</code></td>
+<td>继承 <code>SDKError</code>；代理设置时的检查失败</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>SDKError(code, stage, message, *, context_id=None, details=None, original_error=None)</code> 可用于应用自己的错误包装。四个子类中，<code>ConfigurationError(message)</code> 固定 <code>code=&quot;INVALID_CONFIG&quot;</code>、<code>stage=&quot;validate&quot;</code>；其余三类沿用基类构造参数。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>异常属性</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>str</code></td>
+<td>可用于程序分支的错误码</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td><code>str</code></td>
+<td>失败阶段，如 <code>proxy.set</code></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>str</code></td>
+<td>SDK 错误说明</td>
+</tr>
+<tr>
+<td><code>context_id</code></td>
+<td><code>str | None</code></td>
+<td>关联 Context ID</td>
+</tr>
+<tr>
+<td><code>details</code></td>
+<td><code>dict</code></td>
+<td>补充信息，缺省为空字典</td>
+</tr>
+<tr>
+<td><code>original_error</code></td>
+<td>异常对象或 <code>None</code></td>
+<td>原始异常对象，供调用者进一步处理</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>to_dict() -&gt; dict</code> 返回 <code>code</code>、<code>stage</code>、<code>message</code>、<code>context_id</code>、<code>details</code>，不含 <code>original_error</code>。</p>
+<p>原生 Page/Locator 方法抛 Patchright <code>Error</code> / <code>TimeoutError</code>；鼠标模型还会抛 <code>ValueError</code>、<code>RuntimeError</code>、<code>NotImplementedError</code> 等。仅捕获 <code>SDKError</code> 不能涵盖所有页面和模型异常。</p>
+<h2 id="错误码与处理">错误码与处理</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>操作方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INVALID_CONFIG</code></td>
+<td>根据 message 调整类型、范围、缺失字段或不兼容的选项组合</td>
+</tr>
+<tr>
+<td><code>UNSUPPORTED_RUNTIME</code> / <code>UNSUPPORTED_DRIVER</code></td>
+<td>使用当前 wheel 对应的固定 Patchright 和 driver 环境</td>
+</tr>
+<tr>
+<td><code>BROWSER_CAPABILITIES_UNAVAILABLE</code></td>
+<td>指定支持本 SDK 扩展的配套浏览器</td>
+</tr>
+<tr>
+<td><code>BROWSER_CAPABILITIES_UNSUPPORTED</code></td>
+<td>检查浏览器协议版本与缺少的 features</td>
+</tr>
+<tr>
+<td><code>UNSUPPORTED_FINGERPRINT_FIELDS</code></td>
+<td>使用 capabilities 声明支持的指纹字段</td>
+</tr>
+<tr>
+<td><code>CONTEXT_GPU_UNSUPPORTED</code></td>
+<td>使用支持并确认 Context GPU profile 的浏览器</td>
+</tr>
+<tr>
+<td><code>LAUNCH_FAILED</code></td>
+<td>检查 exe 路径、配套依赖、启动参数和进程环境</td>
+</tr>
+<tr>
+<td><code>BROWSER_NOT_RUNNING</code></td>
+<td>先 start 或进入 with/async with</td>
+</tr>
+<tr>
+<td><code>BROWSER_DISCONNECTED</code></td>
+<td>关闭旧实例，新建浏览器并恢复已保存状态</td>
+</tr>
+<tr>
+<td><code>BROWSER_CLOSING</code></td>
+<td>等待关闭完成后新建浏览器，不再创建 Context</td>
+</tr>
+<tr>
+<td><code>CONTEXT_CLOSED</code></td>
+<td>创建新的 Context</td>
+</tr>
+<tr>
+<td><code>CONTEXT_ID_AMBIGUOUS</code></td>
+<td>避免同时从 raw 或其他 CDP 客户端创建 Context</td>
+</tr>
+<tr>
+<td><code>FINGERPRINT_LOCKED</code></td>
+<td>新建 Context，在打开页面前设置指纹</td>
+</tr>
+<tr>
+<td><code>FINGERPRINT_STATUS_FAILED</code> / <code>FINGERPRINT_SET_FAILED</code></td>
+<td>检查浏览器扩展支持、字段取值和连接状态</td>
+</tr>
+<tr>
+<td><code>PROXY_STATUS_FAILED</code></td>
+<td>检查浏览器连接及代理扩展接口</td>
+</tr>
+<tr>
+<td><code>PROXY_SET_FAILED</code></td>
+<td>查询当前代理状态，确认服务配置与协议错误</td>
+</tr>
+<tr>
+<td><code>PROXY_CHECK_FAILED</code></td>
+<td>读取异常 details 中的 proxy_status，检查认证、HTTP 状态、出口格式及回滚结果</td>
+</tr>
+<tr>
+<td><code>PROXY_CHECK_COMMAND_FAILED</code></td>
+<td>独立检查命令未能正常完成；检查连接和 Context 生命周期</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_UNSUPPORTED</code></td>
+<td>需要支持 proxySwitchBarrier 的浏览器，或在业务空闲时省略 mode</td>
+</tr>
+<tr>
+<td><code>PROXY_DRAIN_TIMEOUT</code></td>
+<td>旧请求未结束；查询旧代理状态，安排结束长连接或调整等待时间</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_IN_PROGRESS</code></td>
+<td>已有切换正在进行；等待该操作结束后再查询状态</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_CONTEXT_LOST</code></td>
+<td>切换关联的 Context 已失效；新建 Context 并应用配置</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_CANCELLED</code></td>
+<td>切换已取消；查询当前状态后决定下一步</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_LEASE_EXPIRED</code></td>
+<td>切换控制已过期；检查连接并查询实际代理配置</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_MULTIPLE_PARTITIONS_UNSUPPORTED</code></td>
+<td>当前存在不支持的多分区条件；不要将此 Context 当作已完成切换</td>
+</tr>
+<tr>
+<td><code>PROXY_SWITCH_BUSY_OR_INVALID</code></td>
+<td>操作冲突或原生参数被拒绝；检查模式、超时和当前操作状态</td>
+</tr>
+<tr>
+<td><code>CONFIG_CHANGED_EXTERNALLY</code></td>
+<td>对可配置的 Context 重新成功应用明确设置，或新建 Context</td>
+</tr>
+<tr>
+<td><code>STORAGE_SAVE_FAILED</code></td>
+<td>检查目录权限、Context 状态和原始异常</td>
+</tr>
+<tr>
+<td><code>STORAGE_RESTORE_FAILED</code></td>
+<td>检查状态文件格式、路径及原始异常</td>
+</tr>
+<tr>
+<td><code>STORAGE_RESTORE_REQUIRES_EMPTY_CONTEXT</code></td>
+<td>在创建任何页面之前恢复，优先传 new_context(storage_state=...)</td>
+</tr>
+<tr>
+<td><code>DIAGNOSTICS_ACTIVE</code></td>
+<td>先 capture/stop，再启动新一轮采集</td>
+</tr>
+</tbody>
+</table></div>
+<p>代理切换还可能透传浏览器返回的其他 <code>PROXY_*</code> 操作错误码；读取 <code>code</code>、<code>stage</code> 和 <code>details</code>，并重新查询状态，不假定错误后必然已应用新代理。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.0 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#读取-context-状态">读取 Context 状态</a><a class="level2" href="#开始采集">开始采集</a><a class="level2" href="#保存诊断文件">保存诊断文件</a><a class="level3" href="#返回字段">返回字段</a><a class="level2" href="#异常类型">异常类型</a><a class="level2" href="#错误码与处理">错误码与处理</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

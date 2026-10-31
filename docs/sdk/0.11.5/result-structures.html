@@ -1,0 +1,261 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>返回结构速查 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.0</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html">drag_element 详解</a><a href="result-structures.html" aria-current="page">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.0 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="返回结构速查">返回结构速查</h1>
+<p>先区分模型计划、实际派发结果和网页业务状态。生成了有效路径并完成派发，不保证网站已经接受操作。</p>
+<h2 id="motionexecution">MotionExecution</h2>
+<p>由 SDK 鼠标移动、点击与拖动返回；不是字典，使用属性访问。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">model_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dispatched_points</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">skipped_points</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plan</code></td>
+<td>MotionPlan</td>
+<td>本次运动计划</td>
+</tr>
+<tr>
+<td><code>dispatched_points</code></td>
+<td>int</td>
+<td>已发送的移动点数，不计起点定位</td>
+</tr>
+<tr>
+<td><code>skipped_points</code></td>
+<td>int</td>
+<td>因调度迟到跳过的计划点数</td>
+</tr>
+<tr>
+<td><code>elapsed_s</code></td>
+<td>float</td>
+<td>移动派发秒数，不含推理、起点定位和按键等待</td>
+</tr>
+<tr>
+<td><code>max_lateness_s</code></td>
+<td>float</td>
+<td>最大派发迟到秒数</td>
+</tr>
+</tbody>
+</table></div>
+<p>正常完成时 <code>dispatched_points + skipped_points == len(plan.points) - 1</code>。</p>
+<h2 id="motionplan">MotionPlan</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>points</code></td>
+<td>list[list[float]]</td>
+<td><code>[绝对x, 绝对y, 累计秒数]</code> 列表，时间从 0 开始严格递增</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>str</td>
+<td>引擎名 conditional_flow_matching_transformer；无位移普通移动为 stationary</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>str</td>
+<td>模型 ID</td>
+</tr>
+<tr>
+<td><code>data_source</code></td>
+<td>str</td>
+<td>实际来源条件 user_mousedata / bogazici / sapimouse</td>
+</tr>
+<tr>
+<td><code>task</code></td>
+<td>str</td>
+<td>move / approach_click / drag</td>
+</tr>
+<tr>
+<td><code>predicted_cadence_s</code></td>
+<td>float 或 None</td>
+<td>预测的典型采样间隔；外部自行构造对象时可能为 None</td>
+</tr>
+<tr>
+<td><code>attempts</code></td>
+<td>int</td>
+<td>模型采样次数</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>list[str]</td>
+<td>像素标定、未学习的条件等提示</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;plan&quot;</span><span class="p">][</span><span class="s2">&quot;points&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># 计划运动总秒数</span>
+</code></pre></div>
+<p><code>plan.source</code> 是引擎名，不是数据集名。坐标是主 Frame 视口 CSS 像素，不是屏幕坐标。</p>
+<h2 id="相对轨迹字典">相对轨迹字典</h2>
+<p>由 <code>generate_single_trajectory()</code> 返回，可直接按键访问。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trajectory</code></td>
+<td>list[list[float]]</td>
+<td><code>[相对x, 相对y, 累计秒数]</code>；首点 <code>[0,0,0]</code></td>
+</tr>
+<tr>
+<td><code>end_x</code> / <code>end_y</code></td>
+<td>float</td>
+<td>最终相对位移</td>
+</tr>
+<tr>
+<td><code>total_points</code></td>
+<td>int</td>
+<td>trajectory 的点数</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float</td>
+<td>轨迹总秒数</td>
+</tr>
+<tr>
+<td><code>predicted_cadence_s</code></td>
+<td>float</td>
+<td>典型采样间隔</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>str</td>
+<td>模型 ID</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>str</td>
+<td>此字典中 source 是数据来源条件</td>
+</tr>
+<tr>
+<td><code>engine</code></td>
+<td>str</td>
+<td>引擎名称</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>list[str]</td>
+<td>提示列表</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.motion</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrajectoryModel</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TrajectoryModel</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_single_trajectory</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;trajectory&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;engine&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>该函数不移动浏览器。要实际拖动，应使用鼠标 API；手工播放时别把累计秒数当作每步 sleep，也别把相对坐标当绝对坐标。</p>
+<h2 id="点击时长字典">点击时长字典</h2>
+<p>由 <code>sample_click_hold()</code> 返回；鼠标自动点击采样时也存入 <code>mouse.last_click_hold</code>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hold_ms</code></td>
+<td>float</td>
+<td>按下至释放的毫秒数</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td>left / right</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>str</td>
+<td>数据来源条件</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>str</td>
+<td>模型 ID</td>
+</tr>
+<tr>
+<td><code>engine</code></td>
+<td>str</td>
+<td>引擎名称</td>
+</tr>
+</tbody>
+</table></div>
+<p>显式传入 hold_ms 的点击将 last_click_hold 设为 None。drag_element 的前后等待不使用此字段。</p>
+<h2 id="代理与其他结果">代理与其他结果</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>调用</th>
+<th>返回类型</th>
+<th>逐字段说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>context.proxy_status()</code> / <code>set_proxy()</code></td>
+<td>ProxyStatus</td>
+<td><a href="reference/ProxyStatus.html">配置、历史状态、health</a></td>
+</tr>
+<tr>
+<td><code>context.check_proxy()</code></td>
+<td>ProxyHealthResult</td>
+<td><a href="reference/ProxyHealthResult.html">ok/kind/stale/exit_ip 等</a></td>
+</tr>
+<tr>
+<td><code>browser.capabilities</code></td>
+<td>BrowserCapabilities</td>
+<td><a href="reference/BrowserCapabilities.html">功能能力字段</a></td>
+</tr>
+<tr>
+<td><code>context.export_config()</code></td>
+<td>dict</td>
+<td><a href="storage.html#json-格式">schema 1/2 配置格式</a></td>
+</tr>
+<tr>
+<td><code>context.save_storage_state()</code></td>
+<td>dict</td>
+<td><a href="storage.html#保存登录状态">cookies/origins/IndexedDB</a></td>
+</tr>
+<tr>
+<td><code>context.capture_diagnostics()</code></td>
+<td>dict</td>
+<td><a href="diagnostics-errors.html#返回字段">文件清单与错误结构</a></td>
+</tr>
+<tr>
+<td><code>SDKError.to_dict()</code></td>
+<td>dict</td>
+<td><a href="reference/SDKError.html">code/stage/message/context_id/details</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>如果方法写明返回 None，就没有可读取的结果对象。异步方法未 await 时得到的是 coroutine，也不是结果对象。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.0 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#motionexecution">MotionExecution</a><a class="level2" href="#motionplan">MotionPlan</a><a class="level2" href="#相对轨迹字典">相对轨迹字典</a><a class="level2" href="#点击时长字典">点击时长字典</a><a class="level2" href="#代理与其他结果">代理与其他结果</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

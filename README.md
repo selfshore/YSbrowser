@@ -2,7 +2,7 @@
 
 <h1>YSbrowser</h1>
 
-<p><strong>基于 Chromium 深度定制的 Windows 浏览器</strong></p>
+<p><strong>基于 Chromium 深度定制的 Windows / Linux 浏览器</strong></p>
 <p>稳定、可复现、可独立配置的浏览器运行环境</p>
 
 [![Release](https://img.shields.io/github/v/release/selfshore/YSbrowser?display_name=tag&style=for-the-badge&color=0969da)](https://github.com/selfshore/YSbrowser/releases/latest)
@@ -14,7 +14,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-[SDK 使用手册](https://selfshore.github.io/YSbrowser/sdk/0.11.4/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
+[SDK 使用手册](https://selfshore.github.io/YSbrowser/sdk/0.11.5/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
 
 </div>
 
@@ -24,11 +24,11 @@
 
 ## 简介
 
-YSbrowser 是基于 Chromium 定制的 Windows 桌面浏览器。新版本把环境配置放在浏览器底层完成，支持独立用户目录、认证代理、WebRTC 地址策略，以及 Canvas、WebGL、Audio、字体、屏幕和文本几何等可复现配置。
+YSbrowser 是基于 Chromium 定制的 Windows / Linux 桌面浏览器。新版本把环境配置放在浏览器底层完成，支持独立用户目录、认证代理、WebRTC 地址策略，以及 Canvas、WebGL、Audio、字体、屏幕和文本几何等可复现配置。
 
 同一套启动参数与种子会稳定选择同一套环境。不同实例使用不同的 `--user-data-dir` 后，Cookie、缓存、LocalStorage、IndexedDB 和站点权限彼此隔离。
 
-> 当前图形实现面向 Windows x64 和 Chromium 默认的 ANGLE D3D11 路径。强制使用 Vulkan、OpenGL 或 SwiftShader 时，WebGL 绘画结果不保证与 D3D11 相同。
+> Windows 图形实现面向 Windows x64 和 Chromium 默认的 ANGLE D3D11 路径。强制使用 Vulkan、OpenGL 或 SwiftShader 时，WebGL 绘画结果不保证与 D3D11 相同。
 
 ## 新版本特性
 
@@ -75,12 +75,19 @@ YSbrowser 是基于 Chromium 定制的 Windows 桌面浏览器。新版本把环
 
 ## 快速开始
 
-从 [Releases](https://github.com/selfshore/YSbrowser/releases) 下载 Windows 压缩包，解压后运行 `YSbrowser.exe`。
+从 [Releases](https://github.com/selfshore/YSbrowser/releases) 下载 Windows 压缩包，解压后运行 `chrome.exe`。
+
+6.4 的 Windows 包为 `chrome.7z`，入口为 `Chrome-bin/chrome.exe`。Linux 包为 `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage`，面向 Ubuntu 24.04 x86_64，要求 AVX2、FMA、F16C。下载后 `chmod +x` 即可执行，沙箱与 AppArmor 配置见同一 Release 的 `AppImage-README.txt`。两端均支持 SDK 0.11.5 自动下载和 SHA-256 校验：
+
+```shell
+python -m pip install --upgrade ysbrowser-sdk
+python -m ysbrowser_sdk install
+```
 
 最小推荐配置：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\profile-01" `
   --fpseed="profile-01" `
   --timezone="Asia/Shanghai" `
@@ -110,7 +117,7 @@ flowchart LR
 例如：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\profile-02" `
   --fpseed="account-02" `
   --canvas-seed="canvas-02" `
@@ -152,7 +159,7 @@ svgrect-seed > rect-seed > fpseed > 默认行为
 例如，使用 RTX 3060 配置启动：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\server-01" `
   --server-gpu-profile=rtx3060 `
   --no-first-run
@@ -237,7 +244,7 @@ svgrect-seed > rect-seed > fpseed > 默认行为
 认证代理示例：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\proxy-01" `
   --proxy-server="http://127.0.0.1:8080" `
   --proxy-auth="username:password" `
@@ -260,7 +267,7 @@ svgrect-seed > rect-seed > fpseed > 默认行为
 CDP 启动示例：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\automation-01" `
   --remote-debugging-port=9222 `
   --iconumber=1 `
@@ -275,7 +282,7 @@ CDP 启动示例：
 下面的示例使用一套稳定的总体种子，并单独指定 Canvas、WebGL 和字体：
 
 ```powershell
-.\YSbrowser.exe `
+.\chrome.exe `
   --user-data-dir="D:\YSbrowser\profiles\my-001" `
   --fpseed="my-profile-001" `
   --canvas-seed="my-canvas-001" `

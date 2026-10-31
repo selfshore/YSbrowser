@@ -1,0 +1,277 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ContextConfig · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.0</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html" aria-current="page">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.0 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="contextconfig">ContextConfig</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../storage.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContextConfig</span><span class="p">,</span> <span class="n">FingerprintProfile</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="p">(</span><span class="n">fingerprint</span><span class="o">=</span><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">&quot;account-001&quot;</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">ContextConfig</span><span class="p">(</span><span class="n">fingerprint</span><span class="p">:</span> <span class="s1">&#39;FingerprintProfile&#39;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">factory</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">proxy</span><span class="p">:</span> <span class="s1">&#39;ProxyConfig | Direct&#39;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">factory</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">no_viewport</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;ContextOptions&#39;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">factory</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fingerprint</code></td>
+<td>FingerprintProfile</td>
+<td><code>独立默认对象</code></td>
+<td>指纹配置</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>ProxyConfig | Direct</td>
+<td><code>独立默认对象</code></td>
+<td>显式保存代理策略</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>是否不固定视口；有 <code>options.viewport</code> 时必须为 <code>False</code></td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>ContextOptions</td>
+<td><code>独立默认对象</code></td>
+<td>Context 选项</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="字段与返回结构">字段与返回结构</h2>
+<p>直接用 <code>对象.字段</code> 读取；需要普通字典时用 <code>dataclasses.asdict(对象)</code>，或使用本类型提供的 to_dict。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fingerprint</code></td>
+<td>FingerprintProfile</td>
+<td>指纹配置</td>
+</tr>
+<tr>
+<td><code>proxy</code></td>
+<td>ProxyConfig | Direct</td>
+<td>显式保存代理策略</td>
+</tr>
+<tr>
+<td><code>no_viewport</code></td>
+<td>bool</td>
+<td>是否不固定视口；有 <code>options.viewport</code> 时必须为 <code>False</code></td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>ContextOptions</td>
+<td>Context 选项</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#contextconfig-from-dict">ContextConfig.from_dict</a></li>
+<li><a href="#contextconfig-load">ContextConfig.load</a></li>
+<li><a href="#contextconfig-save">ContextConfig.save</a></li>
+<li><a href="#contextconfig-to-dict">ContextConfig.to_dict</a></li>
+</ul>
+<h2 id="contextconfig-from-dict">ContextConfig.from_dict</h2>
+<p>从 data（schema 1/2 字典）恢复 ContextConfig。认证与 options 参数的规则同 load；不访问文件。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s1">&#39;dict[str, Any]&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proxy_username</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy_password</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;ContextOptions | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ContextConfig&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>dict[str, Any]</td>
+<td><code>必填</code></td>
+<td>本类型 to_dict() 返回的结构；ContextConfig 为 schema 1/2，ContextOptions 为 values/requires。</td>
+</tr>
+<tr>
+<td><code>proxy_username</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>加载配置时补齐代理用户名，须和 proxy_password 同时提供。</td>
+</tr>
+<tr>
+<td><code>proxy_password</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>加载配置时补齐代理密码，须和 proxy_username 同时提供。</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>ContextOptions | None</td>
+<td><code>None</code></td>
+<td>原生 Context 选项；创建时整体覆盖 config.options，加载配置时非 None 字段补充/覆盖。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回 ContextConfig 实例，不访问文件。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">restored</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>配置与登录状态是两种文件。默认省略凭据；加载时需要按 requires_auth/options.requires 补齐。</p>
+<p><a href="../storage.html">更多示例和完整业务规则</a></p>
+<h2 id="contextconfig-load">ContextConfig.load</h2>
+<p>从 path 读取 JSON，返回 ContextConfig。缺少认证时用 proxy_username/password 成对补齐，options 的非 None 字段补充/覆盖已有选项。格式或缺失值错误抛 ConfigurationError。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s1">&#39;str | Path&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proxy_username</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy_password</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;ContextOptions | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ContextConfig&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-2">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>str | Path</td>
+<td><code>必填</code></td>
+<td>读写的 JSON 路径；省略的导出/保存只返回字典；load/save 必须提供路径。</td>
+</tr>
+<tr>
+<td><code>proxy_username</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>加载配置时补齐代理用户名，须和 proxy_password 同时提供。</td>
+</tr>
+<tr>
+<td><code>proxy_password</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>加载配置时补齐代理密码，须和 proxy_username 同时提供。</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>ContextOptions | None</td>
+<td><code>None</code></td>
+<td>原生 Context 选项；创建时整体覆盖 config.options，加载配置时非 None 字段补充/覆盖。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 ContextConfig 实例；其字段见本页构造参数。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">config</span> <span class="o">=</span> <span class="n">ContextConfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;config/account.json&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>配置与登录状态是两种文件。默认省略凭据；加载时需要按 requires_auth/options.requires 补齐。</p>
+<p><a href="../storage.html">更多示例和完整业务规则</a></p>
+<h2 id="contextconfig-save">ContextConfig.save</h2>
+<p>将配置 JSON 保存到 path，创建父目录，返回 None。include 开关与 to_dict 相同。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s1">&#39;str | Path&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include_proxy_credentials</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">include_sensitive_options</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-3">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>str | Path</td>
+<td><code>必填</code></td>
+<td>读写的 JSON 路径；省略的导出/保存只返回字典；load/save 必须提供路径。</td>
+</tr>
+<tr>
+<td><code>include_proxy_credentials</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否在配置中写出代理账号密码；默认省略并标记需要补齐。</td>
+</tr>
+<tr>
+<td><code>include_sensitive_options</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否写出网站认证、客户端证书、附加请求头等敏感选项。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-3">返回值</h3>
+<p>返回 None。操作失败时抛异常。</p>
+<h3 id="示例-3">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">config</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;config/account.json&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-3">注意事项</h3>
+<p>配置与登录状态是两种文件。默认省略凭据；加载时需要按 requires_auth/options.requires 补齐。</p>
+<p><a href="../storage.html">更多示例和完整业务规则</a></p>
+<h2 id="contextconfig-to-dict">ContextConfig.to_dict</h2>
+<p>返回 schema 1/2 配置字典；默认省略代理认证和敏感 Context 选项。两个 include 开关均为关键字布尔值。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">to_dict</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">include_proxy_credentials</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">include_sensitive_options</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;dict[str, Any]&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-4">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include_proxy_credentials</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否在配置中写出代理账号密码；默认省略并标记需要补齐。</td>
+</tr>
+<tr>
+<td><code>include_sensitive_options</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否写出网站认证、客户端证书、附加请求头等敏感选项。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值-4">返回值</h3>
+<p>返回 schema 1/2 配置字典；<a href="../storage.html#json-格式">JSON 字段说明</a>。</p>
+<h3 id="示例-4">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;schema_version&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">][</span><span class="s2">&quot;mode&quot;</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="注意事项-4">注意事项</h3>
+<p>配置与登录状态是两种文件。默认省略凭据；加载时需要按 requires_auth/options.requires 补齐。</p>
+<p><a href="../storage.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.0 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#字段与返回结构">字段与返回结构</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#contextconfig-from-dict">ContextConfig.from_dict</a><a class="level2" href="#contextconfig-load">ContextConfig.load</a><a class="level2" href="#contextconfig-save">ContextConfig.save</a><a class="level2" href="#contextconfig-to-dict">ContextConfig.to_dict</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

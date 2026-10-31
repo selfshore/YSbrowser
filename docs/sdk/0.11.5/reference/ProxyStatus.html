@@ -1,0 +1,274 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ProxyStatus · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.0</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html" aria-current="page">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.0 · Windows<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="proxystatus">ProxyStatus</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../proxy.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProxyStatus</span>
+</code></pre></div>
+<p>结果对象通常由 SDK 返回。下面的构造字段也可用于理解返回对象的结构。</p>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">ProxyStatus</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">check_state</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">context_id</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">auth_configured</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">,</span> <span class="n">runtime_override</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">,</span> <span class="n">last_exit_ip</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span><span class="p">,</span> <span class="n">last_http_status</span><span class="p">:</span> <span class="s1">&#39;int | None&#39;</span><span class="p">,</span> <span class="n">last_rollback</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span><span class="p">,</span> <span class="n">proxy_server</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">check_url</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span><span class="p">,</span> <span class="n">generation</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">health_check_in_progress</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">health</span><span class="p">:</span> <span class="s1">&#39;ProxyHealthResult | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">last_error_kind</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">last_network_error</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">switch_in_progress</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>代理配置模式：system / direct / fixed_servers；不是切换策略 drain/immediate，也不是在线状态。</td>
+</tr>
+<tr>
+<td><code>check_state</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>配置/切换时的检查记录：unchecked、checking、success、failed_rolled_back、failed_no_rollback；历史 success 不代表当前在线。</td>
+</tr>
+<tr>
+<td><code>context_id</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>浏览器 Context ID</td>
+</tr>
+<tr>
+<td><code>auth_configured</code></td>
+<td>bool</td>
+<td><code>必填</code></td>
+<td>是否配置代理认证</td>
+</tr>
+<tr>
+<td><code>runtime_override</code></td>
+<td>bool</td>
+<td><code>必填</code></td>
+<td>是否存在运行时代理覆盖</td>
+</tr>
+<tr>
+<td><code>last_exit_ip</code></td>
+<td>str | None</td>
+<td><code>必填</code></td>
+<td>最近配置检查解析到的出口</td>
+</tr>
+<tr>
+<td><code>last_http_status</code></td>
+<td>int | None</td>
+<td><code>必填</code></td>
+<td>最近配置检查的 HTTP 状态</td>
+</tr>
+<tr>
+<td><code>last_rollback</code></td>
+<td>bool | None</td>
+<td><code>必填</code></td>
+<td>最近配置检查失败后是否回滚</td>
+</tr>
+<tr>
+<td><code>proxy_server</code></td>
+<td>str</td>
+<td><code>必填</code></td>
+<td>已去除凭据等信息的代理地址，直连为 <code>direct://</code></td>
+</tr>
+<tr>
+<td><code>check_url</code></td>
+<td>str | None</td>
+<td><code>必填</code></td>
+<td>可匿名 GET 的 HTTP(S) 出口检查 URL，不含内嵌认证或 fragment</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>检查关联的代理配置版本，按不透明标识比较</td>
+</tr>
+<tr>
+<td><code>health_check_in_progress</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否有独立健康检查正在执行</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td>ProxyHealthResult | None</td>
+<td><code>None</code></td>
+<td>最近独立健康检查结果</td>
+</tr>
+<tr>
+<td><code>last_error_kind</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>最近配置检查错误分类，如 <code>proxy_auth_error</code>、<code>http_error</code>、<code>network_error</code>、<code>timeout</code>、<code>invalid_ip</code>、<code>exit_ip_mismatch</code>、<code>cancelled</code>、<code>unknown</code></td>
+</tr>
+<tr>
+<td><code>last_network_error</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>最近配置检查提取的 <code>net::ERR_...</code> 错误码</td>
+</tr>
+<tr>
+<td><code>switch_in_progress</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>是否处于有屏障的代理切换过程</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="字段与返回结构">字段与返回结构</h2>
+<p>直接用 <code>对象.字段</code> 读取；需要普通字典时用 <code>dataclasses.asdict(对象)</code>，或使用本类型提供的 to_dict。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td>str</td>
+<td>代理配置模式：system / direct / fixed_servers；不是切换策略 drain/immediate，也不是在线状态。</td>
+</tr>
+<tr>
+<td><code>check_state</code></td>
+<td>str</td>
+<td>配置/切换时的检查记录：unchecked、checking、success、failed_rolled_back、failed_no_rollback；历史 success 不代表当前在线。</td>
+</tr>
+<tr>
+<td><code>context_id</code></td>
+<td>str</td>
+<td>浏览器 Context ID</td>
+</tr>
+<tr>
+<td><code>auth_configured</code></td>
+<td>bool</td>
+<td>是否配置代理认证</td>
+</tr>
+<tr>
+<td><code>runtime_override</code></td>
+<td>bool</td>
+<td>是否存在运行时代理覆盖</td>
+</tr>
+<tr>
+<td><code>last_exit_ip</code></td>
+<td>str | None</td>
+<td>最近配置检查解析到的出口</td>
+</tr>
+<tr>
+<td><code>last_http_status</code></td>
+<td>int | None</td>
+<td>最近配置检查的 HTTP 状态</td>
+</tr>
+<tr>
+<td><code>last_rollback</code></td>
+<td>bool | None</td>
+<td>最近配置检查失败后是否回滚</td>
+</tr>
+<tr>
+<td><code>proxy_server</code></td>
+<td>str</td>
+<td>已去除凭据等信息的代理地址，直连为 <code>direct://</code></td>
+</tr>
+<tr>
+<td><code>check_url</code></td>
+<td>str | None</td>
+<td>可匿名 GET 的 HTTP(S) 出口检查 URL，不含内嵌认证或 fragment</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td>str | None</td>
+<td>检查关联的代理配置版本，按不透明标识比较</td>
+</tr>
+<tr>
+<td><code>health_check_in_progress</code></td>
+<td>bool</td>
+<td>是否有独立健康检查正在执行</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td>ProxyHealthResult | None</td>
+<td>最近独立健康检查结果</td>
+</tr>
+<tr>
+<td><code>last_error_kind</code></td>
+<td>str | None</td>
+<td>最近配置检查错误分类，如 <code>proxy_auth_error</code>、<code>http_error</code>、<code>network_error</code>、<code>timeout</code>、<code>invalid_ip</code>、<code>exit_ip_mismatch</code>、<code>cancelled</code>、<code>unknown</code></td>
+</tr>
+<tr>
+<td><code>last_network_error</code></td>
+<td>str | None</td>
+<td>最近配置检查提取的 <code>net::ERR_...</code> 错误码</td>
+</tr>
+<tr>
+<td><code>switch_in_progress</code></td>
+<td>bool</td>
+<td>是否处于有屏障的代理切换过程</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#proxystatus-from-cdp">ProxyStatus.from_cdp</a></li>
+<li><a href="#proxystatus-to-dict">ProxyStatus.to_dict</a></li>
+</ul>
+<h2 id="proxystatus-from-cdp">ProxyStatus.from_cdp</h2>
+<p>将原生 camelCase 响应转换为本类型。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">from_cdp</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="s1">&#39;dict[str, Any]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ProxyStatus&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数">参数</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>dict[str, Any]</td>
+<td><code>必填</code></td>
+<td>原生 Browser.getProxyStatus 返回的 status 对象。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="返回值">返回值</h3>
+<p>返回 ProxyStatus 实例；输入为原生 CDP 字段，输出字段见本页。此方法不发起请求。</p>
+<h3 id="示例">示例</h3>
+<p>以下片段中的结果对象来自对应 SDK 调用；from_cdp 的字典只演示转换。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProxyStatus</span>
+
+<span class="c1"># 原生响应结构示例；没有执行网络检查。</span>
+<span class="n">raw_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;direct&quot;</span><span class="p">,</span> <span class="s2">&quot;browserContextId&quot;</span><span class="p">:</span> <span class="s2">&quot;example-context&quot;</span><span class="p">,</span> <span class="s2">&quot;proxyServer&quot;</span><span class="p">:</span> <span class="s2">&quot;direct://&quot;</span><span class="p">}</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">ProxyStatus</span><span class="o">.</span><span class="n">from_cdp</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>这是配置和最近检查的记录。check_state=success 不能证明此刻代理在线；需要当前结果时调用 check_proxy。</p>
+<p><a href="../proxy.html">更多示例和完整业务规则</a></p>
+<h2 id="proxystatus-to-dict">ProxyStatus.to_dict</h2>
+<p>导出本对象的字典结构。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">to_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;dict[str, Any]&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数-2">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值-2">返回值</h3>
+<p>返回 dict，字段名与本页结果字段一致；嵌套数据类展开为字典。</p>
+<h3 id="示例-2">示例</h3>
+<p>以下片段中的结果对象来自对应 SDK 调用；from_cdp 的字典只演示转换。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="注意事项-2">注意事项</h3>
+<p>这是配置和最近检查的记录。check_state=success 不能证明此刻代理在线；需要当前结果时调用 check_proxy。</p>
+<p><a href="../proxy.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.0 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#字段与返回结构">字段与返回结构</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#proxystatus-from-cdp">ProxyStatus.from_cdp</a><a class="level2" href="#proxystatus-to-dict">ProxyStatus.to_dict</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>
