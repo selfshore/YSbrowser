@@ -1,0 +1,302 @@
+<!doctype html><html lang="zh-CN" data-doc-root="../"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FingerprintProfile · YSbrowser 文档</title><link rel="stylesheet" href="../assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="../README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.5.post1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="../README.html">开始使用</a><a href="../installation.html">安装与快速开始</a><a href="../browser-context.html">浏览器与 Context</a><a href="../fingerprint.html">指纹与 GPU</a><a href="../context-options.html">Context 选项</a><a href="../proxy.html">代理与出口检查</a><a href="../storage.html">配置与登录状态</a><a href="../mouse.html">鼠标操作总览</a><a href="../drag-element.html">drag_element 详解</a><a href="../result-structures.html">返回结构速查</a><a href="../page-locator.html">页面与定位器</a><a href="../diagnostics-errors.html">诊断与异常</a><a href="../troubleshooting.html">常见问题</a><a href="../examples/README.html">可运行示例</a><details open><summary>SDK 类型参考</summary><div class="nested"><a href="../api-reference.html">全部 SDK 类型</a><a href="../reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="../reference/CompatibilityError.html">CompatibilityError</a><a href="../reference/ConfigurationError.html">ConfigurationError</a><a href="../reference/ContextConfig.html">ContextConfig</a><a href="../reference/ContextOptions.html">ContextOptions</a><a href="../reference/Direct.html">Direct</a><a href="../reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="../reference/FingerprintProfile.html" aria-current="page">FingerprintProfile</a><a href="../reference/MotionExecution.html">MotionExecution</a><a href="../reference/MotionPlan.html">MotionPlan</a><a href="../reference/MotionRequest.html">MotionRequest</a><a href="../reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="../reference/ProxyCheck.html">ProxyCheck</a><a href="../reference/ProxyCheckError.html">ProxyCheckError</a><a href="../reference/ProxyConfig.html">ProxyConfig</a><a href="../reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="../reference/ProxyStatus.html">ProxyStatus</a><a href="../reference/SDKError.html">SDKError</a><a href="../reference/TrajectoryModel.html">TrajectoryModel</a><a href="../reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="../reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="../reference/YSBrowser.html">YSBrowser</a><a href="../reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="../native-reference/README.html">原生对象目录</a><a href="../native-reference/APIRequest.html">APIRequest</a><a href="../native-reference/APIRequestContext.html">APIRequestContext</a><a href="../native-reference/APIResponse.html">APIResponse</a><a href="../native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="../native-reference/Browser.html">Browser</a><a href="../native-reference/BrowserContext.html">BrowserContext</a><a href="../native-reference/BrowserType.html">BrowserType</a><a href="../native-reference/CDPSession.html">CDPSession</a><a href="../native-reference/Clock.html">Clock</a><a href="../native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="../native-reference/Credentials.html">Credentials</a><a href="../native-reference/Debugger.html">Debugger</a><a href="../native-reference/Dialog.html">Dialog</a><a href="../native-reference/Disposable.html">Disposable</a><a href="../native-reference/Download.html">Download</a><a href="../native-reference/ElementHandle.html">ElementHandle</a><a href="../native-reference/Expect.html">Expect</a><a href="../native-reference/FileChooser.html">FileChooser</a><a href="../native-reference/FormData.html">FormData</a><a href="../native-reference/Frame.html">Frame</a><a href="../native-reference/FrameLocator.html">FrameLocator</a><a href="../native-reference/JSHandle.html">JSHandle</a><a href="../native-reference/Keyboard.html">Keyboard</a><a href="../native-reference/Locator.html">Locator</a><a href="../native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="../native-reference/Mouse.html">Mouse</a><a href="../native-reference/Page.html">Page</a><a href="../native-reference/PageAssertions.html">PageAssertions</a><a href="../native-reference/Playwright.html">Playwright</a><a href="../native-reference/Request.html">Request</a><a href="../native-reference/Response.html">Response</a><a href="../native-reference/Route.html">Route</a><a href="../native-reference/Screencast.html">Screencast</a><a href="../native-reference/Selectors.html">Selectors</a><a href="../native-reference/Touchscreen.html">Touchscreen</a><a href="../native-reference/Tracing.html">Tracing</a><a href="../native-reference/Video.html">Video</a><a href="../native-reference/WebError.html">WebError</a><a href="../native-reference/WebMCP.html">WebMCP</a><a href="../native-reference/WebSocket.html">WebSocket</a><a href="../native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="../native-reference/WebStorage.html">WebStorage</a><a href="../native-reference/Worker.html">Worker</a><a href="../native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.5.post1 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>SDK 类型参考 / YSBROWSER SDK</div><h1 id="fingerprintprofile">FingerprintProfile</h1>
+<p><a href="../api-reference.html">SDK API 目录</a> · <a href="../fingerprint.html">使用章节</a></p>
+<h2 id="导入与准备">导入与准备</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">ysbrowser_sdk.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">FingerprintProfile</span>
+
+<span class="n">profile</span> <span class="o">=</span> <span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="o">=</span><span class="s2">&quot;account-001&quot;</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="构造参数">构造参数</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">FingerprintProfile</span><span class="p">(</span><span class="n">fpseed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">audio_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">canvas_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">webgl_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">webgl_profile</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">server_gpu_profile</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">font_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">speech_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">screen_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rect_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dom_rect_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">svg_rect_seed</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="p">:</span> <span class="s1">&#39;int | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_memory</span><span class="p">:</span> <span class="s1">&#39;float | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timezone</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">accept_language</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">platform_version</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">chrome_version</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">geolocation</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">web_rtc_ip_policy</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">web_rtc_proxy_ip</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义 / 单位 / 限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fpseed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>总 seed，例如 <code>&quot;account-001&quot;</code>；作为未单独指定模块 seed 的来源</td>
+</tr>
+<tr>
+<td><code>audio_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>Audio 指纹模块 seed</td>
+</tr>
+<tr>
+<td><code>canvas_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>Canvas 指纹模块 seed；实际适用的绘制路径取决于配套浏览器与 GPU 后端</td>
+</tr>
+<tr>
+<td><code>webgl_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>WebGL 模块 seed；与显式 GPU profile 分别配置</td>
+</tr>
+<tr>
+<td><code>webgl_profile</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>普通 WebGL profile ID，受实际后端兼容条件约束</td>
+</tr>
+<tr>
+<td><code>server_gpu_profile</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>当前 Context 的服务端 GPU 呈现型号，例如 <code>&quot;rtx3060&quot;</code>；从 <code>browser.capabilities.gpu_profiles</code> 选择</td>
+</tr>
+<tr>
+<td><code>font_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>字体模块 seed</td>
+</tr>
+<tr>
+<td><code>speech_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>浏览器语音列表选择 seed；固定 seed 用于保持选择稳定</td>
+</tr>
+<tr>
+<td><code>screen_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>屏幕指标选择 seed；不是指定视口宽高的接口</td>
+</tr>
+<tr>
+<td><code>rect_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>Rect 模块的通用 seed</td>
+</tr>
+<tr>
+<td><code>dom_rect_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>DOM Rect 专用 seed</td>
+</tr>
+<tr>
+<td><code>svg_rect_seed</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>SVG Rect 专用 seed</td>
+</tr>
+<tr>
+<td><code>cpu_cores</code></td>
+<td>int | None</td>
+<td><code>None</code></td>
+<td>逻辑处理器数量，整数 1–256</td>
+</tr>
+<tr>
+<td><code>device_memory</code></td>
+<td>float | None</td>
+<td><code>None</code></td>
+<td>设备内存数值，通常按 GB 配置；有限数且大于 0、不超过 1024，可传整数</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>IANA 时区，如 <code>&quot;Asia/Shanghai&quot;</code>、<code>&quot;Europe/London&quot;</code></td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>浏览器语言，如 <code>&quot;zh-CN&quot;</code></td>
+</tr>
+<tr>
+<td><code>accept_language</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>Accept-Language，如 <code>&quot;zh-CN,zh;q=0.9&quot;</code></td>
+</tr>
+<tr>
+<td><code>platform_version</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>平台版本呈现值，如 <code>&quot;15.0.0&quot;</code>；不是安装操作系统版本</td>
+</tr>
+<tr>
+<td><code>chrome_version</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>Chrome 版本呈现字符串，如 <code>&quot;154.0.0.0&quot;</code>；不会改变实际内核</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td><code>&quot;纬度,经度[,精度]&quot;</code>，如 <code>&quot;31.2304,121.4737,50&quot;</code>；站点仍需地理位置权限</td>
+</tr>
+<tr>
+<td><code>web_rtc_ip_policy</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>使用 <code>&quot;disabled&quot;</code> 或 <code>&quot;proxy&quot;</code> 限制非代理 UDP；不会关闭整个 WebRTC API</td>
+</tr>
+<tr>
+<td><code>web_rtc_proxy_ip</code></td>
+<td>str | None</td>
+<td><code>None</code></td>
+<td>合法 IPv4/IPv6 地址，用于指定 ICE/SDP 地址呈现；不设置实际代理路由，也不自动检测出口</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="字段与返回结构">字段与返回结构</h2>
+<p>直接用 <code>对象.字段</code> 读取；需要普通字典时用 <code>dataclasses.asdict(对象)</code>，或使用本类型提供的 to_dict。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fpseed</code></td>
+<td>str | None</td>
+<td>总 seed，例如 <code>&quot;account-001&quot;</code>；作为未单独指定模块 seed 的来源</td>
+</tr>
+<tr>
+<td><code>audio_seed</code></td>
+<td>str | None</td>
+<td>Audio 指纹模块 seed</td>
+</tr>
+<tr>
+<td><code>canvas_seed</code></td>
+<td>str | None</td>
+<td>Canvas 指纹模块 seed；实际适用的绘制路径取决于配套浏览器与 GPU 后端</td>
+</tr>
+<tr>
+<td><code>webgl_seed</code></td>
+<td>str | None</td>
+<td>WebGL 模块 seed；与显式 GPU profile 分别配置</td>
+</tr>
+<tr>
+<td><code>webgl_profile</code></td>
+<td>str | None</td>
+<td>普通 WebGL profile ID，受实际后端兼容条件约束</td>
+</tr>
+<tr>
+<td><code>server_gpu_profile</code></td>
+<td>str | None</td>
+<td>当前 Context 的服务端 GPU 呈现型号，例如 <code>&quot;rtx3060&quot;</code>；从 <code>browser.capabilities.gpu_profiles</code> 选择</td>
+</tr>
+<tr>
+<td><code>font_seed</code></td>
+<td>str | None</td>
+<td>字体模块 seed</td>
+</tr>
+<tr>
+<td><code>speech_seed</code></td>
+<td>str | None</td>
+<td>浏览器语音列表选择 seed；固定 seed 用于保持选择稳定</td>
+</tr>
+<tr>
+<td><code>screen_seed</code></td>
+<td>str | None</td>
+<td>屏幕指标选择 seed；不是指定视口宽高的接口</td>
+</tr>
+<tr>
+<td><code>rect_seed</code></td>
+<td>str | None</td>
+<td>Rect 模块的通用 seed</td>
+</tr>
+<tr>
+<td><code>dom_rect_seed</code></td>
+<td>str | None</td>
+<td>DOM Rect 专用 seed</td>
+</tr>
+<tr>
+<td><code>svg_rect_seed</code></td>
+<td>str | None</td>
+<td>SVG Rect 专用 seed</td>
+</tr>
+<tr>
+<td><code>cpu_cores</code></td>
+<td>int | None</td>
+<td>逻辑处理器数量，整数 1–256</td>
+</tr>
+<tr>
+<td><code>device_memory</code></td>
+<td>float | None</td>
+<td>设备内存数值，通常按 GB 配置；有限数且大于 0、不超过 1024，可传整数</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>str | None</td>
+<td>IANA 时区，如 <code>&quot;Asia/Shanghai&quot;</code>、<code>&quot;Europe/London&quot;</code></td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td>str | None</td>
+<td>浏览器语言，如 <code>&quot;zh-CN&quot;</code></td>
+</tr>
+<tr>
+<td><code>accept_language</code></td>
+<td>str | None</td>
+<td>Accept-Language，如 <code>&quot;zh-CN,zh;q=0.9&quot;</code></td>
+</tr>
+<tr>
+<td><code>platform_version</code></td>
+<td>str | None</td>
+<td>平台版本呈现值，如 <code>&quot;15.0.0&quot;</code>；不是安装操作系统版本</td>
+</tr>
+<tr>
+<td><code>chrome_version</code></td>
+<td>str | None</td>
+<td>Chrome 版本呈现字符串，如 <code>&quot;154.0.0.0&quot;</code>；不会改变实际内核</td>
+</tr>
+<tr>
+<td><code>geolocation</code></td>
+<td>str | None</td>
+<td><code>&quot;纬度,经度[,精度]&quot;</code>，如 <code>&quot;31.2304,121.4737,50&quot;</code>；站点仍需地理位置权限</td>
+</tr>
+<tr>
+<td><code>web_rtc_ip_policy</code></td>
+<td>str | None</td>
+<td>使用 <code>&quot;disabled&quot;</code> 或 <code>&quot;proxy&quot;</code> 限制非代理 UDP；不会关闭整个 WebRTC API</td>
+</tr>
+<tr>
+<td><code>web_rtc_proxy_ip</code></td>
+<td>str | None</td>
+<td>合法 IPv4/IPv6 地址，用于指定 ICE/SDP 地址呈现；不设置实际代理路由，也不自动检测出口</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="方法与属性索引">方法与属性索引</h2>
+<ul>
+<li><a href="#fingerprintprofile-to-cdp">FingerprintProfile.to_cdp</a></li>
+</ul>
+<h2 id="fingerprintprofile-to-cdp">FingerprintProfile.to_cdp</h2>
+<p>验证并转换为协议字段字典。</p>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">to_cdp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;dict[str, Any]&#39;</span>
+</code></pre></div>
+<p><strong>同步计算/工厂方法；异步程序中也不加 await。</strong></p>
+<h3 id="参数">参数</h3>
+<p>此方法没有调用参数。</p>
+<h3 id="返回值">返回值</h3>
+<p>返回已指定字段的 camelCase 字典，省略 None。</p>
+<h3 id="示例">示例</h3>
+<p>以下为同步调用片段，沿用本页准备的对象。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">to_cdp</span><span class="p">()</span>
+<span class="c1"># data 用于协议字段转换；包含凭据时不要写入公开日志。</span>
+</code></pre></div>
+<h3 id="注意事项">注意事项</h3>
+<p>只能在指纹尚未锁定时应用；to_cdp() 只转换字段，不会修改浏览器。</p>
+<p><a href="../fingerprint.html">更多示例和完整业务规则</a></p>
+<footer class="page-footer"><span>适用 SDK 0.11.5.post1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#导入与准备">导入与准备</a><a class="level2" href="#构造参数">构造参数</a><a class="level2" href="#字段与返回结构">字段与返回结构</a><a class="level2" href="#方法与属性索引">方法与属性索引</a><a class="level2" href="#fingerprintprofile-to-cdp">FingerprintProfile.to_cdp</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="../assets/search-index.js"></script><script src="../assets/app.js"></script></body></html>

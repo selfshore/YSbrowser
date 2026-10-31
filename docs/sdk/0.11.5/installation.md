@@ -339,3 +339,5 @@ python -m ysbrowser_sdk doctor
 
 
 已知限制（发布后复验）：windows 中，仅通过 FingerprintProfile(language="fr-FR", accept_language="fr-FR,fr") 设置 Context，navigator.language 已变化，但 Intl 默认 locale 仍可能沿用进程/系统语言。本次已记录为未通过，尚未修复；字体隔离测试通过不等于 Intl locale 独立性通过。Windows 显式 --lang=fr-FR 可将本次实测进程的 Intl 改为 fr，但不代表不同语言 Context 已独立隔离。
+
+> 2026-10-31 更新：本页适用于旧 SDK 0.11.5。Windows 6.4 附件已重新发布，旧 SDK 校验值不匹配；请升级至 [0.11.5.post1](../0.11.5.post1/installation.html) 后安装。新包已经修复下述历史 Intl 问题。

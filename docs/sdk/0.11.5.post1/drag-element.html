@@ -1,0 +1,296 @@
+<!doctype html><html lang="zh-CN" data-doc-root=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>drag_element：拖动元素一定距离 · YSbrowser 文档</title><link rel="stylesheet" href="assets/theme.css"></head><body>
+<a class="skip" href="#doc-main">跳到正文</a><header class="topbar"><button class="icon-button menu-button" id="menu-toggle" aria-label="打开目录">目录</button><a class="brand" href="README.html"><span class="brand-icon">YS</span><span class="brand-label">YSbrowser</span><span class="version">0.11.5.post1</span></a><button class="search-open" id="search-open"><span>搜索文档与 API</span><kbd>Ctrl K</kbd></button><button class="icon-button font-button" id="font-toggle" aria-label="切换大字号">字号 A+</button><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">明 / 暗</button></header>
+<nav class="sidebar" aria-label="手册目录"><div class="nav-label">使用指南</div><a href="README.html">开始使用</a><a href="installation.html">安装与快速开始</a><a href="browser-context.html">浏览器与 Context</a><a href="fingerprint.html">指纹与 GPU</a><a href="context-options.html">Context 选项</a><a href="proxy.html">代理与出口检查</a><a href="storage.html">配置与登录状态</a><a href="mouse.html">鼠标操作总览</a><a href="drag-element.html" aria-current="page">drag_element 详解</a><a href="result-structures.html">返回结构速查</a><a href="page-locator.html">页面与定位器</a><a href="diagnostics-errors.html">诊断与异常</a><a href="troubleshooting.html">常见问题</a><a href="examples/README.html">可运行示例</a><details><summary>SDK 类型参考</summary><div class="nested"><a href="api-reference.html">全部 SDK 类型</a><a href="reference/BrowserCapabilities.html">BrowserCapabilities</a><a href="reference/CompatibilityError.html">CompatibilityError</a><a href="reference/ConfigurationError.html">ConfigurationError</a><a href="reference/ContextConfig.html">ContextConfig</a><a href="reference/ContextOptions.html">ContextOptions</a><a href="reference/Direct.html">Direct</a><a href="reference/FingerprintLockedError.html">FingerprintLockedError</a><a href="reference/FingerprintProfile.html">FingerprintProfile</a><a href="reference/MotionExecution.html">MotionExecution</a><a href="reference/MotionPlan.html">MotionPlan</a><a href="reference/MotionRequest.html">MotionRequest</a><a href="reference/MultitaskMouseModel.html">MultitaskMouseModel</a><a href="reference/ProxyCheck.html">ProxyCheck</a><a href="reference/ProxyCheckError.html">ProxyCheckError</a><a href="reference/ProxyConfig.html">ProxyConfig</a><a href="reference/ProxyHealthResult.html">ProxyHealthResult</a><a href="reference/ProxyStatus.html">ProxyStatus</a><a href="reference/SDKError.html">SDKError</a><a href="reference/TrajectoryModel.html">TrajectoryModel</a><a href="reference/TrajectoryMouse.html">TrajectoryMouse</a><a href="reference/TrajectoryPrediction.html">TrajectoryPrediction</a><a href="reference/YSBrowser.html">YSBrowser</a><a href="reference/YSContext.html">YSContext</a></div></details><details><summary>Patchright 原生参考</summary><div class="nested"><a href="native-reference/README.html">原生对象目录</a><a href="native-reference/APIRequest.html">APIRequest</a><a href="native-reference/APIRequestContext.html">APIRequestContext</a><a href="native-reference/APIResponse.html">APIResponse</a><a href="native-reference/APIResponseAssertions.html">APIResponseAssertions</a><a href="native-reference/Browser.html">Browser</a><a href="native-reference/BrowserContext.html">BrowserContext</a><a href="native-reference/BrowserType.html">BrowserType</a><a href="native-reference/CDPSession.html">CDPSession</a><a href="native-reference/Clock.html">Clock</a><a href="native-reference/ConsoleMessage.html">ConsoleMessage</a><a href="native-reference/Credentials.html">Credentials</a><a href="native-reference/Debugger.html">Debugger</a><a href="native-reference/Dialog.html">Dialog</a><a href="native-reference/Disposable.html">Disposable</a><a href="native-reference/Download.html">Download</a><a href="native-reference/ElementHandle.html">ElementHandle</a><a href="native-reference/Expect.html">Expect</a><a href="native-reference/FileChooser.html">FileChooser</a><a href="native-reference/FormData.html">FormData</a><a href="native-reference/Frame.html">Frame</a><a href="native-reference/FrameLocator.html">FrameLocator</a><a href="native-reference/JSHandle.html">JSHandle</a><a href="native-reference/Keyboard.html">Keyboard</a><a href="native-reference/Locator.html">Locator</a><a href="native-reference/LocatorAssertions.html">LocatorAssertions</a><a href="native-reference/Mouse.html">Mouse</a><a href="native-reference/Page.html">Page</a><a href="native-reference/PageAssertions.html">PageAssertions</a><a href="native-reference/Playwright.html">Playwright</a><a href="native-reference/Request.html">Request</a><a href="native-reference/Response.html">Response</a><a href="native-reference/Route.html">Route</a><a href="native-reference/Screencast.html">Screencast</a><a href="native-reference/Selectors.html">Selectors</a><a href="native-reference/Touchscreen.html">Touchscreen</a><a href="native-reference/Tracing.html">Tracing</a><a href="native-reference/Video.html">Video</a><a href="native-reference/WebError.html">WebError</a><a href="native-reference/WebMCP.html">WebMCP</a><a href="native-reference/WebSocket.html">WebSocket</a><a href="native-reference/WebSocketRoute.html">WebSocketRoute</a><a href="native-reference/WebStorage.html">WebStorage</a><a href="native-reference/Worker.html">Worker</a><a href="native-reference/types.html">原生输入输出结构</a></div></details><div class="footnote">SDK 0.11.5.post1 · Windows / Linux<br>离线可读 · Ctrl K 搜索</div></nav><main id="doc-main"><div class="eyebrow"><span></span>使用指南 / YSBROWSER SDK</div><h1 id="drag-element-拖动元素一定距离">drag_element：拖动元素一定距离</h1>
+<p>指定滑块手柄等元素，由 SDK 完成定位、按下、轨迹移动和释放。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>这里表示从元素上的起点<strong>向右拖动 250 CSS 像素</strong>，不是把鼠标拖到 x=250。</p>
+<h2 id="完整签名">完整签名</h2>
+<div class="code-block signature"><div class="code-toolbar"><span>Python · API 签名</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">drag_element</span><span class="p">(</span>
+    <span class="n">locator</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">start_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">duration_s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">trajectory</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">button</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">press_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">release_delay_ms</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MotionExecution</span>
+</code></pre></div>
+<p>同步 <code>mouse.drag_element(...)</code>；异步 <code>await mouse.drag_element(...)</code>。无需先 synchronize，也不要预先 down。</p>
+<h2 id="每个参数">每个参数</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>含义与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locator</code></td>
+<td>Locator 或 str</td>
+<td>必填</td>
+<td>当前 Page 内唯一的元素；建议传滑块手柄，而不是整条滑轨</td>
+</tr>
+<tr>
+<td><code>dx</code></td>
+<td>int / float</td>
+<td>必填</td>
+<td>相对起点的水平距离，正向右、负向左；有限数</td>
+</tr>
+<tr>
+<td><code>dy</code></td>
+<td>int / float</td>
+<td>0</td>
+<td>相对起点的垂直距离，正向下、负向上；与 dx 不能同时为 0</td>
+</tr>
+<tr>
+<td><code>start_offset</code></td>
+<td>tuple[float,float] 或 None</td>
+<td>None</td>
+<td>相对元素边界框左上角的偏移；None 为中心；坐标必须位于框内</td>
+</tr>
+<tr>
+<td><code>duration_s</code></td>
+<td>float 或 None</td>
+<td>None</td>
+<td>运动总时长；None 自动预测；显式值必须在 (0,30] 秒内</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int 或 None</td>
+<td>None</td>
+<td>随机种子。固定值复现计划，不能保证实际事件派发完全一致</td>
+</tr>
+<tr>
+<td><code>target_size</code></td>
+<td>tuple[float,float] 或 None</td>
+<td>None</td>
+<td>默认使用元素边界框宽高；当前仅验证，网络未学习尺寸条件</td>
+</tr>
+<tr>
+<td><code>trajectory</code></td>
+<td>str</td>
+<td>model</td>
+<td>仅接受 model；旧 minimum_jerk 已移除</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>str</td>
+<td>left</td>
+<td>left/right/middle；普通滑块通常使用 left</td>
+</tr>
+<tr>
+<td><code>press_delay_ms</code></td>
+<td>float</td>
+<td>40</td>
+<td>按下后开始运动前的等待，0–5000 毫秒</td>
+</tr>
+<tr>
+<td><code>release_delay_ms</code></td>
+<td>float</td>
+<td>40</td>
+<td>运动结束后释放前的等待，0–5000 毫秒</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>float</td>
+<td>30000</td>
+<td>元素检查、边界框等步骤的原生超时；0 表示不设置超时，不是整个拖动的总预算</td>
+</tr>
+</tbody>
+</table></div>
+<p>坐标是主 Frame 视口 CSS 像素，不是屏幕物理像素。<code>start_offset=(12,12)</code> 的含义是边界框左上角向右 12、向下 12。</p>
+<h2 id="常见调用方式">常见调用方式</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="c1"># 自动预测运动时间。</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+
+<span class="c1"># 指定元素内起点与固定运动时间。</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span>
+    <span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">start_offset</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">duration_s</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 向左拖动；元素必须有足够的可用拖动范围。</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=-</span><span class="mi">120</span><span class="p">)</span>
+
+<span class="c1"># 用 CSS 选择器定位元素。</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="s2">&quot;#slider-handle&quot;</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">136</span><span class="p">)</span>
+</code></pre></div>
+<p>默认 <code>drag_source=&quot;auto&quot;</code>：136px 向右等覆盖范围内请求优先使用个人拖动条件；250px 等请求通常选择公共拖动条件。两者都来自同一个 Transformer。查看 <code>result.plan.data_source</code> 确认。</p>
+<h2 id="返回结构与字段含义">返回结构与字段含义</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>              <span class="c1"># 生成引擎</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">model_id</span><span class="p">)</span>            <span class="c1"># 模型 ID</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">data_source</span><span class="p">)</span>         <span class="c1"># 数据来源条件</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">task</span><span class="p">)</span>                <span class="c1"># drag</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>           <span class="c1"># [起点绝对 x, 起点绝对 y, 0]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>          <span class="c1"># [终点绝对 x, 终点绝对 y, 计划总秒数]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dispatched_points</span><span class="p">)</span>        <span class="c1"># 实际派发点数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">skipped_points</span><span class="p">)</span>           <span class="c1"># 调度延迟跳过的点数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">elapsed_s</span><span class="p">)</span>                <span class="c1"># 实际移动派发耗时</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">max_lateness_s</span><span class="p">)</span>           <span class="c1"># 最大调度迟到秒数</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层级 / 字段</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td>MotionExecution</td>
+<td>这一次操作的移动执行结果，不是元素是否移动成功的布尔值</td>
+</tr>
+<tr>
+<td><code>plan.points</code></td>
+<td>list[list[float]]</td>
+<td>绝对坐标的 [x,y,累计秒数]；第三列不是间隔或毫秒</td>
+</tr>
+<tr>
+<td><code>plan.source</code></td>
+<td>str</td>
+<td>conditional_flow_matching_transformer</td>
+</tr>
+<tr>
+<td><code>plan.model_id</code></td>
+<td>str</td>
+<td>随包或指定模型标识</td>
+</tr>
+<tr>
+<td><code>plan.data_source</code></td>
+<td>str</td>
+<td>user_mousedata / bogazici / sapimouse</td>
+</tr>
+<tr>
+<td><code>plan.task</code></td>
+<td>str</td>
+<td>drag</td>
+</tr>
+<tr>
+<td><code>plan.predicted_cadence_s</code></td>
+<td>float</td>
+<td>典型采样间隔，不等于浏览器实际事件间隔</td>
+</tr>
+<tr>
+<td><code>plan.attempts</code></td>
+<td>int</td>
+<td>有效路径采样尝试次数</td>
+</tr>
+<tr>
+<td><code>plan.warnings</code></td>
+<td>list[str]</td>
+<td>像素标定、未学习条件等提示</td>
+</tr>
+<tr>
+<td><code>dispatched_points</code></td>
+<td>int</td>
+<td>实际发送的移动点数；起点定位不计在内</td>
+</tr>
+<tr>
+<td><code>skipped_points</code></td>
+<td>int</td>
+<td>计划里因迟到而跳过的点数</td>
+</tr>
+<tr>
+<td><code>elapsed_s</code></td>
+<td>float</td>
+<td>移动派发耗时，不包含推理、起点定位、按键前后等待</td>
+</tr>
+<tr>
+<td><code>max_lateness_s</code></td>
+<td>float</td>
+<td>最大调度迟到秒数</td>
+</tr>
+</tbody>
+</table></div>
+<p>转换为字典保存：</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;drag-result.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>不要写 <code>result[&quot;plan&quot;]</code>：它是数据类，先 <code>.plan</code> 或 <code>asdict(result)</code>。</p>
+<h2 id="iframe-与-shadowroot">iframe 与 ShadowRoot</h2>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">slider</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">frame_locator</span><span class="p">(</span><span class="s2">&quot;iframe#panel&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">&quot;slider&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">136</span><span class="p">)</span>
+
+<span class="c1"># 配套 Patchright 支持的 Shadow DOM 定位路径。</span>
+<span class="n">slider</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">&quot;slider-panel&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_by_role</span><span class="p">(</span><span class="s2">&quot;slider&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">136</span><span class="p">)</span>
+</code></pre></div>
+<p>iframe 的 Locator 提供的边界框会用于主 Frame 坐标，不要手动再叠加一次 iframe 偏移。闭合根访问依赖配套浏览器/Patchright，不保证 XPath 能穿过 ShadowRoot；页面脚本读取 <code>host.shadowRoot</code> 也不等价。</p>
+<h2 id="如何检查页面真的响应了">如何检查页面真的响应了</h2>
+<p>完成派发不等于业务一定成功。网页可能把滑块限制在轨道内，或者需要特定拖放协议。对于移动的 DOM 元素，可比较边界框；对于值型滑块，应读取值或 ARIA 状态。</p>
+<div class="code-block"><div class="code-toolbar"><span>Python</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">before</span> <span class="o">=</span> <span class="n">slider</span><span class="o">.</span><span class="n">bounding_box</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mouse</span><span class="o">.</span><span class="n">drag_element</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">136</span><span class="p">)</span>
+<span class="n">after</span> <span class="o">=</span> <span class="n">slider</span><span class="o">.</span><span class="n">bounding_box</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">before</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">after</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;元素实际水平变化：&quot;</span><span class="p">,</span> <span class="n">after</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;滑块值：&quot;</span><span class="p">,</span> <span class="n">slider</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;aria-valuenow&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>对于手柄本身不移动、仅更新值的控件，边界框变化可能为 0，应检查应用实际状态。不要仅用 <code>if result:</code> 判断成功。</p>
+<h2 id="容易遇到的问题">容易遇到的问题</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>表现</th>
+<th>原因与处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>调用后没有动作，只打印 coroutine</td>
+<td>异步接口忘了 await；同步代码用 sync_api</td>
+</tr>
+<tr>
+<td>offset 报错</td>
+<td>偏移超过元素宽高；先 bounding_box，或省略以使用中心</td>
+</tr>
+<tr>
+<td>拖到了错误位置</td>
+<td>dx/dy 是距离；拖到绝对坐标用 drag_to，元素间拖动用 drag_element_to</td>
+</tr>
+<tr>
+<td>只能移动一小段</td>
+<td>页面轨道限制、目标选择错，或 CSS/设备像素混用；查看页面值/边界框</td>
+</tr>
+<tr>
+<td>Outside observed domain</td>
+<td>显式来源覆盖不到该请求；使用 auto 或覆盖范围合适的公共来源；允许外推不代表效果可靠</td>
+</tr>
+<tr>
+<td>Position / Endpoint outside viewport</td>
+<td>计划起终点超出视口；先调整页面/目标，API 不会中途自动滚动</td>
+</tr>
+<tr>
+<td>skipped_points 大于 0</td>
+<td>调度迟到会跳过中间点；看实际事件与页面结果，不把计划视为完整浏览器事件记录</td>
+</tr>
+<tr>
+<td>按钮已按住的错误</td>
+<td>不要先 down 再 drag_element；手动 down 配 move_by，最后 finally up</td>
+</tr>
+<tr>
+<td>同一元素有多个匹配</td>
+<td>使用明确 Locator、过滤器或 nth，避免原生 strict-mode 错误</td>
+</tr>
+<tr>
+<td>看起来有回摆或曲线不合预期</td>
+<td>当前模型仍有细小回摆；API 整合不代表模型质量已经提高</td>
+</tr>
+</tbody>
+</table></div>
+<p>这个函数会执行 trial hover 与滚动、读取边界框、生成路径，再即时定位到起点并按下。页面在读取坐标后继续移动布局时，仍可能错过目标；调用期间避免其他任务同时操作同一 Page。</p>
+<h2 id="可运行的同步与异步程序">可运行的同步与异步程序</h2>
+<p>打开<a href="examples/drag_element.py">本地滑块示例</a>。它只加载本地内存页面，默认有界面：</p>
+<div class="code-block"><div class="code-toolbar"><span>PowerShell</span><button class="copy-code" type="button" aria-label="复制代码">复制代码</button></div><pre class="highlight"><code><span class="n">python</span> <span class="p">.\</span><span class="n">examples</span><span class="p">\</span><span class="n">drag_element</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-distance</span> <span class="n">250</span>
+<span class="n">python</span> <span class="p">.\</span><span class="n">examples</span><span class="p">\</span><span class="n">drag_element</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-distance</span> <span class="n">136</span> <span class="p">-</span><span class="n">-async</span>
+</code></pre></div>
+<p>也可查看 <a href="reference/TrajectoryMouse.html">TrajectoryMouse 每个方法的参数表</a>。</p>
+<footer class="page-footer"><span>适用 SDK 0.11.5.post1 · Patchright 1.64.2</span><a href="#doc-main">返回顶部 ↑</a></footer></main><aside class="toc"><div class="toc-title">本页目录</div><a class="level2" href="#完整签名">完整签名</a><a class="level2" href="#每个参数">每个参数</a><a class="level2" href="#常见调用方式">常见调用方式</a><a class="level2" href="#返回结构与字段含义">返回结构与字段含义</a><a class="level2" href="#iframe-与-shadowroot">iframe 与 ShadowRoot</a><a class="level2" href="#如何检查页面真的响应了">如何检查页面真的响应了</a><a class="level2" href="#容易遇到的问题">容易遇到的问题</a><a class="level2" href="#可运行的同步与异步程序">可运行的同步与异步程序</a></aside>
+<dialog id="search-dialog" aria-label="搜索文档"><div class="search-head"><input id="search-input" type="search" placeholder="搜索 API、参数或常见问题" autocomplete="off" aria-label="搜索关键词"><button class="icon-button" id="search-close">关闭</button></div><div class="search-body" id="search-results"></div><div class="search-bottom">本地全文索引，无需联网 · Esc 关闭</div></dialog><script src="assets/search-index.js"></script><script src="assets/app.js"></script></body></html>

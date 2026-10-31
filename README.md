@@ -14,7 +14,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-[SDK 使用手册](https://selfshore.github.io/YSbrowser/sdk/0.11.5/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
+[SDK 使用手册](https://selfshore.github.io/YSbrowser/sdk/0.11.5.post1/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
 
 </div>
 
@@ -77,7 +77,7 @@ YSbrowser 是基于 Chromium 定制的 Windows / Linux 桌面浏览器。新版�
 
 从 [Releases](https://github.com/selfshore/YSbrowser/releases) 下载 Windows 压缩包，解压后运行 `chrome.exe`。
 
-6.4 的 Windows 包为 `chrome.7z`，入口为 `Chrome-bin/chrome.exe`。Linux 包为 `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage`，面向 Ubuntu 24.04 x86_64，要求 AVX2、FMA、F16C。下载后 `chmod +x` 即可执行，沙箱与 AppArmor 配置见同一 Release 的 `AppImage-README.txt`。两端均支持 SDK 0.11.5 自动下载和 SHA-256 校验：
+6.4 的 Windows 包为 `chrome.7z`，入口为 `Chrome-bin/chrome.exe`。Linux 包为 `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage`，面向 Ubuntu 24.04 x86_64，要求 AVX2、FMA、F16C。下载后 `chmod +x` 即可执行，沙箱与 AppArmor 配置见同一 Release 的 `AppImage-README.txt`。两端均支持 SDK 0.11.5.post1 自动下载和 SHA-256 校验：
 
 ```shell
 python -m pip install --upgrade ysbrowser-sdk
@@ -392,3 +392,5 @@ YSbrowser 仅供浏览器兼容性研究、隐私保护、自动化测试和个�
 如果这个项目对你有帮助，欢迎点一个 ⭐
 
 </div>
+
+6.4 的 Windows 包已于 2026-10-31 原位重新发布，修复多语言 Context 的 Intl 构建回退。请先升级 SDK 至 0.11.5.post1，再重新执行浏览器安装；旧 SDK 固定的 Windows 校验值不再匹配。Linux AppImage 保持不变。

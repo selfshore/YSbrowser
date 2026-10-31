@@ -14,7 +14,7 @@
 
 [English](README-en.md) | [中文](README.md)
 
-[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.5/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
+[SDK documentation](https://selfshore.github.io/YSbrowser/sdk/0.11.5.post1/README.html) · [PyPI](https://pypi.org/project/ysbrowser-sdk/)
 
 </div>
 
@@ -76,7 +76,7 @@ The same launch options and seeds consistently select the same environment. When
 
 Download the Windows archive from [Releases](https://github.com/selfshore/YSbrowser/releases), extract it, and run `chrome.exe`.
 
-Release 6.4 provides `chrome.7z` for Windows (entry point: `Chrome-bin/chrome.exe`) and `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage` for Ubuntu 24.04 x86_64. The Linux build requires AVX2, FMA and F16C. Make the AppImage executable with `chmod +x`; see the release asset `AppImage-README.txt` for sandbox and AppArmor setup. SDK 0.11.5 downloads the matching platform asset and verifies its pinned SHA-256:
+Release 6.4 provides `chrome.7z` for Windows (entry point: `Chrome-bin/chrome.exe`) and `YSbrowser-154.0.8037.57-ubuntu24.04-x86_64.AppImage` for Ubuntu 24.04 x86_64. The Linux build requires AVX2, FMA and F16C. Make the AppImage executable with `chmod +x`; see the release asset `AppImage-README.txt` for sandbox and AppArmor setup. SDK 0.11.5.post1 downloads the matching platform asset and verifies its pinned SHA-256:
 
 ```shell
 python -m pip install --upgrade ysbrowser-sdk
@@ -389,3 +389,5 @@ This project is provided as is. Browsers, graphics drivers, detection scripts, a
 If you find this project useful, consider giving it a ⭐
 
 </div>
+
+The Windows asset of release 6.4 was republished in place on 2026-10-31 to restore per-Context Intl locales. Upgrade to SDK 0.11.5.post1 before reinstalling the browser: SDK 0.11.5 pins the previous Windows checksum. The Linux AppImage is unchanged.
