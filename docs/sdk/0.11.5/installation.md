@@ -333,3 +333,9 @@ python -m ysbrowser_sdk doctor
 
 成功退出码为 `0`；捕获到 SDK 异常时输出异常 JSON 并以 `1` 退出；命令行参数错误由参数解析器报告并以 `2` 退出。
 
+
+
+## 浏览器 6.4 已知限制
+
+
+已知限制（发布后复验）：windows 中，仅通过 FingerprintProfile(language="fr-FR", accept_language="fr-FR,fr") 设置 Context，navigator.language 已变化，但 Intl 默认 locale 仍可能沿用进程/系统语言。本次已记录为未通过，尚未修复；字体隔离测试通过不等于 Intl locale 独立性通过。Windows 显式 --lang=fr-FR 可将本次实测进程的 Intl 改为 fr，但不代表不同语言 Context 已独立隔离。
